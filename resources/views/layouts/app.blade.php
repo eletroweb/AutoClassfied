@@ -8,17 +8,13 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
-
-    <!-- Styles -->
-    
-  
+    <title>{{ env('app.name', 'Unicodono') }}</title>
     <link href="https://bootswatch.com/4/cosmo/bootstrap.min.css" rel="stylesheet">
-    <link href="/js/unicodono.css" rel="stylesheet">
+    <link href="/css/unicodono.css" rel="stylesheet">
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <nav id="menu-principal" class="navbar navbar-expand-lg navbar-dark bg-primary">
           <a class="navbar-brand" href="#">Unicodono</a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -38,10 +34,6 @@
                 <a class="nav-link" href="#">#</a>
               </li>
             </ul>
-            <form class="form-inline my-2 my-lg-0">
-              <input class="form-control mr-sm-2" type="text" placeholder="Digite o que está procurando">
-              <button class="btn btn-secondary my-2 my-sm-0" type="submit">Procurar</button>
-            </form>
           </div>
         </nav>
      <!--   <nav class="navbar navbar-default navbar-static-top">

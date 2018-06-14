@@ -11,7 +11,7 @@
   margin: auto;
 }
 .form-signin .checkbox {
-  font-weight: 400;
+  font-weight: 400; 
 }
 .form-signin .form-control {
   position: relative;
