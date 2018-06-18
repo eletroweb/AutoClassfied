@@ -11,7 +11,7 @@
   margin: auto;
 }
 .form-signin .checkbox {
-  font-weight: 400; 
+  font-weight: 400;
 }
 .form-signin .form-control {
   position: relative;
@@ -97,10 +97,10 @@
             </div>
         </div>
     </div>-->
-  
+
   <div class="row text-center">
     <div class="col-sm-12">
-      <img class="mb-4" src="https://www.unicodono.com.br/web/img/topo/01.png" alt="" width="200">    
+      <img class="mb-4" src="https://www.unicodono.com.br/web/img/topo/01.png" alt="" width="200">
     </div>
   </div>
   <form class="form-signin h-100">
@@ -115,6 +115,7 @@
         </label>
       </div>
       <button class="btn btn-lg btn-primary btn-block" type="submit">Entrar</button>
+      <a class="btn btn-lg btn-secondary btn-block" href="/register">Criar Conta</a>
       <p class="mt-5 mb-3 text-muted text-center">Unicodono © Todos os direitos reservados</p>
     </form>
 </div>
