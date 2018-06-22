@@ -30,4 +30,10 @@ class AnuncioController extends Controller
         }
         return redirect('home')->with('status', 'Anúncio publicado com sucesso!');
     }
+  
+    public function anuncios(){
+      $anuncios = Anuncio::orderBy('id', 'desc')->paginate(20);
+      return view('anuncios.anuncios')->with('anuncios', $anuncios);
+    }
 }
+//http://dev-jsantosclass54983.codeanyapp.com/

@@ -20,4 +20,6 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::middleware('auth')->group(function () {
   Route::get('/anuncie', 'AnuncioController@anuncie')->name('anuncie');
+  Route::post('/anuncie', 'AnuncioController@anuncieStore')->name('anuncieStore');
+  Route::get('/anuncios', 'AnuncioController@anuncios')->name('anuncios');
 });

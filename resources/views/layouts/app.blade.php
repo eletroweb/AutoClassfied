@@ -11,6 +11,7 @@
     <title>{{ env('app.name', 'Unicodono') }}</title>
     <link href="https://bootswatch.com/4/cosmo/bootstrap.min.css" rel="stylesheet">
     <link href="{{asset('css/unicodono.css')}}" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
 </head>
 <body>
     <div id="app">
@@ -28,7 +29,7 @@
                 <a class="nav-link" href="{{route('anuncie')}}">Anuncie</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">#</a>
+                <a class="nav-link" href="{{route('anuncios')}}">Anúncios</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#">#</a>
