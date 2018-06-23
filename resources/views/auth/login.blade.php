@@ -103,7 +103,8 @@
       <img class="mb-4" src="https://www.unicodono.com.br/web/img/topo/01.png" alt="" width="200">
     </div>
   </div>
-  <form class="form-signin h-100">
+  <form class="form-signin h-100" method="post" action="{{route('login')}}">
+      {{csrf_field()}}
       <h1 class="h3 mb-3 font-weight-normal">Acesse a sua conta</h1>
       <label for="inputEmail" class="sr-only">Email</label>
       <input type="email" id="inputEmail" class="form-control" placeholder="Digite o seu e-mail" required="" autofocus="">
