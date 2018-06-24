@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAnuncioDadosTable extends Migration
+class CreateAnuncioFieldsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,14 @@ class CreateAnuncioDadosTable extends Migration
      */
     public function up()
     {
-        Schema::create('anuncio_dados', function (Blueprint $table) {
+        Schema::create('anuncio_fields', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nome');
-            $table->string('valor');
-            $table->integer('anuncio');
-            $table->integer('user');
+            $table->string('meta_nome'); //Nome utilizado para inserção de meta dados no AnuncioDados
+            $table->string('type');
+            $table->string('place_holder');
+            $table->double('step');
+            $table->longText('helpText');
             $table->timestamps();
         });
     }
@@ -30,6 +32,6 @@ class CreateAnuncioDadosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('anuncio_dados');
+        Schema::dropIfExists('anuncio_fields');
     }
 }

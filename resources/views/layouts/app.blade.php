@@ -10,7 +10,8 @@
 
     <title>{{ env('app.name', 'Unicodono') }}</title>
     <link href="https://bootswatch.com/4/cosmo/bootstrap.min.css" rel="stylesheet">
-    <link href="/css/unicodono.css" rel="stylesheet">
+    <link href="{{asset('css/unicodono.css')}}" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
 </head>
 <body>
     <div id="app">
@@ -22,13 +23,13 @@
           <div class="collapse navbar-collapse" id="navbarColor01">
             <ul class="navbar-nav mr-auto">
               <li class="nav-item active">
-                <a class="nav-link" href="#">Início <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="{{route('home')}}">Início <span class="sr-only">(current)</span></a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">#</a>
+                <a class="nav-link" href="{{route('anuncie')}}">Anuncie</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">#</a>
+                <a class="nav-link" href="{{route('anuncios')}}">Anúncios</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#">#</a>

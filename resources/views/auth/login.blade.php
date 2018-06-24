@@ -103,20 +103,20 @@
       <img class="mb-4" src="https://www.unicodono.com.br/web/img/topo/01.png" alt="" width="200">
     </div>
   </div>
-  <form class="form-signin h-100" method="post" action="{{route('login')}}">
+  <form method="post" class="form-signin h-100" action="{{route('login')}}">
       {{csrf_field()}}
       <h1 class="h3 mb-3 font-weight-normal">Acesse a sua conta</h1>
-      <label for="inputEmail" class="sr-only">Email</label>
-      <input type="email" id="inputEmail" class="form-control" placeholder="Digite o seu e-mail" required="" autofocus="">
-      <label for="inputPassword" class="sr-only">Senha</label>
-      <input type="password" id="inputPassword" class="form-control" placeholder="Digite a sua senha" required="">
+      <label for="email" class="sr-only">Email</label>
+      <input type="email" id="email" name="email" class="form-control" placeholder="Digite o seu e-mail" required="" autofocus="">
+      <label for="password" class="sr-only">Senha</label>
+      <input type="password" id="password" name="password" class="form-control" placeholder="Digite a sua senha" required="">
       <div class="checkbox mb-3">
         <label>
           <input type="checkbox" value="remember-me"> Lembrar de mim
         </label>
       </div>
       <button class="btn btn-lg btn-primary btn-block" type="submit">Entrar</button>
-      <a class="btn btn-lg btn-secondary btn-block" href="/register">Criar Conta</a>
+      <a class="btn btn-lg btn-secondary btn-block" href="{{ route('register') }}">Criar Conta</a>
       <p class="mt-5 mb-3 text-muted text-center">Unicodono © Todos os direitos reservados</p>
     </form>
 </div>
