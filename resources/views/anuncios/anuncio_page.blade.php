@@ -2,7 +2,7 @@
 @section('content')
 <div class="container">
   <div class="row">
-    <div class="col-sm-7">
+    <div class="col-sm-7" style="margin-top: 40px;">
       <div class="row">
         <div class="col-sm-12">
           <img src="http://via.placeholder.com/700x500" class="img-fluid" alt="Responsive image">
@@ -64,6 +64,24 @@
           </div>
         </div>
       </div>
+        <div class="card" style="border: none">
+          <div class="card-body">
+            <h5 class="card-title">Anunciado por {{App\User::find($anuncio->user)->name}}</h5>
+            <h6 class="card-subtitle mb-2 text-muted">Dados do vendedor</h6>
+            <p class="card-text">
+              <div class="list-group">
+                <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                  <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">Telefone</h5>
+                    <small class="text-muted"></small>
+                  </div>
+                  <p class="mb-1">(71)90000-0000</p>
+                  <small class="text-muted"></small>
+                </a>
+              </div>
+            </p>
+          </div>
+        </div>
     </div>
   </div>
 </div>

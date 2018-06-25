@@ -15,6 +15,8 @@ class CreateUserDadosTable extends Migration
     {
         Schema::create('user_dados', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('nome');
+            $table->string('valor');
             $table->timestamps();
         });
     }
