@@ -15,6 +15,7 @@
         </div>
         <input type="hidden" name="veiculo" value="0">
         <input type="hidden" name="valor" value="100">
+        <input type="hidden" name="user" value="{{Auth::user()->id}}">
         <div class="form-group">
           <label for="descricao">Descrição</label>
           <textarea class="form-control" name="descricao" id="descricao" rows="3" placeholder="Descreve detalhadamento o que você está anunciando"></textarea>

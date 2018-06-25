@@ -19,6 +19,7 @@ class AnuncioController extends Controller
            'veiculo' => 'required',
            'valor' => 'required',
            'descricao' => 'required',
+           'user' => 'required'
         ]);
         $anuncio = Anuncio::create($validatedData);
         //Percorro todos os fields do anuncio e procuro pelo input correspondente a ele.
@@ -36,6 +37,11 @@ class AnuncioController extends Controller
     public function anuncios(){
       $anuncios = Anuncio::orderBy('id', 'desc')->paginate(20);
       return view('anuncios.anuncios')->with('anuncios', $anuncios);
+    }
+
+    public function index(Request $request, $id){
+      $anuncio = Anuncio::find($id);
+      return view('anuncios.anuncio_page')->with('anuncio', $anuncio);
     }
 }
 //http://dev-jsantosclass54983.codeanyapp.com/
