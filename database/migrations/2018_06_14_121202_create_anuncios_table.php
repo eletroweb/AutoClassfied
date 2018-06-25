@@ -18,6 +18,7 @@ class CreateAnunciosTable extends Migration
             $table->string('nome');
             $table->longText('descricao');
             $table->integer('veiculo');
+            $table->integer('user');
             $table->double('valor');
             $table->timestamps();
         });
