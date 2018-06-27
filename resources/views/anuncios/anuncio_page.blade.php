@@ -3,6 +3,11 @@
 <div class="container">
   <div class="row">
     <div class="col-sm-7" style="margin-top: 40px;">
+      @if (session('status'))
+          <div class="alert alert-success">
+              {{ session('status') }}
+          </div>
+      @endif
       <div class="row">
         <div class="col-sm-12">
           <img src="http://via.placeholder.com/700x500" class="img-fluid" alt="Responsive image">

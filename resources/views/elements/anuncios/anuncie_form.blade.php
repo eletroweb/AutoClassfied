@@ -1,11 +1,6 @@
 <div class="container">
   <div class="row">
     <div class="col-sm-6">
-      @if (session('status'))
-          <div class="alert alert-success">
-              {{ session('status') }}
-          </div>
-      @endif
       <form method="post" action="{{route('anuncieStore')}}">
         {{csrf_field()}}
         <div class="form-group">
@@ -13,8 +8,18 @@
           <input type="text" class="form-control" name="nome" id="titulo" aria-describedby="tituloHelp" placeholder="O que você está anunciando?">
           <small id="tituloHelp" class="form-text text-muted">Seja objetivo, o título será exibido na listagem dos veículos.</small>
         </div>
-        <input type="hidden" name="veiculo" value="0">
-        <input type="hidden" name="valor" value="100">
+        <div class="form-group">
+          <label for="veiculo">Veículo</label>
+          <select class="form-control" name="veiculo" id="veiculo">
+            <option value="">Selecione o veículo...</option>
+            <option value="0">Veículo genérico</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="valor">Valor</label>
+          <input type="number" step="0.01" class="form-control" name="valor" id="valor" aria-describedby="valorHelp" placeholder="Digite o preço">
+          <small id="valorHelp" class="form-text text-muted">Este preço será exibido no anúncio</small>
+        </div>
         <input type="hidden" name="user" value="{{Auth::user()->id}}">
         <div class="form-group">
           <label for="descricao">Descrição</label>

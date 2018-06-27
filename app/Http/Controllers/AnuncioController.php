@@ -31,7 +31,7 @@ class AnuncioController extends Controller
           $data->anuncio = $anuncio->id;
           $data->save();
         }
-        return redirect('home')->with('status', 'Anúncio publicado com sucesso!');
+        return redirect('/anuncios/'.$anuncio->id)->with('status', 'Anúncio publicado com sucesso!');
     }
 
     public function anuncios(){
