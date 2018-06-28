@@ -20,6 +20,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::middleware('auth')->group(function () {
   Route::get('/anuncie', 'AnuncioController@anuncie')->name('anuncie');
+  Route::get('/minhaconta', 'UserController@profile')->name('minhaconta');
   Route::post('/anuncios/store', 'AnuncioController@anuncieStore')->name('anuncieStore');
   Route::get('/anuncios', 'AnuncioController@anuncios')->name('anuncios');
   Route::get('/anuncios/{id}', 'AnuncioController@index')->where('id', '[0-9]+');

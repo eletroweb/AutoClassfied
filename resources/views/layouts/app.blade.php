@@ -31,9 +31,22 @@
               <li class="nav-item">
                 <a class="nav-link" href="{{route('anuncios')}}">Anúncios</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">#</a>
-              </li>
+              @if(Auth::check())
+                <li class="nav-item">
+                  <a class="nav-link" href="{{route('minhaconta')}}">Minha conta</a>
+                </li>
+                <li class="nav-item">
+                    <a  class="nav-link" href="{{ route('logout') }}"
+                        onclick="event.preventDefault();
+                                 document.getElementById('logout-form').submit();">
+                        Sair
+                    </a>
+
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        {{ csrf_field() }}
+                    </form>
+                </li>
+              @endif
             </ul>
           </div>
         </nav>
@@ -202,7 +215,7 @@
             </ul>
           </div>
           <div class="col-sm-3">
-            
+
           </div>
         </div>
         <div class="row bg-secondary p-3">
