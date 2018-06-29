@@ -3,7 +3,7 @@
     <a href="/anuncios/{{$anuncio->id}}" class="list-group-item list-group-item-action flex-column align-items-start">
       <div class="row">
         <div class="col-sm-3">
-          <img src="http://via.placeholder.com/150x150" width="150" alt="{{$anuncio->nome}}">  
+          <img src="{{Storage::url(AnuncioImagem::where([['anuncio', $anuncio->id], ['first', true]])->first()->url)}}" width="150" alt="{{$anuncio->nome}}">  
         </div>
         <div class="col-sm-9">
           <div class="d-flex w-100 justify-content-between">
