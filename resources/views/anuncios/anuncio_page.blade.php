@@ -10,13 +10,15 @@
       @endif
       <div class="row">
         <div class="col-sm-12">
-          <img src="http://via.placeholder.com/700x500" class="img-fluid" alt="Responsive image">
+          <img src="{{$principal}}" class="img-fluid" alt="Responsive image">
         </div>
       </div>
       <div class="row">
-        <div class="col-sm-2">
-          <img src="http://via.placeholder.com/100x100" alt="imagem" class="img-thumbnail">
-        </div>
+        @foreach($imagens as $img)
+          <div class="col-sm-2">
+            <img src="{{$img}}" alt="imagem" width="100" class="img-thumbnail">
+          </div>
+        @endforeach
       </div>
     </div>
     <div class="col-sm-5">

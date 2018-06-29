@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Anuncio;
 use App\AnuncioDados;
 use App\AnuncioField;
+use App\AnuncioImagem;
+use Illuminate\Support\Facades\Storage;
 
 class AnuncioController extends Controller
 {
@@ -22,6 +24,19 @@ class AnuncioController extends Controller
            'user' => 'required'
         ]);
         $anuncio = Anuncio::create($validatedData);
+        $img_principal = new AnuncioImagem();
+        $img_principal->url= Storage::put('public', $request->file('img_principal'));
+        $img_principal->anuncio= $anuncio->id;
+        $img_principal->first= true;
+        $img_principal->save();
+        $imgs = $request->file('imagens');
+        foreach($imgs as $img){
+          $img_anuncio = new AnuncioImagem();
+          $img_anuncio->url= Storage::put('public', $img);
+          $img_anuncio->first= false;
+          $img_anuncio->anuncio= $anuncio->id;
+          $img_anuncio->save();
+        }
         //Percorro todos os fields do anuncio e procuro pelo input correspondente a ele.
         foreach(AnuncioField::all() as $field){
           //Enquanto encontro fields crio os metadados do anuncio (AnuncioDados)
@@ -41,7 +56,16 @@ class AnuncioController extends Controller
 
     public function index(Request $request, $id){
       $anuncio = Anuncio::find($id);
-      return view('anuncios.anuncio_page')->with('anuncio', $anuncio);
+      $principal = Storage::url(AnuncioImagem::where([['anuncio', $anuncio->id], ['first', true]])->first()->url);
+      $imagens = array();
+      $result = AnuncioImagem::where([
+                                        ['anuncio', $anuncio->id],
+                                        ['first', false]
+                                      ])->get();
+      foreach($result as $r){
+        $imagens[] = Storage::url($r->url);
+      }
+      return view('anuncios.anuncio_page')->with(['anuncio'=> $anuncio, 'imagens' => $imagens, 'principal' => $principal]);
     }
 }
 //http://dev-jsantosclass54983.codeanyapp.com/
