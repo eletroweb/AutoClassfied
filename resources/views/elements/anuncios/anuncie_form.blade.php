@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <div class="col-sm-6">
-      <form method="post" action="{{route('anuncieStore')}}">
+      <form method="post" action="{{route('anuncieStore')}}"  enctype="multipart/form-data">
         {{csrf_field()}}
         <div class="form-group">
           <label for="titulo">Titulo do anúncio</label>
@@ -34,6 +34,17 @@
           <small id="{{$field->nome_prog}}Help" class="form-text text-muted">{{$field->helpText}}</small>
         </div>
         @endforeach
+        <div class="form-group">
+          <label for="img_principal">Imagem principal:</label>
+          <input type="file" class="form-control-file" name="img_principal" id="img_principal" required>
+        </div>
+        <div class="form-group">
+          <label for="">Mais imagens:</label>
+          <input type="file" class="form-control-file img-filter mb-2" name="imagens[]">
+          <input type="file" class="form-control-file img-filter mb-2" name="imagens[]">
+          <input type="file" class="form-control-file img-filter mb-2" name="imagens[]">
+          <input type="file" class="form-control-file img-filter mb-2" name="imagens[]">
+        </div>
         <button type="submit" class="btn btn-primary">Anunciar</button>
       </form>
     </div>

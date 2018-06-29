@@ -11,6 +11,10 @@ class Anuncio extends Model
     public function anuncio_dados(){
         return $this->hasMany('App\AnuncioDados');
     }
+  
+    public function anuncio_imagens(){
+        return $this->hasMany('App\AnuncioImagem');
+    }
 
     public function user(){
         return $this->belongsTo('App\User');
