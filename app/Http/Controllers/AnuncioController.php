@@ -29,13 +29,15 @@ class AnuncioController extends Controller
         $img_principal->anuncio= $anuncio->id;
         $img_principal->first= true;
         $img_principal->save();
-        $imgs = $request->file('imagens');
-        foreach($imgs as $img){
-          $img_anuncio = new AnuncioImagem();
-          $img_anuncio->url= Storage::put('public', $img);
-          $img_anuncio->first= false;
-          $img_anuncio->anuncio= $anuncio->id;
-          $img_anuncio->save();
+        if($request->hasFile('imagens')){
+          $imgs = $request->file('imagens');
+          foreach($imgs as $img){
+            $img_anuncio = new AnuncioImagem();
+            $img_anuncio->url= Storage::put('public', $img);
+            $img_anuncio->first= false;
+            $img_anuncio->anuncio= $anuncio->id;
+            $img_anuncio->save();
+          }
         }
         //Percorro todos os fields do anuncio e procuro pelo input correspondente a ele.
         foreach(AnuncioField::all() as $field){

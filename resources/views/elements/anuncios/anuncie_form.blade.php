@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <div class="col-sm-6">
-      <form method="post" action="{{route('anuncieStore')}}"  enctype="multipart/form-data">
+      <form method="post" id="anunciar" action="{{route('anuncieStore')}}"  enctype="multipart/form-data">
         {{csrf_field()}}
         <div class="form-group">
           <label for="titulo">Titulo do anúncio</label>
@@ -17,7 +17,7 @@
         </div>
         <div class="form-group">
           <label for="valor">Valor</label>
-          <input type="text" data-affixes-stay="true" data-prefix="R$ " data-thousands="." data-decimal="," class="form-control" name="valor" id="valor" aria-describedby="valorHelp" placeholder="Digite o preço">
+          <input type="text" data-affixes-stay="false" data-prefix="R$ " data-thousands="." data-decimal="," class="form-control" name="valor" id="valor" aria-describedby="valorHelp" placeholder="Digite o preço">
           <small id="valorHelp" class="form-text text-muted">Este preço será exibido no anúncio</small>
         </div>
         <input type="hidden" name="user" value="{{Auth::user()->id}}">
