@@ -13,11 +13,15 @@ class UserController extends Controller
       $user = Auth::user();
       return view('user.home')->with(['user'=> $user]);
     }
-  
+
     public function meus_anuncios(Request $request){
       $user = Auth::user();
       $anuncios = Anuncio::where('user', $user->id)->paginate(5);
       return view('user.meusanuncios')->with('anuncios', $anuncios);
+    }
+
+    public function fale_conosco(Request $request){
+      return view('fale_conosco');
     }
 
 }

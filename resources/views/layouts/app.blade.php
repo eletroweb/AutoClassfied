@@ -73,7 +73,7 @@
                 <a class="nav-link" href="#">Dúvidas</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Fale Conosco</a>
+                <a class="nav-link" href="{{route('fale_conosco')}}">Fale Conosco</a>
               </li>
               @if(Auth::check())
                 <li class="nav-item">
@@ -85,7 +85,6 @@
                                  document.getElementById('logout-form').submit();">
                         Sair
                     </a>
-
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                         {{ csrf_field() }}
                     </form>

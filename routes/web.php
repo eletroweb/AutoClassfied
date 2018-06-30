@@ -18,6 +18,8 @@ Route::get('/', function () {
 Auth::routes();
 Route::get('/anuncios', 'AnuncioController@anuncios')->name('anuncios');
 Route::get('/anuncios/{id}', 'AnuncioController@index')->where('id', '[0-9]+');
+Route::get('/fale-conosco', 'UserController@fale_conosco')->name('fale_conosco');
+Route::post('/fale-conosco', 'UserController@fale_conosco_post')->name('fale_conosco_post');
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::middleware('auth')->group(function () {
