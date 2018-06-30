@@ -33,6 +33,51 @@
               <li class="nav-item">
                 <a class="nav-link" href="{{route('anuncios')}}">Anúncios</a>
               </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Comprar carros
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" href="#">Ofertas de carros</a>
+                  <a class="dropdown-item" href="#">Ofertas de moto</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="#">Carros mais buscados</a>
+                  <a class="dropdown-item" href="#">Motos mais buscadas</a>
+                  <a class="dropdown-item" href="#">Busca avançada</a>
+                  <a class="dropdown-item" href="#">Encontre um revendedor</a>
+                  <a class="dropdown-item" href="#">Tabela FIPE</a>
+                </div>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Vender carros
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" href="#">Anuncie seu carro</a>
+                  <a class="dropdown-item" href="#">Anuncie sua moto</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="#">Planos para revendedores</a>
+                  <a class="dropdown-item" href="#">Cadastro para revendas</a>
+                  <a class="dropdown-item" href="#">Cadastro anúncio simples</a>
+                  <a class="dropdown-item" href="#">Tabela FIPE</a>
+                  <a class="dropdown-item" href="#">Perguntas Frequentes</a>
+                </div>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Avalie o seu veículo</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Financie o seu veículo</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Blog</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Dúvidas</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Fale Conosco</a>
+              </li>
               @if(Auth::check())
                 <li class="nav-item">
                   <a class="nav-link" href="{{route('minhaconta')}}">Minha conta</a>
