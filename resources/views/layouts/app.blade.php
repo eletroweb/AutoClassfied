@@ -191,28 +191,28 @@
                 <a class="nav-link text-white" href="#"><b class="text-white">Sites</b></a>
               </li>
               <li class="nav-item">
-                <a class="nav-link text-white" href="http://www.detran.sp.gov">Detran São Paulo</a>
+                <a class="nav-link text-white" href="http://www.detran.sp.gov.br" target="_blank">Detran São Paulo</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link text-white" href="http://veiculos.fipe.gov.br">Tabela Fipe</a>
+                <a class="nav-link text-white" href="http://veiculos.fipe.gov.br" target="_blank">Tabela Fipe</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link text-white" href="http://detran.mg.gov.br">Detran Minas Gerais</a>
+                <a class="nav-link text-white" href="http://detran.mg.gov.br" target="_blank">Detran Minas Gerais</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link text-white" href="http://detran.sc.gov.br">Detran Santa-Catarina</a>
+                <a class="nav-link text-white" href="http://detran.sc.gov.br" target="_blank">Detran Santa-Catarina</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link text-white" href="http://detran.pr.gov.br">Detran Paraná</a>
+                <a class="nav-link text-white" href="http://detran.pr.gov.br" target="_blank">Detran Paraná</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link text-white" href="http://detran.rj.gov.br">Detran Rio de Janeiro</a>
+                <a class="nav-link text-white" href="http://detran.rj.gov.br" target="_blank">Detran Rio de Janeiro</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link text-white" href="http://detran.rs.gov.br">Detran Rio Grande do Sul</a>
+                <a class="nav-link text-white" href="http://detran.rs.gov.br" target="_blank">Detran Rio Grande do Sul</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link text-white" href="https://postodevistoria.com.br">Postos de Vistoria no Brasil - Encontre o mais próximo !</a>
+                <a class="nav-link text-white" href="https://postodevistoria.com.br" target="_blank">Postos de Vistoria no Brasil - Encontre o mais próximo !</a>
               </li>
             </ul>
           </div>
