@@ -28,9 +28,6 @@
                 <a class="nav-link" href="{{route('home')}}">Início <span class="sr-only">(current)</span></a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{{route('anuncie')}}">Anuncie</a>
-              </li>
-              <li class="nav-item">
                 <a class="nav-link" href="{{route('anuncios')}}">Anúncios</a>
               </li>
               <li class="nav-item dropdown">
@@ -53,7 +50,7 @@
                   Vender carros
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="#">Anuncie seu carro</a>
+                  <a class="dropdown-item" href="{{route('anuncie')}}">Anuncie seu carro</a>
                   <a class="dropdown-item" href="#">Anuncie sua moto</a>
                   <div class="dropdown-divider"></div>
                   <a class="dropdown-item" href="#">Planos para revendedores</a>
