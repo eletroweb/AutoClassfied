@@ -191,25 +191,25 @@
                 <a class="nav-link text-white" href="#"><b class="text-white">Sites</b></a>
               </li>
               <li class="nav-item">
-                <a class="nav-link text-white" href="www.detran.sp.gov">Detran São Paulo</a>
+                <a class="nav-link text-white" href="http://www.detran.sp.gov">Detran São Paulo</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link text-white" href="veiculos.fipe.gov.br">Tabela Fipe</a>
+                <a class="nav-link text-white" href="http://veiculos.fipe.gov.br">Tabela Fipe</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link text-white" href="detran.mg.gov.br">Detran Minas Gerais</a>
+                <a class="nav-link text-white" href="http://detran.mg.gov.br">Detran Minas Gerais</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link text-white" href="detran.sc.gov.br">Detran Santa-Catarina</a>
+                <a class="nav-link text-white" href="http://detran.sc.gov.br">Detran Santa-Catarina</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link text-white" href="detran.pr.gov.br">Detran Paraná</a>
+                <a class="nav-link text-white" href="http://detran.pr.gov.br">Detran Paraná</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link text-white" href="detran.rj.gov.br">Detran Rio de Janeiro</a>
+                <a class="nav-link text-white" href="http://detran.rj.gov.br">Detran Rio de Janeiro</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link text-white" href="detran.rs.gov.br">Detran Rio Grande do Sul</a>
+                <a class="nav-link text-white" href="http://detran.rs.gov.br">Detran Rio Grande do Sul</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link text-white" href="https://postodevistoria.com.br">Postos de Vistoria no Brasil - Encontre o mais próximo !</a>
