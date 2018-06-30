@@ -51,7 +51,7 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                   <a class="dropdown-item" href="{{route('anuncie')}}">Anuncie seu carro</a>
-                  <a class="dropdown-item" href="#">Anuncie sua moto</a>
+                  <a class="dropdown-item" href="{{route('anuncie')}}">Anuncie sua moto</a>
                   <div class="dropdown-divider"></div>
                   <a class="dropdown-item" href="#">Planos para revendedores</a>
                   <a class="dropdown-item" href="#">Cadastro para revendas</a>
