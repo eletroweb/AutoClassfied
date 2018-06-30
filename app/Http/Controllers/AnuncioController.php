@@ -51,8 +51,14 @@ class AnuncioController extends Controller
         return redirect('/anuncios/'.$anuncio->id)->with('status', 'Anúncio publicado com sucesso!');
     }
 
-    public function anuncios(){
-      $anuncios = Anuncio::orderBy('id', 'desc')->paginate(20);
+    public function anuncios(Request $request){
+      if($request->has('search')){
+        $anuncios = Anuncio::where([
+          ['nome', 'like', '%'.$request->input('search').'%'],
+        ])->orderBy('id', 'desc')->paginate(20);
+      }else{
+        $anuncios = Anuncio::orderBy('id', 'desc')->paginate(20);
+      }
       return view('anuncios.anuncios')->with('anuncios', $anuncios);
     }
 
