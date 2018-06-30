@@ -17,7 +17,7 @@
         </div>
         <div class="form-group">
           <label for="valor">Valor</label>
-          <input type="number" step="0.01" class="form-control" name="valor" id="valor" aria-describedby="valorHelp" placeholder="Digite o preço">
+          <input type="text" data-affixes-stay="true" data-prefix="R$ " data-thousands="." data-decimal="," class="form-control" name="valor" id="valor" aria-describedby="valorHelp" placeholder="Digite o preço">
           <small id="valorHelp" class="form-text text-muted">Este preço será exibido no anúncio</small>
         </div>
         <input type="hidden" name="user" value="{{Auth::user()->id}}">
