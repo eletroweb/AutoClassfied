@@ -67,10 +67,17 @@
                 <a class="nav-link" href="#">Financie o seu veículo</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Blog</a>
+                <a class="nav-link" href="https://blog.unicodono.com.br" target="_blank">Blog</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Dúvidas</a>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Dúvidas
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" href="{{route('duvida_comprar_carro')}}">Como comprar seu veículo</a>
+                  <a class="dropdown-item" href="{{route('duvida_vender_carro')}}">Como vender seu veículo</a>
+                  <a class="dropdown-item" href="{{route('duvida_anuncios')}}">Anúncios</a>
+                </div>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="{{route('fale_conosco')}}">Fale Conosco</a>

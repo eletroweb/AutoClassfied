@@ -4,19 +4,18 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateVeiculosTable extends Migration
+class CreateMarcasTable extends Migration
 {
     /**
      * Run the migrations.
-     * Esta table será útil para quando a revenda for postada indicar de qual veículo está sendo tratada.
+     *
      * @return void
      */
     public function up()
     {
-        Schema::create('veiculos', function (Blueprint $table) {
+        Schema::create('marcas', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nome');
-            $table->string('tipo');
             $table->timestamps();
         });
     }
@@ -28,6 +27,6 @@ class CreateVeiculosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('veiculos');
+        Schema::dropIfExists('marcas');
     }
 }

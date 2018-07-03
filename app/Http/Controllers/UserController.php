@@ -24,4 +24,16 @@ class UserController extends Controller
       return view('fale_conosco');
     }
 
+    public function duvida_comprar_carro(Request $request){
+      return view('duvidas.comprar_veiculo');
+    }
+
+    public function duvida_vender_carro(Request $request){
+      return view('duvidas.vender_veiculo');
+    }
+
+    public function duvida_anuncios(Request $request){
+      return view('duvidas.anuncios');
+    }
+
 }
