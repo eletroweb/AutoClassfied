@@ -35,5 +35,9 @@ class UserController extends Controller
     public function duvida_anuncios(Request $request){
       return view('duvidas.anuncios');
     }
+  
+    public function admin(Request $request){
+      return view('admin.dashboard');
+    }
 
 }

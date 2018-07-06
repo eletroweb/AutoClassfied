@@ -24,9 +24,13 @@ Route::get('/como-comprar-carro', 'UserController@duvida_comprar_carro')->name('
 Route::get('/como-vender-carro', 'UserController@duvida_vender_carro')->name('duvida_vender_carro');
 Route::get('/duvidas-anuncios', 'UserController@duvida_anuncios')->name('duvida_anuncios');
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/cronjob/update/all', 'VeiculoController@updateVeiculos');
 Route::middleware('auth')->group(function () {
   Route::get('/anuncie', 'AnuncioController@anuncie')->name('anuncie');
   Route::get('/minha-conta', 'UserController@profile')->name('minhaconta');
   Route::get('/minha-conta/meus-anuncios', 'UserController@meus_anuncios')->name('meusanuncios');
   Route::post('/anuncios/store', 'AnuncioController@anuncieStore')->name('anuncieStore');
+});
+Route::middleware(['auth','admin'])->group(function(){
+  Route::get('/admin', 'UserController@admin')->name('admin');
 });

@@ -1,7 +1,23 @@
 $(document).ready(function(){
   $('#valor').maskMoney();
   $("#anunciar").submit(function(){
-   var value = $('#valor').maskMoney('unmasked')[0];
-   $('#valor').val(value);
- });
+     var value = $('#valor').maskMoney('unmasked')[0];
+     $('#valor').val(value);
+   });
+  $('.owl-carousel').owlCarousel({
+      loop:true,
+      margin:10,
+      nav:true,
+      responsive:{
+          0:{
+              items:1
+          },
+          600:{
+              items:3
+          },
+          1000:{
+              items:5
+          }
+      }
+  })
 });

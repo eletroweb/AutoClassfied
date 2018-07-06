@@ -30,4 +30,8 @@ class User extends Authenticatable
     public function anuncios(){
         return $this->hasMany('App\Anuncio');
     }
+  
+    public function isAdmin(){
+      return true;
+    }
 }

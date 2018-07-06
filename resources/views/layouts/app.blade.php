@@ -9,7 +9,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ env('app.name', 'Unicodono') }}</title>
-    <link href="https://bootswatch.com/4/cosmo/bootstrap.min.css" rel="stylesheet">
+    <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{asset('css/unicodono.css')}}" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
 </head>
@@ -17,7 +17,7 @@
     <div id="app">
         <nav id="menu-principal" class="navbar navbar-expand-lg navbar-dark bg-primary">
           <a class="navbar-brand" href="/">
-            <img src="{{asset("images/01.png")}}"  height="30" alt="">
+            <img src="{{asset('images/01.png')}}"  height="30" alt="">
           </a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -280,5 +280,6 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
     <script src="{{asset('js/jquery.maskMoney.min.js')}}" charset="utf-8"></script>
     <script src="{{asset('js/custom.js')}}" charset="utf-8"></script>
+    <script src="{{asset('js/owl.carousel.min.js')}}" charset="utf-8"></script>
 </body>
 </html>

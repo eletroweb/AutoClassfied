@@ -16,14 +16,16 @@
   </div>
 </div>
 <div class="container">
-
-    <div class="row mt-4">
-      <div class="col-sm-8">
-        @include('elements.homepage.chamada_ofertas')
-      </div>
-      <div class="col-sm-4">
-        @include('elements.homepage.concessionaria')
-      </div>
+  <div class="row mt-4">
+    <div class="col-sm-8">
+      @include('elements.homepage.chamada_ofertas')
     </div>
+    <div class="col-sm-4">
+      @include('elements.homepage.concessionaria')
+    </div>
+  </div>
+  <div class="row">
+      @include('elements.anuncios.carousel')
+  </div>
 </div>
 @endsection
