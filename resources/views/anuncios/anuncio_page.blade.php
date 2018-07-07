@@ -33,37 +33,39 @@
           <a class="btn btn-primary" data-toggle="collapse" href="#contato" role="button" aria-expanded="false" aria-controls="contato" class="card-link">Entrar em contato</a>
           <div class="collapse mt-3" id="contato">
             <div class="card card-body">
-              <form>
+              <form action="{{route('contato_anuncio')}}" method="post">
+                {{csrf_field()}}
                 <div class="form-group">
                   <label for="nome">Nome completo:</label>
-                  <input type="text" class="form-control" id="nome" aria-describedby="nomeHelp" placeholder="Digite o seu nome">
+                  <input type="text" class="form-control" id="nome" name="nome" aria-describedby="nomeHelp" placeholder="Digite o seu nome">
                   <small id="nomeHelp" class="form-text text-muted">Nome usado para identificarmos você.</small>
                 </div>
+                <input type="hidden" name="anuncio" value="{{$anuncio->id}}">
                 <div class="form-group">
                   <label for="email">E-mail:</label>
-                  <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Digite o seu email">
+                  <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Digite o seu email">
                   <small id="emailHelp" class="form-text text-muted">Utilizaremos para entrar em contato com você.</small>
                 </div>
                 <div class="form-group">
                   <label for="telefone">Telefone</label>
-                  <input type="text" class="form-control" id="telefone" aria-describedby="telefoneHelp" placeholder="Digite o seu telefone">
+                  <input type="text" class="form-control" id="telefone" name="telefone" aria-describedby="telefoneHelp" placeholder="Digite o seu telefone">
                   <small id="telefoneHelp" class="form-text text-muted">Utilizaremos para entrar em contato com você.</small>
                 </div>
                 <div class="form-group form-check">
-                  <input type="checkbox" class="form-check-input" id="whatsapp">
+                  <input type="checkbox" class="form-check-input" id="whatsapp" value="1" name="contato_whatsapp">
                   <label class="form-check-label" for="whatsapp">Prefiro contato via WhatsApp</label>
                 </div>
                 <div class="form-group form-check">
-                  <input type="checkbox" class="form-check-input" id="financiamento">
+                  <input type="checkbox" class="form-check-input" id="financiamento" value="1" name="desejo_financiamento">
                   <label class="form-check-label" for="financiamento">Desejo realizar financiamento</label>
                 </div>
                 <div class="form-group form-check">
-                  <input type="checkbox" class="form-check-input" id="veiculo_troca">
+                  <input type="checkbox" class="form-check-input" id="veiculo_troca" value="1" name="veiculo_troca">
                   <label class="form-check-label" for="veiculo_troca">Desejo dar veículo na troca</label>
                 </div>
                 <div class="form-group">
                   <label for="mensagem">Mensagem</label>
-                  <textarea class="form-control" id="mensagem" rows="3" placeholder="Tire as dúvidas sobre o anúncio e faça a sua proposta ao anunciante"></textarea>
+                  <textarea class="form-control" id="mensagem" name="mensagem" rows="3" placeholder="Tire as dúvidas sobre o anúncio e faça a sua proposta ao anunciante"></textarea>
                 </div>
                 <button type="submit" class="btn btn-secondary">Enviar contato</button>
               </form>

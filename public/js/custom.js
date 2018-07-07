@@ -1,7 +1,6 @@
 $(document).ready(function(){
-  $('.money2').mask("#.##0,00", {reverse: true});
   $("#anunciar").submit(function(){
-     var value = $('#valor').mask('unmasked')[0];
+     var value = $('#valor').cleanVal();
      $('#valor').val(value);
    });
   $('.owl-carousel').owlCarousel({
@@ -45,4 +44,5 @@ $(document).ready(function(){
   $('#cpf').mask('000.000.000-00', {reverse: true});
   $('#telefone').mask('(00) 0000-0000');
   $('#celular').mask('(00) 0 0000-0000');
+  $('#valor').mask("#.##0,00", {reverse: true});
 });

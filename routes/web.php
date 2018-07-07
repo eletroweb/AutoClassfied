@@ -25,6 +25,7 @@ Route::get('/como-vender-carro', 'UserController@duvida_vender_carro')->name('du
 Route::get('/duvidas-anuncios', 'UserController@duvida_anuncios')->name('duvida_anuncios');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/cronjob/update/all', 'VeiculoController@updateVeiculos');
+Route::post('/anuncio/contato', 'ContatoAnuncioController@store')->name('contato_anuncio');
 Route::middleware('auth')->group(function () {
   Route::get('/anuncie', 'AnuncioController@anuncie')->name('anuncie');
   Route::get('/minha-conta', 'UserController@profile')->name('minhaconta');
