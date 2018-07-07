@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Anuncio;
 
 class HomeController extends Controller
 {
@@ -21,8 +22,8 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        return view('home');
+    public function index(){
+        $recentes = Anuncio::orderBy('id', 'desc')->paginate(10);
+        return view('home')->with(['recentes' => $recentes]);
     }
 }

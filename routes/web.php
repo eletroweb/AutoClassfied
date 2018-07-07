@@ -31,6 +31,7 @@ Route::middleware('auth')->group(function () {
   Route::get('/minha-conta/meus-anuncios', 'UserController@meus_anuncios')->name('meusanuncios');
   Route::post('/anuncios/store', 'AnuncioController@anuncieStore')->name('anuncieStore');
 });
+Route::get('/importxml', 'VeiculoController@updateVeiculos');
 Route::middleware(['auth','admin'])->group(function(){
   Route::get('/admin', 'UserController@admin')->name('admin');
 });

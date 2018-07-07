@@ -24,6 +24,7 @@
       @include('elements.homepage.concessionaria')
     </div>
   </div>
+  <hr>
   <div class="row">
       @include('elements.anuncios.carousel')
   </div>

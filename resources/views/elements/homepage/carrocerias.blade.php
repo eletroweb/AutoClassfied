@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row mx-auto">
     @include('elements.homepage.carroceria', ['nome'=> 'Hatchback', 'imageUrl'=> asset('images/carroceria/hatchback.png')])
     @include('elements.homepage.carroceria', ['nome'=> 'Sedã', 'imageUrl'=> asset('images/carroceria/sedan.png')])
     @include('elements.homepage.carroceria', ['nome'=> 'Minivan', 'imageUrl'=> asset('images/carroceria/minivan.png')])
