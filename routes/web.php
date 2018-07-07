@@ -18,8 +18,8 @@ Route::get('/', function () {
 Auth::routes();
 Route::get('/anuncios', 'AnuncioController@anuncios')->name('anuncios');
 Route::get('/anuncios/{id}', 'AnuncioController@index')->where('id', '[0-9]+');
-Route::get('/fale-conosco', 'UserController@fale_conosco')->name('fale_conosco');
-Route::post('/fale-conosco', 'UserController@fale_conosco_post')->name('fale_conosco_post');
+Route::get('/fale-conosco', 'ContatoController@index')->name('fale_conosco');
+Route::post('/fale-conosco', 'ContatoController@store')->name('fale_conosco_post');
 Route::get('/como-comprar-carro', 'UserController@duvida_comprar_carro')->name('duvida_comprar_carro');
 Route::get('/como-vender-carro', 'UserController@duvida_vender_carro')->name('duvida_vender_carro');
 Route::get('/duvidas-anuncios', 'UserController@duvida_anuncios')->name('duvida_anuncios');
