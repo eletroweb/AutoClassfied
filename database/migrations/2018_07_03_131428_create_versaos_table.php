@@ -15,6 +15,7 @@ class CreateVersaosTable extends Migration
     {
         Schema::create('versaos', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('nome');
             $table->integer('modelo');
             $table->timestamps();
         });

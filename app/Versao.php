@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Versao extends Model
 {
+
+    protected $fillable = ['nome', 'modelo'];
+
     public function modelo(){
       return $this->belongsTo('App\Modelo');
     }
