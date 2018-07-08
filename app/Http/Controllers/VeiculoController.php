@@ -53,4 +53,16 @@ class VeiculoController extends Controller
       }
       return redirect('/anuncios');
     }
+
+    public function getMarcas(Request $request){
+      return response()->json(Marca::all());
+    }
+
+    public function getModelos(Request $request){
+      return response()->json(Modelos::where('marca', $request->input('marca'))->get());
+    }
+
+    public function getVersoes(Request $request){
+      return response()->json(Versao::where('modelo', $request->input('modelo'))->get());
+    }
 }

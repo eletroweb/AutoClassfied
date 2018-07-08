@@ -16,6 +16,9 @@ Route::get('/', function () {
 });
 
 Auth::routes();
+Route::get('/ajax/veiculos/marcas', 'VeiculoController@getMarcas');
+Route::get('/ajax/veiculos/modelos', 'VeiculoController@getModelos');
+Route::get('/ajax/veiculos/versoes', 'VeiculoController@getVersoes');
 Route::get('/anuncios', 'AnuncioController@anuncios')->name('anuncios');
 Route::get('/anuncios/{id}', 'AnuncioController@index')->where('id', '[0-9]+');
 Route::get('/fale-conosco', 'ContatoController@index')->name('fale_conosco');

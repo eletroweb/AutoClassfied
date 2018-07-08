@@ -9,10 +9,21 @@
           <small id="tituloHelp" class="form-text text-muted">Seja objetivo, o título será exibido na listagem dos veículos.</small>
         </div>
         <div class="form-group">
-          <label for="veiculo">Veículo</label>
-          <select class="form-control" name="veiculo" id="veiculo">
-            <option value="">Selecione o veículo...</option>
-            <option value="0">Veículo genérico</option>
+          <label for="veiculo">Marca</label>
+          <select class="form-control" name="marca" id="marca">
+            <option value="">Selecione a marca...</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="veiculo">Modelo</label>
+          <select class="form-control" name="modelo" id="modelo">
+            <option value="">Selecione o modelo...</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="veiculo">Versão</label>
+          <select class="form-control" name="versao" id="versao">
+            <option value="">Selecione a marca...</option>
           </select>
         </div>
         <div class="form-group">

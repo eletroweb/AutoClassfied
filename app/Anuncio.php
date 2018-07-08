@@ -6,12 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Anuncio extends Model
 {
-    protected $fillable = ['nome', 'descricao', 'veiculo', 'valor', 'user'];
+    protected $fillable = ['nome', 'descricao', 'marca', 'modelo', 'versao', 'valor', 'user'];
 
     public function anuncio_dados(){
         return $this->hasMany('App\AnuncioDados');
     }
-  
+
     public function anuncio_imagens(){
         return $this->hasMany('App\AnuncioImagem');
     }

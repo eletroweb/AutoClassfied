@@ -45,4 +45,60 @@ $(document).ready(function(){
   $('#telefone').mask('(00) 0000-0000');
   $('#celular').mask('(00) 0 0000-0000');
   $('#valor').mask("#.##0,00", {reverse: true});
+  $.ajax({
+    url: '/ajax/veiculos/marcas',
+    type: 'get',
+    dataType: 'json',
+    success:function(data){
+      $('#marca').html('<option value="">Selecione a marca...</option>');
+      $('#modelos').html('<option value="">Selecione o modelo...</option>');
+      $('#versao').html('<option value="">Selecione a versão...</option>');
+      $.each(data, function (i, item) {
+        $('#marca').append($('<option>', {
+            value: item.id,
+            text : item.nome
+        }));
+      });
+    }
+  });
+  $('#marca').change(function(){
+    $.ajax({
+      url: '/ajax/veiculos/modelos',
+      dataType: 'json',
+      type: 'get',
+      data: {marca: $(this).val()},
+      success: function(data){
+        $('#modelo').html('<option value="">Selecione o modelo...</option>');
+        $('#versao').html('<option value="">Selecione a versão...</option>');
+        if($('#marca').val() != ''){
+          $.each(data, function (i, item) {
+            $('#modelo').append($('<option>', {
+                value: item.id,
+                text : item.nome
+            }));
+          });
+        }
+      }
+    });
+
+  });
+  $('#modelo').change(function(){
+    $.ajax({
+      url: '/ajax/veiculos/versoes',
+      dataType: 'json',
+      type: 'get',
+      data: {modelo: $(this).val()},
+      success: function(data){
+        $('#versao').html('<option value="">Selecione a versão...</option>');
+        if($('#modelo').val() != ''){
+          $.each(data, function (i, item) {
+            $('#versao').append($('<option>', {
+                value: item.id,
+                text : item.nome
+            }));
+          });
+        }
+      }
+    });
+  });
 });

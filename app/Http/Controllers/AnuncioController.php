@@ -18,7 +18,9 @@ class AnuncioController extends Controller
     public function anuncieStore(Request $request){
         $validatedData = $request->validate([
            'nome' => 'required|max:30',
-           'veiculo' => 'required',
+           'marca' => 'required',
+           'modelo' => 'required',
+           'versao' => 'required',
            'valor' => 'required',
            'descricao' => 'required',
            'user' => 'required'
