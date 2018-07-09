@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Flash;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
+use App\Marca;
 
 class ModelosController extends AppBaseController
 {
@@ -43,7 +44,8 @@ class ModelosController extends AppBaseController
      */
     public function create()
     {
-        return view('modelos.create');
+        $marcas = Marca::all();
+        return view('modelos.create')->with('marcas', $marcas);
     }
 
     /**

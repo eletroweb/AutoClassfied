@@ -7,7 +7,12 @@
 <!-- Modelo Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('modelo', 'Modelo:') !!}
-    {!! Form::number('modelo', null, ['class' => 'form-control']) !!}
+    <select class="form-control" name="modelo" required>
+      <option value="">Selecione o modelo...</option>
+      @foreach($modelos as $m)
+        <option value="{{$m->id}}">{{$m->nome}}</option>    
+      @endforeach
+    </select>
 </div>
 
 <!-- Submit Field -->
