@@ -1,0 +1,14 @@
+@extends('layouts.app')
+
+@section('content')
+<div class="jumbotron">
+  <h1 class="display-4">$MODEL_NAME_PLURAL_HUMAN$</h1>
+  <p class="lead"></p>
+  <hr class="my-4">
+  <a class="btn btn-primary btn-lg" href="{!! route('$ROUTE_NAMED_PREFIX$$MODEL_NAME_PLURAL_CAMEL$.create') !!}" role="button">Adicionar</a>
+</div>
+<div class="container">
+  @include('flash::message')
+  @include('$VIEW_PREFIX$$MODEL_NAME_PLURAL_SNAKE$.table')
+</div>
+@endsection

@@ -39,3 +39,12 @@ Route::get('/importxml', 'VeiculoController@updateVeiculos');
 Route::middleware(['auth','admin'])->group(function(){
   Route::get('/admin', 'UserController@admin')->name('admin');
 });
+
+
+Route::resource('marcas', 'MarcaController');
+
+Route::resource('modelos', 'ModelosController');
+
+Route::resource('versaos', 'VersaoController');
+
+Route::resource('versaos', 'VersaoController');
