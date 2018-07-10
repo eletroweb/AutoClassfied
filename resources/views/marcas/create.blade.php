@@ -1,6 +1,6 @@
-@extends('layouts.app')
+@extends('admin.dashboard')
 
-@section('content')
+@section('subcontent')
 <div class="jumbotron">
   <h1 class="display-4">Marcas</h1>
   <p class="lead">Crie uma nova marca.</p>
@@ -8,7 +8,7 @@
 </div>
 <div class="container">
   {!! Form::open(['route' => 'marcas.store']) !!}
-
+{{csrf_field()}}
       @include('marcas.fields')
 
   {!! Form::close() !!}

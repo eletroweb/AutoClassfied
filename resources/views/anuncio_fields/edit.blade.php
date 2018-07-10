@@ -1,9 +1,9 @@
-@extends('admin.dashboard')
+@extends('layouts.app')
 
-@section('subcontent')
+@section('content')
     <section class="content-header">
         <h1>
-            Modelos
+            Anúncios - Campos personalizados
         </h1>
    </section>
    <div class="content">
@@ -11,9 +11,9 @@
        <div class="box box-primary">
            <div class="box-body">
                <div class="row">
-                   {!! Form::model($modelos, ['route' => ['modelos.update', $modelos->id], 'method' => 'patch']) !!}
+                   {!! Form::model($anuncioField, ['route' => ['anuncioFields.update', $anuncioField->id], 'method' => 'patch']) !!}
 
-                        @include('modelos.fields')
+                        @include('anuncio_fields.fields')
 
                    {!! Form::close() !!}
                </div>

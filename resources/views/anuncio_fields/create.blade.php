@@ -2,14 +2,14 @@
 
 @section('subcontent')
 <div class="jumbotron">
-  <h1 class="display-4">Modelos</h1>
+  <h1 class="display-4">Anúncios - Campos personalizados</h1>
   <p class="lead"></p>
   <hr class="my-4">
 </div>
 <div class="container">
-  {!! Form::open(['route' => 'modelos.store']) !!}
+  {!! Form::open(['route' => 'anuncioFields.store']) !!}
       {{csrf_field()}}
-      @include('modelos.fields')
+      @include('anuncio_fields.fields')
 
   {!! Form::close() !!}
 </div>
