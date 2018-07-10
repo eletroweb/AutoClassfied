@@ -59,7 +59,7 @@ class MarcaController extends AppBaseController
 
         $marca = $this->marcaRepository->create($input);
 
-        Flash::success('Marca saved successfully.');
+        Flash::success('Marca criada com sucesso!');
 
         return redirect(route('marcas.index'));
     }
@@ -96,7 +96,7 @@ class MarcaController extends AppBaseController
         $marca = $this->marcaRepository->findWithoutFail($id);
 
         if (empty($marca)) {
-            Flash::error('Marca not found');
+            Flash::error('Marca não encontrada');
 
             return redirect(route('marcas.index'));
         }
@@ -117,7 +117,7 @@ class MarcaController extends AppBaseController
         $marca = $this->marcaRepository->findWithoutFail($id);
 
         if (empty($marca)) {
-            Flash::error('Marca not found');
+            Flash::error('Marca não encontrada');
 
             return redirect(route('marcas.index'));
         }
@@ -141,7 +141,7 @@ class MarcaController extends AppBaseController
         $marca = $this->marcaRepository->findWithoutFail($id);
 
         if (empty($marca)) {
-            Flash::error('Marca not found');
+            Flash::error('Marca não encontrada');
 
             return redirect(route('marcas.index'));
         }

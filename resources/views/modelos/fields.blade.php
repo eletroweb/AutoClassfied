@@ -7,7 +7,12 @@
 <!-- Marca Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('marca', 'Marca:') !!}
-    {!! Form::number('marca', null, ['class' => 'form-control']) !!}
+    <select class="form-control" name="marca" required>
+      <option value="">Selecione a marca...</option>
+      @foreach($marcas as $m)
+        <option value="{{$m->id}}">{{$m->nome}}</option>    
+      @endforeach
+    </select>
 </div>
 
 <!-- Submit Field -->

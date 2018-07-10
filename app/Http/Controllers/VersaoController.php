@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Flash;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
+use App\Modelos;
 
 class VersaoController extends AppBaseController
 {
@@ -43,7 +44,8 @@ class VersaoController extends AppBaseController
      */
     public function create()
     {
-        return view('versaos.create');
+        $modelos = Modelos::all();
+        return view('versaos.create')->with('modelos', $modelos);
     }
 
     /**
