@@ -48,3 +48,5 @@ Route::resource('modelos', 'ModelosController');
 Route::resource('versaos', 'VersaoController');
 
 Route::resource('versaos', 'VersaoController');
+
+Route::resource('anuncioFields', 'AnuncioFieldController');

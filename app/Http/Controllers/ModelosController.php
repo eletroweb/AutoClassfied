@@ -31,7 +31,7 @@ class ModelosController extends AppBaseController
     public function index(Request $request)
     {
         $this->modelosRepository->pushCriteria(new RequestCriteria($request));
-        $modelos = $this->modelosRepository->all();
+        $modelos = $this->modelosRepository->paginate(10);
 
         return view('modelos.index')
             ->with('modelos', $modelos);

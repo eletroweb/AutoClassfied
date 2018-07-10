@@ -31,7 +31,7 @@ class VersaoController extends AppBaseController
     public function index(Request $request)
     {
         $this->versaoRepository->pushCriteria(new RequestCriteria($request));
-        $versaos = $this->versaoRepository->all();
+        $versaos = $this->versaoRepository->paginate(10);
 
         return view('versaos.index')
             ->with('versaos', $versaos);

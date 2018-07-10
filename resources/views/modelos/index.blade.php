@@ -1,6 +1,6 @@
-@extends('layouts.app')
+@extends('admin.dashboard')
 
-@section('content')
+@section('subcontent')
 <div class="jumbotron">
   <h1 class="display-4">Modelos</h1>
   <p class="lead"></p>

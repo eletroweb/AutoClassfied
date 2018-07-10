@@ -30,7 +30,7 @@ class MarcaController extends AppBaseController
     public function index(Request $request)
     {
         $this->marcaRepository->pushCriteria(new RequestCriteria($request));
-        $marcas = $this->marcaRepository->all();
+        $marcas = $this->marcaRepository->paginate(10);
 
         return view('marcas.index')
             ->with('marcas', $marcas);

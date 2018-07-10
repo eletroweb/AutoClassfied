@@ -1,6 +1,6 @@
-@extends('layouts.app')
+@extends('admin.dashboard')
 
-@section('content')
+@section('subcontent')
     <section class="content-header">
         <h1>
             Modelos

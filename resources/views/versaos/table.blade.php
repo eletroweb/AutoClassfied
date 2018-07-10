@@ -24,3 +24,4 @@
     @endforeach
     </tbody>
 </table>
+{{$versaos->links()}}

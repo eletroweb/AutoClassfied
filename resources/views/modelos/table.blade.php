@@ -7,15 +7,15 @@
         </tr>
     </thead>
     <tbody>
-    @foreach($modelos as $modelos)
+    @foreach($modelos as $modelo)
         <tr>
-            <td>{!! $modelos->nome !!}</td>
-            <td>{!! App\Marca::find($modelos->marca)->nome !!}</td>
+            <td>{!! $modelo->nome !!}</td>
+            <td>{!! App\Marca::find($modelo->marca)->nome !!}</td>
             <td>
-                {!! Form::open(['route' => ['modelos.destroy', $modelos->id], 'method' => 'delete']) !!}
+                {!! Form::open(['route' => ['modelos.destroy', $modelo->id], 'method' => 'delete']) !!}
                 <div class='btn-group'>
-                    <a href="{!! route('modelos.show', [$modelos->id]) !!}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-eye-open"></i></a>
-                    <a href="{!! route('modelos.edit', [$modelos->id]) !!}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-edit"></i></a>
+                    <a href="{!! route('modelos.show', [$modelo->id]) !!}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-eye-open"></i></a>
+                    <a href="{!! route('modelos.edit', [$modelo->id]) !!}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-edit"></i></a>
                     {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Are you sure?')"]) !!}
                 </div>
                 {!! Form::close() !!}
@@ -24,3 +24,4 @@
     @endforeach
     </tbody>
 </table>
+{{$modelos->links()}}
