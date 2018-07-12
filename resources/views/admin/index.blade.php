@@ -16,7 +16,7 @@
     <!-- Google fonts - Poppins -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,700">
     <!-- theme stylesheet-->
-    <link rel="stylesheet" href="{{asset('css/admin/style.default.css')}}" id="theme-stylesheet">
+    <link rel="stylesheet" href="{{asset('css/admin/style.blue.css')}}" id="theme-stylesheet">
     <!-- Custom stylesheet - for your changes-->
     <link rel="stylesheet" href="{{asset('css/admin/custom.css')}}">
     <!-- Favicon-->
@@ -125,10 +125,10 @@
           </div>
           <!-- Sidebar Navidation Menus--><span class="heading">Principal</span>
           <ul class="list-unstyled">
-            <li class="active"><a href="index.html"> <i class="icon-home"></i>Resumo </a></li>
-            <li><a href="/admin/marcas"> <i class="icon-grid"></i>Marcas </a></li>
-            <li><a href="/admin/modelos"> <i class="fa fa-bar-chart"></i>Modelos </a></li>
-            <li><a href="/admin/versoes"> <i class="icon-padnote"></i>Versões </a></li>
+            <li class="active"><a href="index.html"> <i class="fa fa-info-circle"></i>Resumo </a></li>
+            <li><a href="/admin/marcas"> <i class="fa fa-bookmark"></i>Marcas </a></li>
+            <li><a href="/admin/modelos"> <i class="fa fa-car"></i>Modelos </a></li>
+            <li><a href="/admin/versoes"> <i class="fa fa-list-ol"></i>Versões </a></li>
             <li><a href="#exampledropdownDropdown" aria-expanded="false" data-toggle="collapse"> <i class="icon-interface-windows"></i>Anúncios</a>
               <ul id="exampledropdownDropdown" class="collapse list-unstyled ">
                 <li><a href="/admin/anuncioFields">Campos personalizados</a></li>
