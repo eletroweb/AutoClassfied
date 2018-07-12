@@ -102,8 +102,8 @@ class ModelosController extends AppBaseController
 
             return redirect(route('modelos.index'));
         }
-
-        return view('modelos.edit')->with('modelos', $modelos);
+        $marcas = Marca::all();
+        return view('modelos.edit')->with('modelos', $modelos)->with('marcas', $marcas);
     }
 
     /**

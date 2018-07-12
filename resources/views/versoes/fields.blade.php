@@ -10,7 +10,7 @@
     <select class="form-control" name="modelo" required>
       <option value="">Selecione o modelo...</option>
       @foreach($modelos as $m)
-        <option value="{{$m->id}}">{{$m->nome}}</option>    
+        <option value="{{$m->id}}">{{$m->nome}}</option>
       @endforeach
     </select>
 </div>
@@ -18,5 +18,5 @@
 <!-- Submit Field -->
 <div class="form-group col-sm-12">
     {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
-    <a href="{!! route('versaos.index') !!}" class="btn btn-default">Cancel</a>
+    <a href="{!! route('versoes.index') !!}" class="btn btn-default">Cancel</a>
 </div>

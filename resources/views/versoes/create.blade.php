@@ -10,15 +10,15 @@
       </div>
     </div>
     <div class="card-header d-flex align-items-center">
-      <h3 class="h4">Modelos</h3>
+      <h3 class="h4">Versões</h3>
     </div>
     <div class="card-body">
-  {!! Form::open(['route' => 'marcas.store']) !!}
-      {{csrf_field()}}
-      @include('marcas.fields')
+    {!! Form::open(['route' => 'versoes.store']) !!}
+        {{csrf_field()}}
+        @include('versoes.fields')
 
-  {!! Form::close() !!}
-  </div>
-  </div>
+    {!! Form::close() !!}
+    </div>
+    </div>
 </div>
 @endsection

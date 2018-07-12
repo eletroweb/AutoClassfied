@@ -1,5 +1,4 @@
 @extends('admin.index')
-
 @section('content')
 <div class="container-fluid">
   <div class="container">
@@ -11,15 +10,16 @@
         </div>
       </div>
       <div class="card-header d-flex align-items-center">
-        <h3 class="h4">Marca</h3>
+        <h3 class="h4">Versão</h3>
       </div>
       <div class="card-body">
-        {!! Form::model($marca, ['route' => ['marcas.update', $marca->id], 'method' => 'patch']) !!}
+                   {!! Form::model($versao, ['route' => ['versoes.update', $versao->id], 'method' => 'patch']) !!}
 
-             @include('marcas.fields')
+                        @include('versoes.fields', ['modelos'=> $modelos])
 
-        {!! Form::close() !!}
-      </div>
-    </div>
-</div>
+                   {!! Form::close() !!}
+               </div>
+           </div>
+       </div>
+   </div>
 @endsection

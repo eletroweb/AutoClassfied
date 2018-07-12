@@ -31,10 +31,10 @@ class VersaoController extends AppBaseController
     public function index(Request $request)
     {
         $this->versaoRepository->pushCriteria(new RequestCriteria($request));
-        $versaos = $this->versaoRepository->paginate(10);
+        $versoes = $this->versaoRepository->paginate(10);
 
-        return view('versaos.index')
-            ->with('versaos', $versaos);
+        return view('versoes.index')
+            ->with('versoes', $versoes);
     }
 
     /**
@@ -44,8 +44,8 @@ class VersaoController extends AppBaseController
      */
     public function create()
     {
-        $modelos = Modelos::all();
-        return view('versaos.create')->with('modelos', $modelos);
+          $modelos = Modelos::all();
+        return view('versoes.create')->with('modelos', $modelos);
     }
 
     /**
@@ -63,7 +63,7 @@ class VersaoController extends AppBaseController
 
         Flash::success('Versao saved successfully.');
 
-        return redirect(route('versaos.index'));
+        return redirect(route('versoes.index'));
     }
 
     /**
@@ -80,10 +80,10 @@ class VersaoController extends AppBaseController
         if (empty($versao)) {
             Flash::error('Versao not found');
 
-            return redirect(route('versaos.index'));
+            return redirect(route('versoes.index'));
         }
 
-        return view('versaos.show')->with('versao', $versao);
+        return view('versoes.show')->with('versao', $versao);
     }
 
     /**
@@ -100,10 +100,10 @@ class VersaoController extends AppBaseController
         if (empty($versao)) {
             Flash::error('Versao not found');
 
-            return redirect(route('versaos.index'));
+            return redirect(route('versoes.index'));
         }
-
-        return view('versaos.edit')->with('versao', $versao);
+        $modelos = Modelos::all();
+        return view('versoes.edit')->with('versao', $versao)->with('modelos', $modelos);
     }
 
     /**
@@ -121,14 +121,14 @@ class VersaoController extends AppBaseController
         if (empty($versao)) {
             Flash::error('Versao not found');
 
-            return redirect(route('versaos.index'));
+            return redirect(route('versoes.index'));
         }
 
         $versao = $this->versaoRepository->update($request->all(), $id);
 
         Flash::success('Versao updated successfully.');
 
-        return redirect(route('versaos.index'));
+        return redirect(route('versoes.index'));
     }
 
     /**
@@ -145,13 +145,13 @@ class VersaoController extends AppBaseController
         if (empty($versao)) {
             Flash::error('Versao not found');
 
-            return redirect(route('versaos.index'));
+            return redirect(route('versoes.index'));
         }
 
         $this->versaoRepository->delete($id);
 
         Flash::success('Versao deleted successfully.');
 
-        return redirect(route('versaos.index'));
+        return redirect(route('versoes.index'));
     }
 }

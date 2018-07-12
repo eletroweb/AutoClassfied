@@ -1,23 +1,25 @@
-@extends('admin.dashboard')
+@extends('admin.index')
 
-@section('subcontent')
-    <section class="content-header">
-        <h1>
-            Modelos
-        </h1>
-   </section>
-   <div class="content">
-       @include('adminlte-templates::common.errors')
-       <div class="box box-primary">
-           <div class="box-body">
-               <div class="row">
-                   {!! Form::model($modelos, ['route' => ['modelos.update', $modelos->id], 'method' => 'patch']) !!}
+@section('content')
+<div class="container-fluid">
+  <div class="container">
+    <div class="card">
+      <div class="card-close">
+        <div class="dropdown">
+          <button type="button" id="closeCard1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-ellipsis-v"></i></button>
+          <div aria-labelledby="closeCard1" class="dropdown-menu dropdown-menu-right has-shadow"><a href="#" class="dropdown-item remove"> <i class="fa fa-times"></i>Close</a><a href="#" class="dropdown-item edit"> <i class="fa fa-gear"></i>Edit</a></div>
+        </div>
+      </div>
+      <div class="card-header d-flex align-items-center">
+        <h3 class="h4">Modelo</h3>
+      </div>
+      <div class="card-body">
+         {!! Form::model($modelos, ['route' => ['modelos.update', $modelos->id], 'method' => 'patch']) !!}
 
-                        @include('modelos.fields')
+              @include('modelos.fields', ['marcas'=> $marcas])
 
-                   {!! Form::close() !!}
-               </div>
-           </div>
+         {!! Form::close() !!}
        </div>
-   </div>
+     </div>
+
 @endsection

@@ -40,12 +40,8 @@ Route::middleware(['auth','admin'])->group(function(){
   Route::get('/admin', 'UserController@admin')->name('admin');
   Route::get('/admin/tables', 'UserController@tables');
   Route::get('/admin/form', 'UserController@form');
-  Route::resource('marcas', 'MarcaController');
-  Route::resource('modelos', 'ModelosController');
-  Route::resource('versaos', 'VersaoController');
-  Route::resource('versaos', 'VersaoController');
-  Route::resource('anuncioFields', 'AnuncioFieldController');
+  Route::resource('/admin/marcas', 'MarcaController');
+  Route::resource('/admin/modelos', 'ModelosController');
+  Route::resource('/admin/versoes', 'VersaoController');
+  Route::resource('/admin/anuncioFields', 'AnuncioFieldController');
 });
-
-
-

@@ -3,6 +3,6 @@
 @section('content')
 <div class="container-fluid">
   @include('flash::message')
-  @include('marcas.table')
+  @include('versoes.table')
 </div>
 @endsection
