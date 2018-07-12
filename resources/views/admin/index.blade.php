@@ -136,7 +136,7 @@
                 <li><a href="#">Pagina</a></li>
               </ul>
             </li>
-            <li><a href="login.html"> <i class="icon-interface-windows"></i>Campos de cadastro </a></li>
+            <li><a href="#"> <i class="icon-interface-windows"></i>Campos de cadastro </a></li>
           </ul><span class="heading">Pagseguro</span>
           <ul class="list-unstyled">
             <li> <a href="#"> <i class="icon-flask"></i>Configurações </a></li>
