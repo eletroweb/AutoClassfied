@@ -87,6 +87,9 @@
                   <a class="nav-link" href="{{route('minhaconta')}}">Minha conta</a>
                 </li>
                 <li class="nav-item">
+                  <a class="nav-link" href="{{route('minhaconta')}}">Admin</a>
+                </li>
+                <li class="nav-item">
                     <a  class="nav-link" href="{{ route('logout') }}"
                         onclick="event.preventDefault();
                                  document.getElementById('logout-form').submit();">

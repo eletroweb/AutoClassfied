@@ -37,7 +37,15 @@ class UserController extends Controller
     }
   
     public function admin(Request $request){
-      return view('admin.dashboard');
+      return view('admin.index');
+    }
+  
+    public function tables(Request $request){
+      return view('admin.tables');
+    }
+  
+    public function form(Request $request){
+      return view('admin.form');
     }
 
 }

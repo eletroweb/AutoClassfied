@@ -1,13 +1,7 @@
-@extends('admin.dashboard')
+@extends('admin.index')
 
-@section('subcontent')
-<div class="jumbotron">
-  <h1 class="display-4">Modelos</h1>
-  <p class="lead"></p>
-  <hr class="my-4">
-  <a class="btn btn-primary btn-lg" href="{!! route('modelos.create') !!}" role="button">Adicionar</a>
-</div>
-<div class="container">
+@section('content')
+<div class="container-fluid">
   @include('flash::message')
   @include('modelos.table')
 </div>

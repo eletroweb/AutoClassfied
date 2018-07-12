@@ -1,13 +1,7 @@
-@extends('admin.dashboard')
+@extends('admin.index')
 
-@section('subcontent')
-<div class="jumbotron">
-  <h1 class="display-4">Marcas</h1>
-  <p class="lead">Marcas de veículos.</p>
-  <hr class="my-4">
-  <a class="btn btn-primary btn-lg" href="{!! route('marcas.create') !!}" role="button">Adicionar</a>
-</div>
-<div class="container-fluid text-center m-auto">
+@section('content')
+<div class="container-fluid">
   @include('flash::message')
   @include('marcas.table')
 </div>
