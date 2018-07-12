@@ -38,15 +38,14 @@ Route::middleware('auth')->group(function () {
 Route::get('/importxml', 'VeiculoController@updateVeiculos');
 Route::middleware(['auth','admin'])->group(function(){
   Route::get('/admin', 'UserController@admin')->name('admin');
+  Route::get('/admin/tables', 'UserController@tables');
+  Route::get('/admin/form', 'UserController@form');
+  Route::resource('marcas', 'MarcaController');
+  Route::resource('modelos', 'ModelosController');
+  Route::resource('versaos', 'VersaoController');
+  Route::resource('versaos', 'VersaoController');
+  Route::resource('anuncioFields', 'AnuncioFieldController');
 });
 
 
-Route::resource('marcas', 'MarcaController');
 
-Route::resource('modelos', 'ModelosController');
-
-Route::resource('versaos', 'VersaoController');
-
-Route::resource('versaos', 'VersaoController');
-
-Route::resource('anuncioFields', 'AnuncioFieldController');

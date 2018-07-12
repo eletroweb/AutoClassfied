@@ -30,8 +30,12 @@ class MarcaController extends AppBaseController
     public function index(Request $request)
     {
         $this->marcaRepository->pushCriteria(new RequestCriteria($request));
-        $marcas = $this->marcaRepository->paginate(10);
-
+        $marcas = null;
+        if($request->has('s')){
+          $marcas = $this->marcaRepository->findBy(['nome', 'like', '%'.$request->input('s').'%']);
+        }else{
+          $marcas = $this->marcaRepository->paginate(10);
+        }
         return view('marcas.index')
             ->with('marcas', $marcas);
     }
@@ -56,11 +60,8 @@ class MarcaController extends AppBaseController
     public function store(CreateMarcaRequest $request)
     {
         $input = $request->all();
-
         $marca = $this->marcaRepository->create($input);
-
         Flash::success('Marca criada com sucesso!');
-
         return redirect(route('marcas.index'));
     }
 
