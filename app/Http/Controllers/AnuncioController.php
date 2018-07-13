@@ -56,7 +56,10 @@ class AnuncioController extends Controller
     public function anuncios(Request $request){
       if($request->has('search')){
         $anuncios = Anuncio::where([
-          ['nome', 'like', '%'.$request->input('search').'%'],
+          ['anuncios.nome', 'like', '%'.$request->input('search').'%'],
+          ['anuncios.marca', 'like', '%'.$request->input('marca').'%'], 
+          ['anuncios.modelo', 'like', '%'.$request->input('modelos').'%'],
+          ['anuncios.versao', 'like', '%'.$request->input('versao').'%'],
         ])->orderBy('id', 'desc')->paginate(20);
       }else{
         $anuncios = Anuncio::orderBy('id', 'desc')->paginate(20);
