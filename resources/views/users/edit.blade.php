@@ -11,17 +11,16 @@
         </div>
       </div>
       <div class="card-header d-flex align-items-center">
-        <h3 class="h4">Modelo</h3>
+        <h3 class="h4"> User</h3>
       </div>
       <div class="card-body">
-         {!! Form::model($modelos, ['route' => ['modelos.update', $modelos->id], 'method' => 'patch']) !!}
+               {!! Form::model($user, ['route' => ['users.update', $user->id], 'method' => 'patch']) !!}
 
-              @include('modelos.fields', ['marcas'=> $marcas])
+                    @include('users.fields')
 
-         {!! Form::close() !!}
+               {!! Form::close() !!}
+           </div>
        </div>
-     </div>
-   </div>
- </div>
-
+    </div>
+</div>
 @endsection

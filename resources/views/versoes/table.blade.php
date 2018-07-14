@@ -28,7 +28,7 @@
                       <td>
                           {!! Form::open(['route' => ['versoes.destroy', $versao->id], 'method' => 'delete']) !!}
                           <div class='btn-group'>
-                               <a href="{!! route('versoes.edit', [$versao->id]) !!}" class='btn btn-default btn-xs'><i class="fas fa-trash-alt"></i></a>
+                               <a href="{!! route('versoes.edit', [$versao->id]) !!}" class='btn btn-default btn-xs'><i class="fas fa-edit"></i></a>
                               {!! Form::button('<i class="fas fa-trash-alt"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Are you sure?')"]) !!}
                           </div>
                           {!! Form::close() !!}

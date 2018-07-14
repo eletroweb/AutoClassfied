@@ -45,3 +45,6 @@ Route::middleware(['auth','admin'])->group(function(){
   Route::resource('/admin/versoes', 'VersaoController');
   Route::resource('/admin/anuncioFields', 'AnuncioFieldController');
 });
+
+
+Route::resource('/admin/users', 'UserController');

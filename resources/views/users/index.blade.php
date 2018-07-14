@@ -2,6 +2,6 @@
 @section('content')
 <div class="container">
   @include('flash::message')
-  @include('$VIEW_PREFIX$$MODEL_NAME_PLURAL_SNAKE$.table')
+  @include('users.table')
 </div>
 @endsection

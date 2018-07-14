@@ -129,17 +129,23 @@
             <li><a href="/admin/marcas"> <i class="fa fa-bookmark"></i>Marcas </a></li>
             <li><a href="/admin/modelos"> <i class="fa fa-car"></i>Modelos </a></li>
             <li><a href="/admin/versoes"> <i class="fa fa-list-ol"></i>Versões </a></li>
-            <li><a href="#exampledropdownDropdown" aria-expanded="false" data-toggle="collapse"> <i class="icon-interface-windows"></i>Anúncios</a>
-              <ul id="exampledropdownDropdown" class="collapse list-unstyled ">
+            <li><a href="#anuncios" aria-expanded="false" data-toggle="collapse"> <i class="fa fa-newspaper"></i>Anúncios</a>
+              <ul id="anuncios" class="collapse list-unstyled ">
                 <li><a href="/admin/anuncioFields">Campos personalizados</a></li>
-                <li><a href="#">Pagina</a></li>
+                <li><a href="#">Anúncios criados</a></li>
                 <li><a href="#">Pagina</a></li>
               </ul>
             </li>
-            <li><a href="#"> <i class="icon-interface-windows"></i>Campos de cadastro </a></li>
-          </ul><span class="heading">Pagseguro</span>
+            <li><a href="#usuarios" aria-expanded="false" data-toggle="collapse"><i class="fa fa-users"></i>Usuários</a>
+              <ul id="usuarios" class="collapse list-unstyled ">
+                <li><a href="#">Campos de cadastro</a></li>
+                <li><a href="/admin/users">Usuários cadastrados</a></li>
+                <li><a href="#">Revendas</a></li>
+              </ul>
+            </li>
+          </ul><span class="heading">Configurações</span>
           <ul class="list-unstyled">
-            <li> <a href="#"> <i class="icon-flask"></i>Configurações </a></li>
+            <li> <a href="#"> <i class="fa fa-money-check-alt"></i>PagSeguro</a></li>
             <li> <a href="#"> <i class="icon-screen"></i>Demo </a></li>
             <li> <a href="#"> <i class="icon-mail"></i>Demo </a></li>
             <li> <a href="#"> <i class="icon-picture"></i>Demo </a></li>

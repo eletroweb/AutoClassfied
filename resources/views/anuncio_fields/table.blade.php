@@ -36,9 +36,8 @@
                       <td>
                           {!! Form::open(['route' => ['anuncioFields.destroy', $anuncioField->id], 'method' => 'delete']) !!}
                           <div class='btn-group'>
-                              <a href="{!! route('anuncioFields.show', [$anuncioField->id]) !!}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-eye-open"></i></a>
-                              <a href="{!! route('anuncioFields.edit', [$anuncioField->id]) !!}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-edit"></i></a>
-                              {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Are you sure?')"]) !!}
+                              <a href="{!! route('anuncioFields.edit', [$anuncioField->id]) !!}" class='btn btn-default btn-xs'><i class="fas fa-edit"></i></a>
+                              {!! Form::button('<i class="fas fa-trash-alt"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Are you sure?')"]) !!}
                           </div>
                           {!! Form::close() !!}
                       </td>
