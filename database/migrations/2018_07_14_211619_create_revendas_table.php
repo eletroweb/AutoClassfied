@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateVisualizacaoAnunciosTable extends Migration
+class CreateRevendasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,12 @@ class CreateVisualizacaoAnunciosTable extends Migration
      */
     public function up()
     {
-        Schema::create('visualizacao_anuncios', function (Blueprint $table) {
+        Schema::create('revendas', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('anuncio');
-            $table->integer('user')->nullable();
+            $table->string('razaosocial');
+            $table->string('nomefantasia');
+            $table->string('cnpj');
+            $table->integer('user');
             $table->timestamps();
         });
     }
@@ -28,6 +30,6 @@ class CreateVisualizacaoAnunciosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('visualizacao_anuncios');
+        Schema::dropIfExists('revendas');
     }
 }

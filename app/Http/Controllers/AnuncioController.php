@@ -7,7 +7,9 @@ use App\Anuncio;
 use App\AnuncioDados;
 use App\AnuncioField;
 use App\AnuncioImagem;
+use App\VisualizacaoAnuncio;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 
 class AnuncioController extends Controller
 {
@@ -57,7 +59,7 @@ class AnuncioController extends Controller
       if($request->has('search')){
         $anuncios = Anuncio::where([
           ['anuncios.nome', 'like', '%'.$request->input('search').'%'],
-          ['anuncios.marca', 'like', '%'.$request->input('marca').'%'], 
+          ['anuncios.marca', 'like', '%'.$request->input('marca').'%'],
           ['anuncios.modelo', 'like', '%'.$request->input('modelos').'%'],
           ['anuncios.versao', 'like', '%'.$request->input('versao').'%'],
         ])->orderBy('id', 'desc')->paginate(20);
@@ -78,7 +80,13 @@ class AnuncioController extends Controller
       foreach($result as $r){
         $imagens[] = Storage::url($r->url);
       }
+      $view = new VisualizacaoAnuncio();
+      $view->user = Auth::check()? Auth::user()->id:'';
+      $view->anuncio = $anuncio->id;
+      $view->save();
       return view('anuncios.anuncio_page')->with(['anuncio'=> $anuncio, 'imagens' => $imagens, 'principal' => $principal]);
     }
+
+
+
 }
-//http://dev-jsantosclass54983.codeanyapp.com/
