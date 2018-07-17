@@ -5,7 +5,13 @@
       @foreach($recentes as $r)
       <div class="carousel-item col-md-4 active">
         <div class="card">
-          <img class="card-img-top img-fluid" maxheight="200" src="{{Storage::url(App\AnuncioImagem::where([['anuncio', $r->id], ['first', true]])->first()->url)}}" alt="{{$r->nome}}">
+          @php
+            $url = App\AnuncioImagem::where([['anuncio', $r->id], ['first', true]])->first()->url;
+            if(strpos($url, 'https://') == false && strpos($url, 'http://') == false ){
+              $url = Storage::url($url);
+            }
+          @endphp
+          <img class="card-img-top img-fluid" maxheight="200" src="{{$url}}" alt="{{$r->nome}}">
           <a class="card-body">
             <div class="row">
                 <div class="col-sm-12">
