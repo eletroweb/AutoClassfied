@@ -132,8 +132,8 @@
             <li><a href="#anuncios" aria-expanded="false" data-toggle="collapse"> <i class="fa fa-newspaper"></i>Anúncios</a>
               <ul id="anuncios" class="collapse list-unstyled ">
                 <li><a href="/admin/anuncioFields">Campos personalizados</a></li>
-                <li><a href="#">Anúncios criados</a></li>
-                <li><a href="#">Pagina</a></li>
+                <li><a href="/admin/revenda">Importar revenda</a></li>
+                <!--<li><a href="#">Pagina</a></li>-->
               </ul>
             </li>
             <li><a href="#usuarios" aria-expanded="false" data-toggle="collapse"><i class="fa fa-users"></i>Usuários</a>
@@ -146,9 +146,8 @@
           </ul><span class="heading">Configurações</span>
           <ul class="list-unstyled">
             <li> <a href="#"> <i class="fa fa-money-check-alt"></i>PagSeguro</a></li>
-            <li> <a href="#"> <i class="icon-screen"></i>Demo </a></li>
-            <li> <a href="#"> <i class="icon-mail"></i>Demo </a></li>
-            <li> <a href="#"> <i class="icon-picture"></i>Demo </a></li>
+            <li> <a href="#"> <i class="icon-screen"></i>Configurações do site</a></li>
+            <li> <a href="#"> <i class="icon-mail"></i>Configurações de e-mail</a></li>
           </ul>
         </nav>
         <div class="content-inner">
