@@ -12,7 +12,8 @@
         "infyomlabs/laravel-generator": "5.5.x-dev",
         "laravelcollective/html": "^5.5.0",
         "infyomlabs/adminlte-templates": "5.5.x-dev",
-        "doctrine/dbal": "~2.3"
+        "doctrine/dbal": "~2.3",
+        "pagseguro/pagseguro-php-sdk" : "*"
     },
     "require-dev": {
         "filp/whoops": "~2.0",

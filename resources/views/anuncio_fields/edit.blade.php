@@ -1,16 +1,19 @@
-@extends('layouts.app')
+@extends('admin.index')
 
 @section('content')
-    <section class="content-header">
-        <h1>
-            Anúncios - Campos personalizados
-        </h1>
-   </section>
-   <div class="content">
-       @include('adminlte-templates::common.errors')
-       <div class="box box-primary">
-           <div class="box-body">
-               <div class="row">
+<div class="container-fluid">
+  <div class="container">
+    <div class="card">
+      <div class="card-close">
+        <div class="dropdown">
+          <button type="button" id="closeCard1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-ellipsis-v"></i></button>
+          <div aria-labelledby="closeCard1" class="dropdown-menu dropdown-menu-right has-shadow"><a href="#" class="dropdown-item remove"> <i class="fa fa-times"></i>Close</a><a href="#" class="dropdown-item edit"> <i class="fa fa-gear"></i>Edit</a></div>
+        </div>
+      </div>
+      <div class="card-header d-flex align-items-center">
+        <h3 class="h4">Campo personalizado - Anúncios</h3>
+      </div>
+      <div class="card-body">
                    {!! Form::model($anuncioField, ['route' => ['anuncioFields.update', $anuncioField->id], 'method' => 'patch']) !!}
 
                         @include('anuncio_fields.fields')

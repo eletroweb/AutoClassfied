@@ -29,6 +29,7 @@ Route::get('/duvidas-anuncios', 'UserController@duvida_anuncios')->name('duvida_
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/cronjob/update/all', 'VeiculoController@importMarcaModelos');
 Route::post('/anuncio/contato', 'ContatoAnuncioController@store')->name('contato_anuncio');
+
 Route::middleware('auth')->group(function () {
   Route::get('/anuncie', 'AnuncioController@anuncie')->name('anuncie');
   Route::get('/minha-conta', 'UserController@profile')->name('minhaconta');
@@ -37,6 +38,8 @@ Route::middleware('auth')->group(function () {
 });
 Route::get('/importxml', 'VeiculoController@updateVeiculos');
 Route::middleware(['auth','admin'])->group(function(){
+  Route::get('/admin/revenda', 'RevendaController@index');
+  Route::post('/admin/revenda/import', 'RevendaController@importRevendas');
   Route::get('/admin', 'UserController@admin')->name('admin');
   Route::get('/admin/tables', 'UserController@tables');
   Route::get('/admin/form', 'UserController@form');
@@ -45,3 +48,6 @@ Route::middleware(['auth','admin'])->group(function(){
   Route::resource('/admin/versoes', 'VersaoController');
   Route::resource('/admin/anuncioFields', 'AnuncioFieldController');
 });
+
+
+Route::resource('/admin/users', 'UserController');

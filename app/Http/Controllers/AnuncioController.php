@@ -7,7 +7,9 @@ use App\Anuncio;
 use App\AnuncioDados;
 use App\AnuncioField;
 use App\AnuncioImagem;
+use App\VisualizacaoAnuncio;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 
 class AnuncioController extends Controller
 {
@@ -56,7 +58,10 @@ class AnuncioController extends Controller
     public function anuncios(Request $request){
       if($request->has('search')){
         $anuncios = Anuncio::where([
-          ['nome', 'like', '%'.$request->input('search').'%'],
+          ['anuncios.nome', 'like', '%'.$request->input('search').'%'],
+          ['anuncios.marca', 'like', '%'.$request->input('marca').'%'],
+          ['anuncios.modelo', 'like', '%'.$request->input('modelos').'%'],
+          ['anuncios.versao', 'like', '%'.$request->input('versao').'%'],
         ])->orderBy('id', 'desc')->paginate(20);
       }else{
         $anuncios = Anuncio::orderBy('id', 'desc')->paginate(20);
@@ -66,16 +71,30 @@ class AnuncioController extends Controller
 
     public function index(Request $request, $id){
       $anuncio = Anuncio::find($id);
-      $principal = Storage::url(AnuncioImagem::where([['anuncio', $anuncio->id], ['first', true]])->first()->url);
+      $url = AnuncioImagem::where([['anuncio', $anuncio->id], ['first', true]])->first()->url;
+      if(!$anuncio->importado){
+          $principal = Storage::url($url);
+      }else{
+          $principal = $url;
+      }
       $imagens = array();
       $result = AnuncioImagem::where([
                                         ['anuncio', $anuncio->id],
                                         ['first', false]
                                       ])->get();
       foreach($result as $r){
-        $imagens[] = Storage::url($r->url);
+        if(!$anuncio->importado)
+          $imagens[] = Storage::url($r->url);
+        else
+          $imagens[] = $r->url;
       }
+      $view = new VisualizacaoAnuncio();
+      $view->user = Auth::check()? Auth::user()->id:'';
+      $view->anuncio = $anuncio->id;
+      $view->save();
       return view('anuncios.anuncio_page')->with(['anuncio'=> $anuncio, 'imagens' => $imagens, 'principal' => $principal]);
     }
+
+
+
 }
-//http://dev-jsantosclass54983.codeanyapp.com/

@@ -16,7 +16,7 @@
     <!-- Google fonts - Poppins -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,700">
     <!-- theme stylesheet-->
-    <link rel="stylesheet" href="{{asset('css/admin/style.default.css')}}" id="theme-stylesheet">
+    <link rel="stylesheet" href="{{asset('css/admin/style.blue.css')}}" id="theme-stylesheet">
     <!-- Custom stylesheet - for your changes-->
     <link rel="stylesheet" href="{{asset('css/admin/custom.css')}}">
     <!-- Favicon-->
@@ -125,24 +125,29 @@
           </div>
           <!-- Sidebar Navidation Menus--><span class="heading">Principal</span>
           <ul class="list-unstyled">
-            <li class="active"><a href="index.html"> <i class="icon-home"></i>Resumo </a></li>
-            <li><a href="/admin/marcas"> <i class="icon-grid"></i>Marcas </a></li>
-            <li><a href="/admin/modelos"> <i class="fa fa-bar-chart"></i>Modelos </a></li>
-            <li><a href="/admin/versoes"> <i class="icon-padnote"></i>Versões </a></li>
-            <li><a href="#exampledropdownDropdown" aria-expanded="false" data-toggle="collapse"> <i class="icon-interface-windows"></i>Anúncios</a>
-              <ul id="exampledropdownDropdown" class="collapse list-unstyled ">
+            <li class="active"><a href="index.html"> <i class="fa fa-info-circle"></i>Resumo </a></li>
+            <li><a href="/admin/marcas"> <i class="fa fa-bookmark"></i>Marcas </a></li>
+            <li><a href="/admin/modelos"> <i class="fa fa-car"></i>Modelos </a></li>
+            <li><a href="/admin/versoes"> <i class="fa fa-list-ol"></i>Versões </a></li>
+            <li><a href="#anuncios" aria-expanded="false" data-toggle="collapse"> <i class="fa fa-newspaper"></i>Anúncios</a>
+              <ul id="anuncios" class="collapse list-unstyled ">
                 <li><a href="/admin/anuncioFields">Campos personalizados</a></li>
-                <li><a href="#">Pagina</a></li>
-                <li><a href="#">Pagina</a></li>
+                <li><a href="/admin/revenda">Importar revenda</a></li>
+                <!--<li><a href="#">Pagina</a></li>-->
               </ul>
             </li>
-            <li><a href="#"> <i class="icon-interface-windows"></i>Campos de cadastro </a></li>
-          </ul><span class="heading">Pagseguro</span>
+            <li><a href="#usuarios" aria-expanded="false" data-toggle="collapse"><i class="fa fa-users"></i>Usuários</a>
+              <ul id="usuarios" class="collapse list-unstyled ">
+                <li><a href="#">Campos de cadastro</a></li>
+                <li><a href="/admin/users">Usuários cadastrados</a></li>
+                <li><a href="#">Revendas</a></li>
+              </ul>
+            </li>
+          </ul><span class="heading">Configurações</span>
           <ul class="list-unstyled">
-            <li> <a href="#"> <i class="icon-flask"></i>Configurações </a></li>
-            <li> <a href="#"> <i class="icon-screen"></i>Demo </a></li>
-            <li> <a href="#"> <i class="icon-mail"></i>Demo </a></li>
-            <li> <a href="#"> <i class="icon-picture"></i>Demo </a></li>
+            <li> <a href="#"> <i class="fa fa-money-check-alt"></i>PagSeguro</a></li>
+            <li> <a href="#"> <i class="icon-screen"></i>Configurações do site</a></li>
+            <li> <a href="#"> <i class="icon-mail"></i>Configurações de e-mail</a></li>
           </ul>
         </nav>
         <div class="content-inner">

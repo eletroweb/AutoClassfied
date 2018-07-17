@@ -10,13 +10,13 @@
       @endif
       <div class="row">
         <div class="col-sm-12">
-          <img src="{{$principal}}" class="img-fluid" alt="Responsive image">
+          <img src="{{$principal}}" class="img-fluid main-img" alt="Responsive image">
         </div>
       </div>
       <div class="row">
         @foreach($imagens as $img)
           <div class="col-sm-2">
-            <img src="{{$img}}" alt="imagem" width="100" class="img-thumbnail">
+            <img src="{{$img}}" alt="imagem" width="100" class="img-thumbnail thumbnuncio">
           </div>
         @endforeach
       </div>
@@ -24,7 +24,7 @@
     <div class="col-sm-5">
       <div class="card" style="border: none">
         <div class="card-body">
-          <h5 class="card-title" style="font-size: 30px"><span class="badge badge-success">R${{$anuncio->valor}}</span></h5>
+          <h5 class="card-title" style="font-size: 30px"><span class="badge badge-success">{{$anuncio->valor}}</span></h5>
           <h5 class="card-title" style="font-size: 30px">{{$anuncio->nome}}</h5>
           <h6 class="card-subtitle mb-2 text-muted">{{$anuncio->created_at->format('d/m/Y H:i')}}</h6>
           <p class="card-text">
