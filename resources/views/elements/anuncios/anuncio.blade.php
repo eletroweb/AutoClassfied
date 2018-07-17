@@ -4,12 +4,12 @@
       <div class="row">
         <div class="col-sm-3">
           @php
-            $url = App\AnuncioImagem::where([['anuncio', $r->id], ['first', true]])->first()->url;
-            if(strpos($url, 'https://') == false && strpos($url, 'http://') == false ){
+            $url = App\AnuncioImagem::where([['anuncio', $anuncio->id], ['first', true]])->first()->url;
+            if(!$anuncio->importado){
               $url = Storage::url($url);
             }
           @endphp
-          <img src="{{$url}}" width="150" alt="{{$anuncio->nome}}">  
+          <img src="{{$url}}" width="150" alt="{{$anuncio->nome}}">
         </div>
         <div class="col-sm-9">
           <div class="d-flex w-100 justify-content-between">
@@ -17,10 +17,9 @@
             <small>{{$anuncio->created_at->format('d/m/Y H:i')}}</small>
           </div>
           <p class="mb-1">{{str_limit($anuncio->descricao, 200, '...')}}</p>
-          <small>{{App\User::find($anuncio->user)->name}}</small>  
-        </div>  
+          <small>{{App\User::find($anuncio->user)->name}}</small>
+        </div>
       </div>
-    </a>    
+    </a>
   </div>
 </div>
-

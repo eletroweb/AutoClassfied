@@ -7,7 +7,7 @@
         <div class="card">
           @php
             $url = App\AnuncioImagem::where([['anuncio', $r->id], ['first', true]])->first()->url;
-            if(strpos($url, 'https://') == false && strpos($url, 'http://') == false ){
+            if(!$r->importado){
               $url = Storage::url($url);
             }
           @endphp
@@ -18,7 +18,7 @@
                   <h4 class="card-title">{{$r->nome}}</h4>
                 </div>
                 <div class="col-sm-12">
-                  <span class="badge badge-success mb-1" style="font-size: 14px;">R${{$r->valor}}</span>
+                  <span class="badge badge-success mb-1" style="font-size: 14px;">{{$r->valor}}</span>
                 </div>
             </div>
             <p class="card-text">{{str_limit($r->descricao, 200, '...')}}</p>

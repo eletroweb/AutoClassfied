@@ -22,6 +22,7 @@ class CreateAnunciosTable extends Migration
             $table->integer('versao');
             $table->integer('user');
             $table->string('valor');
+            $table->boolean('importado')->default(false);
             $table->timestamps();
         });
     }

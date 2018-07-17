@@ -55,6 +55,7 @@ class RevendaController extends Controller
       $anuncio->nome = $veiculo->marca.' '.$veiculo->modelo.' - '.$veiculo->versao;
       $anuncio->descricao = (string)$veiculo->observacao;
       $anuncio->marca = Marca::where('nome', $veiculo->marca)->first()->id;
+      $anuncio->importado = true;
       if($modelo = Modelos::where([
           ['nome', (string)$veiculo->modelo],
           ['marca', $anuncio->marca],
@@ -84,7 +85,7 @@ class RevendaController extends Controller
       $anuncio->save();
       //Crio as imagens do anúncio
       $first = true;
-      foreach($veiculo->fotos as $foto){
+      foreach($veiculo->fotos->foto as $foto){
         $img = new AnuncioImagem();
         $img->url = $foto;
         $img->anuncio = $anuncio->id;

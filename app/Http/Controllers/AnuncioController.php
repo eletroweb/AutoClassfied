@@ -71,14 +71,22 @@ class AnuncioController extends Controller
 
     public function index(Request $request, $id){
       $anuncio = Anuncio::find($id);
-      $principal = Storage::url(AnuncioImagem::where([['anuncio', $anuncio->id], ['first', true]])->first()->url);
+      $url = AnuncioImagem::where([['anuncio', $anuncio->id], ['first', true]])->first()->url;
+      if(!$anuncio->importado){
+          $principal = Storage::url($url);
+      }else{
+          $principal = $url;
+      }
       $imagens = array();
       $result = AnuncioImagem::where([
                                         ['anuncio', $anuncio->id],
                                         ['first', false]
                                       ])->get();
       foreach($result as $r){
-        $imagens[] = Storage::url($r->url);
+        if(!$anuncio->importado)
+          $imagens[] = Storage::url($r->url);
+        else
+          $imagens[] = $r->url;
       }
       $view = new VisualizacaoAnuncio();
       $view->user = Auth::check()? Auth::user()->id:'';
