@@ -10,10 +10,6 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-//Apenas para testes
-Route::get('/', function () {
-    return redirect('/login');
-});
 
 Auth::routes();
 Route::get('/ajax/veiculos/marcas', 'VeiculoController@getMarcas');
@@ -26,7 +22,7 @@ Route::post('/fale-conosco', 'ContatoController@store')->name('fale_conosco_post
 Route::get('/como-comprar-carro', 'UserController@duvida_comprar_carro')->name('duvida_comprar_carro');
 Route::get('/como-vender-carro', 'UserController@duvida_vender_carro')->name('duvida_vender_carro');
 Route::get('/duvidas-anuncios', 'UserController@duvida_anuncios')->name('duvida_anuncios');
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index')->name('home');
 Route::get('/cronjob/update/all', 'VeiculoController@importMarcaModelos');
 Route::post('/anuncio/contato', 'ContatoAnuncioController@store')->name('contato_anuncio');
 

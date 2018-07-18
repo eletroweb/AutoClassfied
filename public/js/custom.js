@@ -45,13 +45,14 @@ $(document).ready(function(){
   $('#telefone').mask('(00) 0000-0000');
   $('#celular').mask('(00) 0 0000-0000');
   $('#valor').mask("#.##0,00", {reverse: true});
+  $('.valor').mask("#.##0,00", {reverse: true});
   $.ajax({
     url: '/ajax/veiculos/marcas',
     type: 'get',
     dataType: 'json',
     success:function(data){
       $('#marca').html('<option value="">Selecione a marca...</option>');
-      $('#modelos').html('<option value="">Selecione o modelo...</option>');
+      $('#modelo').html('<option value="">Selecione o modelo...</option>');
       $('#versao').html('<option value="">Selecione a versão...</option>');
       $.each(data, function (i, item) {
         $('#marca').append($('<option>', {
@@ -62,6 +63,7 @@ $(document).ready(function(){
     }
   });
   $('#marca').change(function(){
+    $('#modelo').html('<option value="">Carregando...</option>');
     $.ajax({
       url: '/ajax/veiculos/modelos',
       dataType: 'json',
