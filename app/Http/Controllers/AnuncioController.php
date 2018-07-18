@@ -56,13 +56,21 @@ class AnuncioController extends Controller
     }
 
     public function anuncios(Request $request){
-      if($request->has('search')){
-        $anuncios = Anuncio::where([
-          ['anuncios.nome', 'like', '%'.$request->input('search').'%'],
-          ['anuncios.marca', 'like', '%'.$request->input('marca').'%'],
-          ['anuncios.modelo', 'like', '%'.$request->input('modelos').'%'],
-          ['anuncios.versao', 'like', '%'.$request->input('versao').'%'],
-        ])->orderBy('id', 'desc')->paginate(20);
+      if($request->has('nome')){
+        $param = array();
+        foreach ($request->all() as $key=>$value) {
+          if($value){
+            if($key == 'preco_maximo'){
+              $param[] = ['valor', '<=', $value];
+            }elseif ($key == 'preco_minimo') {
+              $param[] = ['valor', '>=', $value];
+            }else{
+              $prefix = is_numeric($value)?'':'%';
+              $param[] =  [$key, is_numeric($value)? '=':'like', $prefix.strtoupper($value).$prefix];
+            }
+          }
+        }
+        $anuncios = Anuncio::where($param)->orderBy('id', 'desc')->paginate(20);
       }else{
         $anuncios = Anuncio::orderBy('id', 'desc')->paginate(20);
       }

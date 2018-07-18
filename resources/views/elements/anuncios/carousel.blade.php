@@ -12,10 +12,10 @@
             }
           @endphp
           <img class="card-img-top img-fluid" maxheight="200" src="{{$url}}" alt="{{$r->nome}}">
-          <a class="card-body">
+          <div class="card-body">
             <div class="row">
                 <div class="col-sm-12">
-                  <h4 class="card-title">{{$r->nome}}</h4>
+                  <h4 class="card-title"><a style="color: black;" href="/anuncios/{{$r->id}}">{{$r->nome}}</a></h4>
                 </div>
                 <div class="col-sm-12">
                   <span class="badge badge-success mb-1" style="font-size: 14px;">{{$r->valor}}</span>
@@ -23,8 +23,9 @@
             </div>
             <p class="card-text">{{str_limit($r->descricao, 200, '...')}}</p>
             <p class="card-text"><small class="text-muted">Criado em {{$r->created_at->format('d/m/Y')}}</small></p>
-          </div>
-        </a>
+
+        </div>
+        </div>
       </div>
       @endforeach
     </div>

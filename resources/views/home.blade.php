@@ -11,7 +11,9 @@
           <hr>
       </div>
       <div class="col-sm-12 mx-auto">
+        <div class="container">
           @include('elements.homepage.carrocerias')
+        </div>
       </div>
   </div>
 </div>

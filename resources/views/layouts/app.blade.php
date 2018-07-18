@@ -25,7 +25,7 @@
           <div class="collapse navbar-collapse" id="navbarColor01">
             <ul class="navbar-nav mr-auto">
               <li class="nav-item active">
-                <a class="nav-link" href="{{route('home')}}">Início <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="/">Início <span class="sr-only">(current)</span></a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="{{route('anuncios')}}">Anúncios</a>

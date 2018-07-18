@@ -1,5 +1,5 @@
 <div class="col-sm-5">
-    <form method="get">
+    <form action="/anuncios" method="get">
             <div class="card shadow" id="pesquisa-principal">
                 <div class="card-body">
                     <h4 class="card-title">Encontre os principais anúncios</h4>
@@ -8,24 +8,24 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="O que está procurando?" name="" id="">
+                                    <input type="text" class="form-control" placeholder="O que está procurando?" name="nome" id="nome">
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-sm-6">
-                                <div class="form-group">
-                                    <select class="form-control" name="modelo" id="modelo">
-                                            <option value="">Selecione o modelo</option>
-                                    </select>
-                                </div>
+                              <div class="form-group">
+                                  <select class="form-control" name="marca" id="marca">
+                                          <option value="">Selecione a marca</option>
+                                  </select>
+                              </div>
                             </div>
                             <div class="col-sm-6">
-                                <div class="form-group">
-                                    <select class="form-control" name="modelo" id="modelo">
-                                            <option value="">Selecione a marca</option>
-                                    </select>
-                                </div>
+                              <div class="form-group">
+                                  <select class="form-control" name="modelo" id="modelo">
+                                          <option value="">Selecione o modelo</option>
+                                  </select>
+                              </div>
                             </div>
                         </div>
                         <div class="row">
@@ -33,13 +33,13 @@
                                 <div class="form-group">
                                     <div class="input-group">
                                             <div class="input-group-prepend">
-                                                <span class="input-group-text" id="">Faixa de preço</span>
+                                                <span class="input-group-text">Faixa de preço</span>
                                             </div>
-                                            <input type="number" step="0.00" placeholder="Preço mínimo" class="form-control">
-                                            <input type="number" step="0.00" placeholder="Preço máximo" class="form-control">
+                                            <input type="text" nome="preco_minimo" placeholder="Preço mínimo" class="form-control valor">
+                                            <input type="text" nome="preco_maximo" placeholder="Preço máximo" class="form-control valor">
                                         </div>
                                 </div>
-                                    
+
                             </div>
                         </div>
                         <div class="row">
