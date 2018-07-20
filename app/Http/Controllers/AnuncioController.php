@@ -61,8 +61,10 @@ class AnuncioController extends Controller
         foreach ($request->all() as $key=>$value) {
           if($value){
             if($key == 'preco_maximo'){
+              $value = str_replace([',','.'], '', $value);
               $param[] = ['valor', '<=', $value];
             }elseif ($key == 'preco_minimo') {
+              $value = str_replace([',','.'], '', $value);
               $param[] = ['valor', '>=', $value];
             }else{
               $prefix = is_numeric($value)?'':'%';
