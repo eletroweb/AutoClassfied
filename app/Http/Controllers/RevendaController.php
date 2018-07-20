@@ -83,7 +83,6 @@ class RevendaController extends Controller
       $anuncio->user = $revenda->user;
       $anuncio->valor = str_replace(['R$ ', '.', ','], '', $veiculo->preco);
       $anuncio->save();
-      //Crio as imagens do anúncio
       $first = true;
       foreach($veiculo->fotos->foto as $foto){
         $img = new AnuncioImagem();
