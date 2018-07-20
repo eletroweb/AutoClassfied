@@ -18,7 +18,7 @@
                   <h4 class="card-title"><a style="color: black;" href="/anuncios/{{$r->id}}">{{$r->nome}}</a></h4>
                 </div>
                 <div class="col-sm-12">
-                  <span class="badge badge-success mb-1" style="font-size: 14px;">{{$r->valor}}</span>
+                  <span class="badge badge-success mb-1" style="font-size: 14px;">R${{number_format(substr($r->valor.'0', 0, -3), 2, ",", ".")}}</span>
                 </div>
             </div>
             <p class="card-text">{{str_limit($r->descricao, 200, '...')}}</p>
