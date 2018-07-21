@@ -49,8 +49,8 @@
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text" id="">Ano do veículo</span>
                                                 </div>
-                                                <input type="number" step="0.00" placeholder="Ano mínimo" class="form-control">
-                                                <input type="number" step="0.00" placeholder="Ano máximo" class="form-control">
+                                                <input type="number" name="ano_minimo" placeholder="Ano mínimo" class="form-control">
+                                                <input type="number" name="ano_maximo" placeholder="Ano máximo" class="form-control">
                                             </div>
                                     </div>
                                 </div>

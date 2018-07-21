@@ -8,6 +8,8 @@ use App\AnuncioDados;
 use App\AnuncioField;
 use App\AnuncioImagem;
 use App\VisualizacaoAnuncio;
+use App\Adicional;
+use App\Acessorio;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 
@@ -60,12 +62,14 @@ class AnuncioController extends Controller
         $param = array();
         foreach ($request->all() as $key=>$value) {
           if($value){
-            if($key == 'preco_maximo'){
+            if(strpos($key, '_maximo')){
+              $exploded = explode("_", $key);
               $value = str_replace([',','.'], '', $value);
-              $param[] = ['valor', '<=', $value];
-            }elseif ($key == 'preco_minimo') {
+              $param[] = [$exploded[0], '<=', $value];
+            }elseif(strpos($key, '_minimo')){
+              $exploded = explode("_", $key);
               $value = str_replace([',','.'], '', $value);
-              $param[] = ['valor', '>=', $value];
+              $param[] = [$exploded[0], '>=', $value];
             }else{
               $prefix = is_numeric($value)?'':'%';
               $param[] =  [$key, is_numeric($value)? '=':'like', $prefix.strtoupper($value).$prefix];
@@ -98,11 +102,17 @@ class AnuncioController extends Controller
         else
           $imagens[] = $r->url;
       }
+      $dados = AnuncioDados::where([
+        ['anuncio', '=', $anuncio->id],
+        ['visible', '=', true]
+      ])->get();
+      $adicionais = Adicional::where('anuncio', $anuncio->id)->get();
+      $acessorios = Acessorio::where('anuncio', $anuncio->id)->get();
       $view = new VisualizacaoAnuncio();
       $view->user = Auth::check()? Auth::user()->id:'';
       $view->anuncio = $anuncio->id;
       $view->save();
-      return view('anuncios.anuncio_page')->with(['anuncio'=> $anuncio, 'imagens' => $imagens, 'principal' => $principal]);
+      return view('anuncios.anuncio_page')->with(['acessorios' => $acessorios, 'adicionais' => $adicionais, 'anunciodados'=> $dados, 'anuncio'=> $anuncio, 'imagens' => $imagens, 'principal' => $principal]);
     }
 
 
