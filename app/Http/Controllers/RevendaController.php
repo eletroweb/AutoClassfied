@@ -100,14 +100,15 @@ class RevendaController extends Controller
         $this->createAnuncioDado($anuncio, 'portas', $veiculo->portas);
         $this->createAnuncioDado($anuncio, 'cor', $veiculo->cor);
         $this->createAnuncioDado($anuncio, 'combustivel', $veiculo->combustivel);
-        $this->createAnuncioDado($anuncio, 'id_xml', $veiculo->id);
+        $this->createAnuncioDado($anuncio, 'id_xml', $veiculo->id, false);
         $this->createAnuncioDado($anuncio, 'placa', $veiculo->placa);
         $this->createAnuncioDado($anuncio, 'tipo_veiculo', $veiculo->tipoveiculo);
-        foreach($veiculo->acessorios as $acessorio){
-          $this->createAcessorios($anuncio, $acessorio);
+        foreach($veiculo->acessorios->acessorio as $acessorio){
+
+          $this->createAcessorios($anuncio, (string)$acessorio);
         }
-        foreach($veiculo->opcionais as $adicional){
-          $this->createAcessorios($anuncio, $adicional);
+        foreach($veiculo->opcionais->opcional as $adicional){
+          $this->createAdicional($anuncio, $adicional);
         }
         foreach($veiculo->fotos->foto as $foto){
           $img = new AnuncioImagem();
@@ -116,34 +117,34 @@ class RevendaController extends Controller
           $img->first = $first;
           $img->save();
           $first = false;
-        }  
+        }
       }
-      
+
     }
-  
+
     public function createAnuncioDado($anuncio, $key, $value, $visible = true){
-      $anuncioDado = new AnuncioDado();
+      $anuncioDado = new AnuncioDados();
       $anuncioDado->anuncio = $anuncio->id;
       $anuncioDado->nome = $key;
       $anuncioDado->valor = $value;
       $anuncioDado->visible = $visible;
       $anuncioDado->save();
     }
-  
+
     public function createAcessorios($anuncio, $_acessorio){
       $acessorio = new Acessorio();
       $acessorio->anuncio = $anuncio->id;
       $acessorio->nome = $_acessorio;
       $acessorio->save();
     }
-  
+
     public function createAdicional($anuncio, $_adicional){
       $adicional = new Adicional();
       $adicional->anuncio = $anuncio->id;
       $adicional->nome = $_adicional;
       $adicional->save();
     }
-    
+
     //Estas são as condições para que o anúncio vindo do xml seja importado para o sistema.
     public function filtro(){
       return true;

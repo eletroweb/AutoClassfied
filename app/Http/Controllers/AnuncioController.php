@@ -8,6 +8,8 @@ use App\AnuncioDados;
 use App\AnuncioField;
 use App\AnuncioImagem;
 use App\VisualizacaoAnuncio;
+use App\Adicional;
+use App\Acessorio;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 
@@ -104,11 +106,13 @@ class AnuncioController extends Controller
         ['anuncio', '=', $anuncio->id],
         ['visible', '=', true]
       ])->get();
+      $adicionais = Adicional::where('anuncio', $anuncio->id)->get();
+      $acessorios = Acessorio::where('anuncio', $anuncio->id)->get();
       $view = new VisualizacaoAnuncio();
       $view->user = Auth::check()? Auth::user()->id:'';
       $view->anuncio = $anuncio->id;
       $view->save();
-      return view('anuncios.anuncio_page')->with(['anunciodados'=> $dados, 'anuncio'=> $anuncio, 'imagens' => $imagens, 'principal' => $principal]);
+      return view('anuncios.anuncio_page')->with(['acessorios' => $acessorios, 'adicionais' => $adicionais, 'anunciodados'=> $dados, 'anuncio'=> $anuncio, 'imagens' => $imagens, 'principal' => $principal]);
     }
 
 

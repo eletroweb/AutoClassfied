@@ -93,7 +93,7 @@
         </div>
     </div>
   </div>
-  <div class="row"> 
+  <div class="row">
     <div class="col-sm-7">
       <ul class="nav nav-tabs" id="myTab" role="tablist">
         <li class="nav-item">
@@ -110,15 +110,23 @@
         <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
           <ul class="list-group">
           @foreach($anunciodados as $dado)
-            <li class="list-group-item"><b>{{$dado->nome}}</b>: {{$dado->valor}}</li>  
+            <li class="list-group-item"><b>{{$dado->nome}}</b>: {{$dado->valor}}</li>
           @endforeach
           </ul>
         </div>
         <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-        
+          <ul class="list-group">
+            @foreach($adicionais as $adicional)
+              <li class="list-group-item">{{$adicional->nome}}</li>
+            @endforeach
+          </ul>
         </div>
         <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-        
+          <ul class="list-group">
+            @foreach($acessorios as $acessorio)
+              <li class="list-group-item">{{$acessorio->nome}}</li>
+            @endforeach
+          </ul>
         </div>
       </div>
     </div>
