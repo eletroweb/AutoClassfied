@@ -28,6 +28,9 @@
           <a class="dropdown-item" href="#">Anúncios #N</a>
         </div>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/versaos">Planos</a>
+      </li>
     </ul>
   </div>
 </nav>

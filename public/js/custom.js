@@ -1,7 +1,19 @@
 $(document).ready(function(){
+  $('#documento').mask('000.000.000-00', {reverse: true});
+  $('.telefone').mask('(00) 0000-0000');
   $("#anunciar").submit(function(){
      var value = $('#valor').cleanVal();
      $('#valor').val(value);
+   });
+   $('#cnpj').click(function(){
+     $('#info_documento').html('CNPJ');
+     $('#documento').mask('00.000.000/0000-00', {reverse: true});
+     $('#pessoa_fisica').val('0');
+   });
+   $('#cpf').click(function(){
+     $('#info_documento').html('CPF');
+     $('#pessoa_fisica').val('1');
+     $('#documento').mask('000.000.000-00', {reverse: true});
    });
   $('.owl-carousel').owlCarousel({
       loop:true,

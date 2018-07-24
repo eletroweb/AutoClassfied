@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'pessoa_fisica', 'documento'
     ];
 
     /**
@@ -30,7 +30,7 @@ class User extends Authenticatable
     public function anuncios(){
         return $this->hasMany('App\Anuncio');
     }
-  
+
     public function isAdmin(){
       return true;
     }
