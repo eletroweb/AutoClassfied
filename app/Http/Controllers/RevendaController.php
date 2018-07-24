@@ -36,7 +36,7 @@ class RevendaController extends Controller
           $user->email = $veiculo->loja->contato->email;
           $user->password = Hash::make($cnpj);
           $user->pessoa_fisica = false;
-          $user->cnpj = $veiculo->loja->cnpj;
+          $user->documento = $veiculo->loja->cnpj;
           $user->save();
           $revenda = new Revenda();
           $revenda->razaosocial = $veiculo->loja->nomefantasia;
