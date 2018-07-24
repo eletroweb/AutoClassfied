@@ -47,6 +47,15 @@
               </li>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Revendedores
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" href="/login">Fazer login</a>
+                  <a class="dropdown-item" href="{{route('contratar_revenda')}}">Quero contratar</a>
+                </div>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   Vender carros
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -77,10 +86,8 @@
                   <a class="dropdown-item" href="{{route('duvida_comprar_carro')}}">Como comprar seu veículo</a>
                   <a class="dropdown-item" href="{{route('duvida_vender_carro')}}">Como vender seu veículo</a>
                   <a class="dropdown-item" href="{{route('duvida_anuncios')}}">Anúncios</a>
+                  <a class="dropdown-item" href="{{route('fale_conosco')}}">Fale conosco</a>
                 </div>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{{route('fale_conosco')}}">Fale Conosco</a>
               </li>
               @if(Auth::check())
                 <li class="nav-item">

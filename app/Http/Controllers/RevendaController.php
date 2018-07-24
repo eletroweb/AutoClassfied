@@ -149,4 +149,8 @@ class RevendaController extends Controller
     public function filtro(){
       return true;
     }
+
+    public function create(Request $request){
+      return view('revendas.create');
+    }
 }

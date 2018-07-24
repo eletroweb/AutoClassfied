@@ -1,0 +1,11 @@
+<?php
+
+namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Plano extends Model
+{
+    protected $fillable = ['nome', 'descricao', 'anuncios', 'valor', 'preco'];
+    public static $rules = array();
+}
