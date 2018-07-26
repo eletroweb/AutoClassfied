@@ -27,7 +27,8 @@ class AnuncioController extends Controller
            'versao' => 'required',
            'valor' => 'required',
            'descricao' => 'required',
-           'user' => 'required'
+           'user' => 'required',
+           'moto' => ''
         ]);
         $anuncio = Anuncio::create($validatedData);
         $img_principal = new AnuncioImagem();

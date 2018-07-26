@@ -42,6 +42,14 @@
           <textarea class="form-control" name="descricao" id="descricao" rows="3" placeholder="Descreve detalhadamento o que você está anunciando"></textarea>
           <small id="descricaoHelp" class="form-text text-muted">Seja objetivo, o título será exibido na listagem dos veículos.</small>
         </div>
+        <div class="form-group">
+          <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" id="moto" name="moto" value="true">
+            <label class="custom-control-label" for="moto">
+              Estou anunciando uma motocicleta
+            </label>
+          </div>
+        </div>
         @foreach(App\AnuncioField::all() as $field)
         <div class="form-group">
           <label for="{{$field->nome_prog}}">{{$field->nome}}</label>
@@ -50,6 +58,24 @@
           <small id="{{$field->nome_prog}}Help" class="form-text text-muted">{{$field->helpText}}</small>
         </div>
         @endforeach
+
+        <div class="form-group">
+          <label for="adicional">Adicionais</label>
+          <div class="input-group mb-3">
+            <input type="text" class="form-control" id="adicional" placeholder="Digite o nome do adicional que pretende adicionar" aria-describedby="adicionalHelp" aria-label="Digite o nome do adicional que pretende adicionar" aria-describedby="button-addon2">
+            <div class="input-group-append">
+              <button class="btn btn-outline-secondary" type="button" id="addAdicional">Adicionar</button>
+            </div>
+          </div>
+          <small id="adicionalHelp" class="form-text text-muted">Um adicional é um atributo específico do veículo que você deseja citar. Exemplo: bancos de couro.</small>
+        </div>
+        <div class="form-group">
+          <div class="list-group" id="adicionais">
+            <a href="#" class="list-group-item list-group-item-action">Morbi leo risus</a>
+            <a href="#" class="list-group-item list-group-item-action">Porta ac consectetur ac</a>
+            <a href="#" class="list-group-item list-group-item-action">Vestibulum at eros</a>
+          </div>
+        </div>
         <div class="form-group">
           <label for="img_principal">Imagem principal:</label>
           <input type="file" class="form-control-file" name="img_principal" id="img_principal" required>

@@ -1,4 +1,15 @@
 $(document).ready(function(){
+  $('#addAdicional').click(function(){
+    if($('#adicional').val() != ''){
+        $('#adicionais').append('<button type="button" class="list-group-item list-group-item-action item_adicional">'+$('#adicional').val()+'</button>');
+    }else{
+      alert('Você precisa preencher o campo para adicionar');
+    }
+  });
+  $('.item_adicional').click(function(){
+    //confirm('Deseja ?');
+    console.log('clicou');
+  });
   $('#documento').mask('000.000.000-00', {reverse: true});
   $('.telefone').mask('(00) 0000-0000');
   $("#anunciar").submit(function(){
