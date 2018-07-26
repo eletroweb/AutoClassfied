@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Anuncio extends Model
 {
-    protected $fillable = ['nome', 'descricao', 'marca', 'modelo', 'versao', 'valor', 'user'];
+    protected $fillable = ['nome', 'descricao', 'marca', 'modelo', 'versao', 'valor', 'user', 'moto'];
 
     public function anuncio_dados(){
         return $this->hasMany('App\AnuncioDados');

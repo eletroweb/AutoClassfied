@@ -24,6 +24,7 @@ class CreateAnunciosTable extends Migration
             $table->integer('valor');
             $table->integer('ano');
             $table->boolean('importado')->default(false);
+            $table->boolean('moto')->default(false);
             $table->timestamps();
         });
     }

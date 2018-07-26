@@ -67,6 +67,7 @@ class RevendaController extends Controller
         $anuncio->marca = Marca::where('nome', $veiculo->marca)->first()->id;
         $anuncio->importado = true;
         $anuncio->ano = $veiculo->anomodelo;
+        $anuncio->moto = $veiculo->tipoveiculo == 'Carro'? false:true;
         if($modelo = Modelos::where([
             ['nome', (string)$veiculo->modelo],
             ['marca', $anuncio->marca],
@@ -104,9 +105,8 @@ class RevendaController extends Controller
         $this->createAnuncioDado($anuncio, 'combustivel', $veiculo->combustivel);
         $this->createAnuncioDado($anuncio, 'id_xml', $veiculo->id, false);
         $this->createAnuncioDado($anuncio, 'placa', $veiculo->placa);
-        $this->createAnuncioDado($anuncio, 'tipo_veiculo', $veiculo->tipoveiculo);
+        //$this->createAnuncioDado($anuncio, 'tipo_veiculo', $veiculo->tipoveiculo);
         foreach($veiculo->acessorios->acessorio as $acessorio){
-
           $this->createAcessorios($anuncio, (string)$acessorio);
         }
         foreach($veiculo->opcionais->opcional as $adicional){

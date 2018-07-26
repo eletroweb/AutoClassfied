@@ -3,7 +3,7 @@
 <!-- Page Header-->
           <header class="page-header">
             <div class="container-fluid">
-              <h2 class="no-margin-bottom">Título da página</h2>
+              <h2 class="no-margin-bottom">Resumo</h2>
             </div>
           </header>
           <!-- Dashboard Counts Section-->
@@ -13,37 +13,37 @@
                 <!-- Item -->
                 <div class="col-xl-3 col-sm-6">
                   <div class="item d-flex align-items-center">
-                    <div class="icon bg-violet"><i class="icon-user"></i></div>
-                    <div class="title"><span>New<br>Clients</span>
+                    <div class="icon bg-violet"><i class="fa fa-user"></i></div>
+                    <div class="title"><span>Total de<br>Usuários</span>
                       <div class="progress">
-                        <div role="progressbar" style="width: 25%; height: 4px;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" class="progress-bar bg-violet"></div>
+                        <div role="progressbar" style="width: 100%; height: 4px;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" class="progress-bar bg-violet"></div>
                       </div>
                     </div>
-                    <div class="number"><strong>25</strong></div>
+                    <div class="number"><strong>{{$usuarios_count}}</strong></div>
                   </div>
                 </div>
                 <!-- Item -->
                 <div class="col-xl-3 col-sm-6">
                   <div class="item d-flex align-items-center">
-                    <div class="icon bg-red"><i class="icon-padnote"></i></div>
-                    <div class="title"><span>Work<br>Orders</span>
+                    <div class="icon bg-red"><i class="fa fa-newspaper"></i></div>
+                    <div class="title"><span>Total de <br>Anúncios</span>
                       <div class="progress">
-                        <div role="progressbar" style="width: 70%; height: 4px;" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" class="progress-bar bg-red"></div>
+                        <div role="progressbar" style="width: 100%; height: 4px;" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" class="progress-bar bg-red"></div>
                       </div>
                     </div>
-                    <div class="number"><strong>70</strong></div>
+                    <div class="number"><strong>{{$anuncios_count}}</strong></div>
                   </div>
                 </div>
                 <!-- Item -->
                 <div class="col-xl-3 col-sm-6">
                   <div class="item d-flex align-items-center">
-                    <div class="icon bg-green"><i class="icon-bill"></i></div>
-                    <div class="title"><span>New<br>Invoices</span>
+                    <div class="icon bg-green"><i class="fa fa-store"></i></div>
+                    <div class="title"><span>Total de <br>Revendas</span>
                       <div class="progress">
-                        <div role="progressbar" style="width: 40%; height: 4px;" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" class="progress-bar bg-green"></div>
+                        <div role="progressbar" style="width: 100%; height: 4px;" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" class="progress-bar bg-green"></div>
                       </div>
                     </div>
-                    <div class="number"><strong>40</strong></div>
+                    <div class="number"><strong>{{$revendas_count}}</strong></div>
                   </div>
                 </div>
                 <!-- Item -->
@@ -62,10 +62,10 @@
             </div>
           </section>
           <!-- Dashboard Header Section    -->
-          <section class="dashboard-header">
+          <!--<section class="dashboard-header">
             <div class="container-fluid">
               <div class="row">
-                <!-- Statistics -->
+                
                 <div class="statistics col-lg-3 col-12">
                   <div class="statistic d-flex align-items-center bg-white has-shadow">
                     <div class="icon bg-red"><i class="fa fa-tasks"></i></div>
@@ -80,19 +80,19 @@
                     <div class="text"><strong>147</strong><br><small>Forwards</small></div>
                   </div>
                 </div>
-                <!-- Line Chart            -->
+                
                 <div class="chart col-lg-6 col-12">
                   <div class="line-chart bg-white d-flex align-items-center justify-content-center has-shadow">
                     <canvas id="lineCahrt"></canvas>
                   </div>
                 </div>
                 <div class="chart col-lg-3 col-12">
-                  <!-- Bar Chart   -->
+                  
                   <div class="bar-chart has-shadow bg-white">
                     <div class="title"><strong class="text-violet">95%</strong><br><small>Current Server Uptime</small></div>
                     <canvas id="barChartHome"></canvas>
                   </div>
-                  <!-- Numbers-->
+                  
                   <div class="statistic d-flex align-items-center bg-white has-shadow">
                     <div class="icon bg-green"><i class="fa fa-line-chart"></i></div>
                     <div class="text"><strong>99.9%</strong><br><small>Success Rate</small></div>
@@ -102,23 +102,34 @@
             </div>
           </section>
           <!-- Projects Section-->
-          <section class="projects no-padding-top">
+          <section class="projects no-padding-top mt-3">
             <div class="container-fluid">
               <!-- Project-->
+              <div class="row">
+                <div class="col-sm-12">
+                  <h4>
+                    Anúncios mais vistos  
+                  </h4>
+                  <p>
+                    Estes são os anúncios mais vistos pelos usuários
+                  </p>
+                </div>
+              </div>
               <div class="project">
+                @foreach($anuncios as $anuncio)
                 <div class="row bg-white has-shadow">
                   <div class="left-col col-lg-6 d-flex align-items-center justify-content-between">
                     <div class="project-title d-flex align-items-center">
                       <div class="image has-shadow"><img src="img/project-1.jpg" alt="..." class="img-fluid"></div>
                       <div class="text">
-                        <h3 class="h4">Project Title</h3><small>Lorem Ipsum Dolor</small>
+                        <h3 class="h4">{{$anuncio->nome}}</h3><small>{{App\User::find($anuncio->user)->name}}</small>
                       </div>
                     </div>
-                    <div class="project-date"><span class="hidden-sm-down">Today at 4:24 AM</span></div>
+                    <div class="project-date"><span class="hidden-sm-down">{{$anuncio->created_at->format('d/m/Y')}}</span></div>
                   </div>
                   <div class="right-col col-lg-6 d-flex align-items-center">
-                    <div class="time"><i class="fa fa-clock-o"></i>12:00 PM </div>
-                    <div class="comments"><i class="fa fa-comment-o"></i>20</div>
+                    <div class="time"><i class="fa fa-clock-o"></i>{{$anuncio->created_at->format('H:i')}} </div>
+                    <div class="comments"><i class="fa fa-eye"></i>{{App\Visualizacao::where('anuncio', $anuncio->id)->count()}}</div>
                     <div class="project-progress">
                       <div class="progress">
                         <div role="progressbar" style="width: 45%; height: 6px;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" class="progress-bar bg-red"></div>
@@ -126,6 +137,7 @@
                     </div>
                   </div>
                 </div>
+                @endforeach
               </div>
               <!-- Project-->
               <div class="project">

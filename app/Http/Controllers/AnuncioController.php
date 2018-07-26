@@ -27,7 +27,8 @@ class AnuncioController extends Controller
            'versao' => 'required',
            'valor' => 'required',
            'descricao' => 'required',
-           'user' => 'required'
+           'user' => 'required',
+           'moto' => ''
         ]);
         $anuncio = Anuncio::create($validatedData);
         $img_principal = new AnuncioImagem();
@@ -56,7 +57,7 @@ class AnuncioController extends Controller
         }
         return redirect('/anuncios/'.$anuncio->id)->with('status', 'Anúncio publicado com sucesso!');
     }
-
+ 
     public function anuncios(Request $request){
       if($request->has('nome')){
         $param = array();
