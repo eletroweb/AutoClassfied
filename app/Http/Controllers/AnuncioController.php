@@ -57,7 +57,7 @@ class AnuncioController extends Controller
         }
         return redirect('/anuncios/'.$anuncio->id)->with('status', 'Anúncio publicado com sucesso!');
     }
-
+ 
     public function anuncios(Request $request){
       if($request->has('nome')){
         $param = array();

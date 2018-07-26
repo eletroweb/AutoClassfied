@@ -12,6 +12,9 @@ use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
 use App\Anuncio;
 use App\User;
+use App\Revenda;
+use App\VisualizacaoAnuncio;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends AppBaseController
 {
@@ -183,7 +186,17 @@ class UserController extends AppBaseController
     }
 
     public function admin(Request $request){
-      return view('admin.index');
+      $anuncios = VisualizacaoAnuncio::select([DB::raw('visualizacao_anuncios.*, count(*) as `aggregate`'), 'anuncios.*'])
+                    ->join('anuncios', 'categories.anuncio', '=', 'anuncios.id')
+                    ->groupBy('visualizacaos.id')
+                    ->orderBy('aggregate', 'desc')
+                    ->limit(10);
+      return view('admin.resumo')->with([
+                                         'anuncios' => $anuncios,
+                                         'usuarios_count'=> User::all()->count(),
+                                         'anuncios_count'=> Anuncio::all()->count(),
+                                         'revendas_count'=> Revenda::all()->count(),
+                                        ]);
     }
 
     public function tables(Request $request){
