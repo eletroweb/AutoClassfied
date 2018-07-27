@@ -57,7 +57,7 @@ class AnuncioController extends Controller
         }
         return redirect('/anuncios/'.$anuncio->id)->with('status', 'Anúncio publicado com sucesso!');
     }
- 
+
     public function anuncios(Request $request){
       if($request->has('nome')){
         $param = array();
@@ -86,6 +86,8 @@ class AnuncioController extends Controller
 
     public function index(Request $request, $id){
       $anuncio = Anuncio::find($id);
+      $anuncio->visualizacoes += 1;
+      $anuncio->save(); 
       $url = AnuncioImagem::where([['anuncio', $anuncio->id], ['first', true]])->first()->url;
       if(!$anuncio->importado){
           $principal = Storage::url($url);

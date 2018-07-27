@@ -21,6 +21,7 @@ class CreateAnuncioFieldsTable extends Migration
             $table->string('place_holder');
             $table->double('step');
             $table->longText('helpText');
+            
             $table->timestamps();
         });
     }
