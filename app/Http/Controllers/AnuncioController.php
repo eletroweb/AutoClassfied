@@ -87,7 +87,7 @@ class AnuncioController extends Controller
     public function index(Request $request, $id){
       $anuncio = Anuncio::find($id);
       $anuncio->visualizacoes += 1;
-      $anuncio->save(); 
+      $anuncio->save();
       $url = AnuncioImagem::where([['anuncio', $anuncio->id], ['first', true]])->first()->url;
       if(!$anuncio->importado){
           $principal = Storage::url($url);
@@ -112,7 +112,7 @@ class AnuncioController extends Controller
       $adicionais = Adicional::where('anuncio', $anuncio->id)->get();
       $acessorios = Acessorio::where('anuncio', $anuncio->id)->get();
       $view = new VisualizacaoAnuncio();
-      $view->user = Auth::check()? Auth::user()->id:'';
+      $view->user = Auth::check()? Auth::user()->id:'0';
       $view->anuncio = $anuncio->id;
       $view->save();
       return view('anuncios.anuncio_page')->with(['acessorios' => $acessorios, 'adicionais' => $adicionais, 'anunciodados'=> $dados, 'anuncio'=> $anuncio, 'imagens' => $imagens, 'principal' => $principal]);
