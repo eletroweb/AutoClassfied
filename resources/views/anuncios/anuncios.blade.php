@@ -9,7 +9,8 @@
 <div class="container">
   <div class="row">
     <div class="col-sm-3">
-
+      <h5>Filtros</h5>
+      <small class="text-muted">Personalize a busca aos anúncios</small>
     </div>
     <div class="col-sm-9">
       <form>
@@ -26,21 +27,42 @@
     <div class="col-sm-3">
        <ul class="nav flex-column">
         <li class="nav-item">
-          <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-            Categorias
-          </button>
-          <div class="mt-2 collapse" id="collapseExample">
+          <div class="mt-2">
             <div class="card card-body">
-              Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
-            </div>
+              <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="moto" checked>
+                <label class="custom-control-label" for="moto">Moto</label>
+              </div>
+              <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="carro" checked>
+                <label class="custom-control-label" for="carro">Carro</label>
+              </div>
+             </div>
           </div>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">#</a>
+        <li class="nav-item mt-2">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Preço</span>
+            </div>
+            <input type="text" aria-label="Máximo" placeholder="Máximo" name="ano_maximo" class="form-control valor">
+            <input type="text" aria-label="Mínimo" placeholder="Mínimo" name="ano_minimo" class="form-control valor">
+          </div>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">#</a>
+        <li class="nav-item mt-2">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Ano</span>
+            </div>
+            <input type="text" aria-label="Máximo" placeholder="Máximo" name="ano_maximo" class="form-control">
+            <input type="text" aria-label="Mínimo" placeholder="Mínimo" name="ano_minimo" class="form-control">
+          </div>
         </li>
+        <li class="nav-item mt-2">
+          <button class="btn btn-primary">
+            Filtrar
+          </button>
+         </li>
       </ul>
     </div>
     <div class="col-sm-9">
