@@ -186,9 +186,7 @@ class UserController extends AppBaseController
     }
 
     public function admin(Request $request){
-      $anuncios= VisualizacaoAnuncio::select(DB::raw("count(visualizacao_anuncios.anuncio) as count"))
-                 ->whereNotNull('anuncio')->groupBy('anuncio')
-                 ->orderBy('count', 'desc')->paginate(10);
+      $anuncios = Anuncio::orderBy('visualizacoes', 'desc')->paginate(5);
       return view('admin.resumo')->with([
                                          'anuncios' => $anuncios,
                                          'usuarios_count'=> User::all()->count(),
