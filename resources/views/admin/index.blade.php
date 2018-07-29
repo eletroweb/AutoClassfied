@@ -25,6 +25,7 @@
     <!-- Tweaks for older IEs--><!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+
   </head>
   <body>
     <div class="page">
@@ -175,10 +176,9 @@
     <script src="{{asset('vendor/popper.js/umd/popper.min.js')}}"></script>
     <script src="{{asset('vendor/bootstrap/js/bootstrap.min.js')}}"></script>
     <script src="{{asset('vendor/jquery.cookie/jquery.cookie.js')}}"></script>
-    <script src="{{asset('vendor/chart.js/Chart.min.js')}}"></script>
     <script src="{{asset('vendor/jquery-validation/jquery.validate.min.js')}}"></script>
-    <script src="{{asset('js/admin/charts-home.js')}}"></script>
     <!-- Main File-->
     <script src="{{asset('js/admin/front.js')}}"></script>
+    <script src="{{asset('js/admin.js')}}" charset="utf-8"></script>
   </body>
 </html>
