@@ -59,14 +59,22 @@ class AnuncioController extends Controller
     }
 
     public function anuncios(Request $request){
-      if($request->has('nome')){
+      if($request->all()){
         $param = array();
+        $tipos = array();
         foreach ($request->all() as $key=>$value) {
           if($value){
             if(strpos($key, '_maximo')){
               $exploded = explode("_", $key);
               $value = str_replace([',','.'], '', $value);
               $param[] = [$exploded[0], '<=', $value];
+            }elseif(is_array($value)) {
+              //Quando cair aqui eu subentendo que é tipo[]
+              foreach ($value as $_key => $_value) {
+                //$prefix = is_numeric($_value)?'':'%';
+                //$param[] =  ['tipo', is_numeric($_value)? '=':'like', $prefix.strtoupper($_value).$prefix];
+                $tipos[] = $_value=='carro'? false:true;
+              }
             }elseif(strpos($key, '_minimo')){
               $exploded = explode("_", $key);
               $value = str_replace([',','.'], '', $value);
@@ -77,7 +85,7 @@ class AnuncioController extends Controller
             }
           }
         }
-        $anuncios = Anuncio::where($param)->orderBy('id', 'desc')->paginate(20);
+        $anuncios = Anuncio::where($param)->whereIn('moto', $tipos)->orderBy('id', 'desc')->paginate(20);
       }else{
         $anuncios = Anuncio::orderBy('id', 'desc')->paginate(20);
       }

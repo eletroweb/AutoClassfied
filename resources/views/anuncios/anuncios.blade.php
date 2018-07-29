@@ -25,51 +25,72 @@
   </div>
   <div class="row">
     <div class="col-sm-3">
-       <ul class="nav flex-column">
-        <li class="nav-item">
-          <div class="mt-2">
-            <div class="card card-body">
-              <div class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input" id="moto" checked>
-                <label class="custom-control-label" for="moto">Moto</label>
+      <form method="get">
+        <ul class="nav flex-column">
+         <li class="nav-item">
+           <div class="mt-2">
+             <div class="card card-body">
+               <div class="custom-control custom-checkbox">
+                 <input type="checkbox" class="custom-control-input" id="moto" name="tipo[]" value="moto" checked>
+                 <label class="custom-control-label" for="moto">Moto</label>
+               </div>
+               <div class="custom-control custom-checkbox">
+                 <input type="checkbox" class="custom-control-input" id="carro" name="tipo[]" value="carro" checked>
+                 <label class="custom-control-label" for="carro">Carro</label>
+               </div>
               </div>
-              <div class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input" id="carro" checked>
-                <label class="custom-control-label" for="carro">Carro</label>
-              </div>
-             </div>
-          </div>
-        </li>
-        <li class="nav-item mt-2">
-          <div class="input-group">
-            <div class="input-group-prepend">
-              <span class="input-group-text">Preço</span>
-            </div>
-            <input type="text" aria-label="Máximo" placeholder="Máximo" name="ano_maximo" class="form-control valor">
-            <input type="text" aria-label="Mínimo" placeholder="Mínimo" name="ano_minimo" class="form-control valor">
-          </div>
-        </li>
-        <li class="nav-item mt-2">
-          <div class="input-group">
-            <div class="input-group-prepend">
-              <span class="input-group-text">Ano</span>
-            </div>
-            <input type="text" aria-label="Máximo" placeholder="Máximo" name="ano_maximo" class="form-control">
-            <input type="text" aria-label="Mínimo" placeholder="Mínimo" name="ano_minimo" class="form-control">
-          </div>
-        </li>
-        <li class="nav-item mt-2">
-          <button class="btn btn-primary">
-            Filtrar
-          </button>
+           </div>
          </li>
-      </ul>
+         <li class="nav-item mt-2">
+           <div class="input-group">
+             <div class="input-group-prepend">
+               <span class="input-group-text">Preço</span>
+             </div>
+             <input type="text" aria-label="Máximo" placeholder="Máximo" name="valor_maximo" class="form-control valor">
+             <input type="text" aria-label="Mínimo" placeholder="Mínimo" name="valor_minimo" class="form-control valor">
+           </div>
+         </li>
+         <li class="nav-item mt-2">
+           <div class="input-group">
+             <div class="input-group-prepend">
+               <span class="input-group-text">Ano</span>
+             </div>
+             <input type="number" aria-label="Máximo" placeholder="Máximo" name="ano_maximo" class="form-control">
+             <input type="number" aria-label="Mínimo" placeholder="Mínimo" name="ano_minimo" class="form-control">
+           </div>
+         </li>
+         <li class="nav-item mt-2">
+               <select class="form-control" name="marca" id="marca">
+                       <option value="">Selecione a marca</option>
+               </select>
+         </li>
+         <li class="nav-item mt-2">
+               <select class="form-control" name="modelo" id="modelo">
+                       <option value="">Selecione o modelo</option>
+               </select>
+         </li>
+         <li class="nav-item mt-2">
+           <select class="form-control" name="versao" id="versao">
+                   <option value="">Selecione a versão</option>
+           </select>
+         </li>
+         <li class="nav-item mt-2">
+           <button class="btn btn-primary">
+             Filtrar
+           </button>
+          </li>
+       </ul>
+      </form>
     </div>
     <div class="col-sm-9">
       <div class="list-group">
-        @foreach($anuncios as $anuncio)
+        @forelse($anuncios as $anuncio)
           @include('elements.anuncios.anuncio', ['anuncio'=> $anuncio])
-        @endforeach
+        @empty
+        <div class="alert alert-primary" role="alert">
+          Nenhum anúncio encontrado com as especificações fornecidas.
+        </div>
+        @endforelse
       </div>
       {{$anuncios->links()}}
     </div>

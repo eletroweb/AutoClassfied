@@ -7,7 +7,13 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+     (adsbygoogle = window.adsbygoogle || []).push({
+          google_ad_client: "ca-pub-2059965508769380",
+          enable_page_level_ads: true
+     });
+     </script>
     <title>{{ env('app.name', 'Unicodono') }}</title>
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{asset('css/unicodono.css')}}" rel="stylesheet">
@@ -285,6 +291,7 @@
         </div>
       </div>
     </footer>
+
     <script src="{{asset('js/jquery-3.3.1.min.js')}}" charset="utf-8"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
@@ -292,5 +299,6 @@
     <script src="{{asset('js/custom.js')}}" charset="utf-8"></script>
     <script src="{{asset('js/anuncio/main.js')}}" charset="utf-8"></script>
     <script src="{{asset('js/owl.carousel.min.js')}}" charset="utf-8"></script>
+
 </body>
 </html>

@@ -19,12 +19,12 @@
             </div>
         @endif
         <form method="post" action="/admin/revenda/import">
-          {{ csrf_field() }}
+          {{csrf_field()}}
           <div class="form-group">
             <label for="cnpj">CNPJ</label>
             <input type="text" name="cnpj" value="" placeholder="Digite o CNPJ (Sem pontos ou traços)" class="form-control">
           </div>
-          <button type="submit" class="btn btn-primary" name="button">Importar</button>
+          <button type="submit" class="btn btn-primary">Importar</button>
         </form>
       </div>
     </div>

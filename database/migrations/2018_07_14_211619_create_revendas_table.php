@@ -19,7 +19,7 @@ class CreateRevendasTable extends Migration
             $table->string('nomefantasia');
             $table->string('cnpj');
             $table->integer('user');
-            $table->boolean('ativo');
+            $table->boolean('ativo')->default(true);
             $table->timestamps();
         });
     }

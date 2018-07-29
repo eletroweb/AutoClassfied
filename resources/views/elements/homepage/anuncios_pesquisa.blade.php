@@ -43,22 +43,35 @@
                             </div>
                         </div>
                         <div class="row">
-                                <div class="col-sm-12">
-                                    <div class="form-group">
-                                        <div class="input-group">
-                                                <div class="input-group-prepend">
-                                                    <span class="input-group-text" id="">Ano do veículo</span>
-                                                </div>
-                                                <input type="number" name="ano_minimo" placeholder="Ano mínimo" class="form-control">
-                                                <input type="number" name="ano_maximo" placeholder="Ano máximo" class="form-control">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text" id="">Ano do veículo</span>
                                             </div>
-                                    </div>
+                                            <input type="number" name="ano_minimo" placeholder="Ano mínimo" class="form-control">
+                                            <input type="number" name="ano_maximo" placeholder="Ano máximo" class="form-control">
+                                        </div>
                                 </div>
                             </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-sm-6">
+                            <div class="custom-control custom-checkbox">
+                              <input type="checkbox" class="custom-control-input" id="moto" name="tipo[]" value="moto">
+                              <label class="custom-control-label" for="moto">Moto</label>
+                            </div>
+                          </div>
+                          <div class="col-sm-6">
+                            <div class="custom-control custom-checkbox">
+                              <input type="checkbox" class="custom-control-input" id="carro" name="tipo[]" value="carro">
+                              <label class="custom-control-label" for="carro">Carro</label>
+                            </div>
+                          </div>
+                        </div>
                     </p>
                     <button type="submit" class="btn btn-primary">Buscar</button>
                 </div>
             </div>
     </form>
-
 </div>
