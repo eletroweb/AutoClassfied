@@ -8,6 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script type="text/javascript" src="https://stc.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.directpayment.js"></script>
     <script>
      (adsbygoogle = window.adsbygoogle || []).push({
           google_ad_client: "ca-pub-2059965508769380",
