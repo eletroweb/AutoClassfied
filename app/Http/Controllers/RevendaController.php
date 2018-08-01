@@ -60,7 +60,7 @@ class RevendaController extends Controller
         ['nome', '=', 'id_xml'],
         ['valor', '=', $veiculo->id]
       ])->get()->isEmpty();
-      if($empty && $this->filtro()){
+      if($empty && $this->filtro($veiculo)){
         $anuncio = new Anuncio();
         $anuncio->nome = $veiculo->marca.' '.$veiculo->modelo.' - '.$veiculo->versao;
         $anuncio->descricao = (string)$veiculo->observacao;
@@ -148,8 +148,8 @@ class RevendaController extends Controller
     }
 
     //Estas são as condições para que o anúncio vindo do xml seja importado para o sistema.
-    public function filtro(){
-      return true;
+    public function filtro($veiculo){
+      return $veiculo->km == 0 && intval($veiculo->anomodelo) >= 2015;
     }
 
     public function create(Request $request){
