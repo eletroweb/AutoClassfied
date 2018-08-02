@@ -18,6 +18,7 @@
     <title>{{ env('app.name', 'Unicodono') }}</title>
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{asset('css/unicodono.css')}}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/lightgallery.min.css') }}">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
 </head>
 <body>
@@ -297,9 +298,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
     <script src="{{asset('js/jquery.mask.min.js')}}" charset="utf-8"></script>
-    <script src="{{asset('js/custom.js')}}" charset="utf-8"></script>
     <script src="{{asset('js/anuncio/main.js')}}" charset="utf-8"></script>
     <script src="{{asset('js/owl.carousel.min.js')}}" charset="utf-8"></script>
-
+    <script src="{{asset('js/lightgallery.min.js')}}" charset="utf-8"></script>
+    <script src="{{asset('js/custom.js')}}" charset="utf-8"></script>
 </body>
 </html>

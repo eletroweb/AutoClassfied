@@ -13,13 +13,20 @@
           <img src="{{$principal}}" class="img-fluid main-img" alt="Responsive image">
         </div>
       </div>
-      <div class="row">
+      <!-- teste -->
+      <ul id="captions" class="list-unstyled row" lg-uid="lg0">
+      <!-- teste -->
         @foreach($imagens as $img)
-          <div class="col-sm-2">
-            <img src="{{$img}}" alt="imagem" width="100" class="img-thumbnail thumbnuncio">
-          </div>
+        <li class="col-xs-6 col-sm-4 col-md-3" data-src="{{$img}}" data-sub-html="<h4>{{$anuncio->nome}}</h4>" lg-event-uid="&amp;4">
+            <a href="">
+                <img class="img-responsive" src="{{$img}}">
+                <div class="demo-gallery-poster">
+                    <img src="{{$img}}">
+                </div>
+            </a>
+        </li>
         @endforeach
-      </div>
+      </ul>
     </div>
     <div class="col-sm-5">
       <div class="card" style="border: none">
