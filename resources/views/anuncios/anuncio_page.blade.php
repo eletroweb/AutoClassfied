@@ -2,7 +2,7 @@
 @section('content')
 <div class="container">
   <div class="row">
-    <div class="col-sm-7" style="margin-top: 40px;">
+    <div class="col-md-7" style="margin-top: 40px;">
       @if (session('status'))
           <div class="alert alert-success">
               {{ session('status') }}
@@ -13,22 +13,15 @@
           <img src="{{$principal}}" class="img-fluid main-img" alt="Responsive image">
         </div>
       </div>
-      <!-- teste -->
-      <ul id="captions" class="list-unstyled row" lg-uid="lg0">
-      <!-- teste -->
-        @foreach($imagens as $img)
-        <li class="col-xs-6 col-sm-4 col-md-3" data-src="{{$img}}" data-sub-html="<h4>{{$anuncio->nome}}</h4>" lg-event-uid="&amp;4">
-            <a href="">
-                <img class="img-responsive" src="{{$img}}">
-                <div class="demo-gallery-poster">
-                    <img src="{{$img}}">
-                </div>
-            </a>
-        </li>
-        @endforeach
-      </ul>
+      <div class="row">
+          <div class="col-sm-12 text-left mt-2">
+          @foreach($imagens as $img)
+            <a class="col-sm-2 mr-1" href="{{$img}}"data-lightbox="roadtrip"> <img class="rounded float-left  mr-1" width="100" src="{{$img}}"> </a>
+          @endforeach
+          </div>
+      </div>
     </div>
-    <div class="col-sm-5">
+    <div class="col-md-5">
       <div class="card" style="border: none">
         <div class="card-body">
           <h5 class="card-title" style="font-size: 30px"><span class="badge badge-success">R${{number_format(substr($anuncio->valor.'0', 0, -3), 2, ",", ".")}}</span></h5>
@@ -102,9 +95,9 @@
   </div>
   <div class="row">
     <div class="col-sm-7">
-      <ul class="nav nav-tabs" id="myTab" role="tablist">
+      <ul class="nav nav-pills" id="myTab" role="tablist">
         <li class="nav-item">
-          <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Mais informações</a>
+          <a class="nav-link active white" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Mais informações</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Adicionais</a>
@@ -117,21 +110,21 @@
         <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
           <ul class="list-group">
           @foreach($anunciodados as $dado)
-            <li class="list-group-item"><b>{{$dado->nome}}</b>: {{$dado->valor}}</li>
+            <li class="list-group-item"><b>{{ucfirst($dado->nome)}}</b>: {{$dado->valor}}</li>
           @endforeach
           </ul>
         </div>
         <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
           <ul class="list-group">
             @foreach($adicionais as $adicional)
-              <li class="list-group-item">{{$adicional->nome}}</li>
+              <li class="list-group-item">{{ucfirst($adicional->nome)}}</li>
             @endforeach
           </ul>
         </div>
         <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
           <ul class="list-group">
             @foreach($acessorios as $acessorio)
-              <li class="list-group-item">{{$acessorio->nome}}</li>
+              <li class="list-group-item">{{ucfirst($acessorio->nome)}}</li>
             @endforeach
           </ul>
         </div>

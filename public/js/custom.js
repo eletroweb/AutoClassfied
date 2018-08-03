@@ -1,7 +1,4 @@
 $(document).ready(function(){
-  lightGallery(document.getElementById('relative-caption'), {
-    subHtmlSelectorRelative: true
-  });
   $('#addAdicional').click(function(){
     if($('#adicional').val() !== ''){
         $('#adicionais').append('<button type="button" class="list-group-item list-group-item-action item-adicional">'+$('#adicional').val()+'</button>');

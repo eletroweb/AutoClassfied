@@ -126,7 +126,7 @@
           </div>
           <!-- Sidebar Navidation Menus--><span class="heading">Principal</span>
           <ul class="list-unstyled">
-            <li class="active"><a href="index.html"> <i class="fa fa-info-circle"></i>Resumo </a></li>
+            <li class="active"><a href="/admin/resumo"> <i class="fa fa-info-circle"></i>Resumo </a></li>
             <li><a href="/admin/marcas"> <i class="fa fa-bookmark"></i>Marcas </a></li>
             <li><a href="/admin/modelos"> <i class="fa fa-car"></i>Modelos </a></li>
             <li><a href="/admin/versoes"> <i class="fa fa-list-ol"></i>Versões </a></li>

@@ -30,7 +30,7 @@
   </div>
   <form class="form-signup {{ $errors->has('name') ? ' has-error' : '' }}" method="POST" action="{{ route('register') }}">
     {{ csrf_field() }}
-      <h1 class="h3 mb-3 font-weight-normal">Acesse a sua conta</h1>
+      <h1 class="h3 mb-3 font-weight-normal text-center">Crie a sua conta</h1>
       <div class="form-group">
         <label for="inputName">Nome</label>
         <input type="text"  class="form-control" name="name" value="{{ old('name') }}" placeholder="Digite o seu nome" required="" autofocus="">

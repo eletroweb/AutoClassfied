@@ -16,6 +16,7 @@
      });
      </script>-->
     <title>{{ env('app.name', 'Unicodono') }}</title>
+    <link rel="stylesheet" href="{{ asset('css/lightbox.min.css') }}">
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{asset('css/unicodono.css')}}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/lightgallery.min.css') }}">
@@ -114,6 +115,13 @@
                         {{ csrf_field() }}
                     </form>
                 </li>
+              @else
+              <li class="nav-item">
+                <a class="nav-link" href="/login">Entrar</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/register">Criar conta</a>
+              </li>
               @endif
             </ul>
           </div>
@@ -300,7 +308,7 @@
     <script src="{{asset('js/jquery.mask.min.js')}}" charset="utf-8"></script>
     <script src="{{asset('js/anuncio/main.js')}}" charset="utf-8"></script>
     <script src="{{asset('js/owl.carousel.min.js')}}" charset="utf-8"></script>
-    <script src="{{asset('js/lightgallery.min.js')}}" charset="utf-8"></script>
+    <script src="{{asset('js/lightbox.min.js')}}" charset="utf-8"></script>
     <script src="{{asset('js/custom.js')}}" charset="utf-8"></script>
 </body>
 </html>
