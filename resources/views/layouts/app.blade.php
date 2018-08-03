@@ -7,16 +7,19 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <!--<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script type="text/javascript" src="https://stc.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.directpayment.js"></script>
     <script>
      (adsbygoogle = window.adsbygoogle || []).push({
           google_ad_client: "ca-pub-2059965508769380",
           enable_page_level_ads: true
      });
-     </script>
+     </script>-->
     <title>{{ env('app.name', 'Unicodono') }}</title>
+    <link rel="stylesheet" href="{{ asset('css/lightbox.min.css') }}">
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{asset('css/unicodono.css')}}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/lightgallery.min.css') }}">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
 </head>
 <body>
@@ -112,6 +115,13 @@
                         {{ csrf_field() }}
                     </form>
                 </li>
+              @else
+              <li class="nav-item">
+                <a class="nav-link" href="/login">Entrar</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/register">Criar conta</a>
+              </li>
               @endif
             </ul>
           </div>
@@ -296,9 +306,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
     <script src="{{asset('js/jquery.mask.min.js')}}" charset="utf-8"></script>
-    <script src="{{asset('js/custom.js')}}" charset="utf-8"></script>
     <script src="{{asset('js/anuncio/main.js')}}" charset="utf-8"></script>
     <script src="{{asset('js/owl.carousel.min.js')}}" charset="utf-8"></script>
-
+    <script src="{{asset('js/lightbox.min.js')}}" charset="utf-8"></script>
+    <script src="{{asset('js/custom.js')}}" charset="utf-8"></script>
 </body>
 </html>

@@ -105,7 +105,7 @@
   </div>
   <form method="post" class="form-signin h-100" action="{{route('login')}}">
       {{csrf_field()}}
-      <h1 class="h3 mb-3 font-weight-normal">Acesse a sua conta</h1>
+      <h1 class="h3 mb-3 font-weight-normal text-center">Acesse a sua conta</h1>
       <label for="email" class="sr-only">Email</label>
       <input type="email" id="email" name="email" class="form-control" placeholder="Digite o seu e-mail" required="" autofocus="">
       <label for="password" class="sr-only">Senha</label>

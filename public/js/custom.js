@@ -1,13 +1,13 @@
 $(document).ready(function(){
   $('#addAdicional').click(function(){
-    if($('#adicional').val() != ''){
-        $('#adicionais').append('<button type="button" class="list-group-item list-group-item-action item_adicional">'+$('#adicional').val()+'</button>');
+    if($('#adicional').val() !== ''){
+        $('#adicionais').append('<button type="button" class="list-group-item list-group-item-action item-adicional">'+$('#adicional').val()+'</button>');
     }else{
       alert('Você precisa preencher o campo para adicionar');
     }
   });
-  $('.item_adicional').click(function(){
-    console.log('clicou');
+  $('.item-adicional').click(function(){
+    $(this).remove();
   });
   $('#documento').mask('000.000.000-00', {reverse: true});
   $('.telefone').mask('(00) 0000-0000');
@@ -94,7 +94,7 @@ $(document).ready(function(){
       success: function(data){
         $('#modelo').html('<option value="">Selecione o modelo...</option>');
         $('#versao').html('<option value="">Selecione a versão...</option>');
-        if($('#marca').val() != ''){
+        if($('#marca').val() !==''){
           $.each(data, function (i, item) {
             $('#modelo').append($('<option>', {
                 value: item.id,
@@ -114,7 +114,7 @@ $(document).ready(function(){
       data: {modelo: $(this).val()},
       success: function(data){
         $('#versao').html('<option value="">Selecione a versão...</option>');
-        if($('#modelo').val() != ''){
+        if($('#modelo').val() !== ''){
           $.each(data, function (i, item) {
             $('#versao').append($('<option>', {
                 value: item.id,

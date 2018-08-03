@@ -27,6 +27,7 @@ class CreateAnunciosTable extends Migration
             $table->boolean('importado')->default(false);
             $table->boolean('moto')->default(false);
             $table->boolean('ativo')->default(true);
+            $table->boolean('patrocinado')->default(false);
             $table->timestamps();
         });
     }

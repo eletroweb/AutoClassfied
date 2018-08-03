@@ -8,33 +8,47 @@
           <input type="text" class="form-control" name="nome" id="titulo" aria-describedby="tituloHelp" placeholder="O que você está anunciando?">
           <small id="tituloHelp" class="form-text text-muted">Seja objetivo, o título será exibido na listagem dos veículos.</small>
         </div>
-        <div class="form-group">
-          <label for="veiculo">Marca</label>
-          <select class="form-control" name="marca" id="marca">
-            <option value="">Selecione a marca...</option>
-          </select>
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label for="veiculo">Marca</label>
+              <select class="form-control" name="marca" id="marca">
+                <option value="">Selecione a marca...</option>
+              </select>
+            </div>    
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label for="veiculo">Modelo</label>
+              <select class="form-control" name="modelo" id="modelo">
+                <option value="">Selecione o modelo...</option>
+              </select>
+            </div>    
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label for="veiculo">Versão</label>
+              <select class="form-control" name="versao" id="versao">
+                <option value="">Selecione a marca...</option>
+              </select>
+            </div>    
+          </div>
         </div>
-        <div class="form-group">
-          <label for="veiculo">Modelo</label>
-          <select class="form-control" name="modelo" id="modelo">
-            <option value="">Selecione o modelo...</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="veiculo">Versão</label>
-          <select class="form-control" name="versao" id="versao">
-            <option value="">Selecione a marca...</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="valor">Valor</label>
-          <input type="text" class="form-control" name="valor" id="valor" aria-describedby="valorHelp" placeholder="Digite o preço">
-          <small id="valorHelp" class="form-text text-muted">Este preço será exibido no anúncio</small>
-        </div>
-        <div class="form-group">
-          <label for="ano">Ano</label>
-          <input type="text" class="form-control" name="ano" id="ano" aria-describedby="anoHelp" placeholder="Digite o ano do veículo">
-          <small id="anoHelp" class="form-text text-muted">O ano será exibido no anúncio</small>
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label for="valor">Valor</label>
+              <input type="text" class="form-control" name="valor" id="valor" aria-describedby="valorHelp" placeholder="Digite o preço">
+              <small id="valorHelp" class="form-text text-muted">Este preço será exibido no anúncio</small>
+            </div>    
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label for="ano">Ano</label>
+              <input type="text" class="form-control" name="ano" id="ano" aria-describedby="anoHelp" placeholder="Digite o ano do veículo">
+              <small id="anoHelp" class="form-text text-muted">O ano será exibido no anúncio</small>
+            </div>
+          </div>
         </div>
         <input type="hidden" name="user" value="{{Auth::user()->id}}">
         <div class="form-group">
@@ -58,22 +72,22 @@
           <small id="{{$field->nome_prog}}Help" class="form-text text-muted">{{$field->helpText}}</small>
         </div>
         @endforeach
-
-        <div class="form-group">
-          <label for="adicional">Adicionais</label>
-          <div class="input-group mb-3">
-            <input type="text" class="form-control" id="adicional" placeholder="Digite o nome do adicional que pretende adicionar" aria-describedby="adicionalHelp" aria-label="Digite o nome do adicional que pretende adicionar" aria-describedby="button-addon2">
-            <div class="input-group-append">
-              <button class="btn btn-outline-secondary" type="button" id="addAdicional">Adicionar</button>
+        <div class="card">
+          <div class="card-body">
+            <div class="form-group">
+              <label for="adicional">Adicionais</label>
+              <div class="input-group mb-3">
+                <input type="text" class="form-control" id="adicional" placeholder="Digite o nome do adicional que pretende adicionar" aria-describedby="adicionalHelp" aria-label="Digite o nome do adicional que pretende adicionar" aria-describedby="button-addon2">
+                <div class="input-group-append">
+                  <button class="btn btn-outline-secondary" type="button" id="addAdicional">Adicionar</button>
+                </div>
+              </div>
+              <small id="adicionalHelp" class="form-text text-muted">Um adicional é um atributo específico do veículo que você deseja citar. Exemplo: bancos de couro.</small>
             </div>
-          </div>
-          <small id="adicionalHelp" class="form-text text-muted">Um adicional é um atributo específico do veículo que você deseja citar. Exemplo: bancos de couro.</small>
-        </div>
-        <div class="form-group">
-          <div class="list-group" id="adicionais">
-            <a href="#" class="list-group-item list-group-item-action">Morbi leo risus</a>
-            <a href="#" class="list-group-item list-group-item-action">Porta ac consectetur ac</a>
-            <a href="#" class="list-group-item list-group-item-action">Vestibulum at eros</a>
+            <div class="form-group">
+              <div class="list-group" id="adicionais">          
+              </div>
+            </div>
           </div>
         </div>
         <div class="form-group">
