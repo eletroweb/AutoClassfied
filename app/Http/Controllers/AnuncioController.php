@@ -59,11 +59,11 @@ class AnuncioController extends Controller
     }
 
     public function anuncios(Request $request){
-      if($request->all()){
+      if($data = $request->all()){
         $param = array();
         $tipos = array();
-        foreach ($request->all() as $key=>$value) {
-          if($value){
+        foreach ($data as $key=>$value) {
+          if($value && $key != 'mais_buscados'){
             if(strpos($key, '_maximo')){
               $exploded = explode("_", $key);
               $value = str_replace([',','.'], '', $value);
@@ -85,7 +85,8 @@ class AnuncioController extends Controller
             }
           }
         }
-        $anuncios = Anuncio::where($param)->whereIn('moto', $tipos)->orderBy('id', 'desc')->paginate(20);
+        $m_buscados = $request->input('mais_buscados'); //ordem por número de visualizações
+        $anuncios = Anuncio::where($param)->whereIn('moto', $tipos)->orderBy($m_buscados =='1'? 'visualizacoes':'id' , 'desc')->paginate(20);
       }else{
         $anuncios = Anuncio::orderBy('id', 'desc')->paginate(20);
       }

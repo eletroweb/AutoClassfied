@@ -15,14 +15,14 @@
                         <div class="row">
                             <div class="col-sm-6">
                               <div class="form-group">
-                                  <select class="form-control" name="marca" id="marca">
+                                  <select class="form-control select2" name="marca" id="marca">
                                           <option value="">Selecione a marca</option>
                                   </select>
                               </div>
                             </div>
                             <div class="col-sm-6">
                               <div class="form-group">
-                                  <select class="form-control" name="modelo" id="modelo">
+                                  <select class="form-control select2" name="modelo" id="modelo">
                                           <option value="">Selecione o modelo</option>
                                   </select>
                               </div>
