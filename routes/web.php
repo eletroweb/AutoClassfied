@@ -26,6 +26,7 @@ Route::get('/', 'HomeController@index');
 Route::get('/cronjob/update/all', 'VeiculoController@importMarcaModelos');
 Route::post('/anuncio/contato', 'ContatoAnuncioController@store')->name('contato_anuncio');
 Route::get('/contratar-revenda', 'RevendaController@create')->name('contratar_revenda');
+Route::get('/consulta-tabela-fipe', 'FipeController@index')->name('fipe');
 Route::middleware('auth')->group(function () {
   Route::get('/anuncie', 'AnuncioController@anuncie')->name('anuncie');
   Route::get('/minha-conta', 'UserController@profile')->name('minhaconta');

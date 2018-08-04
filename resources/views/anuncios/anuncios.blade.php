@@ -60,20 +60,21 @@
            </div>
          </li>
          <li class="nav-item mt-2">
-               <select class="form-control" name="marca" id="marca">
+               <select class="form-control select2" name="marca" id="marca">
                        <option value="">Selecione a marca</option>
                </select>
          </li>
          <li class="nav-item mt-2">
-               <select class="form-control" name="modelo" id="modelo">
+               <select class="form-control select2" name="modelo" id="modelo">
                        <option value="">Selecione o modelo</option>
                </select>
          </li>
          <li class="nav-item mt-2">
-           <select class="form-control" name="versao" id="versao">
+           <select class="form-control select2" name="versao" id="versao">
                    <option value="">Selecione a versão</option>
            </select>
          </li>
+         <input type="hidden" name="mais_buscados" value="0">
          <li class="nav-item mt-2">
            <button class="btn btn-primary">
              Filtrar

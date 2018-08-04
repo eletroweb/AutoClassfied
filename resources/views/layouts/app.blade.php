@@ -20,6 +20,7 @@
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{asset('css/unicodono.css')}}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/lightgallery.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/select2.min.css') }}">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
 </head>
 <body>
@@ -44,12 +45,12 @@
                   Comprar carros
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="#">Ofertas de carros</a>
-                  <a class="dropdown-item" href="#">Ofertas de moto</a>
+                  <a class="dropdown-item" href="/anuncios?tipo[]=carro&valor_maximo=&valor_minimo=&ano_maximo=&ano_minimo=&marca=&modelo=&versao=">Ofertas de carros</a>
+                  <a class="dropdown-item" href="/anuncios?tipo[]=moto&valor_maximo=&valor_minimo=&ano_maximo=&ano_minimo=&marca=&modelo=&versao=">Ofertas de moto</a>
                   <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="#">Carros mais buscados</a>
-                  <a class="dropdown-item" href="#">Motos mais buscadas</a>
-                  <a class="dropdown-item" href="#">Busca avançada</a>
+                  <a class="dropdown-item" href="/anuncios?tipo[]=carro&mais_buscados=1">Carros mais buscados</a>
+                  <a class="dropdown-item" href="/anuncios?tipo[]=carro&mais_buscados=1">Motos mais buscadas</a>
+                  <!--<a class="dropdown-item" href="#">Busca avançada</a>-->
                   <a class="dropdown-item" href="#">Encontre um revendedor</a>
                   <a class="dropdown-item" href="#">Tabela FIPE</a>
                 </div>
@@ -74,7 +75,7 @@
                   <a class="dropdown-item" href="#">Planos para revendedores</a>
                   <a class="dropdown-item" href="#">Cadastro para revendas</a>
                   <a class="dropdown-item" href="#">Cadastro anúncio simples</a>
-                  <a class="dropdown-item" href="#">Tabela FIPE</a>
+                  <a class="dropdown-item" href="{{route('fipe')}}">Tabela FIPE</a>
                   <a class="dropdown-item" href="#">Perguntas Frequentes</a>
                 </div>
               </li>
@@ -309,6 +310,8 @@
     <script src="{{asset('js/anuncio/main.js')}}" charset="utf-8"></script>
     <script src="{{asset('js/owl.carousel.min.js')}}" charset="utf-8"></script>
     <script src="{{asset('js/lightbox.min.js')}}" charset="utf-8"></script>
+    <script type="text/javascript" src="{{asset('js/select2.full.min.js')}}"></script>
     <script src="{{asset('js/custom.js')}}" charset="utf-8"></script>
+    <script src="{{asset('js/fipe.js')}}" charset="utf-8"></script>
 </body>
 </html>
