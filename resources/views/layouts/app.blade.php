@@ -7,8 +7,9 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <!--<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
     <script type="text/javascript" src="https://stc.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.directpayment.js"></script>
+    <!--<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    
     <script>
      (adsbygoogle = window.adsbygoogle || []).push({
           google_ad_client: "ca-pub-2059965508769380",
@@ -52,7 +53,7 @@
                   <a class="dropdown-item" href="/anuncios?tipo[]=carro&mais_buscados=1">Motos mais buscadas</a>
                   <!--<a class="dropdown-item" href="#">Busca avançada</a>-->
                   <a class="dropdown-item" href="#">Encontre um revendedor</a>
-                  <a class="dropdown-item" href="#">Tabela FIPE</a>
+                  <a class="dropdown-item" href="{{route('fipe')}}">Tabela FIPE</a>
                 </div>
               </li>
               <li class="nav-item dropdown">
@@ -127,6 +128,13 @@
             </ul>
           </div>
         </nav>
+        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <script>
+       (adsbygoogle = window.adsbygoogle || []).push({
+            google_ad_client: "ca-pub-2059965508769380",
+            enable_page_level_ads: true
+       });
+       </script>
      <!--   <nav class="navbar navbar-default navbar-static-top">
             <div class="container">
                 <div class="navbar-header">
