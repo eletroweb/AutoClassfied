@@ -18,7 +18,7 @@
     <title>{{ env('app.name', 'Unicodono') }}</title>
     <link rel="stylesheet" href="{{ asset('css/lightbox.min.css') }}">
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{asset('css/unicodono.css')}}" rel="stylesheet">
+    <link href="{{ asset('css/unicodono.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/lightgallery.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/select2.min.css') }}">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
@@ -51,7 +51,7 @@
                   <a class="dropdown-item" href="/anuncios?tipo[]=carro&mais_buscados=1">Carros mais buscados</a>
                   <a class="dropdown-item" href="/anuncios?tipo[]=carro&mais_buscados=1">Motos mais buscadas</a>
                   <!--<a class="dropdown-item" href="#">Busca avançada</a>-->
-                  <a class="dropdown-item" href="#">Encontre um revendedor</a>
+                  <a class="dropdown-item" href="{{route('revendas')}}">Encontre um revendedor</a>
                   <a class="dropdown-item" href="#">Tabela FIPE</a>
                 </div>
               </li>

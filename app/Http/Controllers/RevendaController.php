@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Hash;
 use App\User;
 use App\Acessorio;
 use App\Adicional;
+use App\Endereco;
 
 class RevendaController extends Controller
 {
@@ -50,8 +51,8 @@ class RevendaController extends Controller
       return view('revendas.index')->with('status', 'Importação de revenda realizada com sucesso!');
     }
 
-    public function index(Request $request){
-      return view('revendas.index');
+    public function admin(Request $request){
+      return view('revendas.admin');
     }
 
     private function import($veiculo, $revenda){
@@ -163,5 +164,24 @@ class RevendaController extends Controller
         }
       }
       return false;
+    }
+
+    public function index(Request $request){
+      $revendas = Revenda::all();
+      return view('revendas.index')->with('revendas', $revendas);
+    }
+
+    public function store(Request $request){
+      $data = $request->all();
+      //
+      $endereco = new Endereco();
+      $endereco->cidade = $request->input('cidade');
+      $endereco->estado = $request->input('estado');
+      $endereco->cep = $request->input('cep');
+      $endereco->bairro = $request->input('bairro');
+      $endereco->save();
+      $data = array_add($data, ['endereco'=> $endereco->id])
+      $revenda = Revenda::create($data);
+      return view('revendas.index');
     }
 }

@@ -1,32 +1,23 @@
-@extends('admin.index')
+@extends('layouts.app')
 @section('content')
-<div class="row">
-  <div class="col-lg-12">
-    <div class="card">
-      <div class="card-close">
-        <div class="dropdown">
-          <button type="button" id="closeCard1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-ellipsis-v"></i></button>
-          <div aria-labelledby="closeCard1" class="dropdown-menu dropdown-menu-right has-shadow"><a href="#" class="dropdown-item remove"><i class="fa fa-times"></i>Close</a><a href="#" class="dropdown-item edit"><i class="fa fa-gear"></i>Edit</a></div>
-        </div>
-      </div>
-      <div class="card-header d-flex align-items-center">
-        <h3 class="h4">Importação de revenda</h3>
-      </div>
-      <div class="card-body">
-        @if (session('status'))
-            <div class="alert alert-success">
-                {{ session('status') }}
-            </div>
-        @endif
-        <form method="post" action="/admin/revenda/import">
-          {{csrf_field()}}
-          <div class="form-group">
-            <label for="cnpj">CNPJ</label>
-            <input type="text" name="cnpj" value="" placeholder="Digite o CNPJ (Sem pontos ou traços)" class="form-control">
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-4">Encontre uma revenda</h1>
+    <p class="lead">Através dos filtros você pode buscar revendas próximas à você.</p>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-6 m-auto">
+      @foreach($revendas as $r)
+        <div class="card  mb-2">
+          <div class="card-body">
+            <h5 class="card-title">{{$r->nomefantasia}}</h5>
+            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+            <a href="#" class="btn btn-primary">Go somewhere</a>
           </div>
-          <button type="submit" class="btn btn-primary">Importar</button>
-        </form>
-      </div>
+        </div>
+      @endforeach
     </div>
   </div>
 </div>
