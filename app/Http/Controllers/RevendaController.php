@@ -173,14 +173,13 @@ class RevendaController extends Controller
 
     public function store(Request $request){
       $data = $request->all();
-      //
       $endereco = new Endereco();
       $endereco->cidade = $request->input('cidade');
       $endereco->estado = $request->input('estado');
       $endereco->cep = $request->input('cep');
       $endereco->bairro = $request->input('bairro');
       $endereco->save();
-      $data = array_add($data, ['endereco'=> $endereco->id])
+      $data = array_add($data, ['endereco'=> $endereco->id]);
       $revenda = Revenda::create($data);
       return view('revendas.index');
     }
