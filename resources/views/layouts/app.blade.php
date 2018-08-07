@@ -7,8 +7,9 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <!--<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
     <script type="text/javascript" src="https://stc.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.directpayment.js"></script>
+    <!--<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
     <script>
      (adsbygoogle = window.adsbygoogle || []).push({
           google_ad_client: "ca-pub-2059965508769380",
@@ -21,13 +22,14 @@
     <link href="{{ asset('css/unicodono.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/lightgallery.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/select2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/select2bootstrap.min.css') }}">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
 </head>
 <body>
     <div id="app">
         <nav id="menu-principal" class="navbar navbar-expand-lg navbar-dark bg-primary">
           <a class="navbar-brand" href="/">
-            <img src="{{asset('images/01.png')}}"  height="30" alt="">
+            <img src="{{asset('images/01.png')}}"  height="40" alt="">
           </a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -51,8 +53,8 @@
                   <a class="dropdown-item" href="/anuncios?tipo[]=carro&mais_buscados=1">Carros mais buscados</a>
                   <a class="dropdown-item" href="/anuncios?tipo[]=carro&mais_buscados=1">Motos mais buscadas</a>
                   <!--<a class="dropdown-item" href="#">Busca avançada</a>-->
-                  <a class="dropdown-item" href="{{route('revendas')}}">Encontre um revendedor</a>
-                  <a class="dropdown-item" href="#">Tabela FIPE</a>
+                  <a class="dropdown-item" href="#">Encontre um revendedor</a>
+                  <a class="dropdown-item" href="{{route('fipe')}}">Tabela FIPE</a>
                 </div>
               </li>
               <li class="nav-item dropdown">
@@ -127,6 +129,13 @@
             </ul>
           </div>
         </nav>
+        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <script>
+       (adsbygoogle = window.adsbygoogle || []).push({
+            google_ad_client: "ca-pub-2059965508769380",
+            enable_page_level_ads: true
+       });
+       </script>
      <!--   <nav class="navbar navbar-default navbar-static-top">
             <div class="container">
                 <div class="navbar-header">

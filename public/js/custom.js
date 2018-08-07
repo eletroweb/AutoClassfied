@@ -1,5 +1,7 @@
 $(document).ready(function(){
-  $('.select2').select2();
+  $('.select2').select2({
+    theme: 'bootstrap'
+  });
   $('#addAdicional').click(function(){
     if($('#adicional').val() !== ''){
         $('#adicionais').append('<button type="button" class="list-group-item list-group-item-action item-adicional">'+$('#adicional').val()+'</button>');
