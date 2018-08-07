@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <div class="col-sm-6">
-      <form method="post" id="anunciar" action="{{route('anuncieStore')}}"  enctype="multipart/form-data">
+      <form class="dropzone" method="post" id="anunciar" action="{{route('anuncieStore')}}"  enctype="multipart/form-data">
         {{csrf_field()}}
         <div class="form-group">
           <label for="titulo">Titulo do anúncio</label>

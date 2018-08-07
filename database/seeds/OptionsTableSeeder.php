@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class OptionsTableSeeder extends Seeder
 {
@@ -17,7 +18,7 @@ class OptionsTableSeeder extends Seeder
           'valor' => 'Unicodono'
         ),
         array(
-          'nome' => 'pagseguro_token',
+          'nome' => 'credencial_pagseguro',
           'valor' => 'token'
         ),
         array(
@@ -25,6 +26,6 @@ class OptionsTableSeeder extends Seeder
           'valor' => 'on'
         )
       );
-      DB::table('users')->insert($options);
+      DB::table('options')->insert($options);
     }
 }

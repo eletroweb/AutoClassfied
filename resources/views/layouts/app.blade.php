@@ -23,6 +23,7 @@
     <link rel="stylesheet" href="{{ asset('css/lightgallery.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/select2.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/select2bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/dropzone.min.css') }}">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
 </head>
 <body>
@@ -322,5 +323,6 @@
     <script type="text/javascript" src="{{asset('js/select2.full.min.js')}}"></script>
     <script src="{{asset('js/custom.js')}}" charset="utf-8"></script>
     <script src="{{asset('js/fipe.js')}}" charset="utf-8"></script>
+    <script src="{{asset('js/dropzone.js')}}" charset="utf-8"></script>
 </body>
 </html>
