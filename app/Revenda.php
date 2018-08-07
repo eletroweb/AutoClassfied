@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class Revenda extends Model
 {
-    protected $fillable = ['razaosocial', 'nomefantasia', 'user', 'cnpj'];
+    protected $fillable = ['razaosocial', 'nomefantasia', 'user', 'cnpj', 'cep', 'endereco'];
 }

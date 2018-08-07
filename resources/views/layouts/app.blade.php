@@ -9,7 +9,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <script type="text/javascript" src="https://stc.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.directpayment.js"></script>
     <!--<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    
+
     <script>
      (adsbygoogle = window.adsbygoogle || []).push({
           google_ad_client: "ca-pub-2059965508769380",
@@ -19,16 +19,17 @@
     <title>{{ env('app.name', 'Unicodono') }}</title>
     <link rel="stylesheet" href="{{ asset('css/lightbox.min.css') }}">
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{asset('css/unicodono.css')}}" rel="stylesheet">
+    <link href="{{ asset('css/unicodono.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/lightgallery.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/select2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/select2bootstrap.min.css') }}">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
 </head>
 <body>
     <div id="app">
         <nav id="menu-principal" class="navbar navbar-expand-lg navbar-dark bg-primary">
           <a class="navbar-brand" href="/">
-            <img src="{{asset('images/01.png')}}"  height="30" alt="">
+            <img src="{{asset('images/01.png')}}"  height="40" alt="">
           </a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>

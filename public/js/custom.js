@@ -1,5 +1,7 @@
 $(document).ready(function(){
-  $('.select2').select2();
+  $('.select2').select2({
+    theme: 'bootstrap'
+  });
   $('#addAdicional').click(function(){
     if($('#adicional').val() !== ''){
         $('#adicionais').append('<button type="button" class="list-group-item list-group-item-action item-adicional">'+$('#adicional').val()+'</button>');
@@ -65,6 +67,9 @@ $(document).ready(function(){
     }
   });
   $('#cpf').mask('000.000.000-00', {reverse: true});
+  $('.cpf').mask('000.000.000-00', {reverse: true});
+  $('.cnpj').mask('00.000.000/0000-00', {reverse: true});
+  $('.cep').mask('00000-000');
   $('#telefone').mask('(00) 0000-0000');
   $('#celular').mask('(00) 0 0000-0000');
   $('#valor').mask("#.##0,00", {reverse: true});
