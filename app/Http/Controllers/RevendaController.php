@@ -167,7 +167,18 @@ class RevendaController extends Controller
     }
 
     public function index(Request $request){
-      $revendas = Revenda::all();
+      $revendas;
+      if(empty($request->all())){
+          $revendas = Revenda::paginate(20);
+      }else{
+        $data = $request->all();
+        $revendas = Revenda::join('enderecos', 'enderecos.id', '=', 'revendas.endereco')
+                ->select(['enderecos.*', 'revendas.*'])
+                ->where([
+                    ['enderecos.cidade', '=', $data['cidade']],
+                    ['enderecos.estado', '=', $data['estado']]
+                ])->paginate(20);
+      }
       return view('revendas.index')->with('revendas', $revendas);
     }
 
