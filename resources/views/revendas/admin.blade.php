@@ -13,14 +13,14 @@
         <h3 class="h4">Importação de revenda</h3>
       </div>
       <div class="card-body">
-        @if (session('status'))
-            <div class="alert alert-success">
-                {{ session('status') }}
-            </div>
-        @endif
         <form method="post" action="/admin/revenda/import">
           {{csrf_field()}}
           <div class="form-group">
+            @if (session('status'))
+                <div class="alert alert-success">
+                    {{ session('status') }}
+                </div>
+            @endif
             <label for="cnpj">CNPJ</label>
             <input type="text" name="cnpj" value="" placeholder="Digite o CNPJ (Sem pontos ou traços)" class="form-control">
           </div>

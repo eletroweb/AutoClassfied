@@ -18,6 +18,8 @@ use App\Endereco;
 
 class RevendaController extends Controller
 {
+    public $comparacoes = array();
+
     //Este método importa as revendas e seus respectivos anúncios
     public function importRevendas(Request $request){
       //07627884000158
@@ -39,16 +41,25 @@ class RevendaController extends Controller
           $user->pessoa_fisica = false;
           $user->documento = $veiculo->loja->cnpj;
           $user->save();
+          $endereco = new Endereco();
+          $endereco->logradouro = $veiculo->loja->endereco->logradouro;
+          $endereco->uf= $veiculo->loja->endereco->uf;
+          $endereco->cidade= $veiculo->loja->endereco->cidade;
+          $endereco->bairro= $veiculo->loja->endereco->bairro;
+          $endereco->numero= $veiculo->loja->endereco->numero;
+          $endereco->cep= $veiculo->loja->endereco->cep;
+          $endereco->save();
           $revenda = new Revenda();
           $revenda->razaosocial = $veiculo->loja->nomefantasia;
           $revenda->nomefantasia = $veiculo->loja->nomefantasia;
           $revenda->cnpj = $veiculo->loja->cnpj;
           $revenda->user = $user->id;
+          $revenda->endereco = $endereco->id;
           $revenda->save();
           $this->import($veiculo, $revenda);
         }
       }
-      return view('revendas.index')->with('status', 'Importação de revenda realizada com sucesso!');
+      return view('revendas.admin')->with('status', 'Importação de revenda realizada com sucesso!');
     }
 
     public function admin(Request $request){
@@ -158,16 +169,21 @@ class RevendaController extends Controller
     }
 
     public function isUnicoDono($veiculo){
-      foreach ($veiculo->complementos->complemento as $complemento) {
-        if(strcmp($complemento, 'Único dono') == 0){
-          return true;
+      if($veiculo->complementos){
+        foreach ($veiculo->complementos->complemento as $complemento) {
+          $c = (string)$complemento;
+          //$this->comparacoes[] = $c;
+          //$this->comparacoes[] = strcmp($c, 'Único dono');
+          if(strcmp($c, (string)'Único dono') == 0){
+            return true;
+          }
         }
       }
       return false;
     }
 
     public function index(Request $request){
-      $revendas;
+      $revendas = array();
       if(empty($request->all())){
           $revendas = Revenda::paginate(20);
       }else{
@@ -184,12 +200,7 @@ class RevendaController extends Controller
 
     public function store(Request $request){
       $data = $request->all();
-      $endereco = new Endereco();
-      $endereco->cidade = $request->input('cidade');
-      $endereco->estado = $request->input('estado');
-      $endereco->cep = $request->input('cep');
-      $endereco->bairro = $request->input('bairro');
-      $endereco->save();
+      $endereco = Endereco::create($data);
       $data = array_add($data, ['endereco'=> $endereco->id]);
       $revenda = Revenda::create($data);
       return view('revendas.index');
