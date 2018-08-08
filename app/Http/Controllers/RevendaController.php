@@ -15,6 +15,7 @@ use App\User;
 use App\Acessorio;
 use App\Adicional;
 use App\Endereco;
+use App\Complemento;
 
 class RevendaController extends Controller
 {
@@ -124,6 +125,7 @@ class RevendaController extends Controller
         foreach($veiculo->opcionais->opcional as $adicional){
           $this->createAdicional($anuncio, $adicional);
         }
+        $this->complementos($veiculo, $anuncio);
         foreach($veiculo->fotos->foto as $foto){
           $img = new AnuncioImagem();
           $img->url = $foto;
@@ -161,22 +163,21 @@ class RevendaController extends Controller
 
     //Estas são as condições para que o anúncio vindo do xml seja importado para o sistema.
     public function filtro($veiculo){
-      return $veiculo->km == 0 && intval($veiculo->anomodelo) >= 2015 && $this->isUnicoDono($veiculo);
+      return $veiculo->km == 0 && intval($veiculo->anomodelo) >= 2015;// && $this->isUnicoDono($veiculo);
     }
 
     public function create(Request $request){
       return view('revendas.create');
     }
 
-    public function isUnicoDono($veiculo){
+    public function complementos($veiculo, $anuncio){
       if($veiculo->complementos){
         foreach ($veiculo->complementos->complemento as $complemento) {
           $c = (string)$complemento;
-          //$this->comparacoes[] = $c;
-          //$this->comparacoes[] = strcmp($c, 'Único dono');
-          if(strcmp($c, (string)'Único dono') == 0){
-            return true;
-          }
+          $_c = new Complemento();
+          $_c->nome = $c;
+          $_c->anuncio = $anuncio->id;
+          $_c->save();
         }
       }
       return false;
