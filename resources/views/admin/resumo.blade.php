@@ -110,7 +110,7 @@
                     <div class="project-title d-flex align-items-center">
                       <div class="image has-shadow"><img src="img/project-1.jpg" alt="..." class="img-fluid"></div>
                       <div class="text">
-                        <h3 class="h4">{{$anuncio->nome}}</h3><small>{{App\User::find($anuncio->user)->name}}</small>
+                        <h3 class="h4"><a href="/anuncios/{{$anuncio->id}}">{{$anuncio->nome}}</a></h3><small>{{App\User::find($anuncio->user)->name}}</small>
                       </div>
                     </div>
                     <div class="project-date"><span class="hidden-sm-down">{{$anuncio->created_at->format('d/m/Y')}}</span></div>
@@ -278,61 +278,18 @@
                       <h3 class="h4">Anúncios recentes</h3>
                     </div>
                     <div class="card-body no-padding">
-                      <!-- Item-->
-                      <div class="item d-flex justify-content-between">
-                        <div class="info d-flex">
-                          <div class="icon"><i class="icon-rss-feed"></i></div>
-                          <div class="title">
-                            <h5>Lorem ipsum dolor sit amet.</h5>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit sed.</p>
+                      @foreach($anuncios_recentes as $recentes)
+                        <div class="item d-flex justify-content-between">
+                          <div class="info d-flex">
+                            <div class="icon"><i class="fa fa-newspaper"></i></div>
+                            <div class="title">
+                              <h5><a href="/anuncios/{{$recentes->id}}">{{$recentes->nome}}</a></h5>
+                              <p>{{str_limit($recentes->descricao, 100)}}</p>
+                            </div>
                           </div>
+                          <div class="date text-right"><strong>{{$recentes->created_at->format('d')}}</strong><span>{{$recentes->created_at->format('m/Y')}}</span></div>
                         </div>
-                        <div class="date text-right"><strong>24</strong><span>May</span></div>
-                      </div>
-                      <!-- Item-->
-                      <div class="item d-flex justify-content-between">
-                        <div class="info d-flex">
-                          <div class="icon"><i class="icon-rss-feed"></i></div>
-                          <div class="title">
-                            <h5>Lorem ipsum dolor sit amet.</h5>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit sed.</p>
-                          </div>
-                        </div>
-                        <div class="date text-right"><strong>24</strong><span>May</span></div>
-                      </div>
-                      <!-- Item        -->
-                      <div class="item d-flex justify-content-between">
-                        <div class="info d-flex">
-                          <div class="icon"><i class="icon-rss-feed"></i></div>
-                          <div class="title">
-                            <h5>Lorem ipsum dolor sit amet.</h5>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit sed.</p>
-                          </div>
-                        </div>
-                        <div class="date text-right"><strong>24</strong><span>May</span></div>
-                      </div>
-                      <!-- Item-->
-                      <div class="item d-flex justify-content-between">
-                        <div class="info d-flex">
-                          <div class="icon"><i class="icon-rss-feed"></i></div>
-                          <div class="title">
-                            <h5>Lorem ipsum dolor sit amet.</h5>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit sed.</p>
-                          </div>
-                        </div>
-                        <div class="date text-right"><strong>24</strong><span>May</span></div>
-                      </div>
-                      <!-- Item-->
-                      <div class="item d-flex justify-content-between">
-                        <div class="info d-flex">
-                          <div class="icon"><i class="icon-rss-feed"></i></div>
-                          <div class="title">
-                            <h5>Lorem ipsum dolor sit amet.</h5>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit sed.</p>
-                          </div>
-                        </div>
-                        <div class="date text-right"><strong>24</strong><span>May</span></div>
-                      </div>
+                      @endforeach
                     </div>
                   </div>
                 </div>

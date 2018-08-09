@@ -4,7 +4,24 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="description" content="Os melhores Carros Usados Seminovos estão aqui" />
+    <meta name="KEYWORDS" content="unico dono, automoveis, comprar carro, carro barato, carro sem entrada, carro importado, carro novo, seminovo, usado, revenda, veiculo, financiamento, classificados, tabela-fipe, notícias, vídeos, dicas, garagem, guia automovel, troca carro, fox, onix, hyundai, ford, ka, volkswagen, gol, chevrolet, prisma, renault, sandero, toyota, corolla, fiat, strada, mobi, toro, jeep, compass, up, nissan, kicks" />
+    <meta name="SUBJECT" content="Carros Usados, Carros Novos e Carros Usados Unico Dono "/>
+    <meta name="Abstract" content="Os melhores Carros Usados Seminovos estão Aqui " />
+    <meta name="company" content="Os melhores Carros Usados Seminovos estão Aqui " />
+    <meta name="distribution" content="Global" />
+    <meta name="RATING" content="General" />
+    <meta name="ROBOTS" content="INDEX, FOLLOW" />
+    <meta name="Googlebot" content="index,follow" />
+    <meta name="MSNBot" content="index,follow,all" />
+    <meta name="InktomiSlurp" content="index,follow,all" />
+    <meta name="Unknownrobot" content="index,follow,all" />
+    <meta name="REVISIT-AFTER" content="2 days" />
+    <meta name="language" content="PT-BR" />
+    <meta name="Audience" content="all" />
+    <meta name="url" content="www.unicodono.com.br" />
+    <link rel="shortcut icon" href="{{asset('images/favicon.jpg')}}" type="image/x-icon" />
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <script type="text/javascript" src="https://stc.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.directpayment.js"></script>

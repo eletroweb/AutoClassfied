@@ -191,6 +191,7 @@ class UserController extends AppBaseController
                                          'anuncios' => $anuncios,
                                          'usuarios_count'=> User::all()->count(),
                                          'anuncios_count'=> Anuncio::all()->count(),
+                                         'anuncios_recentes'=> Anuncio::orderBy('id', 'desc')->paginate(10),
                                          'revendas_count'=> Revenda::all()->count(),
                                         ]);
     }

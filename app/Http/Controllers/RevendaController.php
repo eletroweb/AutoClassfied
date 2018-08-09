@@ -34,6 +34,8 @@ class RevendaController extends Controller
           //Esta revenda existe no nosso banco...
           //var_dump((string)$veiculo->modelo);exit;
           $this->import($veiculo, $revenda);
+          $request->session()->flash('status',
+           'Revenda atualizada com sucesso!');
         }else{
           $user = new User();
           $user->name = $veiculo->loja->contato->nome;
@@ -58,9 +60,13 @@ class RevendaController extends Controller
           $revenda->endereco = $endereco->id;
           $revenda->save();
           $this->import($veiculo, $revenda);
+          $request->session()->flash('status',
+           'Revenda importada com sucesso! Por se tratar de ser uma nova revenda,
+            também criamos a conta. O login é o e-mail da revenda, sua senha o cnpj da revenda.');
         }
       }
-      return view('revendas.admin')->with('status', 'Importação de revenda realizada com sucesso!');
+
+      return view('revendas.admin');
     }
 
     public function admin(Request $request){
@@ -69,12 +75,15 @@ class RevendaController extends Controller
 
     private function import($veiculo, $revenda){
       //Esta revenda existe no nosso banco...
-      $empty = AnuncioDados::where([
+      $anuncio_ = AnuncioDados::where([
         ['nome', '=', 'id_xml'],
         ['valor', '=', $veiculo->id]
-      ])->get()->isEmpty();
-      if($empty && $this->filtro($veiculo)){
-        $anuncio = new Anuncio();
+      ])->first();
+      if($this->filtro($veiculo)){
+        if($anuncio)
+          $anuncio = new Anuncio();
+        else
+          $anuncio = Anuncio::find($anuncio_->anuncio);
         $anuncio->nome = $veiculo->marca.' '.$veiculo->modelo.' - '.$veiculo->versao;
         $anuncio->descricao = (string)$veiculo->observacao;
         $anuncio->marca = Marca::where('nome', $veiculo->marca)->first()->id;
@@ -125,7 +134,7 @@ class RevendaController extends Controller
         foreach($veiculo->opcionais->opcional as $adicional){
           $this->createAdicional($anuncio, $adicional);
         }
-        $this->complementos($veiculo, $anuncio);
+        //$this->complementos($veiculo, $anuncio);
         foreach($veiculo->fotos->foto as $foto){
           $img = new AnuncioImagem();
           $img->url = $foto;
@@ -171,7 +180,7 @@ class RevendaController extends Controller
     }
 
     public function complementos($veiculo, $anuncio){
-      if($veiculo->complementos){
+      if(isset($veiculo->complementos->complemento)){
         foreach ($veiculo->complementos->complemento as $complemento) {
           $c = (string)$complemento;
           $_c = new Complemento();
