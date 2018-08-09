@@ -18,7 +18,7 @@ class CreatePlanosTable extends Migration
             $table->string('nome');
             $table->longText('descricao');
             $table->integer('anuncios');
-            $table->double('preco');
+            $table->decimal('preco');
             $table->timestamps();
         });
     }

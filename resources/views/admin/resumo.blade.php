@@ -306,45 +306,21 @@
                       <h3 class="h4">Últimos contatos</h3>
                     </div>
                     <div class="card-body no-padding">
+                      @foreach($contatos as $contato)
                       <!-- Item-->
                       <div class="item">
                         <div class="feed d-flex justify-content-between">
                           <div class="feed-body d-flex justify-content-between"><a href="#" class="feed-profile"><img src="img/avatar-5.jpg" alt="person" class="img-fluid rounded-circle"></a>
                             <div class="content">
-                              <h5>Aria Smith</h5><span>Posted a new blog </span>
-                              <div class="full-date"><small>Today 5:60 pm - 12.06.2014</small></div>
+                              <h5>{{$contato->nome}}</h5><span>{{$contato->email}}</span>
+                              <div class="full-date"><small>{{$contato->created_at->format('H:i')}} - {{$contato->created_at->format('d/m/Y')}}</small></div>
                             </div>
                           </div>
-                          <div class="date text-right"><small>5min ago</small></div>
+                          <div class="date text-right"><small></small></div>
                         </div>
                       </div>
                       <!-- Item-->
-                      <div class="item">
-                        <div class="feed d-flex justify-content-between">
-                          <div class="feed-body d-flex justify-content-between"><a href="#" class="feed-profile"><img src="img/avatar-2.jpg" alt="person" class="img-fluid rounded-circle"></a>
-                            <div class="content">
-                              <h5>Frank Williams</h5><span>Posted a new blog </span>
-                              <div class="full-date"><small>Today 5:60 pm - 12.06.2014</small></div>
-                              <div class="CTAs"><a href="#" class="btn btn-xs btn-secondary"><i class="fa fa-thumbs-up"> </i>Like</a><a href="#" class="btn btn-xs btn-secondary"><i class="fa fa-heart"> </i>Love    </a></div>
-                            </div>
-                          </div>
-                          <div class="date text-right"><small>5min ago</small></div>
-                        </div>
-                      </div>
-                      <!-- Item-->
-                      <div class="item clearfix">
-                        <div class="feed d-flex justify-content-between">
-                          <div class="feed-body d-flex justify-content-between"><a href="#" class="feed-profile"><img src="img/avatar-3.jpg" alt="person" class="img-fluid rounded-circle"></a>
-                            <div class="content">
-                              <h5>Ashley Wood</h5><span>Posted a new blog </span>
-                              <div class="full-date"><small>Today 5:60 pm - 12.06.2014</small></div>
-                            </div>
-                          </div>
-                          <div class="date text-right"><small>5min ago</small></div>
-                        </div>
-                        <div class="quote has-shadow"> <small>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s. Over the years.</small></div>
-                        <div class="CTAs pull-right"><a href="#" class="btn btn-xs btn-secondary"><i class="fa fa-thumbs-up"> </i>Like</a></div>
-                      </div>
+                      @endforeach
                     </div>
                   </div>
                 </div>

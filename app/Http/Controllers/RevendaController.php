@@ -80,10 +80,10 @@ class RevendaController extends Controller
         ['valor', '=', $veiculo->id]
       ])->first();
       if($this->filtro($veiculo)){
-        if($anuncio)
-          $anuncio = new Anuncio();
-        else
+        if($anuncio_)
           $anuncio = Anuncio::find($anuncio_->anuncio);
+        else
+          $anuncio = new Anuncio();
         $anuncio->nome = $veiculo->marca.' '.$veiculo->modelo.' - '.$veiculo->versao;
         $anuncio->descricao = (string)$veiculo->observacao;
         $anuncio->marca = Marca::where('nome', $veiculo->marca)->first()->id;
