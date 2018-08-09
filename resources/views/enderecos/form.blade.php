@@ -1,4 +1,8 @@
 <div class="row">
+  <div class="form-group col-sm-12">
+    <label for="cep">Logradouro</label>
+    <input type="text" class="form-control" name="logradouro" placeholder="Digite o logradouro" id="logradouro">
+  </div>
 <div class="form-group col-sm-6">
   <label for="cep">CEP</label>
   <input type="text" class="form-control cep" name="cep" placeholder="Digite o CEP" id="cep">

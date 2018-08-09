@@ -11,15 +11,15 @@
 </div>
 
 <!-- Anuncios Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('anuncios', 'Anuncios:') !!}
+<div class="form-group col-sm-4">
+    {!! Form::label('anuncios', 'Anuncios destacados:') !!}
     {!! Form::number('anuncios', null, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Preco Field -->
-<div class="form-group col-sm-6">
+<div class="form-group col-sm-4">
     {!! Form::label('preco', 'Preco:') !!}
-    {!! Form::number('preco', null, ['class' => 'form-control']) !!}
+    {!! Form::text('preco', null, ['class' => 'form-control valor']) !!}
 </div>
 
 <!-- Submit Field -->

@@ -172,7 +172,7 @@
       </div>
     </div>
     <!-- JavaScript files-->
-    <script src="{{asset('vendor/jquery/jquery.min.js')}}"></script>
+    <script src="{{asset('js/jquery-3.3.1.min.js')}}" charset="utf-8"></script>
     <script src="{{asset('vendor/popper.js/umd/popper.min.js')}}"></script>
     <script src="{{asset('vendor/bootstrap/js/bootstrap.min.js')}}"></script>
     <script src="{{asset('vendor/jquery.cookie/jquery.cookie.js')}}"></script>
@@ -180,5 +180,15 @@
     <!-- Main File-->
     <script src="{{asset('js/admin/front.js')}}"></script>
     <script src="{{asset('js/admin.js')}}" charset="utf-8"></script>
+
+    <script src="{{asset('js/jquery.mask.min.js')}}" charset="utf-8"></script>
+    <script src="{{asset('js/anuncio/main.js')}}" charset="utf-8"></script>
+    <script src="{{asset('js/owl.carousel.min.js')}}" charset="utf-8"></script>
+    <script src="{{asset('js/lightbox.min.js')}}" charset="utf-8"></script>
+    <script type="text/javascript" src="{{asset('js/select2.full.min.js')}}"></script>
+    <script src="{{asset('js/custom.js')}}" charset="utf-8"></script>
+    <script src="{{asset('js/fipe.js')}}" charset="utf-8"></script>
+
+    <script src="{{asset('js/cidades_estados.js')}}" charset="utf-8"></script>
   </body>
 </html>

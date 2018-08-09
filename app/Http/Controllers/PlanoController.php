@@ -56,7 +56,7 @@ class PlanoController extends AppBaseController
     public function store(CreatePlanoRequest $request)
     {
         $input = $request->all();
-
+        $input['preco'] = str_replace(',', '.', $input['preco']);
         $plano = $this->planoRepository->create($input);
 
         Flash::success('Plano criado com sucesso!.');

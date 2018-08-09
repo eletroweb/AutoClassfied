@@ -1,4 +1,8 @@
 $(document).ready(function(){
+  $('.plano').click(function(){
+    $('#plano_label').html('Você selecionou o plano '+$(this).children()[0].html());
+    $('#plano').val($(this).val());
+  });
   $('.select2').select2({
     theme: 'bootstrap'
   });

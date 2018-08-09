@@ -14,6 +14,7 @@ use App\Anuncio;
 use App\User;
 use App\Revenda;
 use App\VisualizacaoAnuncio;
+use App\Contato;
 use Illuminate\Support\Facades\DB;
 
 class UserController extends AppBaseController
@@ -191,6 +192,8 @@ class UserController extends AppBaseController
                                          'anuncios' => $anuncios,
                                          'usuarios_count'=> User::all()->count(),
                                          'anuncios_count'=> Anuncio::all()->count(),
+                                         'anuncios_recentes'=> Anuncio::orderBy('id', 'desc')->paginate(10),
+                                         'contatos'=> Contato::orderBy('id', 'desc')->paginate(10),
                                          'revendas_count'=> Revenda::all()->count(),
                                         ]);
     }

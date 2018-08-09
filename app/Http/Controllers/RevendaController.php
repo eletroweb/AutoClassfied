@@ -15,9 +15,12 @@ use App\User;
 use App\Acessorio;
 use App\Adicional;
 use App\Endereco;
+use App\Complemento;
 
 class RevendaController extends Controller
 {
+    public $comparacoes = array();
+
     //Este método importa as revendas e seus respectivos anúncios
     public function importRevendas(Request $request){
       //07627884000158
@@ -31,6 +34,8 @@ class RevendaController extends Controller
           //Esta revenda existe no nosso banco...
           //var_dump((string)$veiculo->modelo);exit;
           $this->import($veiculo, $revenda);
+          $request->session()->flash('status',
+           'Revenda atualizada com sucesso!');
         }else{
           $user = new User();
           $user->name = $veiculo->loja->contato->nome;
@@ -39,16 +44,29 @@ class RevendaController extends Controller
           $user->pessoa_fisica = false;
           $user->documento = $veiculo->loja->cnpj;
           $user->save();
+          $endereco = new Endereco();
+          $endereco->logradouro = $veiculo->loja->endereco->logradouro;
+          $endereco->uf= $veiculo->loja->endereco->uf;
+          $endereco->cidade= $veiculo->loja->endereco->cidade;
+          $endereco->bairro= $veiculo->loja->endereco->bairro;
+          $endereco->numero= $veiculo->loja->endereco->numero;
+          $endereco->cep= $veiculo->loja->endereco->cep;
+          $endereco->save();
           $revenda = new Revenda();
           $revenda->razaosocial = $veiculo->loja->nomefantasia;
           $revenda->nomefantasia = $veiculo->loja->nomefantasia;
           $revenda->cnpj = $veiculo->loja->cnpj;
           $revenda->user = $user->id;
+          $revenda->endereco = $endereco->id;
           $revenda->save();
           $this->import($veiculo, $revenda);
+          $request->session()->flash('status',
+           'Revenda importada com sucesso! Por se tratar de ser uma nova revenda,
+            também criamos a conta. O login é o e-mail da revenda, sua senha o cnpj da revenda.');
         }
       }
-      return view('revendas.index')->with('status', 'Importação de revenda realizada com sucesso!');
+
+      return view('revendas.admin');
     }
 
     public function admin(Request $request){
@@ -57,12 +75,15 @@ class RevendaController extends Controller
 
     private function import($veiculo, $revenda){
       //Esta revenda existe no nosso banco...
-      $empty = AnuncioDados::where([
+      $anuncio_ = AnuncioDados::where([
         ['nome', '=', 'id_xml'],
         ['valor', '=', $veiculo->id]
-      ])->get()->isEmpty();
-      if($empty && $this->filtro($veiculo)){
-        $anuncio = new Anuncio();
+      ])->first();
+      if($this->filtro($veiculo)){
+        if($anuncio_)
+          $anuncio = Anuncio::find($anuncio_->anuncio);
+        else
+          $anuncio = new Anuncio();
         $anuncio->nome = $veiculo->marca.' '.$veiculo->modelo.' - '.$veiculo->versao;
         $anuncio->descricao = (string)$veiculo->observacao;
         $anuncio->marca = Marca::where('nome', $veiculo->marca)->first()->id;
@@ -113,6 +134,7 @@ class RevendaController extends Controller
         foreach($veiculo->opcionais->opcional as $adicional){
           $this->createAdicional($anuncio, $adicional);
         }
+        //$this->complementos($veiculo, $anuncio);
         foreach($veiculo->fotos->foto as $foto){
           $img = new AnuncioImagem();
           $img->url = $foto;
@@ -150,24 +172,28 @@ class RevendaController extends Controller
 
     //Estas são as condições para que o anúncio vindo do xml seja importado para o sistema.
     public function filtro($veiculo){
-      return $veiculo->km == 0 && intval($veiculo->anomodelo) >= 2015 && $this->isUnicoDono($veiculo);
+      return $veiculo->km == 0 && intval($veiculo->anomodelo) >= 2015;// && $this->isUnicoDono($veiculo);
     }
 
     public function create(Request $request){
       return view('revendas.create');
     }
 
-    public function isUnicoDono($veiculo){
-      foreach ($veiculo->complementos->complemento as $complemento) {
-        if(strcmp($complemento, 'Único dono') == 0){
-          return true;
+    public function complementos($veiculo, $anuncio){
+      if(isset($veiculo->complementos->complemento)){
+        foreach ($veiculo->complementos->complemento as $complemento) {
+          $c = (string)$complemento;
+          $_c = new Complemento();
+          $_c->nome = $c;
+          $_c->anuncio = $anuncio->id;
+          $_c->save();
         }
       }
       return false;
     }
 
     public function index(Request $request){
-      $revendas;
+      $revendas = array();
       if(empty($request->all())){
           $revendas = Revenda::paginate(20);
       }else{
@@ -184,12 +210,7 @@ class RevendaController extends Controller
 
     public function store(Request $request){
       $data = $request->all();
-      $endereco = new Endereco();
-      $endereco->cidade = $request->input('cidade');
-      $endereco->estado = $request->input('estado');
-      $endereco->cep = $request->input('cep');
-      $endereco->bairro = $request->input('bairro');
-      $endereco->save();
+      $endereco = Endereco::create($data);
       $data = array_add($data, ['endereco'=> $endereco->id]);
       $revenda = Revenda::create($data);
       return view('revendas.index');
