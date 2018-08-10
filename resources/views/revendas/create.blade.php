@@ -36,13 +36,12 @@
         <h3 class="mt-2">Planos</h3>
         <hr>
         <div class="row m-auto">
-          <div class="col-sm-12 alert alert-primary" role="alert">
-            Selecione o seu plano de anúncios
-          </div>
+
           @foreach(App\Plano::all() as $plano)
-          <button type="button" value="{{$plano->id}}" class="card text-dark bg-light mb-3 col-sm-6 plano">
+          <button type="button" value="{{$plano->id}}" class="card text-left text-dark bg-light mb-3 col-sm-6 plano">
             <div class="card-body">
               <h4 class="card-title">{{$plano->nome}}</h4>
+              <span class="badge badge-success mb-2" style="font-size: 20px;">R${{$plano->preco}}</span>
               <p class="card-text">{{$plano->descricao}}</p>
             </div>
           </button>
@@ -50,7 +49,7 @@
         </div>
       </div>
     </div>
-    <button type="button" class="btn btn-primary" name="button">Cadastrar revenda</button>
+    <button type="button" class="btn btn-primary" id="cadastrar_revenda">Cadastrar revenda</button>
   </form>
 </div>
 

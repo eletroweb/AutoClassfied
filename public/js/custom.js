@@ -1,6 +1,13 @@
 $(document).ready(function(){
   $('.plano').click(function(){
-    $('#plano_label').html('Você selecionou o plano '+$(this).children()[0].html());
+    $('#plano_label').html('Você selecionou o '+$(this).children('.card-body').children('.card-title').html());
+    $('.plano').each(function(){
+      $(this).removeClass('bg-success text-light');
+      $(this).addClass('bg-light text-dark');
+      console.log('teste');
+    });
+    $(this).removeClass('bg-light text-dark');
+    $(this).addClass('bg-success text-light');
     $('#plano').val($(this).val());
   });
   $('.select2').select2({
