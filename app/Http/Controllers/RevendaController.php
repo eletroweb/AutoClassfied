@@ -19,7 +19,6 @@ use App\Complemento;
 
 class RevendaController extends Controller
 {
-    public $comparacoes = array();
 
     //Este método importa as revendas e seus respectivos anúncios
     public function importRevendas(Request $request){
@@ -202,7 +201,7 @@ class RevendaController extends Controller
                 ->select(['enderecos.*', 'revendas.*'])
                 ->where([
                     ['enderecos.cidade', '=', $data['cidade']],
-                    ['enderecos.estado', '=', $data['estado']]
+                    ['enderecos.uf', '=', $data['estado']]
                 ])->paginate(20);
       }
       return view('revendas.index')->with('revendas', $revendas);
@@ -211,8 +210,23 @@ class RevendaController extends Controller
     public function store(Request $request){
       $data = $request->all();
       $endereco = Endereco::create($data);
-      $data = array_add($data, ['endereco'=> $endereco->id]);
+      $data = array_add($data, 'endereco', $endereco->id);
       $revenda = Revenda::create($data);
-      return view('revendas.index');
+      $request->session()->flash('status', 'Revenda criada com sucesso. Você receberá um e-mail
+                                            com o nosso contato para a confirmação do seu plano.
+                                            Obrigado por fazer parte do Unicodono.');
+      return redirect('/revendas');
+    }
+
+    public function homepage(Request $request, $id){
+      $data = $request->all();
+      $revenda = Revenda::find($id);
+      if(empty($data)){
+        $anuncios = Anuncio::where('user', $revenda->user)->orderBy('id', 'desc')->paginate(20);
+      }else {
+        $param = AnuncioController::filter_search($data);
+        $anuncios = Anuncio::where('user', $revenda->user)->where($param)->orderBy('id', 'desc')->paginate(20);
+      }
+      return view('revendas.homepage.revenda')->with(['revenda'=> $revenda, 'anuncios'=> $anuncios]);
     }
 }

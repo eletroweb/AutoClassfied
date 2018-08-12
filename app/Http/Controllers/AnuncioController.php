@@ -60,37 +60,42 @@ class AnuncioController extends Controller
 
     public function anuncios(Request $request){
       if($data = $request->all()){
-        $param = array();
         $tipos = array();
-        foreach ($data as $key=>$value) {
-          if($value && $key != 'mais_buscados'){
-            if(strpos($key, '_maximo')){
-              $exploded = explode("_", $key);
-              $value = str_replace([',','.'], '', $value);
-              $param[] = [$exploded[0], '<=', $value];
-            }elseif(is_array($value)) {
-              //Quando cair aqui eu subentendo que é tipo[]
-              foreach ($value as $_key => $_value) {
-                //$prefix = is_numeric($_value)?'':'%';
-                //$param[] =  ['tipo', is_numeric($_value)? '=':'like', $prefix.strtoupper($_value).$prefix];
-                $tipos[] = $_value=='carro'? false:true;
-              }
-            }elseif(strpos($key, '_minimo')){
-              $exploded = explode("_", $key);
-              $value = str_replace([',','.'], '', $value);
-              $param[] = [$exploded[0], '>=', $value];
-            }else{
-              $prefix = is_numeric($value)?'':'%';
-              $param[] =  [$key, is_numeric($value)? '=':'like', $prefix.strtoupper($value).$prefix];
-            }
-          }
-        }
+        $param = $this->filter_search($data);
         $m_buscados = $request->input('mais_buscados'); //ordem por número de visualizações
         $anuncios = Anuncio::where($param)->whereIn('moto', $tipos)->orderBy($m_buscados =='1'? 'visualizacoes':'id' , 'desc')->paginate(20);
       }else{
         $anuncios = Anuncio::orderBy('id', 'desc')->paginate(20);
       }
       return view('anuncios.anuncios')->with('anuncios', $anuncios);
+    }
+
+    public static function filter_search($data){
+      $param = array();
+      foreach ($data as $key=>$value) {
+        if($value && $key != 'mais_buscados'){
+          if(strpos($key, '_maximo')){
+            $exploded = explode("_", $key);
+            $value = str_replace([',','.'], '', $value);
+            $param[] = [$exploded[0], '<=', $value];
+          }elseif(is_array($value)) {
+            //Quando cair aqui eu subentendo que é tipo[]
+            foreach ($value as $_key => $_value) {
+              //$prefix = is_numeric($_value)?'':'%';
+              //$param[] =  ['tipo', is_numeric($_value)? '=':'like', $prefix.strtoupper($_value).$prefix];
+              $tipos[] = $_value=='carro'? false:true;
+            }
+          }elseif(strpos($key, '_minimo')){
+            $exploded = explode("_", $key);
+            $value = str_replace([',','.'], '', $value);
+            $param[] = [$exploded[0], '>=', $value];
+          }else{
+            $prefix = is_numeric($value)?'':'%';
+            $param[] =  [$key, is_numeric($value)? '=':'like', $prefix.strtoupper($value).$prefix];
+          }
+        }
+      }
+      return $param;
     }
 
     public function index(Request $request, $id){

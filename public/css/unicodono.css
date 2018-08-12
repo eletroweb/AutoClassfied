@@ -5,6 +5,17 @@
   background-image: url('/images/unicodonobanner.jpg');
   background-position: center;
 }
+#avatar-revenda{
+  background-color: white;
+  padding: 10px;
+}
+#revenda-top{
+  padding-top: 80px;
+  height: 250px;
+  width: 100%;
+  background-image: url('/images/dealership.jpg');
+  background-position: 20% 80%;
+}
 .bg-primary{
   background-color: #03598f !important;
 }
