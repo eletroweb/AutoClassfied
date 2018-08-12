@@ -11,12 +11,12 @@
     <div class="col-sm-3">
       <form>
         <div class="form-group">
-          <select class="form-control select2" id="estado" name="">
+          <select class="form-control select2" id="estado" name="estado">
             <option value="">Selecione o estado...</option>
           </select>
         </div>
         <div class="form-group">
-          <select class="form-control select2" id="cidade" name="">
+          <select class="form-control select2" id="cidade" name="cidade">
             <option value="">Selecione a cidade...</option>
           </select>
         </div>
@@ -27,9 +27,11 @@
       @foreach($revendas as $r)
         <div class="card  mb-2">
           <div class="card-body">
-            <h5 class="card-title">{{$r->nomefantasia}}</h5>
-            <p class="card-text">Endereço da revenda</p>
-            <a href="#" class="btn btn-primary">Acessar página</a>
+            <h4 class="card-title">{{$r->nomefantasia}}</h4>
+            <p class="card-text">{{$r->end->logradouro}}, {{$r->end->bairro}}, {{$r->end->numero}}ª
+              <br>{{$r->end->cidade}} - {{$r->end->uf}}
+            </p>
+            <a href="/revenda/{{$r->id}}" class="btn btn-primary">Acessar página</a>
           </div>
         </div>
       @endforeach

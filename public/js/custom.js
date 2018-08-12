@@ -4,7 +4,6 @@ $(document).ready(function(){
     $('.plano').each(function(){
       $(this).removeClass('bg-success text-light');
       $(this).addClass('bg-light text-dark');
-      console.log('teste');
     });
     $(this).removeClass('bg-light text-dark');
     $(this).addClass('bg-success text-light');
@@ -18,6 +17,13 @@ $(document).ready(function(){
         $('#adicionais').append('<button type="button" class="list-group-item list-group-item-action item-adicional">'+$('#adicional').val()+'</button>');
     }else{
       alert('Você precisa preencher o campo para adicionar');
+    }
+  });
+  $('#cadastrar_revenda').click(function(){
+    if($('#plano').val() != ''){
+      $('#cadastro-revenda').submit();
+    }else{
+      alert('Você precisa selecionar um plano para a revenda.');
     }
   });
   $('.item-adicional').click(function(){
