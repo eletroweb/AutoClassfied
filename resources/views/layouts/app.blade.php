@@ -94,13 +94,14 @@
                   <a class="dropdown-item" href="#">Planos para revendedores</a>
                   <a class="dropdown-item" href="#">Cadastro para revendas</a>
                   <a class="dropdown-item" href="#">Cadastro anúncio simples</a>
+                  <a class="dropdown-item" href="#">Avalie o seu veículo</a>
                   <a class="dropdown-item" href="{{route('fipe')}}">Tabela FIPE</a>
                   <a class="dropdown-item" href="#">Perguntas Frequentes</a>
                 </div>
               </li>
-              <li class="nav-item">
+              <!--<li class="nav-item">
                 <a class="nav-link" href="#">Avalie o seu veículo</a>
-              </li>
+              </li>-->
               <li class="nav-item">
                 <a class="nav-link" href="#">Financie o seu veículo</a>
               </li>

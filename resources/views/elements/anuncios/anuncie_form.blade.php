@@ -3,6 +3,8 @@
     <div class="col-sm-6">
       <form class="dropzone" method="post" id="anunciar" action="{{route('anuncieStore')}}"  enctype="multipart/form-data">
         {{csrf_field()}}
+        <h2>Informações básicas</h2>
+        <hr>
         <div class="form-group">
           <label for="titulo">Titulo do anúncio</label>
           <input type="text" class="form-control" name="nome" id="titulo" aria-describedby="tituloHelp" placeholder="O que você está anunciando?">
@@ -15,7 +17,7 @@
               <select class="form-control" name="marca" id="marca">
                 <option value="">Selecione a marca...</option>
               </select>
-            </div>    
+            </div>
           </div>
           <div class="col-sm-6">
             <div class="form-group">
@@ -23,7 +25,7 @@
               <select class="form-control" name="modelo" id="modelo">
                 <option value="">Selecione o modelo...</option>
               </select>
-            </div>    
+            </div>
           </div>
           <div class="col-sm-6">
             <div class="form-group">
@@ -31,7 +33,7 @@
               <select class="form-control" name="versao" id="versao">
                 <option value="">Selecione a marca...</option>
               </select>
-            </div>    
+            </div>
           </div>
         </div>
         <div class="row">
@@ -40,7 +42,7 @@
               <label for="valor">Valor</label>
               <input type="text" class="form-control" name="valor" id="valor" aria-describedby="valorHelp" placeholder="Digite o preço">
               <small id="valorHelp" class="form-text text-muted">Este preço será exibido no anúncio</small>
-            </div>    
+            </div>
           </div>
           <div class="col-sm-6">
             <div class="form-group">
@@ -72,10 +74,12 @@
           <small id="{{$field->nome_prog}}Help" class="form-text text-muted">{{$field->helpText}}</small>
         </div>
         @endforeach
+        <h2>Informações adicionais e imagens</h2>
+        <hr>
         <div class="card">
           <div class="card-body">
             <div class="form-group">
-              <label for="adicional">Adicionais</label>
+              <label for="adicional">Itens adicionais do veículo</label>
               <div class="input-group mb-3">
                 <input type="text" class="form-control" id="adicional" placeholder="Digite o nome do adicional que pretende adicionar" aria-describedby="adicionalHelp" aria-label="Digite o nome do adicional que pretende adicionar" aria-describedby="button-addon2">
                 <div class="input-group-append">
@@ -85,7 +89,7 @@
               <small id="adicionalHelp" class="form-text text-muted">Um adicional é um atributo específico do veículo que você deseja citar. Exemplo: bancos de couro.</small>
             </div>
             <div class="form-group">
-              <div class="list-group" id="adicionais">          
+              <div class="list-group" id="adicionais">
               </div>
             </div>
           </div>
