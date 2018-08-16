@@ -28,14 +28,34 @@ class AnuncioController extends Controller
            'valor' => 'required',
            'descricao' => 'required',
            'user' => 'required',
+           'ano'=> 'required',
            'moto' => ''
         ]);
+
         $anuncio = Anuncio::create($validatedData);
         $img_principal = new AnuncioImagem();
         $img_principal->url= Storage::put('public', $request->file('img_principal'));
         $img_principal->anuncio= $anuncio->id;
         $img_principal->first= true;
         $img_principal->save();
+        if($request->has('adicionais')){
+          $adicionais = $request->input('adicionais');
+          foreach ($adicionais as $a) {
+            $adicional = new Adicional();
+            $adicional->nome = $a;
+            $adicional->anuncio = $anuncio->id;
+            $adicional->save();
+          }
+        }
+        if($request->has('acessorios')){
+          $adicionais = $request->input('acessorios');
+          foreach ($adicionais as $a) {
+            $acessorio = new Acessorio();
+            $acessorio->nome = $a;
+            $acessorio->anuncio = $anuncio->id;
+            $acessorio->save();
+          }
+        }
         if($request->hasFile('imagens')){
           $imgs = $request->file('imagens');
           foreach($imgs as $img){

@@ -1,3 +1,10 @@
+function autoRemove(element){
+  if(confirm('Deseja realmente remover?')){
+    element.remove();
+  }
+
+}
+
 $(document).ready(function(){
   $('.plano').click(function(){
     $('#plano_label').html('Você selecionou o '+$(this).children('.card-body').children('.card-title').html());
@@ -14,7 +21,16 @@ $(document).ready(function(){
   });
   $('#addAdicional').click(function(){
     if($('#adicional').val() !== ''){
-        $('#adicionais').append('<button type="button" class="list-group-item list-group-item-action item-adicional">'+$('#adicional').val()+'</button>');
+        $('#adicionais').append('<button type="button" onclick="autoRemove($(this))" class="list-group-item list-group-item-action del-hover">'+$('#adicional').val()+'<input type="hidden" name="adicionais[]" value="'+$('#adicional').val()+'"></button>');
+        $('#adicional').val('');
+    }else{
+      alert('Você precisa preencher o campo para adicionar');
+    }
+  });
+  $('#addAcessorio').click(function(){
+    if($('#acessorio').val() !== ''){
+        $('#acessorios').append('<button type="button" onclick="autoRemove($(this))" class="list-group-item list-group-item-action del-hover">'+$('#acessorio').val()+'<input type="hidden" name="acessorios[]" value="'+$('#adicional').val()+'"></button>');
+        $('#acessorio').val('');
     }else{
       alert('Você precisa preencher o campo para adicionar');
     }
@@ -26,9 +42,7 @@ $(document).ready(function(){
       alert('Você precisa selecionar um plano para a revenda.');
     }
   });
-  $('.item-adicional').click(function(){
-    $(this).remove();
-  });
+
   $('#documento').mask('000.000.000-00', {reverse: true});
   $('.telefone').mask('(00) 0000-0000');
   $("#anunciar").submit(function(){

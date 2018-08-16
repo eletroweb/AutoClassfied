@@ -14,7 +14,7 @@
           <div class="col-sm-6">
             <div class="form-group">
               <label for="veiculo">Marca</label>
-              <select class="form-control" name="marca" id="marca">
+              <select class="form-control select2" name="marca" id="marca">
                 <option value="">Selecione a marca...</option>
               </select>
             </div>
@@ -22,7 +22,7 @@
           <div class="col-sm-6">
             <div class="form-group">
               <label for="veiculo">Modelo</label>
-              <select class="form-control" name="modelo" id="modelo">
+              <select class="form-control select2" name="modelo" id="modelo">
                 <option value="">Selecione o modelo...</option>
               </select>
             </div>
@@ -30,7 +30,7 @@
           <div class="col-sm-6">
             <div class="form-group">
               <label for="veiculo">Versão</label>
-              <select class="form-control" name="versao" id="versao">
+              <select class="form-control select2" name="versao" id="versao">
                 <option value="">Selecione a marca...</option>
               </select>
             </div>
@@ -66,14 +66,16 @@
             </label>
           </div>
         </div>
+        <div class="row">
         @foreach(App\AnuncioField::all() as $field)
-        <div class="form-group">
+        <div class="form-group col-sm-6">
           <label for="{{$field->nome_prog}}">{{$field->nome}}</label>
           <input type="{{$field->type}}" class="form-control" id="{{$field->nome_prog}}" name="{{$field->nome_prog}}" aria-describedby="{{$field->nome_prog}}Help"
                  placeholder="{{$field->place_holder}}" {{ $field->type=='number'? "step=$field->step" : '' }} >
           <small id="{{$field->nome_prog}}Help" class="form-text text-muted">{{$field->helpText}}</small>
         </div>
         @endforeach
+        </div>
         <h2>Informações adicionais e imagens</h2>
         <hr>
         <div class="card">
@@ -86,10 +88,28 @@
                   <button class="btn btn-outline-secondary" type="button" id="addAdicional">Adicionar</button>
                 </div>
               </div>
-              <small id="adicionalHelp" class="form-text text-muted">Um adicional é um atributo específico do veículo que você deseja citar. Exemplo: bancos de couro.</small>
+              <small id="adicionalHelp" class="form-text text-muted">Um adicional é um atributo específico do veículo que você deseja citar.</small>
             </div>
             <div class="form-group">
               <div class="list-group" id="adicionais">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card mt-2">
+          <div class="card-body">
+            <div class="form-group">
+              <label for="acessorio">Acessórios do veículo</label>
+              <div class="input-group mb-3">
+                <input type="text" class="form-control" id="acessorio" placeholder="Digite o nome do acessório que pretende adicionar" aria-describedby="acessorioHelp" aria-label="Digite o nome do acessório que pretende adicionar" aria-describedby="button-addon2">
+                <div class="input-group-append">
+                  <button class="btn btn-outline-secondary" type="button" id="addAcessorio">Adicionar</button>
+                </div>
+              </div>
+              <small id="acessorioHelp" class="form-text text-muted">Descreva os acessórios do seu veículo por unidade.</small>
+            </div>
+            <div class="form-group">
+              <div class="list-group" id="acessorios">
               </div>
             </div>
           </div>

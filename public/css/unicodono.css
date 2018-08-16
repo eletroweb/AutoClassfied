@@ -114,3 +114,8 @@
     visibility: visible;
   }
 }
+
+.del-hover:hover{
+  background-color: red;
+  color: white;
+}
