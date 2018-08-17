@@ -31,7 +31,7 @@ class AnuncioController extends Controller
            'ano'=> 'required',
            'moto' => ''
         ]);
-
+        var_dump($request->all());exit;
         $anuncio = Anuncio::create($validatedData);
         $img_principal = new AnuncioImagem();
         $img_principal->url= Storage::put('public', $request->file('img_principal'));

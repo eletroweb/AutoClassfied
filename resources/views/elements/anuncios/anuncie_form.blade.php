@@ -116,7 +116,13 @@
         </div>
         <div class="row">
           <div class="col-sm-12 mt-3 mb-3">
-            @include('elements.form.dropzone')
+            <div class="form-group">
+                <label for="imagens">Selecione as imagens do anúncio</label>
+                <input id="imagens" type="file" class="form-control" multiple name="imagens[]" value="">
+            </div>
+            <ul class="list-group" id="imagens_selecionadas">
+              
+            </ul>
           </div>
         </div>
         <!--<div class="form-group">

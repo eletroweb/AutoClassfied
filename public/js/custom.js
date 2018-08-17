@@ -2,13 +2,22 @@ function autoRemove(element){
   if(confirm('Deseja realmente remover?')){
     element.remove();
   }
+}
 
+function removeParent(element){
+  console.log(element.parent().remove());
 }
 
 $(document).ready(function(){
-  var uploader = new qq.FineUploader({
-      element: document.getElementById('my-uploader')
-  }); 
+  $('input:file').change(function(){
+    var input = $(this).clone();
+    input.attr('name', 'imagens[]');
+    var input = input.parseHTML();
+    $.each($(this).prop('files'), function(key, value){
+      //console.log(value);
+      $('#imagens_selecionadas').html($('#imagens_selecionadas').html()+'<li class="list-group-item ">'+value.name+' '+input+'<button onclick="removeParent($(this))" type="button" class="close_file"><i class="fa fa-times-circle"></i></button></li>');
+    });
+  });
   $('.plano').click(function(){
     $('#plano_label').html('Você selecionou o '+$(this).children('.card-body').children('.card-title').html());
     $('.plano').each(function(){
