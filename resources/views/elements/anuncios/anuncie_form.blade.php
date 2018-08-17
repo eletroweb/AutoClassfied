@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <div class="col-sm-6">
-      <form class="dropzone" method="post" id="anunciar" action="{{route('anuncieStore')}}"  enctype="multipart/form-data">
+      <form class="dropzone" method="post" id="qq-form" action="{{route('anuncieStore')}}"  enctype="multipart/form-data">
         {{csrf_field()}}
         <h2>Informações básicas</h2>
         <hr>
@@ -114,7 +114,12 @@
             </div>
           </div>
         </div>
-        <div class="form-group">
+        <div class="row">
+          <div class="col-sm-12 mt-3 mb-3">
+            @include('elements.form.dropzone')
+          </div>
+        </div>
+        <!--<div class="form-group">
           <label for="img_principal">Imagem principal:</label>
           <input type="file" class="form-control-file" name="img_principal" id="img_principal" required>
         </div>
@@ -124,7 +129,7 @@
           <input type="file" class="form-control-file img-filter mb-2" name="imagens[]">
           <input type="file" class="form-control-file img-filter mb-2" name="imagens[]">
           <input type="file" class="form-control-file img-filter mb-2" name="imagens[]">
-        </div>
+        </div>-->
         <button type="submit" class="btn btn-primary">Anunciar</button>
       </form>
     </div>

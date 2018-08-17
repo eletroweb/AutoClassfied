@@ -6,6 +6,9 @@ function autoRemove(element){
 }
 
 $(document).ready(function(){
+  var uploader = new qq.FineUploader({
+      element: document.getElementById('my-uploader')
+  }); 
   $('.plano').click(function(){
     $('#plano_label').html('Você selecionou o '+$(this).children('.card-body').children('.card-title').html());
     $('.plano').each(function(){
