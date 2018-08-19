@@ -33,6 +33,7 @@ Route::middleware('auth')->group(function () {
   Route::get('/minha-conta', 'UserController@profile')->name('minhaconta');
   Route::get('/minha-conta/meus-anuncios', 'UserController@meus_anuncios')->name('meusanuncios');
   Route::post('/anuncios/store', 'AnuncioController@anuncieStore')->name('anuncieStore');
+  Route::post('/imagens/store', 'ImagemController@imageUpload');
 });
 Route::get('/importxml', 'VeiculoController@updateVeiculos');
 Route::middleware(['auth','admin'])->group(function(){

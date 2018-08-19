@@ -9,15 +9,52 @@ function removeParent(element){
 }
 
 $(document).ready(function(){
-  $('input:file').change(function(){
-    var input = $(this).clone();
-    input.attr('name', 'imagens[]');
-    var input = input.parseHTML();
+  var drop_anuncio = $('#dropzone').dropzone({
+    url: "/imagens/store",
+    uploadMultiple: true,
+    parallelUploads: 12,
+    maxFiles: 12,
+    autoQueue: true,
+    acceptedFiles: "image/*",
+    paramName: "imagem", // The name that will be used to transfer the file
+    maxFilesize: 2, // MB
+    dictDefaultMessage: 'Awaaaaaaaaaaaay',
+    previewTemplate: '<div class="dz-preview dz-file-preview col-sm-4">'+
+                      '<div class="dz-details">'+
+                        '<div class="dz-filename"><span data-dz-name class="badge badge-primary"></span></div>'+
+                        '<div class="dz-size" data-dz-size></div>'+
+                        '<img data-dz-thumbnail />'+
+                      '</div>'+
+                      '<div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress></span></div>'+
+                      '<div class="dz-error-message"><span data-dz-errormessage></span></div>'+
+                     '</div>',
+    accept: function(file, done) {
+      done();
+    },
+    success: function(data){
+      if(data.xhr.responseText !== 'false'){
+          var input = $('<input type="hidden">');
+          input.attr('name', 'imagens[]');
+          input.val(data.xhr.responseText.replace('"', '').replace('\\', ''));
+          $('#anunciar').append(input);
+      }
+    }
+  });
+  /*$('input:file').change(function(){
+    //input = $.parseHTML(input);
     $.each($(this).prop('files'), function(key, value){
       //console.log(value);
-      $('#imagens_selecionadas').html($('#imagens_selecionadas').html()+'<li class="list-group-item ">'+value.name+' '+input+'<button onclick="removeParent($(this))" type="button" class="close_file"><i class="fa fa-times-circle"></i></button></li>');
+      var input = $('<input type="file">');
+      input.attr('name', 'imagens[]');
+      input.addClass("d-none");
+      input.val(value);
+      var li = $('<li>');
+      li.addClass('list-group-item');
+      li.html('<i class="fa fa-file mr-4"></i><span class="badge badge-primary mr-3">'+value.name.substring(0,10)+'</span><button onclick="removeParent($(this))" type="button" class="close_file btn badge badge-pill badge-danger"><i class="fa fa-times-circle"></i></button>');
+      li.append(input)
+      $('#imagens_selecionadas').append(li);//.html($('#imagens_selecionadas').html()+'<li class="list-group-item ">'+value.name+input+'<button onclick="removeParent($(this))" type="button" class="close_file"><i class="fa fa-times-circle"></i></button></li>');
     });
-  });
+  });*/
   $('.plano').click(function(){
     $('#plano_label').html('Você selecionou o '+$(this).children('.card-body').children('.card-title').html());
     $('.plano').each(function(){

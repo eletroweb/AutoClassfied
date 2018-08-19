@@ -6,9 +6,13 @@
         <div class="col-sm-3">
           @php
             //var_dump($anuncio->id);exit;
-            $url = App\AnuncioImagem::where([['anuncio', $anuncio->id], ['first', true]])->first()->url;
+            $img_anuncio = App\AnuncioImagem::where([['anuncio', $anuncio->id]])->first();
+            $url = '';
+            $imagem = App\Imagem::find($img_anuncio->imagem);
             if(!$anuncio->importado){
-              $url = Storage::url($url);
+              $url = Storage::url($imagem->url);
+            }else{
+              $url = $imagem->url;
             }
           @endphp
           <img src="{{$url}}" width="150" alt="{{$anuncio->nome}}">
