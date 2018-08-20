@@ -64,7 +64,7 @@
                           </div>
                           <div class="col-sm-6">
                             <div class="custom-control custom-checkbox">
-                              <input type="checkbox" class="custom-control-input" id="carro" name="tipo[]" value="carro">
+                              <input type="checkbox" class="custom-control-input" id="carro" name="tipo[]" value="carro" checked>
                               <label class="custom-control-label" for="carro">Carro</label>
                             </div>
                           </div>

@@ -201,11 +201,14 @@ class RevendaController extends Controller
           $revendas = Revenda::paginate(20);
       }else{
         $data = $request->all();
+        $data['cidade'] = $data['cidade']? $data['cidade']:'%'.$data['cidade'].'%';
+        $data['estado'] = $data['estado']? $data['estado']:'%'.$data['estado'].'%';
         $revendas = Revenda::join('enderecos', 'enderecos.id', '=', 'revendas.endereco')
                 ->select(['enderecos.*', 'revendas.*'])
                 ->where([
-                    ['enderecos.cidade', '=', $data['cidade']],
-                    ['enderecos.uf', '=', $data['estado']]
+                    ['revendas.nomefantasia', 'like', '%'.$request->input('nome').'%'],
+                    ['enderecos.cidade', 'like', $data['cidade']],
+                    ['enderecos.uf', 'like', $data['estado']]
                 ])->paginate(20);
       }
       return view('revendas.index')->with('revendas', $revendas);

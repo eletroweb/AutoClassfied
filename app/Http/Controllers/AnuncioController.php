@@ -88,20 +88,26 @@ class AnuncioController extends Controller
 
     public function anuncios(Request $request){
       if($data = $request->all()){
-        $tipos = array();
-        $param = $this->filter_search($data);
+        //$tipos = array();
+        $filter = $this->filter_search($data);
+        //var_dump($filter[1]);exit;
         $m_buscados = $request->input('mais_buscados'); //ordem por número de visualizações
-        $anuncios = Anuncio::where($param)->whereIn('moto', $tipos)->orderBy($m_buscados =='1'? 'visualizacoes':'id' , 'desc')->paginate(20);
+        $anuncios = Anuncio::where($filter[0])
+            ->whereIn('moto', $filter[1])
+            ->orderBy($request->input('order'), 'desc')
+            ->paginate(intval($request->input('paginate')));
       }else{
-        $anuncios = Anuncio::orderBy('id', 'desc')->paginate(20);
+        $anuncios = Anuncio::orderBy($request->input('order')?$request->input('order'):'id', 'desc')
+          ->paginate($request->input('paginate')?intval($request->input('paginate')):0);
       }
       return view('anuncios.anuncios')->with('anuncios', $anuncios);
     }
 
     public static function filter_search($data){
       $param = array();
+      $tipos = array();
       foreach ($data as $key=>$value) {
-        if($value && $key != 'mais_buscados'){
+        if($value && $key != 'mais_buscados' && $key != 'order' && $key != 'paginate'){
           if(strpos($key, '_maximo')){
             $exploded = explode("_", $key);
             $value = str_replace([',','.'], '', $value);
@@ -111,7 +117,7 @@ class AnuncioController extends Controller
             foreach ($value as $_key => $_value) {
               //$prefix = is_numeric($_value)?'':'%';
               //$param[] =  ['tipo', is_numeric($_value)? '=':'like', $prefix.strtoupper($_value).$prefix];
-              $tipos[] = $_value=='carro'? false:true;
+              $tipos[] = $_value=='carro'? 0:1;
             }
           }elseif(strpos($key, '_minimo')){
             $exploded = explode("_", $key);
@@ -123,7 +129,7 @@ class AnuncioController extends Controller
           }
         }
       }
-      return $param;
+      return [$param, $tipos];
     }
 
     public function index(Request $request, $id){
@@ -138,9 +144,9 @@ class AnuncioController extends Controller
       }
       $imagens = array();
       $result = AnuncioImagem::where([
-                                        ['anuncio', $anuncio->id],
-                                        ['first', false]
-                                      ])->get();
+                                ['anuncio', $anuncio->id],
+                                ['first', false]
+                              ])->get();
       foreach($result as $r){
         if(!$anuncio->importado)
           $imagens[] = Storage::url(Imagem::find($r->imagem)->url);
