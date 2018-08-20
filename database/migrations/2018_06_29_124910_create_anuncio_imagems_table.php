@@ -16,7 +16,7 @@ class CreateAnuncioImagemsTable extends Migration
         Schema::create('anuncio_imagems', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('anuncio');
-            $table->string('url');
+            $table->integer('imagem');
             $table->boolean('first');
             $table->timestamps();
         });

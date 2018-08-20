@@ -37,9 +37,12 @@
     <link rel="stylesheet" href="{{ asset('css/lightbox.min.css') }}">
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/unicodono.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/dropzone.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/lightgallery.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/select2.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/select2bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('fine-uploader/fine-uploader-gallery.css') }}">
+    <link rel="stylesheet" href="{{ asset('fine-uploader/fine-uploader-new.css') }}">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
 </head>
 <body>
@@ -94,13 +97,14 @@
                   <a class="dropdown-item" href="#">Planos para revendedores</a>
                   <a class="dropdown-item" href="#">Cadastro para revendas</a>
                   <a class="dropdown-item" href="#">Cadastro anúncio simples</a>
+                  <a class="dropdown-item" href="#">Avalie o seu veículo</a>
                   <a class="dropdown-item" href="{{route('fipe')}}">Tabela FIPE</a>
                   <a class="dropdown-item" href="#">Perguntas Frequentes</a>
                 </div>
               </li>
-              <li class="nav-item">
+              <!--<li class="nav-item">
                 <a class="nav-link" href="#">Avalie o seu veículo</a>
-              </li>
+              </li>-->
               <li class="nav-item">
                 <a class="nav-link" href="#">Financie o seu veículo</a>
               </li>
@@ -328,7 +332,6 @@
         </div>
       </div>
     </footer>
-
     <script src="{{asset('js/jquery-3.3.1.min.js')}}" charset="utf-8"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
@@ -337,9 +340,9 @@
     <script src="{{asset('js/owl.carousel.min.js')}}" charset="utf-8"></script>
     <script src="{{asset('js/lightbox.min.js')}}" charset="utf-8"></script>
     <script type="text/javascript" src="{{asset('js/select2.full.min.js')}}"></script>
-    <script src="{{asset('js/custom.js')}}" charset="utf-8"></script>
     <script src="{{asset('js/fipe.js')}}" charset="utf-8"></script>
-
     <script src="{{asset('js/cidades_estados.js')}}" charset="utf-8"></script>
+    <script src="{{asset('js/dropzone.js')}}" charset="utf-8"></script>
+        <script src="{{asset('js/custom.js')}}" charset="utf-8"></script>
 </body>
 </html>

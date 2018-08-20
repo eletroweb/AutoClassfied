@@ -10,7 +10,8 @@
       @endif
       <div class="row">
         <div class="col-sm-12">
-          <img src="{{$principal}}" class="img-fluid main-img" alt="Responsive image">
+          <a class="col-sm-2 mr-1" href="{{$imagens[0]}}" data-lightbox="roadtrip"><img src="{{$imagens[0]}}" class="img-fluid main-img m-auto" alt="Responsive image"></a>
+
         </div>
       </div>
       <div class="row">

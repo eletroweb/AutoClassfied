@@ -1,4 +1,60 @@
+function autoRemove(element){
+  if(confirm('Deseja realmente remover?')){
+    element.remove();
+  }
+}
+
+function removeParent(element){
+  console.log(element.parent().remove());
+}
+
 $(document).ready(function(){
+  var drop_anuncio = $('#dropzone').dropzone({
+    url: "/imagens/store",
+    uploadMultiple: true,
+    parallelUploads: 12,
+    maxFiles: 12,
+    autoQueue: true,
+    acceptedFiles: "image/*",
+    paramName: "imagem", // The name that will be used to transfer the file
+    maxFilesize: 2, // MB
+    dictDefaultMessage: 'Awaaaaaaaaaaaay',
+    previewTemplate: '<div class="dz-preview dz-file-preview col-sm-4">'+
+                      '<div class="dz-details">'+
+                        '<div class="dz-filename"><span data-dz-name class="badge badge-primary"></span></div>'+
+                        '<div class="dz-size" data-dz-size></div>'+
+                        '<img data-dz-thumbnail />'+
+                      '</div>'+
+                      '<div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress></span></div>'+
+                      '<div class="dz-error-message"><span data-dz-errormessage></span></div>'+
+                     '</div>',
+    accept: function(file, done) {
+      done();
+    },
+    success: function(data){
+      if(data.xhr.responseText !== 'false'){
+          var input = $('<input type="hidden">');
+          input.attr('name', 'imagens[]');
+          input.val(data.xhr.responseText.replace('"', '').replace('\\', ''));
+          $('#anunciar').append(input);
+      }
+    }
+  });
+  /*$('input:file').change(function(){
+    //input = $.parseHTML(input);
+    $.each($(this).prop('files'), function(key, value){
+      //console.log(value);
+      var input = $('<input type="file">');
+      input.attr('name', 'imagens[]');
+      input.addClass("d-none");
+      input.val(value);
+      var li = $('<li>');
+      li.addClass('list-group-item');
+      li.html('<i class="fa fa-file mr-4"></i><span class="badge badge-primary mr-3">'+value.name.substring(0,10)+'</span><button onclick="removeParent($(this))" type="button" class="close_file btn badge badge-pill badge-danger"><i class="fa fa-times-circle"></i></button>');
+      li.append(input)
+      $('#imagens_selecionadas').append(li);//.html($('#imagens_selecionadas').html()+'<li class="list-group-item ">'+value.name+input+'<button onclick="removeParent($(this))" type="button" class="close_file"><i class="fa fa-times-circle"></i></button></li>');
+    });
+  });*/
   $('.plano').click(function(){
     $('#plano_label').html('Você selecionou o '+$(this).children('.card-body').children('.card-title').html());
     $('.plano').each(function(){
@@ -14,7 +70,16 @@ $(document).ready(function(){
   });
   $('#addAdicional').click(function(){
     if($('#adicional').val() !== ''){
-        $('#adicionais').append('<button type="button" class="list-group-item list-group-item-action item-adicional">'+$('#adicional').val()+'</button>');
+        $('#adicionais').append('<button type="button" onclick="autoRemove($(this))" class="list-group-item list-group-item-action del-hover">'+$('#adicional').val()+'<input type="hidden" name="adicionais[]" value="'+$('#adicional').val()+'"></button>');
+        $('#adicional').val('');
+    }else{
+      alert('Você precisa preencher o campo para adicionar');
+    }
+  });
+  $('#addAcessorio').click(function(){
+    if($('#acessorio').val() !== ''){
+        $('#acessorios').append('<button type="button" onclick="autoRemove($(this))" class="list-group-item list-group-item-action del-hover">'+$('#acessorio').val()+'<input type="hidden" name="acessorios[]" value="'+$('#adicional').val()+'"></button>');
+        $('#acessorio').val('');
     }else{
       alert('Você precisa preencher o campo para adicionar');
     }
@@ -26,9 +91,7 @@ $(document).ready(function(){
       alert('Você precisa selecionar um plano para a revenda.');
     }
   });
-  $('.item-adicional').click(function(){
-    $(this).remove();
-  });
+
   $('#documento').mask('000.000.000-00', {reverse: true});
   $('.telefone').mask('(00) 0000-0000');
   $("#anunciar").submit(function(){

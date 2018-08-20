@@ -11,6 +11,10 @@
     <div class="col-sm-3">
       <form>
         <div class="form-group">
+          <label for="nome">Nome da revenda</label>
+          <input class="form-control" type="text" name="nome" value="" placeholder="Digite o nome da revenda">
+        </div>
+        <div class="form-group">
           <select class="form-control select2" id="estado" name="estado">
             <option value="">Selecione o estado...</option>
           </select>
@@ -24,7 +28,7 @@
       </form>
     </div>
     <div class="col-sm-9">
-      @foreach($revendas as $r)
+      @forelse($revendas as $r)
         <div class="card  mb-2">
           <div class="card-body">
             <h4 class="card-title">{{$r->nomefantasia}}</h4>
@@ -34,7 +38,11 @@
             <a href="/revenda/{{$r->id}}" class="btn btn-primary">Acessar página</a>
           </div>
         </div>
-      @endforeach
+      @empty
+        <div class="alert alert-primary" role="alert">
+          Nenhuma revenda foi encontrada.
+        </div>
+      @endforelse
     </div>
   </div>
 </div>

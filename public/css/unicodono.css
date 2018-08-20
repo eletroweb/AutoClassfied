@@ -5,6 +5,11 @@
   background-image: url('/images/unicodonobanner.jpg');
   background-position: center;
 }
+.drop{
+  border: 2px dotted lightskyblue;
+  min-height: 250px;
+  border-radius: 10px;
+}
 #avatar-revenda{
   background-color: white;
   padding: 10px;
@@ -113,4 +118,9 @@
     display: block;
     visibility: visible;
   }
+}
+
+.del-hover:hover{
+  background-color: red;
+  color: white;
 }
