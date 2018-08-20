@@ -15,6 +15,6 @@ class HomeController extends Controller
      */
     public function index(){
         $recentes = Anuncio::orderBy('id', 'desc')->paginate(10);
-        return view('home')->with(['recentes' => $recentes]);
+        return view('home')->with(['recentes' => $recentes, 'home'=>true]);
     }
 }
