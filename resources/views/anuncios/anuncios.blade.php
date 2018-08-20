@@ -1,11 +1,5 @@
 @extends('layouts.app')
 @section('content')
-<div class="jumbotron jumbotron-fluid" style="margin-bottom: 0;">
-  <div class="container">
-    <h1 class="display-4">Procurando por algo?</h1>
-    <p class="lead">Explore os anúncios e encontre o que precisa</p>
-  </div>
-</div>
 <form>
 <div class="row bg-primary mb-2">
   <div class="col-sm-12 p-2">
