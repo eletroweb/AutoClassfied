@@ -27,9 +27,9 @@ class RevendaController extends Controller
       $url = 'http://xml.dsautoestoque.com/?l='.$request->input('cnpj').'&v=2';
       $result = simplexml_load_string(file_get_contents($url));
       //var_dump((string)$result[0]);exit;
-      $result = strcmp((string)$result[0], '');
+      $cons = strcmp((string)$result[0], '');
       //var_dump($result);exit;
-      if($result == 1){
+      if($cons == 1){
         $request->session()->flash('status', 'Revenda inválida!');
         $request->session()->flash('alert', 'danger');
         return view('revendas.admin');
