@@ -150,16 +150,6 @@
             </ul>
           </div>
         </nav>
-        @if(isset($home))
-          @yield('content')
-          <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-          <script>
-           (adsbygoogle = window.adsbygoogle || []).push({
-                google_ad_client: "ca-pub-2059965508769380",
-                enable_page_level_ads: true
-           });
-         </script>
-       @else
           <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
           <script>
            (adsbygoogle = window.adsbygoogle || []).push({
@@ -168,7 +158,7 @@
            });
          </script>
          @yield('content')
-       @endif
+      
 
     </div>
     <footer>
