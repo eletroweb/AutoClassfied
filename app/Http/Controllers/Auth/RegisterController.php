@@ -6,6 +6,7 @@ use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use App\UserDado;
 
 class RegisterController extends Controller
 {
@@ -53,6 +54,7 @@ class RegisterController extends Controller
             'password' => 'required|string|min:6|confirmed',
             'documento' => 'required|unique:users',
             'pessoa_fisica' => 'required',
+            'telefone' => 'required'
         ]);
     }
 
@@ -64,12 +66,18 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user= User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
             'documento' => $data['documento'],
             'pessoa_fisica' => $data['pessoa_fisica'],
         ]);
+        $dado = new UserDado();
+        $dado->nome = 'telefone';
+        $dado->valor= $data['telefone'];
+        $dado->user = $user->id;
+        $dado->save();
+        return $user;
     }
 }
