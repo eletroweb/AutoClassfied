@@ -17,6 +17,7 @@ use App\Adicional;
 use App\Endereco;
 use App\Complemento;
 use App\Imagem;
+use App\UserDado;
 
 class RevendaController extends Controller
 {
