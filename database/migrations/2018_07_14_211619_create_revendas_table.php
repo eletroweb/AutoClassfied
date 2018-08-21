@@ -21,7 +21,7 @@ class CreateRevendasTable extends Migration
             $table->integer('user');
             $table->boolean('ativo')->default(false);
             $table->integer('endereco');
-            $table->integer('destaques');
+            $table->integer('destaques')->default(0);
             $table->timestamps();
         });
     }

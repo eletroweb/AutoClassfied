@@ -159,7 +159,6 @@
          </script>
          @yield('content')
       
-
     </div>
     <footer>
       <div class="container-fluid">
