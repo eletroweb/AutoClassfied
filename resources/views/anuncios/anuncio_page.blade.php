@@ -85,7 +85,7 @@
                     <h5 class="mb-1">Telefone</h5>
                     <small class="text-muted"></small>
                   </div>
-                  <p class="mb-1">(71)90000-0000</p>
+                  <p class="mb-1">{{App\User::find($anuncio->user)->telefone()->valor}}</p>
                   <small class="text-muted"></small>
                 </a>
               </div>
@@ -94,7 +94,7 @@
         </div>
     </div>
   </div>
-  <div class="row">
+  <div class="row mt-4">
     <div class="col-sm-7">
       <ul class="nav nav-pills" id="myTab" role="tablist">
         <li class="nav-item">
@@ -109,25 +109,35 @@
       </ul>
       <div class="tab-content" id="myTabContent">
         <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-          <ul class="list-group">
+          <div class="row pt-2 bg-primary">
           @foreach($anunciodados as $dado)
-            <li class="list-group-item"><b>{{ucfirst($dado->nome)}}</b>: {{$dado->valor}}</li>
+            <div class="col-sm-6">
+              <p class="text-white"><b>{{ucfirst($dado->nome)}}</b>: {{$dado->valor}}</p>
+            </div>
           @endforeach
-          </ul>
+          </div>
         </div>
         <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-          <ul class="list-group">
+          <div class="row pt-2 bg-primary">
+            <div class="col-sm-12">
+              <p class="text-white"><b>Adicionais do veículo</b></p>
+              <hr>
+            </div>
             @foreach($adicionais as $adicional)
-              <li class="list-group-item">{{ucfirst($adicional->nome)}}</li>
+            <div class="col-sm-6">
+              <p class="text-white">{{ucfirst($adicional->nome)}}</p>
+            </div>
             @endforeach
-          </ul>
+          </div>
         </div>
         <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-          <ul class="list-group">
+          <div class="row bg-primary pt-2">
             @foreach($acessorios as $acessorio)
-              <li class="list-group-item">{{ucfirst($acessorio->nome)}}</li>
+              <div class="col-sm-6">
+                <p class="text-white">{{ucfirst($acessorio->nome)}}</p>
+              </div>
             @endforeach
-          </ul>
+          </div>
         </div>
       </div>
     </div>

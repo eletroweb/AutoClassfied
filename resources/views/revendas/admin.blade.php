@@ -17,7 +17,7 @@
           {{csrf_field()}}
           <div class="form-group">
             @if (session('status'))
-                <div class="alert alert-success">
+                <div class="alert alert-{{ session('alert') }}">
                     {{ session('status') }}
                 </div>
             @endif

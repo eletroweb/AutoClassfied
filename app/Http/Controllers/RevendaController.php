@@ -26,16 +26,22 @@ class RevendaController extends Controller
       //07627884000158
       $url = 'http://xml.dsautoestoque.com/?l='.$request->input('cnpj').'&v=2';
       $result = simplexml_load_string(file_get_contents($url));
+      //var_dump((string)$result[0]);exit;
+      $result = strcmp((string)$result[0], '');
+      //var_dump($result);exit;
+      if($result == 1){
+        $request->session()->flash('status', 'Revenda inválida!');
+        $request->session()->flash('alert', 'danger');
+        return view('revendas.admin');
+      }
       foreach($result as $veiculo){
         //O primeiro passo é verificar se a revenda existe.
         $r = $veiculo->loja;
         $cnpj = $r->cnpj;
         if($revenda = Revenda::where('cnpj', $cnpj)->first()){
-          //Esta revenda existe no nosso banco...
-          //var_dump((string)$veiculo->modelo);exit;
           $this->import($veiculo, $revenda);
-          $request->session()->flash('status',
-           'Revenda atualizada com sucesso!');
+          $request->session()->flash('status', 'Revenda atualizada com sucesso!');
+          $request->session()->flash('alert', 'success');
         }else{
           $user = new User();
           $user->name = $veiculo->loja->contato->nome;
@@ -59,10 +65,16 @@ class RevendaController extends Controller
           $revenda->user = $user->id;
           $revenda->endereco = $endereco->id;
           $revenda->save();
+          $telefone = new UserDado();
+          $telefone->nome = "telefone";
+          $telefone->valor = $veiculo->loja->contato->telefone;
+          $telefone->user = $user->id;
+          $telefone->save();
           $this->import($veiculo, $revenda);
           $request->session()->flash('status',
            'Revenda importada com sucesso! Por se tratar de ser uma nova revenda,
             também criamos a conta. O login é o e-mail da revenda, sua senha o cnpj da revenda.');
+          $request->session()->flash('alert', 'success');
         }
       }
 

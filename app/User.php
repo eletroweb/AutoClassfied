@@ -27,6 +27,13 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    public function telefone(){
+      return UserDado::where([
+          ['nome', '=', 'telefone'],
+          ['user', '=', $this->id]
+        ])->first();
+    }
+
     public function anuncios(){
         return $this->hasMany('App\Anuncio');
     }

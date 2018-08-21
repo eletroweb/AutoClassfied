@@ -150,7 +150,7 @@
             </ul>
           </div>
         </nav>
-        @if($home)
+        @if(isset($home))
           @yield('content')
           <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
           <script>
@@ -169,7 +169,7 @@
          </script>
          @yield('content')
        @endif
-        
+
     </div>
     <footer>
       <div class="container-fluid">

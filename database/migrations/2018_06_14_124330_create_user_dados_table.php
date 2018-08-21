@@ -17,6 +17,7 @@ class CreateUserDadosTable extends Migration
             $table->increments('id');
             $table->string('nome');
             $table->string('valor');
+            $table->integer('user');
             $table->timestamps();
         });
     }
