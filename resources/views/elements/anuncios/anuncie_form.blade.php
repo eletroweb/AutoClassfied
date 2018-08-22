@@ -123,6 +123,8 @@
       </form>
     </div>
     <div class="col-sm-6">
+      <h2>Imagens do anúncio</h2>
+      <hr>
       <div  id="dropzone" class="row mt-3 mb-3 drop">
 
       </div>
