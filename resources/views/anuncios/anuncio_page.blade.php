@@ -109,32 +109,32 @@
       </ul>
       <div class="tab-content" id="myTabContent">
         <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-          <div class="row pt-2 bg-primary">
+          <div class="row pt-2">
           @foreach($anunciodados as $dado)
             <div class="col-sm-6">
-              <p class="text-white"><b>{{ucfirst($dado->nome)}}</b>: {{$dado->valor}}</p>
+              <p><b>{{ucfirst($dado->nome)}}</b>: {{$dado->valor}}</p>
             </div>
           @endforeach
           </div>
         </div>
         <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-          <div class="row pt-2 bg-primary">
+          <div class="row pt-2">
             <div class="col-sm-12">
-              <p class="text-white"><b>Adicionais do veículo</b></p>
+              <p><b>Adicionais do veículo</b></p>
               <hr>
             </div>
             @foreach($adicionais as $adicional)
             <div class="col-sm-6">
-              <p class="text-white">{{ucfirst($adicional->nome)}}</p>
+              <p>{{ucfirst($adicional->nome)}}</p>
             </div>
             @endforeach
           </div>
         </div>
         <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-          <div class="row bg-primary pt-2">
+          <div class="row pt-2">
             @foreach($acessorios as $acessorio)
               <div class="col-sm-6">
-                <p class="text-white">{{ucfirst($acessorio->nome)}}</p>
+                <p>{{ucfirst($acessorio->nome)}}</p>
               </div>
             @endforeach
           </div>

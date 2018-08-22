@@ -25,14 +25,14 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <script type="text/javascript" src="https://stc.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.directpayment.js"></script>
-    <!--<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 
     <script>
      (adsbygoogle = window.adsbygoogle || []).push({
           google_ad_client: "ca-pub-2059965508769380",
           enable_page_level_ads: true
      });
-     </script>-->
+     </script>
     <title>{{ env('app.name', 'Unicodono') }}</title>
     <link rel="stylesheet" href="{{ asset('css/lightbox.min.css') }}">
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
@@ -150,15 +150,8 @@
             </ul>
           </div>
         </nav>
-          <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-          <script>
-           (adsbygoogle = window.adsbygoogle || []).push({
-                google_ad_client: "ca-pub-2059965508769380",
-                enable_page_level_ads: true
-           });
-         </script>
          @yield('content')
-      
+
     </div>
     <footer>
       <div class="container-fluid">
