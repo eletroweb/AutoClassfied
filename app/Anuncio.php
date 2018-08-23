@@ -3,6 +3,8 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\AnuncioImagem;
+use App\Imagem;
 
 class Anuncio extends Model
 {
@@ -18,6 +20,18 @@ class Anuncio extends Model
 
     public function users(){
         return $this->belongsTo('App\User', 'user');
+    }
+
+    public function urlImagemFirst(){
+        $img_anuncio = AnuncioImagem::where([['anuncio', $this->id]])->first();
+        $url = '';
+        $imagem = Imagem::find($img_anuncio->imagem);
+        if(!$this->importado){
+          $url = Storage::url($imagem->url);
+        }else{
+          $url = $imagem->url;
+        }
+        return $url;
     }
 
 }

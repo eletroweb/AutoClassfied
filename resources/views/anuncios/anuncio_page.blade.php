@@ -9,13 +9,13 @@
           </div>
       @endif
       <div class="row">
-        <div class="col-sm-12">
+        <div class="col-sm-12" style="margin-left: inherit;">
           <a class="col-sm-2 mr-1" href="{{$imagens[0]}}" data-lightbox="roadtrip"><img src="{{$imagens[0]}}" class="img-fluid main-img m-auto" alt="Responsive image"></a>
 
         </div>
       </div>
       <div class="row">
-          <div class="col-sm-12 text-left mt-2">
+          <div class="col-sm-12 text-right mt-2">
           @foreach($imagens as $img)
             <a class="col-sm-2 mr-1" href="{{$img}}"data-lightbox="roadtrip"> <img class="rounded float-left  mr-1" width="100" src="{{$img}}"> </a>
           @endforeach
@@ -92,6 +92,28 @@
             </p>
           </div>
         </div>
+        <div class="card" style="border: 0px;">
+          <div class="card-body">
+            <ul class="list-group">
+              <li class="list-group-item d-flex justify-content-between align-items-center" style="font-size: 18px">
+                <b>Financie o seu veículo</b>
+                <span ><i class="fa fa-dollar-sign fa-2x"></i></span>
+              </li>
+              <li class="list-group-item d-flex justify-content-between align-items-center" style="font-size: 18px">
+                <b>Venda o seu veículo</b>
+                <span ><i class="fa fa-car fa-2x"></i></span>
+              </li>
+              <li class="list-group-item d-flex justify-content-between align-items-center" style="font-size: 18px">
+                <b>Catálogo 0km</b>
+                <span ><i class="fa fa-search fa-2x"></i></span>
+              </li>
+              <li class="list-group-item d-flex justify-content-between align-items-center" style="font-size: 18px">
+                <b>Seguro online</b>
+                <span ><i class="fa fa-lock fa-2x"></i></span>
+              </li>
+            </ul>
+          </div>
+        </div>
     </div>
   </div>
   <div class="row mt-4">
@@ -140,6 +162,46 @@
           </div>
         </div>
       </div>
+    </div>
+  </div>
+  <!-- Anúncios relacionados -->
+  <div class="row">
+    <div class="col-sm-12">
+      <hr>
+      <h1 class="mb-3 text-center">Anúncios sugeridos</h1>
+    </div>
+
+    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+      <div class="carousel-inner row w-100 mx-auto">
+        @foreach($relacionados as $r)
+        <div class="carousel-item col-md-4 active">
+          <div class="card">
+            <a href="/anuncios/{{$r->id}}"><img class="card-img-top img-fluid" maxheight="200" src="{{$r->urlImagemFirst()}}" alt="{{$r->nome}}"></a>
+            <div class="card-body">
+              <div class="row">
+                  <div class="col-sm-12">
+                    <h4 class="card-title"><a style="color: black;" href="/anuncios/{{$r->id}}">{{$r->nome}}</a></h4>
+                  </div>
+                  <div class="col-sm-12">
+                    <span class="badge badge-success mb-1" style="font-size: 14px;">R${{number_format(substr($r->valor.'0', 0, -3), 2, ",", ".")}}</span>
+                  </div>
+              </div>
+              <p class="card-text">{{str_limit($r->descricao, 200, '...')}}</p>
+              <p class="card-text"><small class="text-muted">Criado em {{$r->created_at->format('d/m/Y')}}</small></p>
+
+          </div>
+          </div>
+        </div>
+        @endforeach
+      </div>
+      <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
     </div>
   </div>
 </div>

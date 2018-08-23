@@ -39,14 +39,7 @@
         @forelse($anuncios as $anuncio)
         <div class="col-md-4">
           <div class="card mb-4 shadow-sm">
-            @php
-              //var_dump($anuncio->id);exit;
-              $url = App\AnuncioImagem::where([['anuncio', $anuncio->id], ['first', true]])->first()->url;
-              if(!$anuncio->importado){
-                $url = Storage::url($url);
-              }
-            @endphp
-            <img class="card-img-top" src="{{$url}}" alt="{{$anuncio->nome}}">
+            <img class="card-img-top" src="{{$anuncio->urlImagemFirst()}}" alt="{{$anuncio->nome}}">
             <div class="card-body">
               <h5 class="card-title"><a href="/anuncios/{{$anuncio->id}}" style="color: black">{{$anuncio->nome}}</a></h4>
               <p class="card-text">{{str_limit($anuncio->descricao, 150)}}</p>

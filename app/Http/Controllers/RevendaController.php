@@ -188,7 +188,7 @@ class RevendaController extends Controller
 
     //Estas são as condições para que o anúncio vindo do xml seja importado para o sistema.
     public function filtro($veiculo){
-      return $veiculo->km == 0 && intval($veiculo->anomodelo) >= 2015;// && $this->isUnicoDono($veiculo);
+      return $veiculo->km == 0  || intval($veiculo->anomodelo) >= 2015; //|| $this->isUnicoDono($veiculo);
     }
 
     public function create(Request $request){

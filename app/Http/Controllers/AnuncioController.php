@@ -164,7 +164,9 @@ class AnuncioController extends Controller
       $view->user = Auth::check()? Auth::user()->id:'0';
       $view->anuncio = $anuncio->id;
       $view->save();
-      return view('anuncios.anuncio_page')->with(['acessorios' => $acessorios, 'adicionais' => $adicionais, 'anunciodados'=> $dados, 'anuncio'=> $anuncio, 'imagens' => $imagens, 'principal' => $imagens[0]]);
+      $relacionados = Anuncio::where([['id', '!=', $anuncio->id]])->get()->take(4);
+      return view('anuncios.anuncio_page')->with(['acessorios' => $acessorios, 'adicionais' => $adicionais, 'anunciodados'=> $dados,
+            'anuncio'=> $anuncio, 'imagens' => $imagens, 'principal' => $imagens[0], 'relacionados'=> $relacionados]);
     }
 
 
