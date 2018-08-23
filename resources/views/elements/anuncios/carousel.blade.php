@@ -5,17 +5,7 @@
       @foreach($recentes as $r)
       <div class="carousel-item col-md-4 active">
         <div class="card">
-          @php
-          $img_anuncio = App\AnuncioImagem::where([['anuncio', $r->id]])->first();
-          $url = '';
-          $imagem = App\Imagem::find($img_anuncio->imagem);
-          if(!$r->importado){
-            $url = Storage::url($imagem->url);
-          }else{
-            $url = $imagem->url;
-          }
-          @endphp
-          <a href="/anuncios/{{$r->id}}"><img class="card-img-top img-fluid" maxheight="200" src="{{$url}}" alt="{{$r->nome}}"></a>
+          <a href="/anuncios/{{$r->id}}"><img class="card-img-top img-fluid" maxheight="200" src="{{$anuncio->urlImagemFirst()}}" alt="{{$r->nome}}"></a>
           <div class="card-body">
             <div class="row">
                 <div class="col-sm-12">
