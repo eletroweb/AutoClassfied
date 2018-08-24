@@ -27,7 +27,7 @@ Route::get('/cronjob/update/all', 'VeiculoController@importMarcaModelos');
 Route::post('/anuncio/contato', 'ContatoAnuncioController@store')->name('contato_anuncio');
 Route::get('/revenda/{id}', 'RevendaController@homepage');
 Route::get('/consulta-tabela-fipe', 'FipeController@index')->name('fipe');
-Route::get('/revendas', 'RevendaController@index')->name('revendas');
+Route::get('/encontre-uma-revenda', 'RevendaController@revendas')->name('revendas');
 Route::middleware('auth')->group(function () {
   Route::get('/anuncie', 'AnuncioController@anuncie')->name('anuncie');
   Route::get('/minha-conta', 'UserController@profile')->name('minhaconta');
@@ -37,7 +37,7 @@ Route::middleware('auth')->group(function () {
 });
 Route::get('/importxml', 'VeiculoController@updateVeiculos');
 Route::middleware(['auth','admin'])->group(function(){
-  Route::get('/contratar-revenda', 'RevendaController@create')->name('contratar_revenda');
+  Route::get('/contratar-revenda', 'RevendaController@sejarevendedor')->name('contratar_revenda');
   Route::post('/revendas/store', 'RevendaController@store')->name('store_revenda');
   Route::get('/admin/revenda', 'RevendaController@admin');
   Route::post('/admin/revenda/import', 'RevendaController@importRevendas');
@@ -50,4 +50,5 @@ Route::middleware(['auth','admin'])->group(function(){
   Route::resource('/admin/anuncioFields', 'AnuncioFieldController');
   Route::resource('/admin/planos', 'PlanoController');
   Route::resource('/admin/users', 'UserController');
+  Route::resource('/admin/revendas', 'RevendaController');
 });
