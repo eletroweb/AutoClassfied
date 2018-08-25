@@ -86,7 +86,7 @@ class RevendaController extends AppBaseController
   *
   * @return Response
   */
-  public function show($id)
+  public function show(Request $request, $id)
   {
     $revenda = $this->revendaRepository->findWithoutFail($id);
 
@@ -95,8 +95,7 @@ class RevendaController extends AppBaseController
 
       return redirect(route('revendas.index'));
     }
-
-    return view('revendas.show')->with('revenda', $revenda);
+    $this->homepage($request, $id);
   }
 
   /**
@@ -136,8 +135,17 @@ class RevendaController extends AppBaseController
 
       return redirect(route('revendas.index'));
     }
-
-    $revenda = $this->revendaRepository->update($request->all(), $id);
+    $endereco = Endereco::find($revenda->endereco);
+    $endereco->logradouro = $request->input('logradouro');
+    $endereco->numero = $request->input('numero');
+    $endereco->bairro = $request->input('bairro');
+    $endereco->uf = $request->input('uf');
+    $endereco->cidade = $request->input('cidade');
+    $endereco->cep = $request->input('cep');
+    $endereco->save();
+    $data = $request->all();
+    $data['ativo']= $data['ativo']?$data['ativo']:0;
+    $revenda = $this->revendaRepository->update($data, $id);
 
     Flash::success('Revenda atualizada com sucesso.');
 

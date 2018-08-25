@@ -19,8 +19,8 @@
                     @include('revendas.fields')
 
                {!! Form::close() !!}
-           </div>
-       </div>
-    </div>
+         </div>
+     </div>
+  </div>
 </div>
 @endsection
