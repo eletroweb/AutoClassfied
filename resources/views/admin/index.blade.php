@@ -6,6 +6,7 @@
     <title>Unicodono - ADM</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="robots" content="all,follow">
     <!-- Bootstrap CSS-->
     <link rel="stylesheet" href="{{asset('vendor/bootstrap/css/bootstrap.min.css')}}">
@@ -191,5 +192,6 @@
     <script src="{{asset('js/fipe.js')}}" charset="utf-8"></script>
 
     <script src="{{asset('js/cidades_estados.js')}}" charset="utf-8"></script>
+    <script src="{{asset('js/admin/imports.js')}}" charset="utf-8"></script>
   </body>
 </html>

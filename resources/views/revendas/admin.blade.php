@@ -13,7 +13,7 @@
         <h3 class="h4">Importação de revenda</h3>
       </div>
       <div class="card-body">
-        <form method="post" action="/admin/revenda/import">
+        <!--<form method="post" action="/admin/revenda/import">-->
           {{csrf_field()}}
           <div class="form-group">
             @if (session('status'))
@@ -22,10 +22,15 @@
                 </div>
             @endif
             <label for="cnpj">CNPJ</label>
-            <input type="text" name="cnpj" value="" placeholder="Digite o CNPJ (Sem pontos ou traços)" class="form-control">
+            <input type="text" name="cnpj" id="cnpj" value="" placeholder="Digite o CNPJ (Sem pontos ou traços)" class="form-control">
           </div>
-          <button type="submit" class="btn btn-primary">Importar</button>
-        </form>
+          <button type="button" id="importarRevenda" class="btn btn-primary">Importar</button>
+          <div class="row">
+            <div class="col-sm-12">
+              <img class="d-none" id="loading" src="{{asset('img/loading_import.gif')}}" alt="loading">
+            </div>
+          </div>
+        <!--</form>-->
       </div>
     </div>
   </div>

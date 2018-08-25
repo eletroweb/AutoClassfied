@@ -177,61 +177,64 @@ class RevendaController extends AppBaseController
   //Este método importa as revendas e seus respectivos anúncios
   public function importRevendas(Request $request){
     //07627884000158
-    $url = 'http://xml.dsautoestoque.com/?l='.$request->input('cnpj').'&v=2';
-    $result = simplexml_load_string(file_get_contents($url));
-    //var_dump((string)$result[0]);exit;
-    $cons = strcmp((string)$result[0], '');
-    //var_dump($result);exit;
-    if($cons == 1){
-      $request->session()->flash('status', 'Revenda inválida!');
-      $request->session()->flash('alert', 'danger');
-      return view('revendas.admin');
-    }
-    foreach($result as $veiculo){
-      //O primeiro passo é verificar se a revenda existe.
-      $r = $veiculo->loja;
-      $cnpj = $r->cnpj;
-      if($revenda = Revenda::where('cnpj', $cnpj)->first()){
-        $this->import($veiculo, $revenda);
-        $request->session()->flash('status', 'Revenda atualizada com sucesso!');
-        $request->session()->flash('alert', 'success');
-      }else{
-        $user = new User();
-        $user->name = $veiculo->loja->contato->nome;
-        $user->email = $veiculo->loja->contato->email;
-        $user->password = Hash::make($cnpj);
-        $user->pessoa_fisica = false;
-        $user->documento = $veiculo->loja->cnpj;
-        $user->save();
-        $endereco = new Endereco();
-        $endereco->logradouro = $veiculo->loja->endereco->logradouro;
-        $endereco->uf= $veiculo->loja->endereco->uf;
-        $endereco->cidade= $veiculo->loja->endereco->cidade;
-        $endereco->bairro= $veiculo->loja->endereco->bairro;
-        $endereco->numero= $veiculo->loja->endereco->numero;
-        $endereco->cep= $veiculo->loja->endereco->cep;
-        $endereco->save();
-        $revenda = new Revenda();
-        $revenda->razaosocial = $veiculo->loja->nomefantasia;
-        $revenda->nomefantasia = $veiculo->loja->nomefantasia;
-        $revenda->cnpj = $veiculo->loja->cnpj;
-        $revenda->user = $user->id;
-        $revenda->endereco = $endereco->id;
-        $revenda->save();
-        $telefone = new UserDado();
-        $telefone->nome = "telefone";
-        $telefone->valor = $veiculo->loja->contato->telefone;
-        $telefone->user = $user->id;
-        $telefone->save();
-        $this->import($veiculo, $revenda);
-        $request->session()->flash('status',
-        'Revenda importada com sucesso! Por se tratar de ser uma nova revenda,
-        também criamos a conta. O login é o e-mail da revenda, sua senha o cnpj da revenda.');
-        $request->session()->flash('alert', 'success');
+    try{
+      $url = 'http://xml.dsautoestoque.com/?l='.$request->input('cnpj').'&v=2';
+      $result = simplexml_load_string(file_get_contents($url));
+      //var_dump((string)$result[0]);exit;
+      $cons = strcmp((string)$result[0], '');
+      //var_dump($result);exit;
+      if($cons == 1){
+        $request->session()->flash('status', 'Revenda inválida!');
+        $request->session()->flash('alert', 'danger');
+        return view('revendas.admin');
       }
+      foreach($result as $veiculo){
+        //O primeiro passo é verificar se a revenda existe.
+        $r = $veiculo->loja;
+        $cnpj = $r->cnpj;
+        if($revenda = Revenda::where('cnpj', $cnpj)->first()){
+          $this->import($veiculo, $revenda);
+          $message= 'Revenda atualizada com sucesso!';
+          $status= 'success';
+        }else{
+          $user = new User();
+          $user->name = $veiculo->loja->contato->nome;
+          $user->email = $veiculo->loja->contato->email;
+          $user->password = Hash::make($cnpj);
+          $user->pessoa_fisica = false;
+          $user->documento = $veiculo->loja->cnpj;
+          $user->save();
+          $endereco = new Endereco();
+          $endereco->logradouro = $veiculo->loja->endereco->logradouro;
+          $endereco->uf= $veiculo->loja->endereco->uf;
+          $endereco->cidade= $veiculo->loja->endereco->cidade;
+          $endereco->bairro= $veiculo->loja->endereco->bairro;
+          $endereco->numero= $veiculo->loja->endereco->numero;
+          $endereco->cep= $veiculo->loja->endereco->cep;
+          $endereco->save();
+          $revenda = new Revenda();
+          $revenda->razaosocial = $veiculo->loja->nomefantasia;
+          $revenda->nomefantasia = $veiculo->loja->nomefantasia;
+          $revenda->cnpj = $veiculo->loja->cnpj;
+          $revenda->user = $user->id;
+          $revenda->endereco = $endereco->id;
+          $revenda->save();
+          $telefone = new UserDado();
+          $telefone->nome = "telefone";
+          $telefone->valor = $veiculo->loja->contato->telefone;
+          $telefone->user = $user->id;
+          $telefone->save();
+          $this->import($veiculo, $revenda);
+          $message= 'Revenda importada com sucesso! Por se tratar de ser uma nova revenda,
+                     também criamos a conta. O login é o e-mail da revenda, sua senha o cnpj da revenda.';
+          $status= 'success';
+        }
+      }
+    }catch(ErrorException $e){
+        $message = $e->getMessage();
+        $status= 'danger';
     }
-
-    return view('revendas.admin');
+    return response()->json(['message'=> $message, 'status'=> $status]);
   }
 
   public function admin(Request $request){
