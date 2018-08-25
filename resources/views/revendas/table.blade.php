@@ -17,7 +17,7 @@
                     <th>Razaosocial</th>
                     <th>Nomefantasia</th>
                     <th>Cnpj</th>
-                    <th>User</th>
+                    <th>Usuário</th>
                     <th>Ativo</th>
                     <th>Endereco</th>
                     <th>Destaques</th>
@@ -30,16 +30,16 @@
                     <td>{!! $revenda->razaosocial !!}</td>
                     <td>{!! $revenda->nomefantasia !!}</td>
                     <td>{!! $revenda->cnpj !!}</td>
-                    <td>{!! $revenda->user !!}</td>
-                    <td>{!! $revenda->ativo !!}</td>
-                    <td>{!! $revenda->endereco !!}</td>
+                    <td>{!! $revenda->usuario->name !!}</td>
+                    <td>{!! $revenda->ativo?'Sim':'Não' !!}</td>
+                    <td><button type="button" onclick="showEndereco('{{$revenda->end->logradouro}}', '{{$revenda->end->bairro}}',
+                       '{{$revenda->end->cidade}}', '{{$revenda->end->uf}}', '{{$revenda->end->numero}}')" class="btn btn-info">Ver</button></td>
                     <td>{!! $revenda->destaques !!}</td>
                     <td>
                         {!! Form::open(['route' => ['revendas.destroy', $revenda->id], 'method' => 'delete']) !!}
                         <div class='btn-group'>
-                            <a href="{!! route('revendas.show', [$revenda->id]) !!}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-eye-open"></i></a>
-                            <a href="{!! route('revendas.edit', [$revenda->id]) !!}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-edit"></i></a>
-                            {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Are you sure?')"]) !!}
+                            <a href="{!! route('revendas.edit', [$revenda->id]) !!}" class='btn btn-default btn-xs'><i class="fas fa-edit"></i></a>
+                            {!! Form::button('<i class="fas fa-trash-alt"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Deseja realmente excluir?')"]) !!}
                         </div>
                         {!! Form::close() !!}
                     </td>
@@ -47,5 +47,24 @@
             @endforeach
             </tbody>
         </table>
+      </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="enderecoModal" tabindex="-1" role="dialog" aria-labelledby="enderecoModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="enderecoModalLabel">Endereço</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p id="endereco"></p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+          </div>
+        </div>
       </div>
     </div>

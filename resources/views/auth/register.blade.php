@@ -51,6 +51,11 @@
       <div class="form-group">
         <label for="documento" id="info_documento">CPF</label>
         <input class="form-control" type="text" id="documento" name="documento" value="" required>
+        @if ($errors->has('documento'))
+            <span class="help-block">
+                <strong>{{ $errors->first('documento') }}</strong>
+            </span>
+        @endif
       </div>
       <div class="row text-center mb-2">
         <div class="form-check col-sm-6">

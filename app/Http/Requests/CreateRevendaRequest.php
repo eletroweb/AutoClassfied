@@ -25,6 +25,12 @@ class CreateRevendaRequest extends FormRequest
      */
     public function rules()
     {
-        return Revenda::$rules;
+      return array(
+          'razaosocial'=> 'required',
+          'nomefantasia'=> 'required',
+          'user'=> 'required',
+          'cnpj'=> 'required|unique:revendas,cnpj,'.$this->revenda,
+          
+      );
     }
 }

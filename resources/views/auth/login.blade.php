@@ -106,9 +106,19 @@
   <form method="post" class="form-signin h-100" action="{{route('login')}}">
       {{csrf_field()}}
       <h1 class="h3 mb-3 font-weight-normal text-center">Acesse a sua conta</h1>
+      @if ($errors->has('email'))
+          <span class="help-block">
+              <strong>{{ $errors->first('email') }}</strong>
+          </span>
+      @endif
       <label for="email" class="sr-only">Email</label>
       <input type="email" id="email" name="email" class="form-control" placeholder="Digite o seu e-mail" required="" autofocus="">
       <label for="password" class="sr-only">Senha</label>
+      @if ($errors->has('password'))
+          <span class="help-block">
+              <strong>{{ $errors->first('password') }}</strong>
+          </span>
+      @endif
       <input type="password" id="password" name="password" class="form-control" placeholder="Digite a sua senha" required="">
       <div class="checkbox mb-3">
         <label>

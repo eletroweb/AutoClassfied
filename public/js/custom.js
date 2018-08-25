@@ -8,6 +8,11 @@ function removeParent(element){
   console.log(element.parent().remove());
 }
 
+function showEndereco(rua, bairro, cidade, estado, numero){
+  $('#endereco').html('Rua '+rua+' '+numero+', '+bairro+' - '+cidade+', '+estado);
+  $('#enderecoModal').modal('show');
+}
+
 $(document).ready(function(){
   var drop_anuncio = $('#dropzone').dropzone({
     url: "/imagens/store",
@@ -91,7 +96,7 @@ $(document).ready(function(){
       alert('Você precisa selecionar um plano para a revenda.');
     }
   });
-
+  
   $('#documento').mask('000.000.000-00', {reverse: true});
   $('.telefone').mask('(00) 0000-0000');
   $("#anunciar").submit(function(){
