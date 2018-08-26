@@ -44,6 +44,7 @@ Route::middleware(['auth','admin'])->group(function(){
   Route::get('/admin', 'UserController@admin')->name('admin');
   Route::get('/admin/tables', 'UserController@tables');
   Route::get('/admin/form', 'UserController@form');
+  Route::get('/admin/configuracoes', 'ConfigController@index')->name('configuracoes');
   Route::resource('/admin/marcas', 'MarcaController');
   Route::resource('/admin/modelos', 'ModelosController');
   Route::resource('/admin/versoes', 'VersaoController');

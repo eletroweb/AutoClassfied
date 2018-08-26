@@ -51,7 +51,6 @@ class VeiculoController extends Controller
         }
         //Marca::create($r->marca);
       }
-      return redirect('/anuncios');
     }
 
     public function getMarcas(Request $request){
