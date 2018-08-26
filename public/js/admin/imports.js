@@ -21,6 +21,7 @@ $(document).ready(function(){
         complete: function( jqXHR, textStatus ){
           $('#loading').addClass('d-none');
           $('#importarRevenda').removeAttr('disabled');
+          $('#cnpj').removeAttr('disabled');
         }
       });
     }else{
