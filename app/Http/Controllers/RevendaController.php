@@ -304,13 +304,15 @@ class RevendaController extends AppBaseController
             }
             //$this->complementos($veiculo, $anuncio);
             foreach($veiculo->fotos->foto as $foto){
-              $img = new Imagem();
+              $old_img = Imagem::where([['url', $foto]])->first();
+              $img = $old_img? $old_img:(new Imagem());
               $img->url= $foto;
               $img->save();
-              $img_anuncio = new AnuncioImagem();
+              $old = AnuncioImagem::where('imagem', $img->id)->first();
+              $img_anuncio = $old? $old:(new AnuncioImagem());
               $img_anuncio->imagem = $img->id;
               $img_anuncio->anuncio = $anuncio->id;
-              $img_anuncio->first = $first;
+              $img_anuncio->first = $old?$img_anuncio->first:$first;
               $img_anuncio->save();
               $first = false;
             }
@@ -319,7 +321,11 @@ class RevendaController extends AppBaseController
         }
 
         public function createAnuncioDado($anuncio, $key, $value, $visible = true){
-          $anuncioDado = new AnuncioDados();
+          $old = AnuncioDados::where([
+            ['nome', '=', $key],
+            ['anuncio', '=', $anuncio->id]
+          ])->first();
+          $anuncioDado = $old? $old:(new AnuncioDados());
           $anuncioDado->anuncio = $anuncio->id;
           $anuncioDado->nome = $key;
           $anuncioDado->valor = $value;
@@ -328,17 +334,21 @@ class RevendaController extends AppBaseController
         }
 
         public function createAcessorios($anuncio, $_acessorio){
-          $acessorio = new Acessorio();
-          $acessorio->anuncio = $anuncio->id;
-          $acessorio->nome = $_acessorio;
-          $acessorio->save();
+          if(!Acessorio::where([['nome', '=', $_acessorio],['anuncio','=',$anuncio->id]])->first()){
+            $acessorio = new Acessorio();
+            $acessorio->anuncio = $anuncio->id;
+            $acessorio->nome = $_acessorio;
+            $acessorio->save();
+          }
         }
 
         public function createAdicional($anuncio, $_adicional){
-          $adicional = new Adicional();
-          $adicional->anuncio = $anuncio->id;
-          $adicional->nome = $_adicional;
-          $adicional->save();
+          if(!Adicional::where([['nome', '=', $_adicional],['anuncio','=',$anuncio->id]])->first()){
+            $adicional = new Adicional();
+            $adicional->anuncio = $anuncio->id;
+            $adicional->nome = $_adicional;
+            $adicional->save();
+          }
         }
 
         //Estas são as condições para que o anúncio vindo do xml seja importado para o sistema.
@@ -354,10 +364,12 @@ class RevendaController extends AppBaseController
           if(isset($veiculo->complementos->complemento)){
             foreach ($veiculo->complementos->complemento as $complemento) {
               $c = (string)$complemento;
-              $_c = new Complemento();
-              $_c->nome = $c;
-              $_c->anuncio = $anuncio->id;
-              $_c->save();
+              if(!Complemento::where('nome', $c)->first()){
+                $_c = new Complemento();
+                $_c->nome = $c;
+                $_c->anuncio = $anuncio->id;
+                $_c->save();
+              }
             }
           }
           return false;
@@ -404,7 +416,5 @@ class RevendaController extends AppBaseController
             }
             return view('revendas.homepage.revenda')->with(['revenda'=> $revenda, 'anuncios'=> $anuncios]);
           }
-
-
 
 }

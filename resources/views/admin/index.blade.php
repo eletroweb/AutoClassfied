@@ -46,7 +46,7 @@
               <div class="navbar-header">
                 <!-- Navbar Brand --><a href="index.html" class="navbar-brand d-none d-sm-inline-block">
                   <div class="brand-text d-none d-lg-inline-block"><span>Unicodono  </span><strong>Painel de controle</strong></div>
-                  <div class="brand-text d-none d-sm-inline-block d-lg-none"><strong>BD</strong></div></a>
+                  <div class="brand-text d-none d-sm-inline-block d-lg-none"><strong>UN</strong></div></a>
                 <!-- Toggle Button--><a id="toggle-btn" href="#" class="menu-btn active"><span></span><span></span><span></span></a>
               </div>
               <!-- Navbar Menu -->
@@ -144,6 +144,7 @@
               <ul id="usuarios" class="collapse list-unstyled ">
                 <li><a href="#">Campos de cadastro</a></li>
                 <li><a href="/admin/users">Usuários cadastrados</a></li>
+
               </ul>
             </li>
           </ul><span class="heading">Configurações</span>
