@@ -144,13 +144,12 @@
               <ul id="usuarios" class="collapse list-unstyled ">
                 <li><a href="#">Campos de cadastro</a></li>
                 <li><a href="/admin/users">Usuários cadastrados</a></li>
-                <li><a href="#">Revendas</a></li>
               </ul>
             </li>
           </ul><span class="heading">Configurações</span>
           <ul class="list-unstyled">
             <li> <a href="#"> <i class="fa fa-money-check-alt"></i>PagSeguro</a></li>
-            <li> <a href="#"> <i class="icon-screen"></i>Configurações do site</a></li>
+            <li> <a href="{{route('configuracoes')}}"> <i class="fa fa-cogs"></i>Configurações do site</a></li>
             <li> <a href="#"> <i class="icon-mail"></i>Configurações de e-mail</a></li>
           </ul>
         </nav>
@@ -175,6 +174,7 @@
     </div>
     <!-- JavaScript files-->
     <script src="{{asset('js/jquery-3.3.1.min.js')}}" charset="utf-8"></script>
+    <script src="{{asset('js/jquery.mask.min.js')}}" charset="utf-8"></script>
     <script src="{{asset('vendor/popper.js/umd/popper.min.js')}}"></script>
     <script src="{{asset('vendor/bootstrap/js/bootstrap.min.js')}}"></script>
     <script src="{{asset('vendor/jquery.cookie/jquery.cookie.js')}}"></script>
@@ -182,7 +182,6 @@
     <!-- Main File-->
     <script src="{{asset('js/admin/front.js')}}"></script>
     <script src="{{asset('js/admin.js')}}" charset="utf-8"></script>
-
     <script src="{{asset('js/jquery.mask.min.js')}}" charset="utf-8"></script>
     <script src="{{asset('js/anuncio/main.js')}}" charset="utf-8"></script>
     <script src="{{asset('js/owl.carousel.min.js')}}" charset="utf-8"></script>
@@ -190,7 +189,6 @@
     <script type="text/javascript" src="{{asset('js/select2.full.min.js')}}"></script>
     <script src="{{asset('js/custom.js')}}" charset="utf-8"></script>
     <script src="{{asset('js/fipe.js')}}" charset="utf-8"></script>
-
     <script src="{{asset('js/cidades_estados.js')}}" charset="utf-8"></script>
     <script src="{{asset('js/admin/imports.js')}}" charset="utf-8"></script>
   </body>

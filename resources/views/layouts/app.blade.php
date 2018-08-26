@@ -280,6 +280,6 @@
     <script src="{{asset('js/fipe.js')}}" charset="utf-8"></script>
     <script src="{{asset('js/cidades_estados.js')}}" charset="utf-8"></script>
     <script src="{{asset('js/dropzone.js')}}" charset="utf-8"></script>
-        <script src="{{asset('js/custom.js')}}" charset="utf-8"></script>
+    <script src="{{asset('js/custom.js')}}" charset="utf-8"></script>
 </body>
 </html>
