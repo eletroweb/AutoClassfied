@@ -1,3 +1,6 @@
+body{
+  font-family: 'Raleway', sans-serif;
+}
 #banner_principal{
   padding-top: 50px;
   height: 500px;
@@ -9,6 +12,9 @@
   border: 2px dotted lightskyblue;
   min-height: 250px;
   border-radius: 10px;
+}
+.btn-primary{
+  background-color: #03598f !important;
 }
 #avatar-revenda{
   background-color: white;
@@ -123,4 +129,38 @@
 .del-hover:hover{
   background-color: red;
   color: white;
+}
+
+/* Tabs*/
+section {
+    padding: 60px 0;
+}
+
+section .section-title {
+    text-align: center;
+    color: #007b5e;
+    margin-bottom: 50px;
+    text-transform: uppercase;
+}
+#tabs{
+    color:  #03598f;
+}
+#tabs h6.section-title{
+    color:  #03598f;
+}
+
+#tabs .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+    color: #03598f;
+    background-color: transparent;
+    border-color: transparent transparent #f3f3f3;
+    border-bottom: 4px solid !important;
+    font-size: 20px;
+    font-weight: bold;
+}
+#tabs .nav-tabs .nav-link {
+    border: 1px solid transparent;
+    border-top-left-radius: .25rem;
+    border-top-right-radius: .25rem;
+    color:  #03598f;
+    font-size: 20px;
 }

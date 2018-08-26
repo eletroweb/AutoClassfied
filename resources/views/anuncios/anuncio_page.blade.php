@@ -21,6 +21,85 @@
           @endforeach
           </div>
       </div>
+        <!--<ul class="nav mt-3 nav-pills" id="myTab" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active white" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Mais informações</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Adicionais</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Acessórios</a>
+          </li>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+          <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+            <div class="row pt-2">
+
+            </div>
+          </div>
+          <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+            <div class="row pt-2">
+              <div class="col-sm-12">
+                <p><b>Adicionais do veículo</b></p>
+                <hr>
+              </div>
+
+            </div>
+          </div>
+          <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+            <div class="row pt-2">
+
+            </div>
+          </div>
+      </div>-->
+      <!-- Tabs -->
+      <section id="tabs">
+      	<div class="container">
+      		<!--<h6 class="section-title h1">Tabs</h6>-->
+      		<div class="row">
+      			<div class="col-xs-12 ">
+      				<nav>
+      					<div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+      						<a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Informações</a>
+      						<a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Adicionais do veículo</a>
+      						<a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Acessórios</a>
+      					</div>
+      				</nav>
+      				<div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
+      					<div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                  <div class="row">
+                    @foreach($anunciodados as $dado)
+                      <div class="col-sm-4">
+                        <p style="font-size: 14px;"><b style="font-size: 18px;">{{ucfirst($dado->nome)}}</b><br> {{$dado->valor}}</p>
+                      </div>
+                    @endforeach
+                  </div>
+      					</div>
+      					<div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                  <div class="row">
+                    @foreach($adicionais as $adicional)
+                    <div class="col-sm-4">
+                      <p>{{ucfirst($adicional->nome)}}</p>
+                    </div>
+                    @endforeach
+                  </div>
+      					</div>
+      					<div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+                  <div class="row">
+                    @foreach($acessorios as $acessorio)
+                      <div class="col-sm-6">
+                        <p>{{ucfirst($acessorio->nome)}}</p>
+                      </div>
+                    @endforeach
+                  </div>
+      					</div>
+      				</div>
+      			</div>
+      		</div>
+      	</div>
+      </section>
+      <!-- ./Tabs -->
     </div>
     <div class="col-md-5">
       <div class="card" style="border: none">
@@ -117,52 +196,7 @@
     </div>
   </div>
   <div class="row mt-4">
-    <div class="col-sm-7">
-      <ul class="nav nav-pills" id="myTab" role="tablist">
-        <li class="nav-item">
-          <a class="nav-link active white" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Mais informações</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Adicionais</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Acessórios</a>
-        </li>
-      </ul>
-      <div class="tab-content" id="myTabContent">
-        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-          <div class="row pt-2">
-          @foreach($anunciodados as $dado)
-            <div class="col-sm-6">
-              <p><b>{{ucfirst($dado->nome)}}</b>: {{$dado->valor}}</p>
-            </div>
-          @endforeach
-          </div>
-        </div>
-        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-          <div class="row pt-2">
-            <div class="col-sm-12">
-              <p><b>Adicionais do veículo</b></p>
-              <hr>
-            </div>
-            @foreach($adicionais as $adicional)
-            <div class="col-sm-6">
-              <p>{{ucfirst($adicional->nome)}}</p>
-            </div>
-            @endforeach
-          </div>
-        </div>
-        <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-          <div class="row pt-2">
-            @foreach($acessorios as $acessorio)
-              <div class="col-sm-6">
-                <p>{{ucfirst($acessorio->nome)}}</p>
-              </div>
-            @endforeach
-          </div>
-        </div>
-      </div>
-    </div>
+
   </div>
   <!-- Anúncios relacionados -->
   <div class="row">
