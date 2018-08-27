@@ -20,6 +20,7 @@ class AnuncioController extends Controller
       return view('anuncios.anuncie');
     }
 
+
     public function anuncieStore(Request $request){
         //var_dump($request->all());exit;
         $validatedData = $request->validate([
