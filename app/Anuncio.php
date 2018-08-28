@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use App\AnuncioImagem;
 use App\Imagem;
+use App\Revenda;
 
 class Anuncio extends Model
 {
@@ -33,5 +34,7 @@ class Anuncio extends Model
         }
         return $url;
     }
+
+    
 
 }

@@ -11,7 +11,6 @@
       <div class="row">
         <div class="col-sm-12" style="margin-left: inherit;">
           <a class="col-sm-2 mr-1" href="{{$imagens[0]}}" data-lightbox="roadtrip"><img src="{{$imagens[0]}}" class="img-fluid main-img m-auto" alt="Responsive image"></a>
-
         </div>
       </div>
       <div class="row">
@@ -21,38 +20,6 @@
           @endforeach
           </div>
       </div>
-        <!--<ul class="nav mt-3 nav-pills" id="myTab" role="tablist">
-          <li class="nav-item">
-            <a class="nav-link active white" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Mais informações</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Adicionais</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Acessórios</a>
-          </li>
-        </ul>
-        <div class="tab-content" id="myTabContent">
-          <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-            <div class="row pt-2">
-
-            </div>
-          </div>
-          <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-            <div class="row pt-2">
-              <div class="col-sm-12">
-                <p><b>Adicionais do veículo</b></p>
-                <hr>
-              </div>
-
-            </div>
-          </div>
-          <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-            <div class="row pt-2">
-
-            </div>
-          </div>
-      </div>-->
       <!-- Tabs -->
       <section id="tabs">
       	<div class="container">
@@ -155,8 +122,14 @@
       </div>
         <div class="card" style="border: none">
           <div class="card-body">
-            <h5 class="card-title">Anunciado por {{App\User::find($anuncio->user)->name}}</h5>
-            <h6 class="card-subtitle mb-2 text-muted">Dados do vendedor</h6>
+            <h5 class="card-title">Anunciado por {{$anuncio->users->isRevenda()?$anuncio->users->isRevenda()->nomefantasia:$anuncio->users->name}}</h5>
+            <h6 class="card-subtitle mb-2 text-muted">
+              @if($r = $anuncio->users->isRevenda())
+                <a href="/revenda/{{$r->id}}">Ver estoque completo desta revenda</a>
+              @else
+                Dados do vendedor
+              @endif
+            </h6>
             <p class="card-text">
               <div class="list-group">
                 <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
@@ -164,7 +137,7 @@
                     <h5 class="mb-1">Telefone</h5>
                     <small class="text-muted"></small>
                   </div>
-                  <p class="mb-1">{{App\User::find($anuncio->user)->telefone()->valor}}</p>
+                  <p class="mb-1">{{$anuncio->users->telefone()->valor}}</p>
                   <small class="text-muted"></small>
                 </a>
               </div>
