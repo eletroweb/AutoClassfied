@@ -74,7 +74,7 @@
                   <a class="dropdown-item" href="/anuncios?tipo[]=moto&mais_buscados=1">Motos mais buscadas</a>
                   <!--<a class="dropdown-item" href="#">Busca avançada</a>-->
                   <a class="dropdown-item" href="{{route('revendas')}}">Encontre um revendedor</a>
-                  <a class="dropdown-item" href="{{route('fipe')}}">Tabela FIPE</a>
+                  <a class="dropdown-item" href="{{route('fipe')}}">Avalie o seu carro</a>
                 </div>
               </li>
               <li class="nav-item dropdown">
