@@ -22,6 +22,7 @@
     <meta name="Audience" content="all" />
     <meta name="url" content="www.unicodono.com.br" />
     <link rel="shortcut icon" href="{{asset('images/favicon.jpg')}}" type="image/x-icon" />
+
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <script type="text/javascript" src="https://stc.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.directpayment.js"></script>
@@ -44,6 +45,7 @@
     <link rel="stylesheet" href="{{ asset('fine-uploader/fine-uploader-new.css') }}">
     <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+    <script src='https://www.google.com/recaptcha/api.js'></script>
 </head>
 <body>
     <div id="app">
@@ -282,5 +284,6 @@
     <script src="{{asset('js/cidades_estados.js')}}" charset="utf-8"></script>
     <script src="{{asset('js/dropzone.js')}}" charset="utf-8"></script>
     <script src="{{asset('js/custom.js')}}" charset="utf-8"></script>
+    <script src="{{asset('js/recaptcha.js')}}" charset="utf-8"></script>
 </body>
 </html>
