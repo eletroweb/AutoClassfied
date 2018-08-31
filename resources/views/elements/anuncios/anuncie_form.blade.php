@@ -65,7 +65,7 @@
         </div>
         <div class="form-group">
           <div class="custom-control custom-checkbox">
-            <input required type="checkbox" class="custom-control-input" id="moto" name="moto" value="true">
+            <input type="checkbox" class="custom-control-input" id="moto" name="moto" value="1">
             <label class="custom-control-label" for="moto">
               Estou anunciando uma motocicleta
             </label>

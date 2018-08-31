@@ -3,9 +3,9 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use App\Revenda;
+use App\NewsletterUser;
 
-class UpdateRevendaRequest extends FormRequest
+class UpdateNewsletterUserRequest extends FormRequest
 {
 
     /**
@@ -25,14 +25,6 @@ class UpdateRevendaRequest extends FormRequest
      */
     public function rules()
     {
-       //var_dump($this->revenda);exit;
-        /*return array(
-            'razaosocial'=> 'required',
-            'nomefantasia'=> 'required',
-            'user'=> 'required',
-            'cnpj'=> 'required|unique:revendas,cnpj,'.$this->revenda,
-
-        );*/
-        return array();
+        return NewsletterUser::$rules;
     }
 }

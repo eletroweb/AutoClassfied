@@ -41,4 +41,8 @@ class User extends Authenticatable
     public function isAdmin(){
       return true;
     }
+
+    public function isRevenda(){
+      return Revenda::where('user', $this->id)->first();
+    }
 }

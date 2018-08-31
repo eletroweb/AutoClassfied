@@ -11,6 +11,16 @@
     <div class="col-sm-6">
       <div class="card">
         <div class="card-body">
+          @if(!Auth::check())
+            <div class="form-group">
+              <label for="nome">Nome</label>
+              <input type="text" name="nome" class="form-control" required placeholder="Digite o seu nome">
+            </div>
+            <div class="form-group">
+              <label for="nome">E-mail</label>
+              <input type="email" name="email" class="form-control" required placeholder="Digite o seu e-mail">
+            </div>
+          @endif
           <div class="form-group">
             <label for="marca">Marca do veículo</label>
             <select class="form-control select2" id="marca_fipe" name="marca">

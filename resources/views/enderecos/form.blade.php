@@ -17,7 +17,7 @@
   </div>
   <div class="form-group col-sm-6">
     <label for="estado">Estado</label>
-    <select required class="form-control" name="uf" id="uf" required>
+    <select class="form-control" name="uf" id="uf" required>
       <option value="">Selecione o seu estado...</option>
       <option value="AC">Acre</option>
       <option value="AL">Alagoas</option>

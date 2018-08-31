@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
 <main role="main">
-  <section class="jumbotron text-center" id="revenda-top">
+  <section class="jumbotron text-center modifiable" id="revenda-top">
     <div class="container">
       <div class="row">
         <form class="col-sm-5 m-auto" style="z-index: 10;">
@@ -34,6 +34,9 @@
     </div>
   </section>
   <div class="album py-5">
+    <div class="alert alert-primary text-center" role="alert">
+      Você pode alterar a imagem e a logo da sua revenda acessando as <a href="/revenda/{{$revenda->id}}/configuracoes" class="alert-link">Configurações da revenda</a>
+    </div>
     <div class="container">
       <div class="row">
         @forelse($anuncios as $anuncio)

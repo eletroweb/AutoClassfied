@@ -37,7 +37,7 @@ class AnuncioController extends Controller
         if(Auth::user()->id != intval($user)){
           return redirect('/anuncie')->with('status', 'Você está trapaceando para publicar este anúncio');
         }
-        if($request->hasFile('imagens')){
+        if($request->has('imagens')){
           $imagens = $request->input('imagens');
           $anuncio = Anuncio::create($validatedData);
           $img_principal = new AnuncioImagem();
@@ -164,7 +164,8 @@ class AnuncioController extends Controller
       $view->user = Auth::check()? Auth::user()->id:'0';
       $view->anuncio = $anuncio->id;
       $view->save();
-      $relacionados = Anuncio::where([['id', '!=', $anuncio->id]])->get()->take(4);
+      $revenda = $anuncio->users->isRevenda();
+      $relacionados = $revenda?Anuncio::where([['id', '!=', $anuncio->id]])->get()->take(4):Anuncio::where('user', $anuncio->users->id)->get()->take(4);
       return view('anuncios.anuncio_page')->with(['acessorios' => $acessorios, 'adicionais' => $adicionais, 'anunciodados'=> $dados,
             'anuncio'=> $anuncio, 'imagens' => $imagens, 'principal' => $imagens[0], 'relacionados'=> $relacionados]);
     }
