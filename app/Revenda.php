@@ -3,9 +3,14 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Anuncio;
+use Illuminate\Support\Facades\DB;
 
 class Revenda extends Model
 {
+  
+    private $anunciosPublicados = null;
+    private $anunciosAtivos = null;
 
     protected $fillable = ['razaosocial', 'nomefantasia', 'user', 'cnpj', 'ativo', 'endereco', 'destaques'];
 
@@ -16,4 +21,28 @@ class Revenda extends Model
     public function usuario(){
       return $this->hasOne('App\User', 'id', 'user');
     }
+  
+    public function anunciosPublicados(){
+      if($this->anunciosPublicados){
+        return $this->anunciosPublicados;
+      }
+      $this->anunciosPublicados = Anuncio::where('user', $this->user)->get();
+      return $this->anunciosPublicados;
+    }
+    
+    public function anunciosAtivos(){
+      if($this->anunciosAtivos){
+        return $this->anunciosAtivos;
+      }
+      $this->anunciosAtivos= Anuncio::where([['user', '=', $this->user], ['ativo', '=', true]])->get();
+      return $this->anunciosAtivos;
+    }
+  
+    public function totalVisualizacoesAnuncios(){
+      return VisualizacaoAnuncio::join('anuncios', 'anuncios.id', '=', 'visualizacao_anuncios.anuncio')
+              ->select(DB::raw('count(*) as visualizacoes'))
+              ->where('anuncios.user', $this->user)->get();
+
+    }
+    
 }

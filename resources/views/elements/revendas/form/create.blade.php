@@ -13,7 +13,7 @@
             </span>
         @endif
       </div>
-      <input type="hidden" name="user" value="{{Auth::user()->id}}">
+      <input type="hidden" name="user" value="{{$revenda->user}}">
       <div class="form-group">
         <label for="nomefantasia">Nome fantasia</label>
         <input value="{{isset($revenda)?$revenda->nomefantasia:''}}" type="text" class="form-control" name="nomefantasia" id="nomefantasia" placeholder="Este nome será exibido" required>
