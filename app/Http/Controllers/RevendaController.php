@@ -18,6 +18,7 @@ use App\Versao;
 use App\AnuncioImagem;
 use App\AnuncioDados;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 use App\User;
 use App\Acessorio;
 use App\Adicional;
