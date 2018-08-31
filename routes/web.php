@@ -28,12 +28,15 @@ Route::post('/anuncio/contato', 'ContatoAnuncioController@store')->name('contato
 Route::get('/revenda/{id}', 'RevendaController@homepage');
 Route::get('/consulta-tabela-fipe', 'FipeController@index')->name('fipe');
 Route::get('/encontre-uma-revenda', 'RevendaController@revendas')->name('revendas');
+
 Route::middleware('auth')->group(function () {
   Route::get('/anuncie', 'AnuncioController@anuncie')->name('anuncie');
   Route::get('/minha-conta', 'UserController@profile')->name('minhaconta');
   Route::get('/minha-conta/meus-anuncios', 'UserController@meus_anuncios')->name('meusanuncios');
   Route::post('/anuncios/store', 'AnuncioController@anuncieStore')->name('anuncieStore');
   Route::post('/imagens/store', 'ImagemController@imageUpload');
+  Route::get('/revenda/{id}/configuracoes', 'RevendaController@config');
+  Route::post('/revenda/{id}/update', 'RevendaController@update')->name('update_revenda');
 });
 Route::get('/importxml', 'VeiculoController@updateVeiculos');
 Route::middleware(['auth','admin'])->group(function(){
@@ -54,5 +57,3 @@ Route::middleware(['auth','admin'])->group(function(){
   Route::resource('/admin/revendas', 'RevendaController');
   Route::resource('newsletterUsers', 'NewsletterUserController');
 });
-
-

@@ -129,12 +129,11 @@ class RevendaController extends AppBaseController
   public function update($id, UpdateRevendaRequest $request)
   {
     $revenda = $this->revendaRepository->findWithoutFail($id);
-
     if (empty($revenda)) {
       Flash::error('Revenda não encontrada');
-
       return redirect(route('revendas.index'));
     }
+
     $endereco = Endereco::find($revenda->endereco);
     $endereco->logradouro = $request->input('logradouro');
     $endereco->numero = $request->input('numero');
@@ -144,12 +143,11 @@ class RevendaController extends AppBaseController
     $endereco->cep = $request->input('cep');
     $endereco->save();
     $data = $request->all();
-    $data['ativo']= $data['ativo']?$data['ativo']:0;
+    $data['user'] = isset($data['user'])? Auth::user()->id:$data['user'];
+    $data['ativo']= isset($data['ativo'])?$data['ativo']:0;
     $revenda = $this->revendaRepository->update($data, $id);
-
     Flash::success('Revenda atualizada com sucesso.');
-
-    return redirect(route('revendas.index'));
+    return redirect()->back();
   }
 
   /**
@@ -415,6 +413,11 @@ class RevendaController extends AppBaseController
               $anuncios = Anuncio::where('user', $revenda->user)->where($param)->orderBy('id', 'desc')->paginate(20);
             }
             return view('revendas.homepage.revenda')->with(['revenda'=> $revenda, 'anuncios'=> $anuncios]);
+          }
+
+          public function config(Request $request, $id){
+            $revenda = Revenda::find($id);
+            return view('revendas.homepage.config')->with('revenda', $revenda);
           }
 
 }
