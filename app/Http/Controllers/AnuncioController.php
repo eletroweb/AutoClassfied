@@ -133,7 +133,7 @@ class AnuncioController extends Controller
       return [$param, $tipos];
     }
 
-    public function index(Request $request, $id){
+    public function index(Request $request, $nome, $id){
       $anuncio = Anuncio::find($id);
       $anuncio->visualizacoes += 1;
       $anuncio->save();

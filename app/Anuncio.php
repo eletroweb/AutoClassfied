@@ -35,6 +35,22 @@ class Anuncio extends Model
         return $url;
     }
 
-    
+    public function getNomeFormated(){
+      return str_replace("  ", "", $this->nome);
+    }
+
+    public function getKm(){
+      return AnuncioDados::where([
+        ['nome', '=', 'Km'],
+        ['anuncio', '=', $this->id]
+      ])->first()->valor;
+    }
+
+    public function getCambio(){
+      return AnuncioDados::where([
+        ['nome', '=', 'Cambio'],
+        ['anuncio', '=', $this->id]
+      ])->first()->valor;
+    }
 
 }
