@@ -44,7 +44,7 @@
           <div class="card mb-4 shadow-sm">
             <img class="card-img-top" src="{{$anuncio->urlImagemFirst()}}" alt="{{$anuncio->nome}}">
             <div class="card-body">
-              <h5 class="card-title"><a href="/anuncios/{{$anuncio->id}}" style="color: black">{{$anuncio->nome}}</a></h4>
+              <h5 class="card-title"><a href="/anuncios/{{$anuncio->nome}}_{{$anuncio->id}}" style="color: black">{{$anuncio->nome}}</a></h4>
               <p class="card-text">{{str_limit($anuncio->descricao, 150)}}</p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">

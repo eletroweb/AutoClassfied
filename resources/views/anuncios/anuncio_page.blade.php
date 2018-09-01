@@ -84,18 +84,18 @@
                 {{csrf_field()}}
                 <div class="form-group">
                   <label for="nome">Nome completo:</label>
-                  <input type="text" class="form-control" id="nome" name="nome" aria-describedby="nomeHelp" placeholder="Digite o seu nome">
+                  <input type="text" class="form-control" id="nome" name="nome" value="{{Auth::check()?Auth::user()->name:''}}" aria-describedby="nomeHelp" placeholder="Digite o seu nome">
                   <small id="nomeHelp" class="form-text text-muted">Nome usado para identificarmos você.</small>
                 </div>
                 <input type="hidden" name="anuncio" value="{{$anuncio->id}}">
                 <div class="form-group">
                   <label for="email">E-mail:</label>
-                  <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Digite o seu email">
+                  <input type="email" class="form-control" id="email" value="{{Auth::check()?Auth::user()->email:''}}" name="email" aria-describedby="emailHelp" placeholder="Digite o seu email">
                   <small id="emailHelp" class="form-text text-muted">Utilizaremos para entrar em contato com você.</small>
                 </div>
                 <div class="form-group">
                   <label for="telefone">Telefone</label>
-                  <input type="text" class="form-control" id="telefone" name="telefone" aria-describedby="telefoneHelp" placeholder="Digite o seu telefone">
+                  <input type="text" class="form-control" id="telefone" value="{{Auth::check()?Auth::user()->telefone()->valor:''}}" name="telefone" aria-describedby="telefoneHelp" placeholder="Digite o seu telefone">
                   <small id="telefoneHelp" class="form-text text-muted">Utilizaremos para entrar em contato com você.</small>
                 </div>
                 <div class="form-group form-check">
@@ -131,16 +131,13 @@
               @endif
             </h6>
             <p class="card-text">
-              <div class="list-group">
-                <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-                  <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1">Telefone</h5>
-                    <small class="text-muted"></small>
-                  </div>
-                  <p class="mb-1">{{$anuncio->users->telefone()->valor}}</p>
-                  <small class="text-muted"></small>
-                </a>
-              </div>
+              <ul class="list-group">
+                <li class="list-group-item"><i class="fa fa-phone"></i> {{$anuncio->users->telefone()->valor}}</li>
+                <li class="list-group-item"><i class="fa fa-map-marker-alt"></i>
+                  {{$anuncio->users->isRevenda()->end->logradouro}} {{$anuncio->users->isRevenda()->end->numero}},
+                  {{$anuncio->users->isRevenda()->end->cidade}} - {{$anuncio->users->isRevenda()->end->uf}}
+                </li>
+              </ul>
             </p>
           </div>
         </div>
