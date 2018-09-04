@@ -57,6 +57,24 @@
             </div>
           </div>
         </div>
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label for="ano">Quilometragem</label>
+              <input required type="number" value="{{old('km')}}" class="form-control" name="km" id="km" aria-describedby="anoHelp" placeholder="Digite o ano do veículo">
+              <small id="kmHelp" class="form-text text-muted">Informe a quilometragem do veículo</small>
+            </div>
+          </div>
+
+        </div>
+        <div class="form-group">
+          <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" id="usado" name="usado" value="1">
+            <label class="custom-control-label" for="usado">
+              Veículo usado
+            </label>
+          </div>
+        </div>
         <input type="hidden" name="user" value="{{Auth::user()->id}}">
         <div class="form-group">
           <label for="descricao">Descrição</label>
