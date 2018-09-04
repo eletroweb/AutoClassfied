@@ -10,7 +10,9 @@ $(document).ready(function(){
         type: 'post',
         dataType: 'json',
         data: {_token:  $('meta[name="csrf-token"]').attr('content'),
-         cnpj: $('#cnpj').val().replace('-', '').replace('-', '').replace('-', '').replace('/', '')},
+         cnpj: $('#cnpj').val().replace('-', '').replace('-', '').replace('-', '').replace('/', ''),
+         limite: $('#limite').val()==''?-1:$('#limite').val()
+       },
         success: function(data){
           $('#importarRevenda').removeAttr('disabled');
           alert('Revenda importada com sucesso!');

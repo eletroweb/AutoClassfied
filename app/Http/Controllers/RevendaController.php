@@ -187,7 +187,17 @@ class RevendaController extends AppBaseController
         $request->session()->flash('alert', 'danger');
         return view('revendas.admin');
       }
+      //Limitar importações de revendas
+      $limite = intval($request->input('limite'))+1;
       foreach($result as $veiculo){
+        if($limite != -1){
+          if($limite > 0){
+            //var_dump($limite);
+            $limite--;
+          }
+          else
+            return response()->json(['message'=> $message, 'status'=> $status]);
+        }
         //O primeiro passo é verificar se a revenda existe.
         $r = $veiculo->loja;
         $cnpj = $r->cnpj;
@@ -196,13 +206,16 @@ class RevendaController extends AppBaseController
           $message= 'Revenda atualizada com sucesso!';
           $status= 'success';
         }else{
-          $user = new User();
-          $user->name = $veiculo->loja->contato->nome;
-          $user->email = $veiculo->loja->contato->email;
-          $user->password = Hash::make($cnpj);
-          $user->pessoa_fisica = false;
-          $user->documento = $veiculo->loja->cnpj;
-          $user->save();
+          $user = User::where('email', $veiculo->loja->contato->email)->first();
+          if(!$user){
+            $user = new User();
+            $user->name = $veiculo->loja->contato->nome;
+            $user->email = $veiculo->loja->contato->email;
+            $user->password = Hash::make($cnpj);
+            $user->pessoa_fisica = false;
+            $user->documento = $veiculo->loja->cnpj;
+            $user->save();
+          }
           $endereco = new Endereco();
           $endereco->logradouro = $veiculo->loja->endereco->logradouro;
           $endereco->uf= $veiculo->loja->endereco->uf;

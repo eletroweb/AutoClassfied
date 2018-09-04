@@ -51,7 +51,8 @@ class Revenda extends Model
                               , 'contato_anuncios.email as email_contatante',
                               'contato_anuncios.*', 'anuncios.*'])
                     ->where('anuncios.user', $this->user)
-                    ->get();
+                    ->orderBy('contato_anuncios.id', 'desc')
+                    ->paginate(10);
     }
 
 }
