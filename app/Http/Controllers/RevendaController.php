@@ -188,7 +188,7 @@ class RevendaController extends AppBaseController
         return view('revendas.admin');
       }
       //Limitar importações de revendas
-      $limite = intval($request->input('limite'))+1;
+      $limite = $request->input('limite')=='-1'?-1:intval($request->input('limite'));
       foreach($result as $veiculo){
         if($limite != -1){
           if($limite > 0){
