@@ -31,7 +31,9 @@ class AnuncioController extends Controller
            'descricao' => 'required',
            'user' => 'required',
            'ano'=> 'required',
-           'moto' => ''
+           'moto' => '',
+           'km'=> 'required',
+           'usado'=> ''
         ]);
         $user = $request->input('user');
         if(Auth::user()->id != intval($user)){

@@ -47,6 +47,18 @@
     <div class="col-sm-3">
         <ul class="nav flex-column">
          <li class="nav-item">
+           <div class="card card-body">
+             <div class="custom-control custom-checkbox">
+               <input type="checkbox" class="custom-control-input" id="novos" name="usado[]" value="0" checked>
+               <label class="custom-control-label" for="novos">Novos</label>
+             </div>
+             <div class="custom-control custom-checkbox">
+               <input type="checkbox" class="custom-control-input" id="usados" name="usado[]" value="1" checked>
+               <label class="custom-control-label" for="usados">Usados</label>
+             </div>
+           </div>
+         </li>
+         <li class="nav-item">
            <div class="mt-2">
              <div class="card card-body">
                <div class="custom-control custom-checkbox">
@@ -76,6 +88,15 @@
              </div>
              <input type="number" aria-label="Máximo" placeholder="Máximo" name="ano_maximo" class="form-control">
              <input type="number" aria-label="Mínimo" placeholder="Mínimo" name="ano_minimo" class="form-control">
+           </div>
+         </li>
+         <li class="nav-item mt-2">
+           <div class="input-group">
+             <div class="input-group-prepend">
+               <span class="input-group-text">KM</span>
+             </div>
+             <input type="number" aria-label="Máximo" placeholder="Máximo" name="km_maximo" class="form-control">
+             <input type="number" aria-label="Mínimo" placeholder="Mínimo" name="km_minimo" class="form-control">
            </div>
          </li>
          <li class="nav-item mt-2">

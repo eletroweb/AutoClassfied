@@ -270,6 +270,8 @@ class RevendaController extends AppBaseController
         $anuncio->importado = true;
         $anuncio->ano = $veiculo->anomodelo;
         $anuncio->moto = $veiculo->tipoveiculo == 'Carro'? false:true;
+        $anuncio->km = $veiculo->km;
+        $anuncio->usado = $veiculo->zerokm=='N'?1:0;
         if($modelo = Modelos::where([
           ['nome', (string)$veiculo->modelo],
           ['marca', $anuncio->marca],
@@ -301,7 +303,6 @@ class RevendaController extends AppBaseController
             //Acredito que este trecho possa ser melhorado...
             //$this->createAnuncioDado($anuncio, 'ano_modelo', $veiculo->anomodelo);
             $this->createAnuncioDado($anuncio, 'cambio', $veiculo->cambio);
-            $this->createAnuncioDado($anuncio, 'km', $veiculo->km);
             $this->createAnuncioDado($anuncio, 'portas', $veiculo->portas);
             $this->createAnuncioDado($anuncio, 'cor', $veiculo->cor);
             $this->createAnuncioDado($anuncio, 'combustivel', $veiculo->combustivel);

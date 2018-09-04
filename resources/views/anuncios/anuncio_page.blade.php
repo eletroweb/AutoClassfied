@@ -36,6 +36,9 @@
       				<div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
       					<div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
                   <div class="row">
+                    <div class="col-sm-4">
+                      <p style="font-size: 14px;"><b style="font-size: 18px;">Quilometragem</b><br> {{$anuncio->km}}KM</p>
+                    </div>
                     @foreach($anunciodados as $dado)
                       <div class="col-sm-4">
                         <p style="font-size: 14px;"><b style="font-size: 18px;">{{ucfirst($dado->nome)}}</b><br> {{$dado->valor}}</p>

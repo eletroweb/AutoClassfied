@@ -9,7 +9,7 @@ use App\Revenda;
 
 class Anuncio extends Model
 {
-    protected $fillable = ['nome', 'descricao', 'marca', 'modelo', 'versao', 'valor', 'user', 'moto', 'ano'];
+    protected $fillable = ['nome', 'descricao', 'marca', 'km', 'usado', 'modelo', 'versao', 'valor', 'user', 'moto', 'ano'];
 
     public function anuncio_dados(){
         return $this->hasMany('App\AnuncioDados');
@@ -40,10 +40,7 @@ class Anuncio extends Model
     }
 
     public function getKm(){
-      return AnuncioDados::where([
-        ['nome', '=', 'Km'],
-        ['anuncio', '=', $this->id]
-      ])->first()->valor;
+      return $this->km;
     }
 
     public function getCambio(){
