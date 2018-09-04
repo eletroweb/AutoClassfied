@@ -24,6 +24,12 @@
             <label for="cnpj">CNPJ</label>
             <input type="text" name="cnpj" id="cnpj" value="" placeholder="Digite o CNPJ (Sem pontos ou traços)" class="form-control">
           </div>
+          <div class="row">
+            <div class="form-group col-sm-3">
+              <label for="limite">Limite</label>
+              <input class="form-control" type="number" id="limite" name="limite" placeholder="Limite de anúncios" value="">
+            </div>
+          </div>
           <button type="button" id="importarRevenda" class="btn btn-primary">Importar</button>
           <div class="row">
             <div class="col-sm-12">
