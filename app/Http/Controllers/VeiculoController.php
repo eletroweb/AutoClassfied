@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Marca;
 use App\Modelos;
 use App\Versao;
+use App\Anuncio;
+use Illuminate\Support\Facades\DB;
 
 class VeiculoController extends Controller
 {
@@ -54,7 +56,19 @@ class VeiculoController extends Controller
     }
 
     public function getMarcas(Request $request){
-      return response()->json(Marca::all());
+      $usadas = Anuncio::join('marcas', 'marcas.id', '=', 'anuncios.marca')
+                    ->select([DB::raw('count(*) as quantidade'), 'marcas.nome', 'marcas.id'])
+                    ->orderByRaw('quantidade DESC')
+                    ->groupBy('anuncios.marca')
+                    //->having('quantidade', '>=', '0')
+                    ->get();
+      $except = array();
+      foreach ($usadas->all() as $m) {
+        $except[] = $m->id;
+      }
+      $marcas = Marca::whereNotIn('id', $except)->get(); //Pego todas as marcas com exceção das marcas que já tenho
+      $marcas = $usadas->merge($marcas);
+      return response()->json($marcas);
     }
 
     public function getModelos(Request $request){

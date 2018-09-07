@@ -50,7 +50,7 @@ return [
             'charset' => 'utf8',
             'collection' => 'utf8_unicode_ci',
             'prefix' => '',
-            'strict' => true,
+            'strict' => false,
             'engine' => null,
         ],
 
