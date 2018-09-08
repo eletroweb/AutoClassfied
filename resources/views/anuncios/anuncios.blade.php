@@ -33,14 +33,12 @@
       <small class="text-muted">Personalize a busca aos anúncios</small>
     </div>
     <div class="col-sm-9">
-
         <div class="input-group mb-3">
           <input type="text" class="form-control" name="search" placeholder="Digite o que está procurando" aria-label="Digite o que está procurando" aria-describedby="basic-addon2">
           <div class="input-group-append">
             <button class="btn btn-outline-primary" type="button">Procurar</button>
           </div>
         </div>
-
     </div>
   </div>
   <div class="row">

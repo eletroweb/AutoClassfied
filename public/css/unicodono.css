@@ -1,6 +1,10 @@
 body{
   font-family: 'Pontano Sans', sans-serif;
 }
+.patrocinado{
+  border-color: green;
+  border-width: 1px;
+}
 #banner_principal{
   padding-top: 50px;
   height: 500px;
