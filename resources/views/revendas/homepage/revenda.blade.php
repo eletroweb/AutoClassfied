@@ -1,13 +1,21 @@
 @extends('layouts.app')
 @section('content')
 <main role="main">
-  <section class="jumbotron text-center modifiable" id="revenda-top">
+  <section class="jumbotron text-center modifiable" id="revenda-top" style="background-image: url(
+    {{$revenda->capa?Storage::url($revenda->capa):asset('images/placeholder.jpg')
+  }})">
     <div class="container">
       <div class="row">
         <form class="col-sm-5 m-auto" style="z-index: 10;">
           <div id="avatar-revenda">
-            <h1 class="jumbotron-heading">{{$revenda->nomefantasia}}</h1>
-            <p class="lead text-muted">Aqui você encontrará todos os anúncios desta revenda</p>
+            @if($revenda->logo)
+            <img src="{{Storage::url($revenda->logo)}}" width="300" class="mx-auto d-block" alt="
+            {{$revenda->nomefantasia}}">
+            @else
+              <h1 class="jumbotron-heading">{{$revenda->nomefantasia}}</h1>
+            @endif
+            <!--<h1 class="jumbotron-heading">{{$revenda->nomefantasia}}</h1>-->
+            <!--<p class="lead text-muted">Aqui você encontrará todos os anúncios desta revenda</p>-->
           </div>
           <div class="input-group mb-3 mt-2">
             <input type="text" class="form-control" name="nome" placeholder="Pesquise pelo anúncio" aria-label="Pesquise pelo anúncio" aria-describedby="button-addon2">

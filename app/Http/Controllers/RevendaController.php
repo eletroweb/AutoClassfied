@@ -26,6 +26,8 @@ use App\Endereco;
 use App\Complemento;
 use App\Imagem;
 use App\UserDado;
+use Illuminate\Support\Facades\Storage;
+
 
 class RevendaController extends AppBaseController
 {
@@ -140,11 +142,18 @@ class RevendaController extends AppBaseController
     $endereco->numero = $request->input('numero');
     $endereco->bairro = $request->input('bairro');
     $endereco->uf = $request->input('uf');
-    $endereco->cidade = $request->input('cidade');
+    $endereco->cidade = $request->input('cidade'); 
     $endereco->cep = $request->input('cep');
     $endereco->save();
     $data = $request->all();
-    $data['user'] = isset($data['user'])? Auth::user()->id:$data['user'];
+    if($request->hasFile('capa')){
+      $data['capa'] = Storage::put('public', $data['capa']);
+    }
+    if($request->hasFile('logo')){
+      $data['logo'] = Storage::put('public', $data['logo']);
+    }
+    
+    $data['user']= Revenda::find($id)->user;
     $data['ativo']= isset($data['ativo'])?$data['ativo']:0;
     $revenda = $this->revendaRepository->update($data, $id);
     Flash::success('Revenda atualizada com sucesso.');
@@ -333,106 +342,112 @@ class RevendaController extends AppBaseController
 
         }
 
-        public function createAnuncioDado($anuncio, $key, $value, $visible = true){
-          $old = AnuncioDados::where([
-            ['nome', '=', $key],
-            ['anuncio', '=', $anuncio->id]
-          ])->first();
-          $anuncioDado = $old? $old:(new AnuncioDados());
-          $anuncioDado->anuncio = $anuncio->id;
-          $anuncioDado->nome = $key;
-          $anuncioDado->valor = $value;
-          $anuncioDado->visible = $visible;
-          $anuncioDado->save();
+  public function createAnuncioDado($anuncio, $key, $value, $visible = true){
+    $old = AnuncioDados::where([
+      ['nome', '=', $key],
+      ['anuncio', '=', $anuncio->id]
+    ])->first();
+    $anuncioDado = $old? $old:(new AnuncioDados());
+    $anuncioDado->anuncio = $anuncio->id;
+    $anuncioDado->nome = $key;
+    $anuncioDado->valor = $value;
+    $anuncioDado->visible = $visible;
+    $anuncioDado->save();
+  }
+
+  public function createAcessorios($anuncio, $_acessorio){
+    if(!Acessorio::where([['nome', '=', $_acessorio],['anuncio','=',$anuncio->id]])->first()){
+      $acessorio = new Acessorio();
+      $acessorio->anuncio = $anuncio->id;
+      $acessorio->nome = $_acessorio;
+      $acessorio->save();
+    }
+  }
+
+  public function createAdicional($anuncio, $_adicional){
+    if(!Adicional::where([['nome', '=', $_adicional],['anuncio','=',$anuncio->id]])->first()){
+      $adicional = new Adicional();
+      $adicional->anuncio = $anuncio->id;
+      $adicional->nome = $_adicional;
+      $adicional->save();
+    }
+  }
+
+  //Estas são as condições para que o anúncio vindo do xml seja importado para o sistema.
+  public function filtro($veiculo){
+    return $veiculo->km == 0  || intval($veiculo->anomodelo) >= 2015; //|| $this->isUnicoDono($veiculo);
+  }
+
+  public function sejarevendedor(Request $request){
+    return view('revendas.seja_revendedor');
+  }
+
+  public function complementos($veiculo, $anuncio){
+    if(isset($veiculo->complementos->complemento)){
+      foreach ($veiculo->complementos->complemento as $complemento) {
+        $c = (string)$complemento;
+        if(!Complemento::where('nome', $c)->first()){
+          $_c = new Complemento();
+          $_c->nome = $c;
+          $_c->anuncio = $anuncio->id;
+          $_c->save();
         }
+      }
+    }
+    return false;
+  }
 
-        public function createAcessorios($anuncio, $_acessorio){
-          if(!Acessorio::where([['nome', '=', $_acessorio],['anuncio','=',$anuncio->id]])->first()){
-            $acessorio = new Acessorio();
-            $acessorio->anuncio = $anuncio->id;
-            $acessorio->nome = $_acessorio;
-            $acessorio->save();
-          }
-        }
+  public function revendas(Request $request){
+    $revendas = array();
+    if(empty($request->all())){
+      $revendas = Revenda::paginate(20);
+    }else{
+      $data = $request->all();
+      $data['cidade'] = $data['cidade']? $data['cidade']:'%'.$data['cidade'].'%';
+      $data['estado'] = $data['estado']? $data['estado']:'%'.$data['estado'].'%';
+      $revendas = Revenda::join('enderecos', 'enderecos.id', '=', 'revendas.endereco')
+      ->select(['enderecos.*', 'revendas.*'])
+      ->where([
+        ['revendas.nomefantasia', 'like', '%'.$request->input('nome').'%'],
+        ['enderecos.cidade', 'like', $data['cidade']],
+        ['enderecos.uf', 'like', $data['estado']]
+        ])->paginate(20);
+      }
+      return view('revendas.revendas')->with('revendas', $revendas);
+    }
 
-        public function createAdicional($anuncio, $_adicional){
-          if(!Adicional::where([['nome', '=', $_adicional],['anuncio','=',$anuncio->id]])->first()){
-            $adicional = new Adicional();
-            $adicional->anuncio = $anuncio->id;
-            $adicional->nome = $_adicional;
-            $adicional->save();
-          }
-        }
+    public function store(Request $request){
+      $data = $request->all();
+      $endereco = Endereco::create($data);
+      $data = array_add($data, 'endereco', $endereco->id); 
+      if($request->hasFile('capa')){
+        $data['capa'] = Storage::put('public', $data['capa']);
+      }
+      if($request->hasFile('logo')){
+        $data['logo'] = Storage::put('public', $data['logo']);
+      }
+      $revenda = Revenda::create($data);
+      $request->session()->flash('status', 'Revenda criada com sucesso. Você receberá um e-mail
+                                            com o nosso contato para a confirmação do seu plano.
+                                            Obrigado por fazer parte do Unicodono.');
+      return redirect('/revendas');
+    }
 
-        //Estas são as condições para que o anúncio vindo do xml seja importado para o sistema.
-        public function filtro($veiculo){
-          return $veiculo->km == 0  || intval($veiculo->anomodelo) >= 2015; //|| $this->isUnicoDono($veiculo);
-        }
+    public function homepage(Request $request, $id){
+      $data = $request->all();
+      $revenda = Revenda::find($id);
+      if(empty($data)){
+        $anuncios = Anuncio::where('user', $revenda->user)->orderBy('id', 'desc')->paginate(20);
+      }else {
+        $param = AnuncioController::filter_search($data);
+        $anuncios = Anuncio::where('user', $revenda->user)->where($param)->orderBy('id', 'desc')->paginate(20);
+      }
+      return view('revendas.homepage.revenda')->with(['revenda'=> $revenda, 'anuncios'=> $anuncios]);
+    }
 
-        public function sejarevendedor(Request $request){
-          return view('revendas.seja_revendedor');
-        }
-
-        public function complementos($veiculo, $anuncio){
-          if(isset($veiculo->complementos->complemento)){
-            foreach ($veiculo->complementos->complemento as $complemento) {
-              $c = (string)$complemento;
-              if(!Complemento::where('nome', $c)->first()){
-                $_c = new Complemento();
-                $_c->nome = $c;
-                $_c->anuncio = $anuncio->id;
-                $_c->save();
-              }
-            }
-          }
-          return false;
-        }
-
-        public function revendas(Request $request){
-          $revendas = array();
-          if(empty($request->all())){
-            $revendas = Revenda::paginate(20);
-          }else{
-            $data = $request->all();
-            $data['cidade'] = $data['cidade']? $data['cidade']:'%'.$data['cidade'].'%';
-            $data['estado'] = $data['estado']? $data['estado']:'%'.$data['estado'].'%';
-            $revendas = Revenda::join('enderecos', 'enderecos.id', '=', 'revendas.endereco')
-            ->select(['enderecos.*', 'revendas.*'])
-            ->where([
-              ['revendas.nomefantasia', 'like', '%'.$request->input('nome').'%'],
-              ['enderecos.cidade', 'like', $data['cidade']],
-              ['enderecos.uf', 'like', $data['estado']]
-              ])->paginate(20);
-            }
-            return view('revendas.revendas')->with('revendas', $revendas);
-          }
-
-          public function store(Request $request){
-            $data = $request->all();
-            $endereco = Endereco::create($data);
-            $data = array_add($data, 'endereco', $endereco->id);
-            $revenda = Revenda::create($data);
-            $request->session()->flash('status', 'Revenda criada com sucesso. Você receberá um e-mail
-            com o nosso contato para a confirmação do seu plano.
-            Obrigado por fazer parte do Unicodono.');
-            return redirect('/revendas');
-          }
-
-          public function homepage(Request $request, $id){
-            $data = $request->all();
-            $revenda = Revenda::find($id);
-            if(empty($data)){
-              $anuncios = Anuncio::where('user', $revenda->user)->orderBy('id', 'desc')->paginate(20);
-            }else {
-              $param = AnuncioController::filter_search($data);
-              $anuncios = Anuncio::where('user', $revenda->user)->where($param)->orderBy('id', 'desc')->paginate(20);
-            }
-            return view('revendas.homepage.revenda')->with(['revenda'=> $revenda, 'anuncios'=> $anuncios]);
-          }
-
-          public function config(Request $request, $id){
-            $revenda = Revenda::find($id);
-            return view('revendas.homepage.config')->with('revenda', $revenda);
-          }
+    public function config(Request $request, $id){
+      $revenda = Revenda::find($id);
+      return view('revendas.homepage.config')->with('revenda', $revenda);
+    }
 
 }
