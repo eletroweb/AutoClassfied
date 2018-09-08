@@ -1,9 +1,37 @@
-<form method="post" id="cadastro-revenda" action="{{isset($revenda)?route('update_revenda', $revenda->id):route('store_revenda')}}">
+<form method="post" id="cadastro-revenda" action="{{isset($revenda)?route('update_revenda', $revenda->id):route('store_revenda')}}" enctype="multipart/form-data">
   {{csrf_field()}}
   <div class="row">
     <div class="col-sm-{{isset($revenda)?'12':'6'}}">
-      <h3 class="mt-2">Informações principais</h3>
+      <h3 class="mt-2">Configurações</h3>
       <hr>
+      <div class="form-group">
+      @if($revenda->capa)
+          <img src="{{Storage::url($revenda->capa)}}" class="thumbnail" height="50%" width="50%">
+      @endif
+      </div>
+      <div class="form-group">
+        <label for="capa">Capa da sua página ( 1200x106 )</label>
+        <input id="capa" type="file" name="capa" class="form-control" accept="image/*">
+        @if ($errors->has('capa'))
+            <span class="help-block">
+                <strong>{{ $errors->first('capa') }}</strong>
+            </span>
+        @endif
+      </div>
+      <div class="form-group">
+      @if($revenda->logo)
+          <img src="{{Storage::url($revenda->logo)}}" class="thumbnail" height="50%" width="50%">
+      @endif
+      </div>
+      <div class="form-group">
+        <label for="logo">Logo da sua revenda</label>
+        <input id="logo" type="file" name="logo" class="form-control" accept="image/*">
+        @if ($errors->has('logo'))
+            <span class="help-block">
+                <strong>{{ $errors->first('logo') }}</strong>
+            </span>
+        @endif
+      </div>
       <div class="form-group">
         <label for="razaosocial">Razão social</label>
         <input value="{{isset($revenda)?$revenda->razaosocial:''}}" type="text" class="form-control" name="razaosocial" id="razaosocial" placeholder="Digite a razão social da revenda" required>

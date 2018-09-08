@@ -22,14 +22,17 @@ body{
 }
 #avatar-revenda{
   background-color: white;
+  border-radius: 10px;
   padding: 10px;
 }
 #revenda-top{
   padding-top: 80px;
   height: 250px;
   width: 100%;
-  background-image: url('/images/dealership.jpg');
+  /*background-image: url('/images/dealership.jpg');*/
+  background-repeat: no-repeat;
   background-position: 20% 80%;
+  background-size: cover;
 }
 .bg-primary{
   background-color: #03598f !important;

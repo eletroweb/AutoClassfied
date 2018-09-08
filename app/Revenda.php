@@ -12,7 +12,8 @@ class Revenda extends Model
     private $anunciosPublicados = null;
     private $anunciosAtivos = null;
 
-    protected $fillable = ['razaosocial', 'nomefantasia', 'user', 'cnpj', 'ativo', 'endereco', 'destaques'];
+    protected $fillable = ['razaosocial', 'nomefantasia', 'user', 'cnpj', 'ativo', 'endereco'
+                            , 'destaques', 'capa', 'logo'];
 
     public function end(){
       return $this->hasOne('App\Endereco', 'id', 'endereco');

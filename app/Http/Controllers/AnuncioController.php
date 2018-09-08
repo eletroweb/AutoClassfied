@@ -172,6 +172,4 @@ class AnuncioController extends Controller
             'anuncio'=> $anuncio, 'imagens' => $imagens, 'principal' => $imagens[0], 'relacionados'=> $relacionados]);
     }
 
-
-
 }
