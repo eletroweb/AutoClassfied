@@ -19,6 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->boolean('pessoa_fisica');
+            $table->integer('endereco')->nullable();
             $table->string('documento')->unique();
             $table->rememberToken();
             $table->timestamps();

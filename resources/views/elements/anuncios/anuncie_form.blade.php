@@ -2,11 +2,12 @@
   <form id="anunciar" method="post" action="{{route('anuncieStore')}}"  enctype="multipart/form-data">
   <div class="row">
     <div class="col-sm-6">
-      @if (session('status'))
-          <div class="alert alert-danger">
-              {{ session('status') }}
-          </div>
-      @endif
+        @if (session('status'))
+            <div class="alert alert-danger">
+                {{ session('status') }}
+            </div>
+        @endif
+        @include('flash::message')
         {{csrf_field()}}
         <h2>Informações básicas</h2>
         <hr>
@@ -48,7 +49,7 @@
               <input required type="text" value="{{old('valor')}}" class="form-control" name="valor" id="valor" aria-describedby="valorHelp" placeholder="Digite o preço">
               <small id="valorHelp" class="form-text text-muted">Este preço será exibido no anúncio</small>
             </div>
-          </div>
+          </div> 
           <div class="col-sm-6">
             <div class="form-group">
               <label for="ano">Ano</label>
@@ -59,13 +60,22 @@
         </div>
         <div class="row">
           <div class="col-sm-6">
-            <div class="form-group">
+            <div class="form-group"> 
               <label for="ano">Quilometragem</label>
-              <input required type="number" value="{{old('km')}}" class="form-control" name="km" id="km" aria-describedby="anoHelp" placeholder="Digite o ano do veículo">
+              <input required type="number" value="{{old('km')}}" class="form-control" name="km" id="km" aria-describedby="anoHelp" placeholder="Digite a quilometragem do veículo">
               <small id="kmHelp" class="form-text text-muted">Informe a quilometragem do veículo</small>
             </div>
           </div>
-
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label for="ano">Cambio</label>
+              <select class="form-control" name="cambio" required="required">
+                <option value="">Selecione o cambio...</option>
+                <option value="Manual">Manual</option>
+                <option value="Automático">Automático</option>
+              </select>
+            </div>
+          </div>
         </div>
         <div class="form-group">
           <div class="custom-control custom-checkbox">
@@ -137,7 +147,7 @@
             </div>
           </div>
         </div>
-        <button type="submit" class="btn btn-primary">Anunciar</button>
+        <button type="submit" class="mt-2 btn btn-primary">Anunciar</button>
       </form>
     </div>
     <div class="col-sm-6">
@@ -148,4 +158,39 @@
       </div>
     </div>
 </div>
+</div>
+<input type="hidden" id="endereco" value="{{Auth::user()->endereco}}">
+<script type="text/javascript">
+  $(document).ready(function(){
+    if($('#endereco').val() == ''){
+      $('#enderecoCadastro').modal();
+    }
+    $('#enderecoCadastro').on('hidden.bs.modal', function (e) {
+      window.location.href = "/";
+    });
+  });
+</script>
+<!-- Cadastrar endereço se necessário -->
+<div class="modal fade" id="enderecoCadastro" tabindex="-1" role="dialog" aria-labelledby="enderecoCadastro" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <form action="/cadastrar-endereco" method="post" class="modal-content">
+      {{csrf_field()}}
+      <div class="modal-header">
+        <h5 class="modal-title" id="enderecoCadastro">Informe o seu endereço</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="alert alert-primary" role="alert">
+          Precisamos saber o seu endereço para que você possa publicar anúncios.
+        </div>
+        @include('enderecos.form')
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="submit" class="btn btn-primary">Salvar endereço</button>
+      </div>
+    </form>
+  </div>
 </div>

@@ -28,6 +28,7 @@ Route::post('/anuncio/contato', 'ContatoAnuncioController@store')->name('contato
 Route::get('/revenda/{id}', 'RevendaController@homepage');
 Route::get('/consulta-tabela-fipe', 'FipeController@index')->name('fipe');
 Route::get('/encontre-uma-revenda', 'RevendaController@revendas')->name('revendas');
+Route::get('/revenda/rel/chartjs', 'RevendaController@viewsByMonth')->name('rel_chart_mes');
 
 Route::middleware('auth')->group(function () {
   Route::get('/anuncie', 'AnuncioController@anuncie')->name('anuncie');
@@ -37,7 +38,9 @@ Route::middleware('auth')->group(function () {
   Route::post('/imagens/store', 'ImagemController@imageUpload');
   Route::get('/revenda/{id}/configuracoes', 'RevendaController@config');
   Route::post('/revenda/{id}/update', 'RevendaController@update')->name('update_revenda');
+  Route::post('/cadastrar-endereco', 'UserController@cadastrarEndereco');
 });
+
 Route::get('/importxml', 'VeiculoController@updateVeiculos');
 Route::middleware(['auth','admin'])->group(function(){
   Route::get('/contratar-revenda', 'RevendaController@sejarevendedor')->name('contratar_revenda');

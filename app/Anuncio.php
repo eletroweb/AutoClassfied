@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 use App\AnuncioImagem;
 use App\Imagem;
 use App\Revenda;
+use Illuminate\Support\Facades\Storage;
+
 
 class Anuncio extends Model
 {

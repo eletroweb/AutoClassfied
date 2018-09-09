@@ -205,4 +205,16 @@ class UserController extends AppBaseController
     public function form(Request $request){
       return view('admin.form');
     }
+
+    public function cadastrarEndereco(Request $request){
+        $endereco = new Endereco();
+        $endereco->logradouro = $request->input('logradouro');
+        $endereco->numero = $request->input('numero');
+        $endereco->uf = $request->input('uf');
+        $endereco->cidade = $request->input('cidade');
+        $endereco->bairro = $request->input('bairro');
+        $endereco->save();
+        Flash::success('Endereço cadastrado com sucesso!');
+        return redirect()->back();
+    }
 }

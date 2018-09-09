@@ -137,8 +137,8 @@
               <ul class="list-group">
                 <li class="list-group-item"><i class="fa fa-phone"></i> {{$anuncio->users->telefone()->valor}}</li>
                 <li class="list-group-item"><i class="fa fa-map-marker-alt"></i>
-                  {{$anuncio->users->isRevenda()->end->logradouro}} {{$anuncio->users->isRevenda()->end->numero}},
-                  {{$anuncio->users->isRevenda()->end->cidade}} - {{$anuncio->users->isRevenda()->end->uf}}
+                  {{$anuncio->users->isRevenda()?$anuncio->users->isRevenda()->end->logradouro:$anuncio->users->end->logradouro}} {{$anuncio->users->isRevenda()?$anuncio->users->isRevenda()->end->numero:$anuncio->users->end->numero}},
+                  {{$anuncio->users->isRevenda()?$anuncio->users->isRevenda()->end->cidade:$anuncio->users->end->cidade}} - {{$anuncio->users->isRevenda()?$anuncio->users->isRevenda()->end->uf:$anuncio->users->end->uf}}
                 </li>
               </ul>
             </p>
