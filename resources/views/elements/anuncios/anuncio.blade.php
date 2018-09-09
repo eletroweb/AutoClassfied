@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-sm-12">
-    <a href='/anuncios/{{str_replace(" ", "-", $anuncio->getNomeFormated())}}_{{$anuncio->id}}' class="list-group-item list-group-item-action flex-column align-items-start mt-1 mb-1 {{$anuncio->patrocinado?'patrocinado':''}}">
+    <a href='/anuncios/{{$anuncio->getNomeFormated()}}_{{$anuncio->id}}' class="list-group-item list-group-item-action flex-column align-items-start mt-1 mb-1 {{$anuncio->patrocinado?'patrocinado':''}}">
       <div class="row">
         <div class="col-sm-5">
           @php

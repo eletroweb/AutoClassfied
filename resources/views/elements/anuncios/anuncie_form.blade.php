@@ -77,6 +77,34 @@
             </div>
           </div>
         </div>
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label for="combustivel">Combustível</label>
+              <select id="combustivel" name="combustivel" class="form-control" required="required">
+                <option value="">Selecione o combustível...</option>
+                <option value="Gasolina">Gasolina</option>
+                <option value="Alcool">Alcool</option>
+                <option value="Diesel">Diesel</option>
+                <option value="Elétrico">Elétrico</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label for="cor">Cor</label>
+              <input type="text" name="cor" value="{{old('cor')}}" class="form-control" id="cor" placeholder="Digite o nome da cor" required="required">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label for="cor">Portas</label>
+              <input type="number" class="form-control" value="{{old('portas')}}" name="portas" id="portas" placeholder="Digite o número de portas" required="required">
+            </div>
+          </div>  
+        </div>
         <div class="form-group">
           <div class="custom-control custom-checkbox">
             <input type="checkbox" class="custom-control-input" id="usado" name="usado" value="1">

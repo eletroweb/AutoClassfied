@@ -4,20 +4,18 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Option;
+use GuzzleHttp\Exception\GuzzleException;
+use GuzzleHttp\Client;
 
 class PagseguroController extends Controller
 {
-   
+
     public function startSession(Request $request){
-      $credencial = Option::where('nome', 'credencial_pagseguro')->first()->valor;
-      //$credenciais = 'Virão do banco de dados';
-      $opts = array('http' =>
-                  array(
-                      'method'  => 'POST',
-                      'header'  => 'Content-type: application/x-www-form-urlencoded',
-                  )
-              );
-      $xml = simplexml_load_string(file_get_contents("https://ws.pagseguro.uol.com.br/v2/sessions?{$credencial}", false, $opts));
-      return view('transacao.index')->with('xml', $xml);
+      $http = new Client();
+      $email = env('PAGSEGURO_EMAIL', 'PAGSEGURO_EMAIL');
+      $token = env('PAGSEGURO_TOKEN', 'PAGSEGURO_TOKEN');
+      $response = $http->request('POST', "https://ws.sandbox.pagseguro.uol.com.br/v2/sessions/?email=$email&token=$token");
+      $xml = simplexml_load_string($response->getBody());
+      return response()->json($xml->id);
     }
 }

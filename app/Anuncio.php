@@ -38,7 +38,7 @@ class Anuncio extends Model
     }
 
     public function getNomeFormated(){
-      return str_replace("  ", "", $this->nome);
+      return str_replace(" ", "-", str_replace("  ", "", $this->nome));
     }
 
     public function getKm(){

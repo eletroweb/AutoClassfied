@@ -15,7 +15,9 @@ use App\User;
 use App\Revenda;
 use App\VisualizacaoAnuncio;
 use App\Contato;
+use App\Endereco;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends AppBaseController
 {
@@ -214,6 +216,9 @@ class UserController extends AppBaseController
         $endereco->cidade = $request->input('cidade');
         $endereco->bairro = $request->input('bairro');
         $endereco->save();
+        $usuario = Auth::user();
+        $usuario->endereco = $endereco->id;
+        $usuario->save();
         Flash::success('Endereço cadastrado com sucesso!');
         return redirect()->back();
     }

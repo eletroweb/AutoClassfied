@@ -48,10 +48,19 @@ class AnuncioController extends Controller
           $img_principal->anuncio= $anuncio->id;
           $img_principal->first= true;
           $img_principal->save();
-          $cambio = $request->input('cambio');
           $ad = new AnuncioDados();
           $ad->nome = "cambio";
-          $ad->valor = $cambio;
+          $ad->valor = $request->input('cambio');
+          $ad->anuncio = $anuncio->id;
+          $ad->save();
+          $ad = new AnuncioDados();
+          $ad->nome = "portas";
+          $ad->valor = $request->input('portas');
+          $ad->anuncio = $anuncio->id;
+          $ad->save();
+          $ad = new AnuncioDados();
+          $ad->nome = "combustivel";
+          $ad->valor = $request->input('combustivel');
           $ad->anuncio = $anuncio->id;
           $ad->save();
           if($request->has('adicionais')){
@@ -94,8 +103,10 @@ class AnuncioController extends Controller
             $data->anuncio = $anuncio->id;
             $data->save();
           }
-          return redirect("/anuncios/{$anuncio->nome}_$anuncio->id")->with('status', 'Anúncio publicado com sucesso!');
+          $title = $anuncio->getNomeFormatted();
+          return redirect("/anuncios/$title_$anuncio->id")->with('status', 'Anúncio publicado com sucesso!');
         }
+        $request->flash();
         return redirect('/anuncie')->with('status', 'Você precisa inserir no mínimo uma imagem para publicar o seu anúncio');
     }
 
@@ -178,7 +189,17 @@ class AnuncioController extends Controller
       $view->anuncio = $anuncio->id;
       $view->save();
       $revenda = $anuncio->users->isRevenda();
-      $relacionados = $revenda?Anuncio::where('user', $anuncio->users->id)->get()->random(4):Anuncio::where([['id', '!=', $anuncio->id]])->get()->random(4);
+      $count = Anuncio::count();
+      $relacionados = array();
+      //var_dump($count);exit;
+      if($count > 1){
+        $relacionados = 
+          $revenda?
+          Anuncio::where('user', $anuncio->users->id)->get()->random($count < 4?$count:4)
+          :
+          Anuncio::where([['id', '!=', $anuncio->id]])->get()->random($count < 4?$count:4);  
+      }
+      
       return view('anuncios.anuncio_page')->with(['acessorios' => $acessorios, 'adicionais' => $adicionais, 'anunciodados'=> $dados,
             'anuncio'=> $anuncio, 'imagens' => $imagens, 'principal' => $imagens[0], 'relacionados'=> $relacionados]);
     }

@@ -31,6 +31,7 @@ Route::get('/encontre-uma-revenda', 'RevendaController@revendas')->name('revenda
 Route::get('/revenda/rel/chartjs', 'RevendaController@viewsByMonth')->name('rel_chart_mes');
 
 Route::middleware('auth')->group(function () {
+  Route::post('/pagseguro/startSession', 'PagseguroController@startSession')->name('start_session');
   Route::get('/anuncie', 'AnuncioController@anuncie')->name('anuncie');
   Route::get('/minha-conta', 'UserController@profile')->name('minhaconta');
   Route::get('/minha-conta/meus-anuncios', 'UserController@meus_anuncios')->name('meusanuncios');
