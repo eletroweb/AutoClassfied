@@ -47,6 +47,8 @@
     <script src='https://www.google.com/recaptcha/api.js'></script>
     <script type="text/javascript" src="{{asset('js/Chart.bundle.min.js')}}"></script>
     <script src="{{asset('js/jquery-3.3.1.min.js')}}" charset="utf-8"></script>
+    <script type="text/javascript" src="https://stc.sandbox.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.directpayment.js"></script>
+    <link rel="stylesheet" type="text/css" href="{{asset('css/pagamento.css')}}">
 </head>
 <body>
     <div id="app">

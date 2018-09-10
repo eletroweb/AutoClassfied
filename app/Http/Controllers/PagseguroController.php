@@ -18,4 +18,5 @@ class PagseguroController extends Controller
       $xml = simplexml_load_string($response->getBody());
       return response()->json($xml->id);
     }
+
 }

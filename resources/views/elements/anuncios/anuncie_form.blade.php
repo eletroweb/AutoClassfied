@@ -139,7 +139,7 @@
         </div>
         <h2>Informações adicionais e imagens</h2>
         <hr>
-        <div class="card">
+        <div class="box">
           <div class="card-body">
             <div class="form-group">
               <label for="adicional">Itens adicionais do veículo</label>
@@ -157,7 +157,7 @@
             </div>
           </div>
         </div>
-        <div class="card mt-2">
+        <div class="box mt-2">
           <div class="card-body">
             <div class="form-group">
               <label for="acessorio">Acessórios do veículo</label>
@@ -175,6 +175,7 @@
             </div>
           </div>
         </div>
+        @include('elements.anuncios.selecionar_pagamento')  
         <button type="submit" class="mt-2 btn btn-primary">Anunciar</button>
       </form>
     </div>
