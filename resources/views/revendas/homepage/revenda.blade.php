@@ -52,11 +52,11 @@
           <div class="card mb-4 shadow-sm">
             <img class="card-img-top" src="{{$anuncio->urlImagemFirst()}}" alt="{{$anuncio->nome}}">
             <div class="card-body">
-              <h5 class="card-title"><a href="/anuncios/{{$anuncio->nome}}_{{$anuncio->id}}" style="color: black">{{$anuncio->nome}}</a></h4>
+              <h5 class="card-title"><a href="/anuncios/{{$anuncio->getNomeFormated()}}_{{$anuncio->id}}" style="color: black">{{$anuncio->nome}}</a></h4>
               <p class="card-text">{{str_limit($anuncio->descricao, 150)}}</p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
-                  <a href="/anuncios/{{$anuncio->id}}" class="btn btn-sm btn-outline-secondary">Ver anúncio</a>
+                  <a href="/anuncios/{{$anuncio->getNomeFormated()}}_{{$anuncio->id}}" class="btn btn-sm btn-outline-secondary">Ver anúncio</a>
                   <!--<button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>-->
                 </div>
                 <span class="badge badge-success" style="font-size: 16px;">R${{number_format(substr($anuncio->valor.'0', 0, -3), 2, ",", ".")}}</span>
