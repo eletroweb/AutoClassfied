@@ -11,7 +11,8 @@ use Illuminate\Support\Facades\Storage;
 
 class Anuncio extends Model
 {
-    protected $fillable = ['nome', 'descricao', 'marca', 'km', 'usado', 'modelo', 'versao', 'valor', 'user', 'moto', 'ano'];
+    protected $fillable = ['nome', 'descricao', 'marca', 'km', 'usado', 'modelo', 'versao', 'valor', 'user', 'moto', 
+                            'ano', 'blindagem'];
 
     public function anuncio_dados(){
         return $this->hasMany('App\AnuncioDados');

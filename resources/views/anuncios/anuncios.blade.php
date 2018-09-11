@@ -34,9 +34,9 @@
     </div>
     <div class="col-sm-9">
         <div class="input-group mb-3">
-          <input type="text" class="form-control" name="search" placeholder="Digite o que está procurando" aria-label="Digite o que está procurando" aria-describedby="basic-addon2">
+          <input type="text" class="form-control" name="nome" placeholder="Digite o que está procurando" aria-label="Digite o que está procurando" aria-describedby="basic-addon2">
           <div class="input-group-append">
-            <button class="btn btn-outline-primary" type="button">Procurar</button>
+            <button class="btn btn-outline-primary" type="submit">Procurar</button>
           </div>
         </div>
     </div>
@@ -47,11 +47,13 @@
          <li class="nav-item">
            <div class="card card-body">
              <div class="custom-control custom-checkbox">
-               <input type="checkbox" class="custom-control-input" id="novos" name="usado[]" value="0" checked>
+               <input type="checkbox" class="custom-control-input" id="novos" name="usado[]" value="0"
+                {{is_array(old('usado'))? in_array(0, old('usado')) ? ' checked' : ''  : 'checked'}}>
                <label class="custom-control-label" for="novos">Novos</label>
              </div>
              <div class="custom-control custom-checkbox">
-               <input type="checkbox" class="custom-control-input" id="usados" name="usado[]" value="1" checked>
+               <input type="checkbox" class="custom-control-input" id="usados" name="usado[]" value="1" 
+               {{is_array(old('usado'))? in_array(1, old('usado')) ? ' checked' : ''  : 'checked'}}>
                <label class="custom-control-label" for="usados">Usados</label>
              </div>
            </div>
@@ -60,14 +62,30 @@
            <div class="mt-2">
              <div class="card card-body">
                <div class="custom-control custom-checkbox">
-                 <input type="checkbox" class="custom-control-input" id="moto" name="tipo[]" value="moto" checked>
+                 <input type="checkbox" class="custom-control-input" id="moto" name="tipo[]" value="moto"
+                  {{is_array(old('tipo'))? in_array('moto', old('tipo')) ? ' checked' : ''  : 'checked'}}>
                  <label class="custom-control-label" for="moto">Moto</label>
                </div>
                <div class="custom-control custom-checkbox">
-                 <input type="checkbox" class="custom-control-input" id="carro" name="tipo[]" value="carro" checked>
+                 <input type="checkbox" class="custom-control-input" id="carro" name="tipo[]" value="carro" 
+                 {{is_array(old('tipo'))? in_array('carro', old('tipo')) ? ' checked' : ''  : 'checked'}}>
                  <label class="custom-control-label" for="carro">Carro</label>
                </div>
               </div>
+           </div>
+         </li>
+         <li class="nav-item mt-2">
+           <div class="card card-body">
+             <div class="custom-control custom-checkbox">
+               <input type="checkbox" class="custom-control-input" id="blindado" name="blindagem[]" value="1"
+                {{is_array(old('blindagem'))? in_array(1, old('blindagem')) ? ' checked' : ''  : 'checked'}}>
+               <label class="custom-control-label" for="novos">Com blindagem</label>
+             </div>
+             <div class="custom-control custom-checkbox">
+               <input type="checkbox" class="custom-control-input" id="nao_blindado" name="blindagem[]" value="0" 
+               {{is_array(old('blindagem'))? in_array(0, old('blindagem')) ? ' checked' : ''  : 'checked'}}>
+               <label class="custom-control-label" for="usados">Sem blindagem</label>
+             </div>
            </div>
          </li>
          <li class="nav-item mt-2">
@@ -103,21 +121,25 @@
                <select class="form-control select2" name="marca" id="marca">
                        <option value="">Selecione a marca</option>
                </select>
-               @if(old('marca'))
+               
                 <script type="text/javascript">
-                  $('#marca').val("{{old('marca')}}");
+                  
+                    $('#marca').val("{{old('marca')}}");
+                    $('#marca').trigger('change');
+                 
+                  
                 </script>
-               @endif
+               
          </li>
          <li class="nav-item mt-2">
                <select class="form-control select2" name="modelo" id="modelo">
                        <option value="">Selecione o modelo</option>
                </select>
-               @if(old('modelo'))
+               
                 <script type="text/javascript">
                   $('#modelo').val("{{old('modelo')}}");
                 </script>
-               @endif
+               
          </li>
          <li class="nav-item mt-2">
                <select class="form-control select2" name="versao" id="versao">
