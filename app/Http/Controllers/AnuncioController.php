@@ -133,7 +133,7 @@ class AnuncioController extends Controller
       $param = array();
       $tipos = array();
       foreach ($data as $key=>$value) {
-        if($value && $key != 'mais_buscados' && $key != 'order' && $key != 'paginate'){
+        if($value && $key != 'mais_buscados' && $key != 'order' && $key != 'paginate' && $key != 'blindagem'){
           if(strpos($key, '_maximo')){
             $exploded = explode("_", $key);
             $value = str_replace([',','.'], '', $value);
@@ -141,8 +141,6 @@ class AnuncioController extends Controller
           }elseif(is_array($value)) {
             //Quando cair aqui eu subentendo que é tipo[]
             foreach ($value as $_key => $_value) {
-              //$prefix = is_numeric($_value)?'':'%';
-              //$param[] =  ['tipo', is_numeric($_value)? '=':'like', $prefix.strtoupper($_value).$prefix];
               $tipos[] = $_value=='carro'? 0:1;
             }
           }elseif(strpos($key, '_minimo')){
@@ -153,6 +151,8 @@ class AnuncioController extends Controller
             $prefix = is_numeric($value)?'':'%';
             $param[] =  [$key, is_numeric($value)? '=':'like', $prefix.strtoupper($value).$prefix];
           }
+        }elseif ($key == 'blindagem') {
+          
         }
       }
       return [$param, $tipos];

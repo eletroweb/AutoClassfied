@@ -105,12 +105,26 @@
             </div>
           </div>  
         </div>
-        <div class="form-group">
-          <div class="custom-control custom-checkbox">
-            <input type="checkbox" class="custom-control-input" id="usado" name="usado" value="1">
-            <label class="custom-control-label" for="usado">
-              Veículo usado
-            </label>
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="form-group">
+              <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="usado" name="usado" value="1">
+                <label class="custom-control-label" for="usado">
+                  Veículo usado
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group">
+              <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="blindagem" name="blindagem" value="1">
+                <label class="custom-control-label" for="blindagem">
+                  Blindado
+                </label>
+              </div>
+            </div>
           </div>
         </div>
         <input type="hidden" name="user" value="{{Auth::user()->id}}">
