@@ -23,7 +23,7 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $hidden = [
+    protected $hidden = [ 
         'password', 'remember_token',
     ];
 
@@ -44,5 +44,9 @@ class User extends Authenticatable
 
     public function isRevenda(){
       return Revenda::where('user', $this->id)->first();
+    }
+
+    public function end(){
+        return $this->hasOne('App\Endereco', 'id', 'endereco');
     }
 }

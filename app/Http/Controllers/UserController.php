@@ -15,7 +15,9 @@ use App\User;
 use App\Revenda;
 use App\VisualizacaoAnuncio;
 use App\Contato;
+use App\Endereco;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends AppBaseController
 {
@@ -204,5 +206,20 @@ class UserController extends AppBaseController
 
     public function form(Request $request){
       return view('admin.form');
+    }
+
+    public function cadastrarEndereco(Request $request){
+        $endereco = new Endereco();
+        $endereco->logradouro = $request->input('logradouro');
+        $endereco->numero = $request->input('numero');
+        $endereco->uf = $request->input('uf');
+        $endereco->cidade = $request->input('cidade');
+        $endereco->bairro = $request->input('bairro');
+        $endereco->save();
+        $usuario = Auth::user();
+        $usuario->endereco = $endereco->id;
+        $usuario->save();
+        Flash::success('Endereço cadastrado com sucesso!');
+        return redirect()->back();
     }
 }

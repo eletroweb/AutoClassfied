@@ -27,6 +27,9 @@ use App\Complemento;
 use App\Imagem;
 use App\UserDado;
 use Illuminate\Support\Facades\Storage;
+use App\VisualizacaoAnuncio;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 
 class RevendaController extends AppBaseController
@@ -448,6 +451,22 @@ class RevendaController extends AppBaseController
     public function config(Request $request, $id){
       $revenda = Revenda::find($id);
       return view('revendas.homepage.config')->with('revenda', $revenda);
+    }
+
+    public function viewsByMonth(Request $request){
+      $revenda = $request->input('revenda');
+      $carbon = Carbon::now(); 
+      $visualizacoes = array();
+      for($month= 1; $month <= 12; $month++) {
+        $visualizacoes[] = VisualizacaoAnuncio::join('anuncios', 'anuncios.id', '=', 'visualizacao_anuncios.anuncio')
+                                          ->join('revendas', 'revendas.user', '=', 'anuncios.user')
+                                          ->select(DB::raw('count(*) as visualizacoes'))
+                                          ->where('revendas.id', '=', $revenda)
+                                          ->whereMonth('anuncios.created_at', $month)
+                                          ->whereYear('anuncios.created_at', $carbon->year)
+                                          ->first(); 
+      }
+      return response()->json($visualizacoes);
     }
 
 }

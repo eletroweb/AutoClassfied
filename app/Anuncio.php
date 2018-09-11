@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 use App\AnuncioImagem;
 use App\Imagem;
 use App\Revenda;
+use Illuminate\Support\Facades\Storage;
+
 
 class Anuncio extends Model
 {
@@ -36,7 +38,7 @@ class Anuncio extends Model
     }
 
     public function getNomeFormated(){
-      return str_replace("  ", "", $this->nome);
+      return str_replace(" ", "-", str_replace("  ", "", $this->nome));
     }
 
     public function getKm(){

@@ -1,0 +1,4 @@
+[22-Jun-2018 14:46:11 America/Sao_Paulo] PHP Parse error:  syntax error, unexpected '?' in /home/unicodonocom/dev.unicodono.com.br/dev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 233
+[22-Jun-2018 14:46:28 America/Sao_Paulo] PHP Parse error:  syntax error, unexpected '?' in /home/unicodonocom/dev.unicodono.com.br/dev/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 233
+[20-Jul-2018 10:00:54 America/Sao_Paulo] PHP Parse error:  syntax error, unexpected 'function' (T_FUNCTION), expecting identifier (T_STRING) or \\ (T_NS_SEPARATOR) in /home/unicodonocom/dev.unicodono.com.br/dev/vendor/myclabs/deep-copy/src/DeepCopy/deep_copy.php on line 5
+[20-Aug-2018 10:39:15 America/Sao_Paulo] PHP Parse error:  syntax error, unexpected 'function' (T_FUNCTION), expecting identifier (T_STRING) or \\ (T_NS_SEPARATOR) in /home/unicodonocom/dev.unicodono.com.br/dev/vendor/myclabs/deep-copy/src/DeepCopy/deep_copy.php on line 5

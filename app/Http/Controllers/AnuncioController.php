@@ -33,7 +33,8 @@ class AnuncioController extends Controller
            'ano'=> 'required',
            'moto' => '',
            'km'=> 'required',
-           'usado'=> ''
+           'usado'=> '',
+           'cambio'=> 'required'
         ]);
         $user = $request->input('user');
         if(Auth::user()->id != intval($user)){
@@ -43,32 +44,51 @@ class AnuncioController extends Controller
           $imagens = $request->input('imagens');
           $anuncio = Anuncio::create($validatedData);
           $img_principal = new AnuncioImagem();
-          $img_principal->url= Storage::put('public', $imagens[0]);
+          $img_principal->imagem= Imagem::where('url', str_replace("\"", "", $imagens[0]))->first()->id;
           $img_principal->anuncio= $anuncio->id;
           $img_principal->first= true;
           $img_principal->save();
+          $ad = new AnuncioDados();
+          $ad->nome = "cambio";
+          $ad->valor = $request->input('cambio');
+          $ad->anuncio = $anuncio->id;
+          $ad->save();
+          $ad = new AnuncioDados();
+          $ad->nome = "portas";
+          $ad->valor = $request->input('portas');
+          $ad->anuncio = $anuncio->id;
+          $ad->save();
+          $ad = new AnuncioDados();
+          $ad->nome = "combustivel";
+          $ad->valor = $request->input('combustivel');
+          $ad->anuncio = $anuncio->id;
+          $ad->save();
           if($request->has('adicionais')){
             $adicionais = $request->input('adicionais');
             foreach ($adicionais as $a) {
-              $adicional = new Adicional();
-              $adicional->nome = $a;
-              $adicional->anuncio = $anuncio->id;
-              $adicional->save();
+              if($a != ''){
+                $adicional = new Adicional();
+                $adicional->nome = $a;
+                $adicional->anuncio = $anuncio->id;
+                $adicional->save();
+              }
             }
           }
           if($request->has('acessorios')){
             $adicionais = $request->input('acessorios');
             foreach ($adicionais as $a) {
-              $acessorio = new Acessorio();
-              $acessorio->nome = $a;
-              $acessorio->anuncio = $anuncio->id;
-              $acessorio->save();
+              if($a != ''){
+                $acessorio = new Acessorio();
+                $acessorio->nome = $a;
+                $acessorio->anuncio = $anuncio->id;
+                $acessorio->save();  
+              }
             }
           }
 
           foreach($imagens as $img){
             $img_anuncio = new AnuncioImagem();
-            $img_anuncio->url= Storage::put('public', $img);
+            $img_anuncio->imagem= Imagem::where('url', str_replace("\"", "", $img))->first()->id;
             $img_anuncio->first= false;
             $img_anuncio->anuncio= $anuncio->id;
             $img_anuncio->save();
@@ -83,26 +103,29 @@ class AnuncioController extends Controller
             $data->anuncio = $anuncio->id;
             $data->save();
           }
-          return redirect('/anuncios/'.$anuncio->id)->with('status', 'Anúncio publicado com sucesso!');
+          $title = $anuncio->getNomeFormatted();
+          return redirect("/anuncios/$title_$anuncio->id")->with('status', 'Anúncio publicado com sucesso!');
         }
+        $request->flash();
         return redirect('/anuncie')->with('status', 'Você precisa inserir no mínimo uma imagem para publicar o seu anúncio');
     }
 
     public function anuncios(Request $request){
-      if($data = $request->all()){
-        //$tipos = array();
-        //var_dump($data);exit;
+      $paginacao = $request->input('paginate')?intval($request->input('paginate')):20;
+      $data = $request->all();
+      unset($data['page']);
+      if(!empty($data)){
         $filter = $this->filter_search($data);
         //var_dump($filter[1]);exit;
         $m_buscados = $request->input('mais_buscados'); //ordem por número de visualizações
         $anuncios = Anuncio::where($filter[0])
             ->whereIn('moto', $filter[1])
             ->orderBy($request->input('order')?$request->input('order'):'id', 'desc')
-            ->paginate($request->input('paginate')?intval($request->input('paginate')):20);
+            ->paginate($paginacao);
       }else{
-        $anuncios = Anuncio::orderBy($request->input('order')?$request->input('order'):'id', 'desc')
-          ->paginate($request->input('paginate')?intval($request->input('paginate')):20);
+        $anuncios = Anuncio::orderBy($request->input('order')?$request->input('order'):'id', 'desc')->paginate($paginacao);
       }
+      $request->flash();
       return view('anuncios.anuncios')->with('anuncios', $anuncios);
     }
 
@@ -167,7 +190,17 @@ class AnuncioController extends Controller
       $view->anuncio = $anuncio->id;
       $view->save();
       $revenda = $anuncio->users->isRevenda();
-      $relacionados = $revenda?Anuncio::where([['id', '!=', $anuncio->id]])->get()->take(4):Anuncio::where('user', $anuncio->users->id)->get()->take(4);
+      $count = Anuncio::count();
+      $relacionados = array();
+      //var_dump($count);exit;
+      if($count > 1){
+        $relacionados = 
+          $revenda?
+          Anuncio::where('user', $anuncio->users->id)->get()->random($count < 4?$count:4)
+          :
+          Anuncio::where([['id', '!=', $anuncio->id]])->get()->random($count < 4?$count:4);  
+      }
+      
       return view('anuncios.anuncio_page')->with(['acessorios' => $acessorios, 'adicionais' => $adicionais, 'anunciodados'=> $dados,
             'anuncio'=> $anuncio, 'imagens' => $imagens, 'principal' => $imagens[0], 'relacionados'=> $relacionados]);
     }
