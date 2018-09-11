@@ -111,20 +111,21 @@ class AnuncioController extends Controller
     }
 
     public function anuncios(Request $request){
-      if($data = $request->all()){
-        //$tipos = array();
-        //var_dump($data);exit;
+      $paginacao = $request->input('paginate')?intval($request->input('paginate')):20;
+      $data = $request->all();
+      unset($data['page']);
+      if(!empty($data)){
         $filter = $this->filter_search($data);
         //var_dump($filter[1]);exit;
         $m_buscados = $request->input('mais_buscados'); //ordem por número de visualizações
         $anuncios = Anuncio::where($filter[0])
             ->whereIn('moto', $filter[1])
             ->orderBy($request->input('order')?$request->input('order'):'id', 'desc')
-            ->paginate($request->input('paginate')?intval($request->input('paginate')):20);
+            ->paginate($paginacao);
       }else{
-        $anuncios = Anuncio::orderBy($request->input('order')?$request->input('order'):'id', 'desc')
-          ->paginate($request->input('paginate')?intval($request->input('paginate')):20);
+        $anuncios = Anuncio::orderBy($request->input('order')?$request->input('order'):'id', 'desc')->paginate($paginacao);
       }
+      $request->flash();
       return view('anuncios.anuncios')->with('anuncios', $anuncios);
     }
 

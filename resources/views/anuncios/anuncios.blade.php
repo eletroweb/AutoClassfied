@@ -75,8 +75,8 @@
              <div class="input-group-prepend">
                <span class="input-group-text">Preço</span>
              </div>
-             <input type="text" aria-label="Máximo" placeholder="Máximo" name="valor_maximo" class="form-control valor">
-             <input type="text" aria-label="Mínimo" placeholder="Mínimo" name="valor_minimo" class="form-control valor">
+             <input type="text" aria-label="Máximo" placeholder="Máximo" name="valor_maximo" value="{{old('valor_maximo')}}" class="form-control valor">
+             <input type="text" aria-label="Mínimo" placeholder="Mínimo" name="valor_minimo" value="{{old('valor_minimo')}}" class="form-control valor">
            </div>
          </li>
          <li class="nav-item mt-2">
@@ -84,8 +84,8 @@
              <div class="input-group-prepend">
                <span class="input-group-text">Ano</span>
              </div>
-             <input type="number" aria-label="Máximo" placeholder="Máximo" name="ano_maximo" class="form-control">
-             <input type="number" aria-label="Mínimo" placeholder="Mínimo" name="ano_minimo" class="form-control">
+             <input type="number" aria-label="Máximo" placeholder="Máximo" name="ano_maximo" value="{{old('ano_maximo')}}" class="form-control">
+             <input type="number" aria-label="Mínimo" placeholder="Mínimo" name="ano_minimo" value="{{old('ano_minimo')}}" class="form-control">
            </div>
          </li>
          <li class="nav-item mt-2">
@@ -93,24 +93,41 @@
              <div class="input-group-prepend">
                <span class="input-group-text">KM</span>
              </div>
-             <input type="number" aria-label="Máximo" placeholder="Máximo" name="km_maximo" class="form-control">
-             <input type="number" aria-label="Mínimo" placeholder="Mínimo" name="km_minimo" class="form-control">
+             <input type="number" aria-label="Máximo" placeholder="Máximo" name="km_maximo" class="form-control"
+              value="{{old('km_maximo')}}">
+             <input type="number" aria-label="Mínimo" placeholder="Mínimo" name="km_minimo" class="form-control"
+              value="{{old('km_maximo')}}">
            </div>
          </li>
          <li class="nav-item mt-2">
                <select class="form-control select2" name="marca" id="marca">
                        <option value="">Selecione a marca</option>
                </select>
+               @if(old('marca'))
+                <script type="text/javascript">
+                  $('#marca').val("{{old('marca')}}");
+                </script>
+               @endif
          </li>
          <li class="nav-item mt-2">
                <select class="form-control select2" name="modelo" id="modelo">
                        <option value="">Selecione o modelo</option>
                </select>
+               @if(old('modelo'))
+                <script type="text/javascript">
+                  $('#modelo').val("{{old('modelo')}}");
+                </script>
+               @endif
          </li>
          <li class="nav-item mt-2">
-           <select class="form-control select2" name="versao" id="versao">
-                   <option value="">Selecione a versão</option>
-           </select>
+               <select class="form-control select2" name="versao" id="versao">
+                       <option value="">Selecione a versão</option>
+               </select>
+               @if(old('versao'))
+                <script type="text/javascript">
+                  $('#versao').val("{{old('versao')}}");
+                </script>
+               @endif
          </li>
          <input type="hidden" name="mais_buscados" value="0">
          <li class="nav-item mt-2">
