@@ -12,7 +12,7 @@
       </div>
       <div class="col-sm-12 mx-auto">
         <div class="container">
-          @include('elements.homepage.carrocerias')
+          @include('elements.homepage.carrocerias', ['marcas'=>$marcas])
         </div>
       </div>
   </div>
