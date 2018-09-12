@@ -153,4 +153,5 @@ class MarcaController extends AppBaseController
 
         return redirect(route('marcas.index'));
     }
+
 }

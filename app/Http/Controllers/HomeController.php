@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Anuncio;
+use App\Marca;
 
 class HomeController extends Controller
 {
@@ -15,6 +16,7 @@ class HomeController extends Controller
      */
     public function index(){
         $recentes = Anuncio::orderBy('id', 'desc')->paginate(10);
-        return view('home')->with(['recentes' => $recentes, 'home'=>true]);
+        $marcas = Marca::all();
+        return view('home')->with(['recentes' => $recentes, 'home'=>true, 'marcas'=> $marcas]);
     }
 }
