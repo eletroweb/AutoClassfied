@@ -61,3 +61,8 @@ Route::middleware(['auth','admin'])->group(function(){
   Route::resource('/admin/revendas', 'RevendaController');
   Route::resource('newsletterUsers', 'NewsletterUserController');
 });
+
+
+Route::resource('transactions', 'TransactionController');
+
+Route::resource('transactionItems', 'TransactionItemController');
