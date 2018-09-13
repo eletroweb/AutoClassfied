@@ -50,12 +50,15 @@ $(document).ready(function(){
   });
   $('#buscar_fipe').click(function(){
     if($('#marca_fipe').val() !== '' && $('#modelo_fipe').val() !== '' && $('#versao_fipe').val() !== '' && $('#nome').val() !== '' && $('#email').val()!==''){
-        $.ajax({
+        /*$.ajax({
           url: '/newsletteruser/store',
           type: 'post',
           data: {_token: $('meta[name="csrf-token"]').attr('content'), nome: $('#nome').val(), email: $('#email').val()},
           success: function(data){
-            $.ajax({
+                 
+          }
+        });*/
+      $.ajax({
               url: 'http://fipeapi.appspot.com/api/1/carros/veiculo/'+$('#marca_fipe').val()+'/'+$('#modelo_fipe').val()+'/'+$('#versao_fipe').val()+'.json',
               type: 'get',
               dataType: 'json',
@@ -68,9 +71,7 @@ $(document).ready(function(){
                 $('#ano').html('<b>Ano:</b>'+data.ano_modelo);
                 $('#result').removeClass('d-none');
               }
-            });      
-          }
-        });       
+            }); 
     }else{
       alert('Você precisa preencher todo o formulário para realizar a consulta');
     }
