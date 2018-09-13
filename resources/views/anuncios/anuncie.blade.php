@@ -22,6 +22,7 @@
 	      </div>
 	      <div class="modal-footer">
 	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+	        <button type="button" id="btnPagar" class="btn btn-secondary" data-dismiss="modal">Prosseguir com o pagamento</button>
 	      </div>
 	    </div>
 	  </div>

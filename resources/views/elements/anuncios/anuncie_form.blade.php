@@ -16,6 +16,7 @@
           <input required type="text" value="{{old('nome')}}" class="form-control" name="nome" id="titulo" aria-describedby="tituloHelp" placeholder="O que você está anunciando?">
           <small id="tituloHelp" class="form-text text-muted">Seja objetivo, o título será exibido na listagem dos veículos.</small>
         </div>
+        <input type="hidden" name="cardtoken">
         <div class="row">
           <div class="col-sm-6">
             <div class="form-group">

@@ -5,7 +5,7 @@
       <h3 class="mt-2">Configurações</h3>
       <hr>
       <div class="form-group">
-      @if($revenda->capa)
+      @if(isset($revenda) && $revenda->capa)
           <img src="{{Storage::url($revenda->capa)}}" class="thumbnail" height="50%" width="50%">
       @endif
       </div>
@@ -19,7 +19,7 @@
         @endif
       </div>
       <div class="form-group">
-      @if($revenda->logo)
+      @if(isset($revenda) && $revenda->logo)
           <img src="{{Storage::url($revenda->logo)}}" class="thumbnail" height="50%" width="50%">
       @endif
       </div>
@@ -41,7 +41,7 @@
             </span>
         @endif
       </div>
-      <input type="hidden" name="user" value="{{$revenda->user}}">
+      <input type="hidden" name="user" value="{{isset($revenda)?$revenda->user:''}}">
       <div class="form-group">
         <label for="nomefantasia">Nome fantasia</label>
         <input value="{{isset($revenda)?$revenda->nomefantasia:''}}" type="text" class="form-control" name="nomefantasia" id="nomefantasia" placeholder="Este nome será exibido" required>
@@ -64,7 +64,11 @@
       </div>
       <h3 class="mt-2">Endereço</h3>
       <hr>
-      @include('enderecos.form', ['endereco'=> $revenda->end])
+      @if(isset($revenda))
+        @include('enderecos.form', ['endereco'=> $revenda->end])
+      @else
+        @include('enderecos.form')
+      @endif
     </div>
     @if(!isset($revenda))
     <div class="col-sm-6">

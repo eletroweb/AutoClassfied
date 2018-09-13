@@ -1,47 +1,60 @@
 $(document).ready(function(){
-	$.ajax({
-		url: '/pagseguro/startSession',
-		dataType: 'json',
-		type: 'post',
-		data: {_token: $('meta[name="csrf-token"]').attr('content')},
-		success: function(data){
-			console.log(data[0]);
-			PagSeguroDirectPayment.setSessionId(data[0]);
-			PagSeguroDirectPayment.onSenderHashReady(function(response){
-			    if(response.status == 'error') {
-			        console.log(response.message);
-			        return false;
-			    }
+	$('#checkoutModal').on('show.bs.modal', function (e) {
+		  $.ajax({
+			url: '/pagseguro/startSession',
+			dataType: 'json',
+			type: 'post',
+			data: {_token: $('meta[name="csrf-token"]').attr('content')},
+			success: function(data){
+				console.log(data[0]);
+				PagSeguroDirectPayment.setSessionId(data[0]);
+				PagSeguroDirectPayment.onSenderHashReady(function(response){
+					if(response != undefined){
+						if(response.status == 'error') {
+					        console.log(response.message);
+					        return false;
+					    }
 
-			    hashComprador = response.senderHash; //Hash estará disponível nesta variável.
-			    console.log(hashComprador);
-			});
-			/*PagSeguroDirectPayment.getPaymentMethods({
-				amount: 50.00,
-				success: function(response) {
-					console.log(response);
-				},
-				error: function(response) {
-					console.log(response);
-				},
-				complete: function(response) {
-					//console.log(response);
-				}
-			});*/
-		}
+					    hashComprador = response.senderHash; //Hash estará disponível nesta variável.
+					    console.log(hashComprador);
+					}
+				    	
+				});
+				/*PagSeguroDirectPayment.getPaymentMethods({
+					amount: 50.00,
+					success: function(response) {
+						console.log(response);
+					},
+					error: function(response) {
+						console.log(response);
+					},
+					complete: function(response) {
+						//console.log(response);
+					}
+				});*/
+			}
+		});
 	});
-	$('#card-number').change(function(){
-		if($(this).val().length == 4){
+	$('#cartao').mask('0000-0000-0000-0000');
+	$('#month').mask('00');
+	$('#year').mask('00');
+	$('#cartao').keyup(function(){
+		console.log('Caiu card-number');
+		if($(this).cleanVal().length >= 5){
+			console.log($(this).cleanVal().length+' <==> ');
 			PagSeguroDirectPayment.getBrand({
-				cardBin: document.getElementById('#cartao').value,
+				cardBin: $(this).cleanVal(), 
 					success: function(response) {
 						//bandeira encontrada
+						bin_bandeira = response.bin;
 					},
 					error: function(response) {
 						//tratamento do erro
+						console.log(response);
 					},
 					complete: function(response) {
 						//tratamento comum para todas chamadas
+						console.log(response);
 					}
 			});
 		}
@@ -51,6 +64,32 @@ $(document).ready(function(){
 			$('#checkoutModal').modal();
 		}
 	});
-});
+	$('#btnPagar').click(function(){
+		if ($('#cartao').val().length == 20 && $('#cvv').val().length > 2 && $('#month').val().length == 2 && $('#year').val().length == 0 ) {
+			var param = {
+			    cardNumber: $('#cartao').cleanVal(),
+			    brand: bin_bandeira,
+			    cvv: $('#cvv').val(),
+			    expirationMonth: $('#month').val(),
+			    expirationYear: $('#year').val(),
+			    success: function(response) {
+			        //token gerado, esse deve ser usado na chamada da API do Checkout Transparente
+			        var result = PagSeguroDirectPayment.createCardToken(param); //Uso esse token no post da transacao
+					$('#card-token').val(result.card.token);
+					console.log(result.card.token);
+			    },
+			    error: function(response) {
+			        //tratamento do erro
+			        console.log(response);
+			    },
+			    complete: function(response) {
+			        //tratamento comum para todas chamadas
+			        console.log(response);
+			    }
+			}
 
+		}
+	});
+});
+var bin_bandeira = '';
 var hashComprador = '';
