@@ -1,5 +1,5 @@
 <div class="list-group">
-  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
+  <a href="/contratar-revenda" class="list-group-item list-group-item-action flex-column align-items-start active">
     <div class="d-flex w-100 justify-content-between">
       <h5 class="mb-1">É UMA CONCESSIONARIA?</h5>
       <small></small>

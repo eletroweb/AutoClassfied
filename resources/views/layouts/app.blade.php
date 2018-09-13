@@ -87,7 +87,9 @@
                   Revendedores
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  @if(!Auth::check())
                   <a class="dropdown-item" href="/login">Fazer login</a>
+                  @endif
                   <a class="dropdown-item" href="{{route('contratar_revenda')}}">Quero contratar</a>
                 </div>
               </li>
