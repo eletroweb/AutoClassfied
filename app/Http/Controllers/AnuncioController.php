@@ -13,6 +13,7 @@ use App\Acessorio;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use App\Imagem;
+use App\Http\Controllers\TransactionController;
 
 class AnuncioController extends Controller
 {
@@ -81,7 +82,7 @@ class AnuncioController extends Controller
                 $acessorio = new Acessorio();
                 $acessorio->nome = $a;
                 $acessorio->anuncio = $anuncio->id;
-                $acessorio->save();  
+                $acessorio->save();
               }
             }
           }
@@ -103,7 +104,9 @@ class AnuncioController extends Controller
             $data->anuncio = $anuncio->id;
             $data->save();
           }
-          $title = $anuncio->getNomeFormatted();
+          $title = 'tst';//$anuncio->getNomeFormatted();
+          $xml = TransactionController::payment($request);
+          var_dump($xml);exit;
           return redirect("/anuncios/$title_$anuncio->id")->with('status', 'Anúncio publicado com sucesso!');
         }
         $request->flash();
@@ -152,7 +155,7 @@ class AnuncioController extends Controller
             $param[] =  [$key, is_numeric($value)? '=':'like', $prefix.strtoupper($value).$prefix];
           }
         }elseif ($key == 'blindagem') {
-          
+
         }
       }
       return [$param, $tipos];
@@ -194,13 +197,13 @@ class AnuncioController extends Controller
       $relacionados = array();
       //var_dump($count);exit;
       if($count > 1){
-        $relacionados = 
+        $relacionados =
           $revenda?
           Anuncio::where('user', $anuncio->users->id)->get()->random($count < 4?$count:4)
           :
-          Anuncio::where([['id', '!=', $anuncio->id]])->get()->random($count < 4?$count:4);  
+          Anuncio::where([['id', '!=', $anuncio->id]])->get()->random($count < 4?$count:4);
       }
-      
+
       return view('anuncios.anuncio_page')->with(['acessorios' => $acessorios, 'adicionais' => $adicionais, 'anunciodados'=> $dados,
             'anuncio'=> $anuncio, 'imagens' => $imagens, 'principal' => $imagens[0], 'relacionados'=> $relacionados]);
     }

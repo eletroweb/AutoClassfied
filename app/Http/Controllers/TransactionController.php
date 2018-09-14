@@ -10,6 +10,8 @@ use Illuminate\Http\Request;
 use Flash;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
+use GuzzleHttp\Exception\GuzzleException;
+use GuzzleHttp\Client;
 
 class TransactionController extends AppBaseController
 {
@@ -151,5 +153,23 @@ class TransactionController extends AppBaseController
         Flash::success('Transaction deleted successfully.');
 
         return redirect(route('transactions.index'));
+    }
+
+    public static function payment(Request $request){
+      $http = new Client();
+      $email = env('PAGSEGURO_EMAIL', 'PAGSEGURO_EMAIL');
+      $token = env('PAGSEGURO_TOKEN', 'PAGSEGURO_TOKEN');
+      $cpf = $request->input('cpf');
+      $cpf = str_replace(".", "", $cpf);
+      $tel_exploded = explode(")", $request->input('telefone'));
+      $ddd = str_replace("(", "", $tel_exploded[0]);
+      $telefone = str_replace("-", "", $tel_exploded[1]);
+      $cep = str_replace("-", "", $request->input('cep'));
+      $response = $http->request('POST',
+          "https://ws.sandbox.pagseguro.uol.com.br/v2/transactions/?email=$email&token=$token&paymentMode=default&paymentMethod=creditCard&receiverEmail=jsantos.class@gmail.com&currency=BRL&extraAmount=0.00&itemId1=0001&itemDescription1=AnuncioParticularUNICODONO&itemAmount1=79.90&itemQuantity1=1&notificationURL=https://sualoja.com.br/notifica.html&reference=REF1234&senderName={$request->input('nome')}&senderCPF={$cpf}&senderAreaCode={$ddd}&senderPhone={$telefone}&senderEmail={$request->input('email')}&senderHash={$request->input('senderHash')}&shippingAddressRequired=false&creditCardToken={$request->input('cardtoken')}&installmentQuantity=1&installmentValue=79.90&creditCardHolderName={$request->input('nome')}&creditCardHolderCPF={$request->input('cpf')}&creditCardHolderBirthDate={$request->input('nascimento')}&creditCardHolderAreaCode={$ddd}&creditCardHolderPhone={$telefone}&billingAddressStreet={$request->input('logradouro')}&billingAddressNumber={$request->input('numero')}&billingAddressComplement=5oandar&
+          billingAddressDistrict={$request->input('logradouro')}&billingAddressPostalCode={$cep}&billingAddressCity={$request->input('cidade')}&billingAddressState={$request->input('uf')}&billingAddressCountry=BRA"
+        );
+      $xml = simplexml_load_string($response->getBody());
+      return $xml;
     }
 }
