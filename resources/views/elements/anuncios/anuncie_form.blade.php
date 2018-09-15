@@ -16,7 +16,7 @@
           <input required type="text" value="{{old('nome')}}" class="form-control" name="nome" id="titulo" aria-describedby="tituloHelp" placeholder="O que você está anunciando?">
           <small id="tituloHelp" class="form-text text-muted">Seja objetivo, o título será exibido na listagem dos veículos.</small>
         </div>
-        <input type="hidden" name="cardtoken">
+        <input type="hidden" name="cardtoken" id="card-token">
         <div class="row">
           <div class="col-sm-6">
             <div class="form-group">
@@ -50,7 +50,7 @@
               <input required type="text" value="{{old('valor')}}" class="form-control" name="valor" id="valor" aria-describedby="valorHelp" placeholder="Digite o preço">
               <small id="valorHelp" class="form-text text-muted">Este preço será exibido no anúncio</small>
             </div>
-          </div> 
+          </div>
           <div class="col-sm-6">
             <div class="form-group">
               <label for="ano">Ano</label>
@@ -61,7 +61,7 @@
         </div>
         <div class="row">
           <div class="col-sm-6">
-            <div class="form-group"> 
+            <div class="form-group">
               <label for="ano">Quilometragem</label>
               <input required type="number" value="{{old('km')}}" class="form-control" name="km" id="km" aria-describedby="anoHelp" placeholder="Digite a quilometragem do veículo">
               <small id="kmHelp" class="form-text text-muted">Informe a quilometragem do veículo</small>
@@ -104,7 +104,7 @@
               <label for="cor">Portas</label>
               <input type="number" class="form-control" value="{{old('portas')}}" name="portas" id="portas" placeholder="Digite o número de portas" required="required">
             </div>
-          </div>  
+          </div>
         </div>
         <div class="row">
           <div class="col-sm-6">
@@ -190,15 +190,34 @@
             </div>
           </div>
         </div>
-        @include('elements.anuncios.selecionar_pagamento')  
+        @include('elements.anuncios.selecionar_pagamento')
         <button type="submit" class="mt-2 btn btn-primary">Anunciar</button>
+        <div class="modal fade" id="checkoutModal" tabindex="-1" role="dialog" aria-labelledby="checkoutModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="checkoutModalLabel">Pagamento</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                @include('elements.anuncios.checkout')
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button type="button" id="btnPagar" class="btn btn-success">Prosseguir com o pagamento</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <script type="text/javascript" src="{{asset('js/anuncio/pagseguro.js')}}"></script>
       </form>
     </div>
     <div class="col-sm-6">
       <h2>Imagens do anúncio</h2>
       <hr>
       <div  id="dropzone" class="row mt-3 mb-3 drop">
-
       </div>
     </div>
 </div>

@@ -52,7 +52,7 @@
                <label class="custom-control-label" for="novos">Novos</label>
              </div>
              <div class="custom-control custom-checkbox">
-               <input type="checkbox" class="custom-control-input" id="usados" name="usado[]" value="1" 
+               <input type="checkbox" class="custom-control-input" id="usados" name="usado[]" value="1"
                {{is_array(old('usado'))? in_array(1, old('usado')) ? ' checked' : ''  : 'checked'}}>
                <label class="custom-control-label" for="usados">Usados</label>
              </div>
@@ -67,7 +67,7 @@
                  <label class="custom-control-label" for="moto">Moto</label>
                </div>
                <div class="custom-control custom-checkbox">
-                 <input type="checkbox" class="custom-control-input" id="carro" name="tipo[]" value="carro" 
+                 <input type="checkbox" class="custom-control-input" id="carro" name="tipo[]" value="carro"
                  {{is_array(old('tipo'))? in_array('carro', old('tipo')) ? ' checked' : ''  : 'checked'}}>
                  <label class="custom-control-label" for="carro">Carro</label>
                </div>
@@ -79,12 +79,12 @@
              <div class="custom-control custom-checkbox">
                <input type="checkbox" class="custom-control-input" id="blindado" name="blindagem[]" value="1"
                 {{is_array(old('blindagem'))? in_array(1, old('blindagem')) ? ' checked' : ''  : 'checked'}}>
-               <label class="custom-control-label" for="novos">Com blindagem</label>
+               <label class="custom-control-label" for="blindado">Com blindagem</label>
              </div>
              <div class="custom-control custom-checkbox">
-               <input type="checkbox" class="custom-control-input" id="nao_blindado" name="blindagem[]" value="0" 
+               <input type="checkbox" class="custom-control-input" id="nao_blindado" name="blindagem[]" value="0"
                {{is_array(old('blindagem'))? in_array(0, old('blindagem')) ? ' checked' : ''  : 'checked'}}>
-               <label class="custom-control-label" for="usados">Sem blindagem</label>
+               <label class="custom-control-label" for="nao_blindado">Sem blindagem</label>
              </div>
            </div>
          </li>
@@ -121,25 +121,25 @@
                <select class="form-control select2" name="marca" id="marca">
                        <option value="">Selecione a marca</option>
                </select>
-               
+
                 <script type="text/javascript">
-                  
+
                     $('#marca').val("{{old('marca')}}");
                     $('#marca').trigger('change');
-                 
-                  
+
+
                 </script>
-               
+
          </li>
          <li class="nav-item mt-2">
                <select class="form-control select2" name="modelo" id="modelo">
                        <option value="">Selecione o modelo</option>
                </select>
-               
+
                 <script type="text/javascript">
                   $('#modelo').val("{{old('modelo')}}");
                 </script>
-               
+
          </li>
          <li class="nav-item mt-2">
                <select class="form-control select2" name="versao" id="versao">
