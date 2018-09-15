@@ -39,6 +39,9 @@
                     <div class="col-sm-4">
                       <p style="font-size: 14px;"><b style="font-size: 18px;">Quilometragem</b><br> {{$anuncio->km}}KM</p>
                     </div>
+                    <div class="col-sm-4">
+                      <p style="font-size: 14px;"><b style="font-size: 18px;">Blindado</b><br> {{$anuncio->blindagem?'Sim':'Não'}}</p>
+                    </div>
                     @foreach($anunciodados as $dado)
                       <div class="col-sm-4">
                         <p style="font-size: 14px;"><b style="font-size: 18px;">{{ucfirst($dado->nome)}}</b><br> {{$dado->valor}}</p>

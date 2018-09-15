@@ -145,7 +145,7 @@ class RevendaController extends AppBaseController
     $endereco->numero = $request->input('numero');
     $endereco->bairro = $request->input('bairro');
     $endereco->uf = $request->input('uf');
-    $endereco->cidade = $request->input('cidade'); 
+    $endereco->cidade = $request->input('cidade');
     $endereco->cep = $request->input('cep');
     $endereco->save();
     $data = $request->all();
@@ -155,7 +155,7 @@ class RevendaController extends AppBaseController
     if($request->hasFile('logo')){
       $data['logo'] = Storage::put('public', $data['logo']);
     }
-    
+
     $data['user']= Revenda::find($id)->user;
     $data['ativo']= isset($data['ativo'])?$data['ativo']:0;
     $revenda = $this->revendaRepository->update($data, $id);
@@ -283,6 +283,7 @@ class RevendaController extends AppBaseController
         $anuncio->ano = $veiculo->anomodelo;
         $anuncio->moto = $veiculo->tipoveiculo == 'Carro'? false:true;
         $anuncio->km = $veiculo->km;
+        $anuncio->blindagem = $this->isBlindado($veiculo);
         $anuncio->usado = $veiculo->zerokm=='N'?1:0;
         if($modelo = Modelos::where([
           ['nome', (string)$veiculo->modelo],
@@ -385,6 +386,14 @@ class RevendaController extends AppBaseController
     return view('revendas.seja_revendedor');
   }
 
+  public function isBlindado($veiculo){
+    foreach($veiculo->complementos->complemento as $c){
+      $c = (string)$c;
+      return $c == 'Blindado';
+    }
+    return false;
+  }
+
   public function complementos($veiculo, $anuncio){
     if(isset($veiculo->complementos->complemento)){
       foreach ($veiculo->complementos->complemento as $complemento) {
@@ -422,7 +431,7 @@ class RevendaController extends AppBaseController
     public function store(Request $request){
       $data = $request->all();
       $endereco = Endereco::create($data);
-      $data = array_add($data, 'endereco', $endereco->id); 
+      $data = array_add($data, 'endereco', $endereco->id);
       if($request->hasFile('capa')){
         $data['capa'] = Storage::put('public', $data['capa']);
       }
@@ -455,7 +464,7 @@ class RevendaController extends AppBaseController
 
     public function viewsByMonth(Request $request){
       $revenda = $request->input('revenda');
-      $carbon = Carbon::now(); 
+      $carbon = Carbon::now();
       $visualizacoes = array();
       for($month= 1; $month <= 12; $month++) {
         $visualizacoes[] = VisualizacaoAnuncio::join('anuncios', 'anuncios.id', '=', 'visualizacao_anuncios.anuncio')
@@ -464,7 +473,7 @@ class RevendaController extends AppBaseController
                                           ->where('revendas.id', '=', $revenda)
                                           ->whereMonth('anuncios.created_at', $month)
                                           ->whereYear('anuncios.created_at', $carbon->year)
-                                          ->first(); 
+                                          ->first();
       }
       return response()->json($visualizacoes);
     }
