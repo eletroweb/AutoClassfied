@@ -24,6 +24,7 @@ class CreateAnunciosTable extends Migration
             $table->integer('valor');
             $table->integer('ano');
             $table->integer('km');
+            $table->integer('transaction_id')->nullable(true);
             $table->boolean('usado')->default(true);
             $table->boolean('blindagem')->default(false);
             $table->integer('visualizacoes')->default(0);

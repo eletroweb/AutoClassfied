@@ -13,7 +13,7 @@ use App\Acessorio;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use App\Imagem;
-use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\PagseguroController;
 
 class AnuncioController extends Controller
 {
@@ -104,10 +104,12 @@ class AnuncioController extends Controller
             $data->anuncio = $anuncio->id;
             $data->save();
           }
-          $title = 'tst';//$anuncio->getNomeFormatted();
-          $xml = TransactionController::payment($request);
-          var_dump($xml);exit;
-          return redirect("/anuncios/$title_$anuncio->id")->with('status', 'Anúncio publicado com sucesso!');
+          $title = $anuncio->getNomeFormated();
+          $xml = PagseguroController::payment($request);
+          $transaction = TransactionController::transactionFromXml($xml);
+          $anuncio->transaction_id = $transaction->id;
+          $anuncio->save();
+          return redirect("/anuncios/{$title}_{$anuncio->id}")->with('status', 'Anúncio publicado com sucesso!');
         }
         $request->flash();
         return redirect('/anuncie')->with('status', 'Você precisa inserir no mínimo uma imagem para publicar o seu anúncio');

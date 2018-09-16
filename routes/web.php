@@ -59,10 +59,7 @@ Route::middleware(['auth','admin'])->group(function(){
   Route::resource('/admin/planos', 'PlanoController');
   Route::resource('/admin/users', 'UserController');
   Route::resource('/admin/revendas', 'RevendaController');
-  Route::resource('newsletterUsers', 'NewsletterUserController');
+  Route::resource('/admin/newsletterUsers', 'NewsletterUserController');
+  Route::resource('/admin/transactions', 'TransactionController');
+  Route::resource('/admin/transactionItems', 'TransactionItemController');
 });
-
-
-Route::resource('transactions', 'TransactionController');
-
-Route::resource('transactionItems', 'TransactionItemController');

@@ -140,6 +140,7 @@
               </ul>
             </li>
             <li><a href="/admin/planos"> <i class="fa fa-toolbox"></i>Planos </a></li>
+            <li><a href="/transacaos/"> <i class="fa fa-dollar-sign"></i>Transações </a></li>
             <li><a href="#usuarios" aria-expanded="false" data-toggle="collapse"><i class="fa fa-users"></i>Usuários</a>
               <ul id="usuarios" class="collapse list-unstyled ">
                 <li><a href="#">Campos de cadastro</a></li>
