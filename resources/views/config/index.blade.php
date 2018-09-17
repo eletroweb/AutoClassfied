@@ -13,7 +13,7 @@
     </div>
     <div class="card-body">
       <div class="col-sm-12">
-        <button type="button" class="btn btn-outline-warning" id="importAll">Importar marcas, modelos e versões</button>
+        <button type="button" onclick="confirm('Realmente deseja realizar a importação?')" class="btn btn-outline-warning" id="importAll">Importar marcas, modelos e versões</button>
       </div>
       <div class="col-sm-12">
         <img src="{{asset('img/loading_import.gif')}}" class="d-none" id="loading_import_all" alt="loading">
