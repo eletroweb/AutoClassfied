@@ -4,7 +4,7 @@
           <h3 class="box-title">Selecione a sua opção de anúncio</h3>
           <div class="plan-selection custom-control custom-radio">
               <div class="plan-data">
-                  <input id="anuncio_destacado" value="y" class="custom-control-input tipo_anuncio" name="custom_radio" type="radio"/>
+                  <input id="anuncio_destacado" value="y" class="custom-control-input tipo_anuncio" name="anuncio_destacado" type="radio"/>
                   <label for="anuncio_destacado" class="custom-control-label" style="font-weight: bold; color: green;">Anúncio destacado</label>
                   <p class="plan-text">
                     Sugestão para usuários | Melhor posição </p>
@@ -13,7 +13,7 @@
           </div>
           <div class="plan-selection custom-control custom-radio">
               <div class="plan-data">
-                  <input id="anuncio_padrao" class="custom-control-input tipo_anuncio" name="custom_radio" type="radio" value="n" />
+                  <input id="anuncio_padrao" class="custom-control-input tipo_anuncio" name="anuncio_destacado" type="radio" value="n" />
                   <label for="anuncio_padrao" class="custom-control-label">Anúncio padrão</label>
                   <p class="plan-text">
                     Não destacar anúncio                  

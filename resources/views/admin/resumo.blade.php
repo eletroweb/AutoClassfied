@@ -110,7 +110,7 @@
                     <div class="project-title d-flex align-items-center">
                       <div class="image has-shadow"><img src="img/project-1.jpg" alt="..." class="img-fluid"></div>
                       <div class="text">
-                        <h3 class="h4"><a href="/anuncios/{{$anuncio->getNomeFormated()}}_{{$anuncio->id}}">{{$anuncio->nome}}</a></h3><small>{{App\User::find($anuncio->user)->name}}</small>
+                        <h3 class="h4"><a href="/anuncios/{{$anuncio->getNomeFormated()}}_{{$anuncio->id}}">{{$anuncio->titulo}}</a></h3><small>{{App\User::find($anuncio->user)->name}}</small>
                       </div>
                     </div>
                     <div class="project-date"><span class="hidden-sm-down">{{$anuncio->created_at->format('d/m/Y')}}</span></div>
@@ -283,7 +283,7 @@
                           <div class="info d-flex">
                             <div class="icon"><i class="fa fa-newspaper"></i></div>
                             <div class="title">
-                              <h5><a href="/anuncios/{{$recentes->getNomeFormated()}}_{{$recentes->id}}"> {{$recentes->nome}}</a></h5>
+                              <h5><a href="/anuncios/{{$recentes->getNomeFormated()}}_{{$recentes->id}}"> {{$recentes->titulo}}</a></h5>
                               <p>{{str_limit($recentes->descricao, 100)}}</p>
                             </div>
                           </div>

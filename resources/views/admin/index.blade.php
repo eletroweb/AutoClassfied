@@ -140,7 +140,7 @@
               </ul>
             </li>
             <li><a href="/admin/planos"> <i class="fa fa-toolbox"></i>Planos </a></li>
-            <li><a href="/transacaos/"> <i class="fa fa-dollar-sign"></i>Transações </a></li>
+            <li><a href="/admin/transactions/"> <i class="fa fa-dollar-sign"></i>Transações </a></li>
             <li><a href="#usuarios" aria-expanded="false" data-toggle="collapse"><i class="fa fa-users"></i>Usuários</a>
               <ul id="usuarios" class="collapse list-unstyled ">
                 <li><a href="#">Campos de cadastro</a></li>
@@ -152,7 +152,7 @@
           <ul class="list-unstyled">
             <li> <a href="#"> <i class="fa fa-money-check-alt"></i>PagSeguro</a></li>
             <li> <a href="{{route('configuracoes')}}"> <i class="fa fa-cogs"></i>Configurações do site</a></li>
-            <li> <a href="#"> <i class="icon-mail"></i>Configurações de e-mail</a></li>
+            <li> <a href="#"> <i class="fa fa-envelope"></i>Configurações de e-mail</a></li>
           </ul>
         </nav>
         <div class="content-inner">

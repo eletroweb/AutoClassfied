@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Storage;
 
 class Anuncio extends Model
 {
-    protected $fillable = ['nome', 'descricao', 'marca', 'km', 'usado', 'modelo', 'versao', 'valor', 'user', 'moto', 
+    protected $fillable = ['titulo', 'descricao', 'marca', 'km', 'usado', 'modelo', 'versao', 'valor', 'user', 'moto', 
                             'ano', 'blindagem'];
 
     public function anuncio_dados(){
@@ -39,7 +39,7 @@ class Anuncio extends Model
     }
 
     public function getNomeFormated(){
-      return str_replace(" ", "-", str_replace("  ", "", $this->nome));
+      return str_replace(" ", "-", str_replace("  ", " ", $this->titulo));
     }
 
     public function getKm(){

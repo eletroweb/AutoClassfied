@@ -276,7 +276,7 @@ class RevendaController extends AppBaseController
         $anuncio = Anuncio::find($anuncio_->anuncio);
         else
         $anuncio = new Anuncio();
-        $anuncio->nome = $veiculo->marca.' '.$veiculo->modelo.' - '.$veiculo->versao;
+        $anuncio->titulo = $veiculo->marca." ".$veiculo->modelo.' '.$veiculo->versao;
         $anuncio->descricao = (string)$veiculo->observacao;
         $anuncio->marca = Marca::where('nome', $veiculo->marca)->first()->id;
         $anuncio->importado = true;

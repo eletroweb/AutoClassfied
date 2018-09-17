@@ -14,11 +14,11 @@
               $url = $imagem->url;
             }
           @endphp
-          <img src="{{$url}}" width="300" alt="{{$anuncio->nome}}">
+          <img src="{{$url}}" width="300" alt="{{$anuncio->titulo}}">
         </div>
         <div class="col-sm-7">
           <div class="d-flex w-100 justify-content-between">
-            <h5 class="mb-1">{{$anuncio->nome}}</h5>
+            <h5 class="mb-1">{{$anuncio->titulo}}</h5>
             <small>{{$anuncio->created_at->format('d/m/Y H:i')}}</small>
           </div>
           <h5 class="mb-1">

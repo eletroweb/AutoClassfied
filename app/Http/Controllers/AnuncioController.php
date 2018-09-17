@@ -24,7 +24,7 @@ class AnuncioController extends Controller
     public function anuncieStore(Request $request){
         //var_dump($request->all());exit;
         $validatedData = $request->validate([
-           'nome' => 'required|max:30',
+           'titulo' => 'required|max:30',
            'marca' => 'required',
            'modelo' => 'required',
            'versao' => 'required',
@@ -105,9 +105,11 @@ class AnuncioController extends Controller
             $data->save();
           }
           $title = $anuncio->getNomeFormated();
-          $xml = PagseguroController::payment($request);
-          $transaction = TransactionController::transactionFromXml($xml);
-          $anuncio->transaction_id = $transaction->id;
+          if($request->input('anuncio_padrao')){
+            $xml = PagseguroController::payment($request);
+            $transaction = TransactionController::transactionFromXml($xml);
+            $anuncio->transaction_id = $transaction->id; 
+          }
           $anuncio->save();
           return redirect("/anuncios/{$title}_{$anuncio->id}")->with('status', 'Anúncio publicado com sucesso!');
         }
