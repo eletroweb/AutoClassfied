@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row justify-content-md-center">
     @include('elements.homepage.carroceria', ['nome'=> 'bmw', 'imageUrl'=> asset('images/marcas/bmw.png')])
     @include('elements.homepage.carroceria', ['nome'=> 'chevrolet', 'imageUrl'=> asset('images/marcas/chevrolet.png')])
     @include('elements.homepage.carroceria', ['nome'=> 'citroen', 'imageUrl'=> asset('images/marcas/citroen.png')])

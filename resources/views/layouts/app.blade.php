@@ -22,8 +22,6 @@
     <meta name="Audience" content="all" />
     <meta name="url" content="www.unicodono.com.br" />
     <link rel="shortcut icon" href="{{asset('images/favicon.jpg')}}" type="image/x-icon" />
-
-    <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <!--<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
     <script>
@@ -49,6 +47,7 @@
     <script src="{{asset('js/jquery-3.3.1.min.js')}}" charset="utf-8"></script>
     <script type="text/javascript" src="https://stc.sandbox.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.directpayment.js"></script>
     <link rel="stylesheet" type="text/css" href="{{asset('css/pagamento.css')}}">
+    <link rel="stylesheet" href="{{asset('css/hover-min.css')}}">
 </head>
 <body>
     <div id="app">
@@ -157,8 +156,7 @@
             </ul>
           </div>
         </nav>
-         @yield('content')
-
+        @yield('content')
     </div>
     <footer>
       <div class="container-fluid">
