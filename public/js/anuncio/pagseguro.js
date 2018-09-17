@@ -52,6 +52,7 @@ $(document).ready(function(){
 										success: function(r) {
 												$('#card-token').val(r.card.token);
 												$('#btnPagar').html('Informações processadas');
+                        $('#checkoutModal').modal('hide');
 										},
 										error: function(r) {
 												//tratamento do erro

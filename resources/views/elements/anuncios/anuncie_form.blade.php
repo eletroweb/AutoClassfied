@@ -13,7 +13,7 @@
         <hr>
         <div class="form-group">
           <label for="titulo">Titulo do anúncio</label>
-          <input required type="text" value="{{old('nome')}}" class="form-control" name="nome" id="titulo" aria-describedby="tituloHelp" placeholder="O que você está anunciando?">
+          <input required type="text" value="{{old('nome')}}" class="form-control" name="titulo" id="titulo" aria-describedby="tituloHelp" placeholder="O que você está anunciando?">
           <small id="tituloHelp" class="form-text text-muted">Seja objetivo, o título será exibido na listagem dos veículos.</small>
         </div>
         <input type="hidden" name="cardtoken" id="card-token">
@@ -196,7 +196,7 @@
           <div class="modal-dialog" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="checkoutModalLabel">Pagamento</h5>
+                <h5 class="modal-title" id="checkoutModalLabel">Informações de pagamento</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
@@ -217,7 +217,7 @@
     <div class="col-sm-6">
       <h2>Imagens do anúncio</h2>
       <hr>
-      <div  id="dropzone" class="row mt-3 mb-3 drop">
+      <div  id="dropzone" class="row mt-3 mb-3 box">
       </div>
     </div>
 </div>

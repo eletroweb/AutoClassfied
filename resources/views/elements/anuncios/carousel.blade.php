@@ -9,7 +9,7 @@
           <div class="card-body">
             <div class="row">
                 <div class="col-sm-12">
-                  <h4 class="card-title"><a style="color: black;" href="/anuncios/{{$r->nome}}_{{$r->id}}">{{$r->nome}}</a></h4>
+                  <h4 class="card-title"><a style="color: black;" href="/anuncios/{{$r->titulo}}_{{$r->id}}">{{$r->titulo}}</a></h4>
                 </div>
                 <div class="col-sm-12">
                   <span class="badge badge-success mb-1" style="font-size: 14px;">R${{number_format(substr($r->valor.'0', 0, -3), 2, ",", ".")}}</span>
