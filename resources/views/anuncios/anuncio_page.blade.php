@@ -39,6 +39,9 @@
                     <div class="col-sm-4">
                       <p style="font-size: 14px;"><b style="font-size: 18px;">Quilometragem</b><br> {{$anuncio->km}}KM</p>
                     </div>
+                    <div class="col-sm-4">
+                      <p style="font-size: 14px;"><b style="font-size: 18px;">Blindado</b><br> {{$anuncio->blindagem?'Sim':'Não'}}</p>
+                    </div>
                     @foreach($anunciodados as $dado)
                       <div class="col-sm-4">
                         <p style="font-size: 14px;"><b style="font-size: 18px;">{{ucfirst($dado->nome)}}</b><br> {{$dado->valor}}</p>
@@ -75,7 +78,7 @@
       <div class="card" style="border: none">
         <div class="card-body">
           <h5 class="card-title" style="font-size: 30px"><span class="badge badge-success">R${{number_format(substr($anuncio->valor.'0', 0, -3), 2, ",", ".")}}</span></h5>
-          <h5 class="card-title" style="font-size: 30px">{{$anuncio->nome}}</h5>
+          <h5 class="card-title" style="font-size: 30px">{{$anuncio->titulo}}</h5>
           <h6 class="card-subtitle mb-2 text-muted">{{$anuncio->created_at->format('d/m/Y H:i')}}</h6>
           <p class="card-text">
             {{$anuncio->descricao}}
@@ -183,11 +186,11 @@
         @foreach($relacionados as $r)
         <div class="carousel-item col-md-4 active">
           <div class="card">
-            <a href="/anuncios/{{$r->nome}}_{{$r->id}}"><img class="card-img-top img-fluid" maxheight="200" src="{{$r->urlImagemFirst()}}" alt="{{$r->nome}}"></a>
+            <a href="/anuncios/{{$r->titulo}}_{{$r->id}}"><img class="card-img-top img-fluid" maxheight="200" src="{{$r->urlImagemFirst()}}" alt="{{$r->titulo}}"></a>
             <div class="card-body">
               <div class="row">
                   <div class="col-sm-12">
-                    <h4 class="card-title"><a style="color: black;" href="/anuncios/{{$anuncio->getNomeFormated()}}_{{$anuncio->id}}">{{$r->nome}}</a></h4>
+                    <h4 class="card-title"><a style="color: black;" href="/anuncios/{{$r->getNomeFormated()}}_{{$r->id}}">{{$r->titulo}}</a></h4>
                   </div>
                   <div class="col-sm-12">
                     <span class="badge badge-success mb-1" style="font-size: 14px;">R${{number_format(substr($r->valor.'0', 0, -3), 2, ",", ".")}}</span>
@@ -195,7 +198,6 @@
               </div>
               <p class="card-text">{{str_limit($r->descricao, 200, '...')}}</p>
               <p class="card-text"><small class="text-muted">Criado em {{$r->created_at->format('d/m/Y')}}</small></p>
-
           </div>
           </div>
         </div>

@@ -13,7 +13,7 @@ use App\Acessorio;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use App\Imagem;
-use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\PagseguroController;
 
 class AnuncioController extends Controller
 {
@@ -24,7 +24,7 @@ class AnuncioController extends Controller
     public function anuncieStore(Request $request){
         //var_dump($request->all());exit;
         $validatedData = $request->validate([
-           'nome' => 'required|max:30',
+           'titulo' => 'required|max:30',
            'marca' => 'required',
            'modelo' => 'required',
            'versao' => 'required',
@@ -104,10 +104,14 @@ class AnuncioController extends Controller
             $data->anuncio = $anuncio->id;
             $data->save();
           }
-          $title = 'tst';//$anuncio->getNomeFormatted();
-          $xml = TransactionController::payment($request);
-          var_dump($xml);exit;
-          return redirect("/anuncios/$title_$anuncio->id")->with('status', 'Anúncio publicado com sucesso!');
+          $title = $anuncio->getNomeFormated();
+          if($request->input('anuncio_padrao')){
+            $xml = PagseguroController::payment($request);
+            $transaction = TransactionController::transactionFromXml($xml);
+            $anuncio->transaction_id = $transaction->id; 
+          }
+          $anuncio->save();
+          return redirect("/anuncios/{$title}_{$anuncio->id}")->with('status', 'Anúncio publicado com sucesso!');
         }
         $request->flash();
         return redirect('/anuncie')->with('status', 'Você precisa inserir no mínimo uma imagem para publicar o seu anúncio');
@@ -122,7 +126,9 @@ class AnuncioController extends Controller
         //var_dump($filter[1]);exit;
         $m_buscados = $request->input('mais_buscados'); //ordem por número de visualizações
         $anuncios = Anuncio::where($filter[0])
-            ->whereIn('moto', $filter[1])
+            ->whereIn('moto', $filter[1]['tipos'])
+            ->whereIn('usado', $filter[1]['usado'])
+            ->whereIn('blindagem', $filter[1]['blindagem'])
             ->orderBy($request->input('order')?$request->input('order'):'id', 'desc')
             ->paginate($paginacao);
       }else{
@@ -134,9 +140,9 @@ class AnuncioController extends Controller
 
     public static function filter_search($data){
       $param = array();
-      $tipos = array();
+      $details = array();
       foreach ($data as $key=>$value) {
-        if($value && $key != 'mais_buscados' && $key != 'order' && $key != 'paginate' && $key != 'blindagem'){
+        if($value && $key != 'mais_buscados' && $key != 'order' && $key != 'paginate'){
           if(strpos($key, '_maximo')){
             $exploded = explode("_", $key);
             $value = str_replace([',','.'], '', $value);
@@ -144,7 +150,13 @@ class AnuncioController extends Controller
           }elseif(is_array($value)) {
             //Quando cair aqui eu subentendo que é tipo[]
             foreach ($value as $_key => $_value) {
-              $tipos[] = $_value=='carro'? 0:1;
+              if($key == 'tipo'){
+                $details['tipos'][] = $_value=='carro'? 0:1;
+              }elseif($key == 'blindagem'){
+                $details['blindagem'][] = $_value;
+              }elseif($key == 'usado') {
+                $details['usado'][] = $_value;
+              }
             }
           }elseif(strpos($key, '_minimo')){
             $exploded = explode("_", $key);
@@ -154,11 +166,9 @@ class AnuncioController extends Controller
             $prefix = is_numeric($value)?'':'%';
             $param[] =  [$key, is_numeric($value)? '=':'like', $prefix.strtoupper($value).$prefix];
           }
-        }elseif ($key == 'blindagem') {
-
         }
       }
-      return [$param, $tipos];
+      return [$param, $details];
     }
 
     public function index(Request $request, $nome, $id){

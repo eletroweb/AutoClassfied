@@ -2,7 +2,7 @@
 
 namespace App\Repositories;
 
-use App\Models\TransactionItem;
+use App\TransactionItem;
 use InfyOm\Generator\Common\BaseRepository;
 
 /**

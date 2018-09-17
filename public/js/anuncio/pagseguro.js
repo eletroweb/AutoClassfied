@@ -1,96 +1,84 @@
 $(document).ready(function(){
+	$('#btnPagar').prop('disabled', true);
+	$('#btnPagar').html('Carregando...');
 	$('#checkoutModal').on('show.bs.modal', function (e) {
 		  $.ajax({
-			url: '/pagseguro/startSession',
-			dataType: 'json',
-			type: 'post',
-			data: {_token: $('meta[name="csrf-token"]').attr('content')},
-			success: function(data){
-				console.log(data[0]);
-				PagSeguroDirectPayment.setSessionId(data[0]);
-				PagSeguroDirectPayment.onSenderHashReady(function(response){
-					if(response != undefined){
-						if(response.status == 'error') {
-					        console.log(response.message);
-					        return false;
-					    }
-
-					    hashComprador = response.senderHash; //Hash estará disponível nesta variável.
-					    console.log(hashComprador);
-					}
-
-				});
-				/*PagSeguroDirectPayment.getPaymentMethods({
-					amount: 50.00,
-					success: function(response) {
-						console.log(response);
-					},
-					error: function(response) {
-						console.log(response);
-					},
-					complete: function(response) {
-						//console.log(response);
-					}
-				});*/
-			}
-		});
+				url: '/pagseguro/startSession',
+				dataType: 'json',
+				type: 'post',
+				data: {_token: $('meta[name="csrf-token"]').attr('content')},
+				success: function(data){
+					PagSeguroDirectPayment.setSessionId(data[0]);
+					PagSeguroDirectPayment.onSenderHashReady(function(response){
+						if(response != undefined){
+								if(response.status == 'error') {
+						        console.log(response.message);
+						        return false;
+						    }
+						    hashComprador = response.senderHash; //Hash estará disponível nesta variável.
+								$('#btnPagar').prop('disabled', false);
+	 					 		$('#btnPagar').html('Processar informações');
+						}
+					});
+				}
+			});
 	});
 	$('#cartao').mask('0000-0000-0000-0000');
 	$('#month').mask('00');
 	$('#year').mask('0000');
-	$('#cartao').keyup(function(){
-		console.log('Caiu card-number');
-		if($(this).cleanVal().length >= 5){
-			console.log($(this).cleanVal().length+' <==> ');
-			PagSeguroDirectPayment.getBrand({
-				cardBin: $(this).cleanVal(),
-					success: function(response) {
-						//bandeira encontrada
-						bin_bandeira = response.bin;
-					},
-					error: function(response) {
-						//tratamento do erro
-						console.log(response);
-					},
-					complete: function(response) {
-						//tratamento comum para todas chamadas
-						console.log(response);
-					}
-			});
-		}
-	});
 	$('.tipo_anuncio').change(function(){
 		if($(this).val() == 'y'){
 			$('#checkoutModal').modal();
 		}
 	});
+	41227-149
 	$('#btnPagar').click(function(){
-		//console.log('Olá mundo');
-		//if ($('#cartao').val().length == 20 && $('#cvv').val().length > 2 && $('#month').val().length == 2 && $('#year').val().length == 0 ) {
-			var param = {
-			    cardNumber: $('#cartao').cleanVal(),
-			    brand: bin_bandeira,
-			    cvv: $('#cvv').val(),
-			    expirationMonth: $('#month').val(),
-			    expirationYear: $('#year').val(),
-			    success: function(response) {
-			        //token gerado, esse deve ser usado na chamada da API do Checkout Transparente
-			        //var result = PagSeguroDirectPayment.createCardToken(param); //Uso esse token no post da transacao
-							console.log(response.card.token);
-							$('#card-token').val(response.card.token);
-							//console.log(result.card.token);
-			    },
-			    error: function(response) {
-			        //tratamento do erro
-			        console.log(response);
-			    },
-			    complete: function(response) {
-			        //tratamento comum para todas chamadas
-			        console.log(response);
-			    }
-			}
-			PagSeguroDirectPayment.createCardToken(param);
-		//}
+		if($('#nome').val() !== '' && $('#telefone').val().length >= 10 && $('#cpf').val().length == 14 && $('#logradouro').val() !== ''
+				&& $('#cidade').val() !== '' && $('#bairro').val() !== '' && $('#uf').val() !== '' && $('#cep').val().length == 9
+				&& $('#cartao').val().length == 19 && $('#month').val().length == 2 && $('#year').val().length == 4) {
+					//Se o formulário estiver todo preenchido...
+					$('#btnPagar').prop('disabled', true);
+					$('#btnPagar').html('Processando informações...');
+					PagSeguroDirectPayment.getBrand({
+						cardBin: $('#cartao').cleanVal(),
+							success: function(response) {
+								//bandeira encontrada
+								var param = {
+										cardNumber: $('#cartao').cleanVal(),
+										brand: response.bin,
+										cvv: $('#cvv').val(),
+										expirationMonth: $('#month').val(),
+										expirationYear: $('#year').val(),
+										success: function(r) {
+												$('#card-token').val(r.card.token);
+												$('#btnPagar').html('Informações processadas');
+                        $('#checkoutModal').modal('hide');
+										},
+										error: function(r) {
+												//tratamento do erro
+												alert('Erro ao processar informações de pagamento.');
+												$('#btnPagar').html('Processar informações');
+												$('#btnPagar').prop('disabled', false);
+												console.log(r);
+										},
+										complete: function(r) {
+												//tratamento comum para todas chamadas
+												//$('#btnPagar').html('Processar pagamento');
+										}
+								}
+								PagSeguroDirectPayment.createCardToken(param);
+							},
+							error: function(response) {
+								alert('Erro ao processar bandeira do cartão, verifique se o número foi digitado corretamente.');
+								console.log(response);
+							},
+							complete: function(response) {
+
+							}
+					});
+				}else{
+					alert('Você precisa preencher todas as informações para prosseguir');
+				}
 	});
 });
 var bin_bandeira = '';
