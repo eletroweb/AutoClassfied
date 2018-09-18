@@ -150,7 +150,7 @@
             </li>
           </ul><span class="heading">Configurações</span>
           <ul class="list-unstyled">
-            <li> <a href="#"> <i class="fa fa-money-check-alt"></i>PagSeguro</a></li>
+            <li> <a href="{{route('pagseguro_config')}}"> <i class="fa fa-money-check-alt"></i>PagSeguro</a></li>
             <li> <a href="{{route('configuracoes')}}"> <i class="fa fa-cogs"></i>Configurações do site</a></li>
             <li> <a href="#"> <i class="fa fa-envelope"></i>Configurações de e-mail</a></li>
           </ul>

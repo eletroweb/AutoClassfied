@@ -89,4 +89,8 @@ class PagseguroController extends Controller
       return $resp;
     }
 
+    public function admin(Request $request){
+      return view('pagseguro.admin');
+    }
+
 }
