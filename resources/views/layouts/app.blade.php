@@ -167,7 +167,7 @@
                 <a class="nav-link text-white" href="#"><b class="text-white">Institucional</b></a>
               </li>
               <li class="nav-item">
-                <a class="nav-link text-white" href="#">Ofertas de carros</a>
+                <a class="nav-link text-white" href="/anuncios">Ofertas de carros</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link text-white" href="#">Politica de privacidade</a>
@@ -192,22 +192,19 @@
                 <a class="nav-link text-white" href="#"><b class="text-white">Mapa do site</b></a>
               </li>
               <li class="nav-item">
-                <a class="nav-link text-white" href="#">Comprar carro</a>
+                <a class="nav-link text-white" href="/anuncios?paginate=10&order=visualizacoes&nome=&usado%5B%5D=0&usado%5B%5D=1&tipo%5B%5D=carro&blindagem%5B%5D=1&blindagem%5B%5D=0&valor_maximo=&valor_minimo=&ano_maximo=&ano_minimo=&km_maximo=&km_minimo=&marca=&modelo=&versao=&mais_buscados=0">Comprar carro</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link text-white" href="#">Comprar moto</a>
+                <a class="nav-link text-white" href="/anuncios?paginate=10&order=visualizacoes&nome=&usado%5B%5D=0&usado%5B%5D=1&tipo%5B%5D=moto&blindagem%5B%5D=1&blindagem%5B%5D=0&valor_maximo=&valor_minimo=&ano_maximo=&ano_minimo=&km_maximo=&km_minimo=&marca=&modelo=&versao=&mais_buscados=0">Comprar moto</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link text-white" href="#">Vender carro</a>
+                <a class="nav-link text-white" href="/anuncie">Vender carro</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link text-white" href="#">Vender moto</a>
+                <a class="nav-link text-white" href="/anuncie">Vender moto</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link text-white" href="#">Tabela Unicodono</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link text-white" href="#">Serviços</a>
+                <a class="nav-link text-white" href="/consulta-tabela-fipe">Avalie o seu veículo</a>
               </li>
             </ul>
           </div>
@@ -217,7 +214,7 @@
                 <a class="nav-link text-white" href="#"><b class="text-white">Atendimento</b></a>
               </li>
               <li class="nav-item">
-                <a class="nav-link text-white" href="#">Fale conosco</a>
+                <a class="nav-link text-white" href="/fale-conosco">Fale conosco</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link text-white" href="#">Como comprar o seu veículo</a>
@@ -226,7 +223,7 @@
                 <a class="nav-link text-white" href="#">Como vender o seu veículo</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link text-white" href="#">Painel de controle</a>
+                <a class="nav-link text-white" href="/minha-conta">Painel de controle</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link text-white" href="#">Sobre anúncios</a>

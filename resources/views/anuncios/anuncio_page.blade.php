@@ -2,7 +2,7 @@
 @section('content')
 <div class="container">
   <div class="row">
-    <div class="col-md-7" style="margin-top: 40px;">
+    <div class="col-sm-7 mt-4">
       @if (session('status'))
           <div class="alert alert-success">
               {{ session('status') }}
@@ -20,12 +20,29 @@
         </div>
         @endforeach
       </div>
+    </div>
+    <div class="col-sm-5">
+      <div class="card" style="border: none">
+        <div class="card-body">
+          <h4 class="card-title" style="font-size: 30px"><span class="badge badge-success">R${{number_format(substr($anuncio->valor.'0', 0, -3), 2, ",", ".")}}</span></h4>
+          <h3 class="card-title" style="font-size: 30px">{{$anuncio->titulo}}</h3>
+          <h6 class="card-subtitle mb-2 text-muted">{{$anuncio->created_at->format('d/m/Y H:i')}}</h6>
+          <p class="card-text">
+            {{$anuncio->descricao}}
+          </p>
+        </div>
+    </div>
+  </div>
+  </div>
+  <div class="row">
+    <div class="col-md-7">
+
       <!-- Tabs -->
       <section id="tabs">
       	<div class="container">
       		<!--<h6 class="section-title h1">Tabs</h6>-->
       		<div class="row">
-      			<div class="col-xs-12 ">
+      			<div class="col-xs-12 text-center">
       				<nav>
       					<div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
       						<a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Informações</a>
@@ -35,33 +52,33 @@
       				</nav>
       				<div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
       					<div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-                  <div class="row">
-                    <div class="col-sm-4">
+                  <div class="d-flex flex-row bd-highlight mb-3 flex-wrap text-center">
+                    <div class="p-2 bd-highlight">
                       <p style="font-size: 14px;"><b style="font-size: 18px;">Quilometragem</b><br> {{$anuncio->km}}KM</p>
                     </div>
-                    <div class="col-sm-4">
+                    <div class="p-2 bd-highlight">
                       <p style="font-size: 14px;"><b style="font-size: 18px;">Blindado</b><br> {{$anuncio->blindagem?'Sim':'Não'}}</p>
                     </div>
                     @foreach($anunciodados as $dado)
-                      <div class="col-sm-4">
+                      <div class="p-2 bd-highlight">
                         <p style="font-size: 14px;"><b style="font-size: 18px;">{{ucfirst($dado->nome)}}</b><br> {{$dado->valor}}</p>
                       </div>
                     @endforeach
                   </div>
       					</div>
       					<div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-                  <div class="row">
+                  <div class="d-flex flex-row bd-highlight mb-3 flex-wrap">
                     @foreach($adicionais as $adicional)
-                    <div class="col-sm-4">
+                    <div class="p-2 bd-highlight">
                       <p>{{ucfirst($adicional->nome)}}</p>
                     </div>
                     @endforeach
                   </div>
       					</div>
       					<div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
-                  <div class="row">
+                  <div class="d-flex flex-row bd-highlight mb-3 flex-wrap">
                     @foreach($acessorios as $acessorio)
-                      <div class="col-sm-6">
+                      <div class="p-2 bd-highlight">
                         <p>{{ucfirst($acessorio->nome)}}</p>
                       </div>
                     @endforeach
@@ -75,15 +92,9 @@
       <!-- ./Tabs -->
     </div>
     <div class="col-md-5">
-      <div class="card" style="border: none">
+      <div class="card w-100" style="border: none">
         <div class="card-body">
-          <h5 class="card-title" style="font-size: 30px"><span class="badge badge-success">R${{number_format(substr($anuncio->valor.'0', 0, -3), 2, ",", ".")}}</span></h5>
-          <h5 class="card-title" style="font-size: 30px">{{$anuncio->titulo}}</h5>
-          <h6 class="card-subtitle mb-2 text-muted">{{$anuncio->created_at->format('d/m/Y H:i')}}</h6>
-          <p class="card-text">
-            {{$anuncio->descricao}}
-          </p>
-          <a class="btn btn-primary" data-toggle="collapse" href="#contato" role="button" aria-expanded="false" aria-controls="contato" class="card-link">Entrar em contato</a>
+          <a class="btn btn-primary btn-lg btn-block" data-toggle="collapse" href="#contato" role="button" aria-expanded="false" aria-controls="contato" class="card-link">Entrar em contato</a>
           <div class="collapse mt-3" id="contato">
             <div class="card card-body">
               <form action="{{route('contato_anuncio')}}" method="post">
@@ -131,7 +142,7 @@
             <h5 class="card-title">Anunciado por {{$anuncio->users->isRevenda()?$anuncio->users->isRevenda()->nomefantasia:$anuncio->users->name}}</h5>
             <h6 class="card-subtitle mb-2 text-muted">
               @if($r = $anuncio->users->isRevenda())
-                <a href="/revenda/{{$r->id}}">Ver estoque completo desta revenda</a>
+                <a href="{{$r->getUrl()}}">Ver estoque completo desta revenda</a>
               @else
                 Dados do vendedor
               @endif
