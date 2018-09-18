@@ -51,8 +51,8 @@ class VeiculoController extends Controller
             }
           }
         }
-        //Marca::create($r->marca);
       }
+      return response()->json("Atualizado com sucesso!");
     }
 
     public function getMarcas(Request $request){

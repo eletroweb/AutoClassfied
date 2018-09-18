@@ -16,7 +16,7 @@ Route::get('/ajax/veiculos/marcas', 'VeiculoController@getMarcas');
 Route::get('/ajax/veiculos/modelos', 'VeiculoController@getModelos');
 Route::get('/ajax/veiculos/versoes', 'VeiculoController@getVersoes');
 Route::get('/anuncios', 'AnuncioController@anuncios')->name('anuncios');
-Route::get('/anuncios/{titulo}_{id}', 'AnuncioController@index')->where('id', '[0-9]+');
+Route::get('/{tipo}/{marca}/{modelo}/{versao}/{titulo}/{id}', 'AnuncioController@index')->where('id', '[0-9]+');
 Route::get('/fale-conosco', 'ContatoController@index')->name('fale_conosco');
 Route::post('/fale-conosco', 'ContatoController@store')->name('fale_conosco_post');
 Route::get('/como-comprar-carro', 'UserController@duvida_comprar_carro')->name('duvida_comprar_carro');
@@ -25,10 +25,10 @@ Route::get('/duvidas-anuncios', 'UserController@duvida_anuncios')->name('duvida_
 Route::get('/', 'HomeController@index');
 Route::get('/cronjob/update/all', 'VeiculoController@importMarcaModelos');
 Route::post('/anuncio/contato', 'ContatoAnuncioController@store')->name('contato_anuncio');
-Route::get('/revenda/{id}', 'RevendaController@homepage');
+Route::get('/telefone/{nome}/{cidade}/{id}', 'RevendaController@homepage');
 Route::get('/consulta-tabela-fipe', 'FipeController@index')->name('fipe');
 Route::get('/encontre-uma-revenda', 'RevendaController@revendas')->name('revendas');
-Route::get('/revenda/rel/chartjs', 'RevendaController@viewsByMonth')->name('rel_chart_mes');
+
 
 Route::middleware('auth')->group(function () {
   Route::post('/pagseguro/startSession', 'PagseguroController@startSession')->name('start_session');
@@ -40,6 +40,7 @@ Route::middleware('auth')->group(function () {
   Route::get('/revenda/{id}/configuracoes', 'RevendaController@config');
   Route::post('/revenda/{id}/update', 'RevendaController@update')->name('update_revenda');
   Route::post('/cadastrar-endereco', 'UserController@cadastrarEndereco');
+  Route::get('/revenda/rel/chartjs', 'RevendaController@viewsByMonth')->name('rel_chart_mes');
 });
 
 Route::get('/importxml', 'VeiculoController@updateVeiculos');

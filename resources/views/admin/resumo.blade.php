@@ -110,7 +110,7 @@
                     <div class="project-title d-flex align-items-center">
                       <div class="image has-shadow"><img src="img/project-1.jpg" alt="..." class="img-fluid"></div>
                       <div class="text">
-                        <h3 class="h4"><a href="/anuncios/{{$anuncio->getNomeFormated()}}_{{$anuncio->id}}">{{$anuncio->titulo}}</a></h3><small>{{App\User::find($anuncio->user)->name}}</small>
+                        <h3 class="h4"><a href="{{$anuncio->getUrl()}}">{{$anuncio->titulo}}</a></h3><small>{{App\User::find($anuncio->user)->name}}</small>
                       </div>
                     </div>
                     <div class="project-date"><span class="hidden-sm-down">{{$anuncio->created_at->format('d/m/Y')}}</span></div>
