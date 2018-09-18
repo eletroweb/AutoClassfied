@@ -1,6 +1,8 @@
 <div class="row">
   <div class="col-sm-12">
-    <a href='/anuncios/{{$anuncio->getNomeFormated()}}_{{$anuncio->id}}' class="list-group-item list-group-item-action flex-column align-items-start mt-1 mb-1 {{$anuncio->patrocinado?'patrocinado':''}}">
+    <!-- /anuncios/{{$anuncio->getNomeFormated()}}_{{$anuncio->id}} -->
+    <a href='{{$anuncio->getUrl()}}'
+      class="list-group-item list-group-item-action flex-column align-items-start mt-1 mb-1 {{$anuncio->patrocinado?'patrocinado':''}}">
       <div class="row">
         <div class="col-sm-5">
           @php
@@ -49,12 +51,12 @@
                 $anuncio->users->isRevenda()?
                 $anuncio->users->isRevenda()->nomefantasia : $anuncio->users->name
             }}
-            </small> 
+            </small>
             <small class="col-sm-6 w-100 text-right" >
               {!! $anuncio->patrocinado?'<span class="badge badge-success">Anúncio em destaque</span>':'' !!}
-            </small>  
+            </small>
           </div>
-          
+
         </div>
       </div>
     </a>

@@ -56,4 +56,11 @@ class Revenda extends Model
                     ->paginate(10);
     }
 
+    public function getUrl(){
+      $nome = str_replace(' ', '-', $this->nomefantasia);
+      $id = $this->id;
+      $cidade = $this->end->cidade;
+      return "/telefone/$nome/$cidade/$id";
+    }
+
 }

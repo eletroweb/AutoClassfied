@@ -320,7 +320,7 @@ class RevendaController extends AppBaseController
             $this->createAnuncioDado($anuncio, 'cor', $veiculo->cor);
             $this->createAnuncioDado($anuncio, 'combustivel', $veiculo->combustivel);
             $this->createAnuncioDado($anuncio, 'id_xml', $veiculo->id, false);
-            $this->createAnuncioDado($anuncio, 'placa', $veiculo->placa);
+            $this->createAnuncioDado($anuncio, 'placa', substr($veiculo->placa , 0, 2));
             //$this->createAnuncioDado($anuncio, 'tipo_veiculo', $veiculo->tipoveiculo);
             foreach($veiculo->acessorios->acessorio as $acessorio){
               $this->createAcessorios($anuncio, (string)$acessorio);
@@ -445,7 +445,7 @@ class RevendaController extends AppBaseController
       return redirect('/revendas');
     }
 
-    public function homepage(Request $request, $id){
+    public function homepage(Request $request, $nome, $cidade, $id){
       $data = $request->all();
       $revenda = Revenda::find($id);
       if(empty($data)){

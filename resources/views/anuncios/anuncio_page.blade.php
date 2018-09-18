@@ -13,12 +13,12 @@
           <a class="col-sm-2 mr-1" href="{{$imagens[0]}}" data-lightbox="roadtrip"><img src="{{$imagens[0]}}" class="img-fluid main-img m-auto" alt="Responsive image"></a>
         </div>
       </div>
-      <div class="row">
-          <div class="col-sm-12 text-right mt-2">
-          @foreach($imagens as $img)
-            <a class="col-sm-2 mr-1" href="{{$img}}"data-lightbox="roadtrip"> <img class="rounded float-left  mr-1" width="100" src="{{$img}}"> </a>
-          @endforeach
-          </div>
+      <div class="d-flex flex-row bd-highlight mb-3 flex-wrap">
+        @foreach($imagens as $img)
+        <div class="p-2 bd-highlight">
+          <a href="{{$img}}"data-lightbox="roadtrip"> <img class="rounded float-left  mr-1" width="100" src="{{$img}}"> </a>
+        </div>
+        @endforeach
       </div>
       <!-- Tabs -->
       <section id="tabs">
@@ -186,11 +186,11 @@
         @foreach($relacionados as $r)
         <div class="carousel-item col-md-4 active">
           <div class="card">
-            <a href="/anuncios/{{$r->titulo}}_{{$r->id}}"><img class="card-img-top img-fluid" maxheight="200" src="{{$r->urlImagemFirst()}}" alt="{{$r->titulo}}"></a>
+            <a href="/anuncios/{{$r->getUrl()}}"><img class="card-img-top img-fluid" maxheight="200" src="{{$r->urlImagemFirst()}}" alt="{{$r->titulo}}"></a>
             <div class="card-body">
               <div class="row">
                   <div class="col-sm-12">
-                    <h4 class="card-title"><a style="color: black;" href="/anuncios/{{$r->getNomeFormated()}}_{{$r->id}}">{{$r->titulo}}</a></h4>
+                    <h4 class="card-title"><a style="color: black;" href="/anuncios/{{$r->getUrl()}}">{{$r->titulo}}</a></h4>
                   </div>
                   <div class="col-sm-12">
                     <span class="badge badge-success mb-1" style="font-size: 14px;">R${{number_format(substr($r->valor.'0', 0, -3), 2, ",", ".")}}</span>

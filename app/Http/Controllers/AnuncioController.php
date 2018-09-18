@@ -108,7 +108,7 @@ class AnuncioController extends Controller
           if($request->input('anuncio_padrao')){
             $xml = PagseguroController::payment($request);
             $transaction = TransactionController::transactionFromXml($xml);
-            $anuncio->transaction_id = $transaction->id; 
+            $anuncio->transaction_id = $transaction->id;
           }
           $anuncio->save();
           return redirect("/anuncios/{$title}_{$anuncio->id}")->with('status', 'Anúncio publicado com sucesso!');
@@ -127,8 +127,8 @@ class AnuncioController extends Controller
         $m_buscados = $request->input('mais_buscados'); //ordem por número de visualizações
         $anuncios = Anuncio::where($filter[0])
             ->whereIn('moto', $filter[1]['tipos'])
-            ->whereIn('usado', $filter[1]['usado'])
-            ->whereIn('blindagem', $filter[1]['blindagem'])
+            ->whereIn('usado', isset($filter[1]['usado'])?$filter[1]['usado']:array(0,1))
+            ->whereIn('blindagem', isset($filter[1]['blindagem'])?$filter[1]['blindagem']:array(0,1))
             ->orderBy($request->input('order')?$request->input('order'):'id', 'desc')
             ->paginate($paginacao);
       }else{
@@ -171,8 +171,17 @@ class AnuncioController extends Controller
       return [$param, $details];
     }
 
-    public function index(Request $request, $nome, $id){
+    public function index(Request $request, $tipo, $marca, $modelo, $versao, $titulo, $id){
       $anuncio = Anuncio::find($id);
+      if($tipo != 'anuncios'){
+        if(!$anuncio->users->isRevenda()){
+          return redirect('/');
+        }
+      }else{
+        if($anuncio->users->isRevenda()){
+          return redirect('/');
+        }
+      }
       $anuncio->visualizacoes += 1;
       $anuncio->save();
       $url = AnuncioImagem::where([['anuncio', $anuncio->id], ['first', true]])->first()->url;

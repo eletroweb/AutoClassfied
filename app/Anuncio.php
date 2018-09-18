@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Storage;
 
 class Anuncio extends Model
 {
-    protected $fillable = ['titulo', 'descricao', 'marca', 'km', 'usado', 'modelo', 'versao', 'valor', 'user', 'moto', 
+    protected $fillable = ['titulo', 'descricao', 'marca', 'km', 'usado', 'modelo', 'versao', 'valor', 'user', 'moto',
                             'ano', 'blindagem'];
 
     public function anuncio_dados(){
@@ -46,11 +46,36 @@ class Anuncio extends Model
       return $this->km;
     }
 
+    public function marcas(){
+      return $this->belongsTo('App\Marca', 'marca');
+    }
+
+    public function modelos(){
+      return $this->belongsTo('App\Modelos', 'modelo');
+    }
+
+    public function versaos(){
+      return $this->belongsTo('App\Versao', 'versao');
+    }
+
     public function getCambio(){
       return AnuncioDados::where([
         ['nome', '=', 'Cambio'],
         ['anuncio', '=', $this->id]
       ])->first()->valor;
+    }
+
+    public function getUrl(){
+      $marca = str_replace(' ', '-', $this->marcas->nome);
+      $modelo = str_replace(' ', '-', trim($this->modelos->nome));
+      $versao = str_replace(' ', '-', trim($this->versaos->nome));
+      $titulo = $this->getNomeFormated();
+      $id = $this->id;
+      if($revenda = $this->users->isRevenda()){
+          $nome = str_replace(' ', '-', $revenda->nomefantasia);
+          return "/$nome/$marca/$modelo/$versao/$titulo/$id/";
+      }
+      return "/anuncios/$marca/$modelo/$versao/$titulo/$id/";
     }
 
 }

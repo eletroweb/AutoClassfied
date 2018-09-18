@@ -35,7 +35,7 @@
             <p class="card-text">{{$r->end->logradouro}}, {{$r->end->bairro}}, {{$r->end->numero}}ª
               <br>{{$r->end->cidade}} - {{$r->end->uf}}
             </p>
-            <a href="/revenda/{{$r->id}}" class="btn btn-primary">Acessar página</a>
+            <a href="{{$r->getUrl()}}" class="btn btn-primary">Acessar página</a>
           </div>
         </div>
       @empty

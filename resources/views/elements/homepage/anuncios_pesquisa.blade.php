@@ -58,7 +58,7 @@
                         <div class="row">
                           <div class="col-sm-6">
                             <div class="custom-control custom-checkbox">
-                              <input type="checkbox" class="custom-control-input" id="moto" name="tipo[]" value="moto">
+                              <input type="checkbox" class="custom-control-input" id="moto" name="tipo[]" value="moto" checked>
                               <label class="custom-control-label" for="moto">Moto</label>
                             </div>
                           </div>
@@ -66,6 +66,20 @@
                             <div class="custom-control custom-checkbox">
                               <input type="checkbox" class="custom-control-input" id="carro" name="tipo[]" value="carro" checked>
                               <label class="custom-control-label" for="carro">Carro</label>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-sm-6">
+                            <div class="custom-control custom-checkbox">
+                              <input type="checkbox" class="custom-control-input" id="moto" name="usado[]" value="1" checked>
+                              <label class="custom-control-label" for="moto">Usado</label>
+                            </div>
+                          </div>
+                          <div class="col-sm-6">
+                            <div class="custom-control custom-checkbox">
+                              <input type="checkbox" class="custom-control-input" id="carro" name="tipo[]" value="0" checked>
+                              <label class="custom-control-label" for="carro">Novo</label>
                             </div>
                           </div>
                         </div>
