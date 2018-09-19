@@ -96,7 +96,6 @@ $(document).ready(function(){
       alert('Você precisa selecionar um plano para a revenda.');
     }
   });
-  
   $('#documento').mask('000.000.000-00', {reverse: true});
   $('.telefone').mask('(00) 0000-0000');
   $("#anunciar").submit(function(){

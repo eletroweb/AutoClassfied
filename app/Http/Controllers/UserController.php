@@ -208,6 +208,10 @@ class UserController extends AppBaseController
       return view('admin.form');
     }
 
+    public function configuracoes(Request $request){
+      return view('user.configuracoes');
+    }
+
     public function cadastrarEndereco(Request $request){
         $endereco = new Endereco();
         $endereco->logradouro = $request->input('logradouro');

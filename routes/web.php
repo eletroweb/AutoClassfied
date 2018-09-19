@@ -31,6 +31,7 @@ Route::get('/encontre-uma-revenda', 'RevendaController@revendas')->name('revenda
 
 
 Route::middleware('auth')->group(function () {
+  Route::get('/minha-conta/configuracoes', 'UserController@configuracoes')->name('configuracoes_conta');
   Route::post('/pagseguro/startSession', 'PagseguroController@startSession')->name('start_session');
   Route::get('/anuncie', 'AnuncioController@anuncie')->name('anuncie');
   Route::get('/minha-conta', 'UserController@profile')->name('minhaconta');

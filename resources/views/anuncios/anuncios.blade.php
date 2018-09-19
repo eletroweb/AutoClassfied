@@ -34,7 +34,7 @@
     </div>
     <div class="col-sm-9">
         <div class="input-group mb-3">
-          <input type="text" class="form-control" name="nome" placeholder="Digite o que está procurando" aria-label="Digite o que está procurando" aria-describedby="basic-addon2">
+          <input type="text" class="form-control" name="titulo" placeholder="Digite o que está procurando" aria-label="Digite o que está procurando" aria-describedby="basic-addon2">
           <div class="input-group-append">
             <button class="btn btn-outline-primary" type="submit">Procurar</button>
           </div>

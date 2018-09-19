@@ -426,56 +426,56 @@ class RevendaController extends AppBaseController
         ])->paginate(20);
       }
       return view('revendas.revendas')->with('revendas', $revendas);
-    }
+  }
 
-    public function store(Request $request){
-      $data = $request->all();
-      $endereco = Endereco::create($data);
-      $data = array_add($data, 'endereco', $endereco->id);
-      if($request->hasFile('capa')){
-        $data['capa'] = Storage::put('public', $data['capa']);
-      }
-      if($request->hasFile('logo')){
-        $data['logo'] = Storage::put('public', $data['logo']);
-      }
-      $revenda = Revenda::create($data);
-      $request->session()->flash('status', 'Revenda criada com sucesso. Você receberá um e-mail
-                                            com o nosso contato para a confirmação do seu plano.
-                                            Obrigado por fazer parte do Unicodono.');
-      return redirect('/revendas');
+  public function store(Request $request){
+    $data = $request->all();
+    $endereco = Endereco::create($data);
+    $data = array_add($data, 'endereco', $endereco->id);
+    if($request->hasFile('capa')){
+      $data['capa'] = Storage::put('public', $data['capa']);
     }
+    if($request->hasFile('logo')){
+      $data['logo'] = Storage::put('public', $data['logo']);
+    }
+    $revenda = Revenda::create($data);
+    $request->session()->flash('status', 'Revenda criada com sucesso. Você receberá um e-mail
+                                          com o nosso contato para a confirmação do seu plano.
+                                          Obrigado por fazer parte do Unicodono.');
+    return redirect('/revendas');
+  }
 
-    public function homepage(Request $request, $nome, $cidade, $id){
-      $data = $request->all();
-      $revenda = Revenda::find($id);
-      if(empty($data)){
-        $anuncios = Anuncio::where('user', $revenda->user)->orderBy('id', 'desc')->paginate(20);
-      }else {
-        $param = AnuncioController::filter_search($data);
-        $anuncios = Anuncio::where('user', $revenda->user)->where($param)->orderBy('id', 'desc')->paginate(20);
-      }
-      return view('revendas.homepage.revenda')->with(['revenda'=> $revenda, 'anuncios'=> $anuncios]);
+  public function homepage(Request $request, $nome, $cidade, $id){
+    $data = $request->all();
+    $revenda = Revenda::find($id);
+    if(empty($data)){
+      $anuncios = Anuncio::where('user', $revenda->user)->orderBy('id', 'desc')->paginate(20);
+    }else {
+      $param = AnuncioController::filter_search($data);
+      $anuncios = Anuncio::where('user', $revenda->user)->where($param[0])->orderBy('id', 'desc')->paginate(20);
     }
+    return view('revendas.homepage.revenda')->with(['revenda'=> $revenda, 'anuncios'=> $anuncios]);
+  }
 
-    public function config(Request $request, $id){
-      $revenda = Revenda::find($id);
-      return view('revendas.homepage.config')->with('revenda', $revenda);
-    }
+  public function config(Request $request, $id){
+    $revenda = Revenda::find($id);
+    return view('revendas.homepage.config')->with('revenda', $revenda);
+  }
 
-    public function viewsByMonth(Request $request){
-      $revenda = $request->input('revenda');
-      $carbon = Carbon::now();
-      $visualizacoes = array();
-      for($month= 1; $month <= 12; $month++) {
-        $visualizacoes[] = VisualizacaoAnuncio::join('anuncios', 'anuncios.id', '=', 'visualizacao_anuncios.anuncio')
-                                          ->join('revendas', 'revendas.user', '=', 'anuncios.user')
-                                          ->select(DB::raw('count(*) as visualizacoes'))
-                                          ->where('revendas.id', '=', $revenda)
-                                          ->whereMonth('anuncios.created_at', $month)
-                                          ->whereYear('anuncios.created_at', $carbon->year)
-                                          ->first();
-      }
-      return response()->json($visualizacoes);
+  public function viewsByMonth(Request $request){
+    $revenda = $request->input('revenda');
+    $carbon = Carbon::now();
+    $visualizacoes = array();
+    for($month= 1; $month <= 12; $month++) {
+      $visualizacoes[] = VisualizacaoAnuncio::join('anuncios', 'anuncios.id', '=', 'visualizacao_anuncios.anuncio')
+                                        ->join('revendas', 'revendas.user', '=', 'anuncios.user')
+                                        ->select(DB::raw('count(*) as visualizacoes'))
+                                        ->where('revendas.id', '=', $revenda)
+                                        ->whereMonth('anuncios.created_at', $month)
+                                        ->whereYear('anuncios.created_at', $carbon->year)
+                                        ->first();
     }
+    return response()->json($visualizacoes);
+  }
 
 }
