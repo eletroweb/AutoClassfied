@@ -18,7 +18,7 @@
             <!--<p class="lead text-muted">Aqui você encontrará todos os anúncios desta revenda</p>-->
           </div>
           <div class="input-group mb-3 mt-2">
-            <input type="text" class="form-control" name="nome" placeholder="Pesquise pelo anúncio" aria-label="Pesquise pelo anúncio" aria-describedby="button-addon2">
+            <input type="text" class="form-control" name="titulo" placeholder="Pesquise pelo anúncio" aria-label="Pesquise pelo anúncio" aria-describedby="button-addon2">
             <div class="input-group-append">
               <a class="btn btn-primary" type="button" data-toggle="collapse" href="#pesquisa_avancada" role="button" aria-expanded="false" aria-controls="pesquisa_avancada"><i class="fa fa-arrows-alt-v"></i></a>
               <button class="btn btn-secondary" type="submit"><i class="fa fa-search"></i></button>

@@ -8,7 +8,7 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="O que está procurando?" name="nome" id="nome">
+                                    <input type="text" class="form-control" placeholder="O que está procurando?" name="titulo" id="nome">
                                 </div>
                             </div>
                         </div>
@@ -77,7 +77,7 @@
                           </div>
                           <div class="col-sm-6">
                             <div class="custom-control custom-checkbox d-none d-sm-block">
-                              <input type="checkbox" class="custom-control-input" id="carro" name="tipo[]" value="0" checked>
+                              <input type="checkbox" class="custom-control-input" id="carro" name="usado[]" value="0" checked>
                               <label class="custom-control-label" for="carro">Novo</label>
                             </div>
                           </div>

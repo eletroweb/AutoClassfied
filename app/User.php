@@ -23,7 +23,7 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $hidden = [ 
+    protected $hidden = [
         'password', 'remember_token',
     ];
 
@@ -35,7 +35,7 @@ class User extends Authenticatable
     }
 
     public function anuncios(){
-        return $this->hasMany('App\Anuncio');
+        return $this->hasMany('App\Anuncio', 'user');
     }
 
     public function isAdmin(){
@@ -49,4 +49,5 @@ class User extends Authenticatable
     public function end(){
         return $this->hasOne('App\Endereco', 'id', 'endereco');
     }
+
 }

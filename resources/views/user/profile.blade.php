@@ -11,8 +11,7 @@
     <div class="col-sm-3">
       <nav class="nav flex-column">
         <a class="nav-link" href="{{route('meusanuncios')}}">Meus anúncios</a>
-        <a class="nav-link" href="#">Meus contatos</a>
-        <a class="nav-link" href="#">Configurações</a>
+        <a class="nav-link" href="{{route('configuracoes_conta')}}">Configurações</a>
       </nav>
     </div>
     <div class="col-sm-9">
