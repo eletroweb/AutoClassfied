@@ -7,22 +7,25 @@ use App\Option;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Client;
 use Carbon\Carbon;
+use App\Option;
 
 class PagseguroController extends Controller
 {
 
     public function startSession(Request $request){
       $http = new Client();
-      $email = env('PAGSEGURO_EMAIL', 'PAGSEGURO_EMAIL');
-      $token = env('PAGSEGURO_TOKEN', 'PAGSEGURO_TOKEN');
-      $response = $http->request('POST', "https://ws.sandbox.pagseguro.uol.com.br/v2/sessions/?email=$email&token=$token");
+      $link = Option::getOptionValor('pagseguro_endereco');
+      $email = Option::getOptionValor('pagseguro_email');
+      $token = Option::getOptionValor('pagseguro_token');
+      $response = $http->request('POST', "$link/v2/sessions/?email=$email&token=$token");
       $xml = simplexml_load_string($response->getBody());
       return response()->json($xml->id);
     }
 
     public static function payment(Request $request){
-      $email = env('PAGSEGURO_EMAIL', 'PAGSEGURO_EMAIL');
-      $token = env('PAGSEGURO_TOKEN', 'PAGSEGURO_TOKEN');
+      $email = Option::getOptionValor('pagseguro_email');
+      $token = Option::getOptionValor('pagseguro_token');
+      $link = Option::getOptionValor('pagseguro_endereco');
       $cpf = $request->input('cpf');
       $cpf = trim(str_replace("-", "", str_replace(".", "", $cpf)));
       $tel_exploded = explode(") ", $request->input('telefone'));
@@ -38,7 +41,7 @@ class PagseguroController extends Controller
       $data['extraAmount']='0.00';
       $data['itemId1']='0001';
       $data['itemDescription1']='Anúncio Particular UnicoDono';
-      $data['itemAmount1']= '79.00';
+      $data['itemAmount1']= str_replace(',', '.', Option::getOptionValor('pagseguro_endereco'));
       $data['itemQuantity1']='1';
       $data["notificationURL"]="http://www.danielsilva.esy.es/tlek/pagseguro/testenotification.php";
       $data['reference']='REF1234';
@@ -79,7 +82,7 @@ class PagseguroController extends Controller
       curl_setopt($curl, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
       curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type: application/x-www-form-urlencoded; charset=ISO-8859-1'));
       //curl_setopt($curl, CURLOPT_URL, "https://ws.sandbox.pagseguro.uol.com.br/v2/transactions/");
-      curl_setopt($curl, CURLOPT_URL, "https://ws.sandbox.pagseguro.uol.com.br/v2/transactions");
+      curl_setopt($curl, CURLOPT_URL, "$link/v2/transactions");
       curl_setopt($curl, CURLOPT_POST, true);
       curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($data));
       curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
