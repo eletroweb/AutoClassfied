@@ -22,7 +22,6 @@ class AnuncioController extends Controller
     }
 
     public function anuncieStore(Request $request){
-        //var_dump($request->all());exit;
         $validatedData = $request->validate([
            'titulo' => 'required|max:30',
            'marca' => 'required',
@@ -64,57 +63,72 @@ class AnuncioController extends Controller
           $ad->valor = $request->input('combustivel');
           $ad->anuncio = $anuncio->id;
           $ad->save();
-          if($request->has('adicionais')){
-            $adicionais = $request->input('adicionais');
-            foreach ($adicionais as $a) {
-              if($a != ''){
-                $adicional = new Adicional();
-                $adicional->nome = $a;
-                $adicional->anuncio = $anuncio->id;
-                $adicional->save();
-              }
-            }
-          }
-          if($request->has('acessorios')){
-            $adicionais = $request->input('acessorios');
-            foreach ($adicionais as $a) {
-              if($a != ''){
-                $acessorio = new Acessorio();
-                $acessorio->nome = $a;
-                $acessorio->anuncio = $anuncio->id;
-                $acessorio->save();
-              }
-            }
-          }
-
-          foreach($imagens as $img){
-            $img_anuncio = new AnuncioImagem();
-            $img_anuncio->imagem= Imagem::where('url', str_replace("\"", "", $img))->first()->id;
-            $img_anuncio->first= false;
-            $img_anuncio->anuncio= $anuncio->id;
-            $img_anuncio->save();
-          }
-
-          //Percorro todos os fields do anuncio e procuro pelo input correspondente a ele.
-          foreach(AnuncioField::all() as $field){
-            //Enquanto encontro fields crio os metadados do anuncio (AnuncioDados)
-            $data = new AnuncioDados();
-            $data->nome = $field->meta_nome;
-            $data->valor = $request->input($field->meta_nome); //Pego o valor
-            $data->anuncio = $anuncio->id;
-            $data->save();
-          }
+          $this->insertAdicionaisAnuncio($request, $anuncio);
+          $this->insertAcessoriosAnuncio($request, $anuncio);
+          $this->insertImagesAnuncio($anuncio, $imagens);
+          $this->insertAnuncioDados($request, $field);          
           $title = $anuncio->getNomeFormated();
-          if($request->input('anuncio_padrao')){
-            $xml = PagseguroController::payment($request);
-            $transaction = TransactionController::transactionFromXml($xml);
-            $anuncio->transaction_id = $transaction->id;
+          if($request->input('anuncio_destacado') == 'y'){
+            if($request->has('tipo_pagamento')){
+              $xml = PagseguroController::payment($request);
+              $transaction = TransactionController::transactionFromXml($xml);
+              $anuncio->transaction_id = $transaction->id;
+            }
           }
           $anuncio->save();
-          return redirect("/anuncios/{$title}_{$anuncio->id}")->with('status', 'Anúncio publicado com sucesso!');
+          return redirect("{$title}")->with('status', 'Anúncio publicado com sucesso!');
         }
         $request->flash();
         return redirect('/anuncie')->with('status', 'Você precisa inserir no mínimo uma imagem para publicar o seu anúncio');
+    }
+  
+    private function insertAdicionaisAnuncio(Request $request, $anuncio){
+      if($request->has('adicionais')){
+        $adicionais = $request->input('adicionais');
+        foreach ($adicionais as $a) {
+          if($a != ''){
+            $adicional = new Adicional();
+            $adicional->nome = $a;
+            $adicional->anuncio = $anuncio->id;
+            $adicional->save();
+          }
+        }
+      }
+    }
+  
+    private function insertAcessoriosAnuncio(Request $request, $anuncio){
+      if($request->has('acessorios')){
+        $adicionais = $request->input('acessorios');
+        foreach ($adicionais as $a) {
+          if($a != ''){
+            $acessorio = new Acessorio();
+            $acessorio->nome = $a;
+            $acessorio->anuncio = $anuncio->id;
+            $acessorio->save();
+          }
+        }
+      }
+    }
+  
+    private function insertAnuncioDados(Request $request){
+      foreach(AnuncioField::all() as $field){
+        //Enquanto encontro fields crio os metadados do anuncio (AnuncioDados)
+        $data = new AnuncioDados();
+        $data->nome = $field->meta_nome;
+        $data->valor = $request->input($field->meta_nome); //Pego o valor
+        $data->anuncio = $anuncio->id;
+        $data->save();
+      }
+    }
+  
+    private function insertImagesAnuncio($anuncio, $imagens){
+      foreach($imagens as $img){
+        $img_anuncio = new AnuncioImagem();
+        $img_anuncio->imagem= Imagem::where('url', str_replace("\"", "", $img))->first()->id;
+        $img_anuncio->first= false;
+        $img_anuncio->anuncio= $anuncio->id;
+        $img_anuncio->save();
+      }
     }
 
     public function anuncios(Request $request){

@@ -191,7 +191,7 @@
           </div>
         </div>
         @include('elements.anuncios.selecionar_pagamento')
-        <button type="submit" class="mt-2 btn btn-primary">Anunciar</button>
+        <button type="submit" onclick="beforeStoreAnuncio()" class="mt-2 btn btn-primary">Anunciar</button>
         <div class="modal fade" id="checkoutModal" tabindex="-1" role="dialog" aria-labelledby="checkoutModalLabel" aria-hidden="true">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -255,5 +255,25 @@
         <button type="submit" class="btn btn-primary">Salvar endereço</button>
       </div>
     </form>
+  </div>
+</div>
+<!-- Erro no anúncio -->
+<div class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="errorModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="errorModalLabel">Você precisa preencher as informações de pagamento</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Atenção, para destacar um anúncio você deve <b>selecionar e preencher</b> a forma de pagamento 
+        com informações válidas.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+      </div>
+    </div>
   </div>
 </div>

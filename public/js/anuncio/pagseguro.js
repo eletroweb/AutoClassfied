@@ -1,37 +1,61 @@
+var bin_bandeira = '';
+var hashComprador = '';
+
+function loadSenderHash(){
+  $.ajax({
+    url: '/pagseguro/startSession',
+    dataType: 'json',
+    type: 'post',
+    data: {_token: $('meta[name="csrf-token"]').attr('content')},
+    success: function(data){
+      PagSeguroDirectPayment.setSessionId(data[0]);
+      PagSeguroDirectPayment.onSenderHashReady(function(response){
+        if(response !== undefined){
+            if(response.status == 'error') {
+                console.log(response.message);
+                return false;
+            }
+            hashComprador = response.senderHash; //Hash estará disponível nesta variável.
+            $('#btnPagar').prop('disabled', false);
+            $('#btnPagar').html('Processar informações');
+        }
+      });
+    }
+  });
+}
+
+function beforeStoreAnuncio(){
+  if($('#senderHash').val() === '' && $('.tipo_anuncio').val() === 'y'){
+     $('#errorModal').modal('show');
+     return false;
+  }
+  return true;
+}
+
 $(document).ready(function(){
 	$('#btnPagar').prop('disabled', true);
 	$('#btnPagar').html('Carregando...');
 	$('#checkoutModal').on('show.bs.modal', function (e) {
-		  $.ajax({
-				url: '/pagseguro/startSession',
-				dataType: 'json',
-				type: 'post',
-				data: {_token: $('meta[name="csrf-token"]').attr('content')},
-				success: function(data){
-					PagSeguroDirectPayment.setSessionId(data[0]);
-					PagSeguroDirectPayment.onSenderHashReady(function(response){
-						if(response != undefined){
-								if(response.status == 'error') {
-						        console.log(response.message);
-						        return false;
-						    }
-						    hashComprador = response.senderHash; //Hash estará disponível nesta variável.
-								$('#btnPagar').prop('disabled', false);
-	 					 		$('#btnPagar').html('Processar informações');
-						}
-					});
-				}
-			});
+		  loadSenderHash();
 	});
 	$('#cartao').mask('0000-0000-0000-0000');
 	$('#month').mask('00');
 	$('#year').mask('0000');
+  //Tipo anúncio é y para anúncios destacados
 	$('.tipo_anuncio').change(function(){
 		if($(this).val() == 'y'){
-			$('#checkoutModal').modal();
-		}
+      $('#tipo_pagamento_destaque').collapse('show');
+      $('.tipo_pagamento').change(function(){
+        if($(this).val() === 'boleto'){
+            loadSenderHash();
+        }else{
+          $('#checkoutModal').modal();    
+        }
+      });
+		}else{
+      $('#tipo_pagamento_destaque').collapse('hide');
+    }
 	});
-	41227-149
 	$('#btnPagar').click(function(){
 		if($('#nome').val() !== '' && $('#telefone').val().length >= 10 && $('#cpf').val().length == 14 && $('#logradouro').val() !== ''
 				&& $('#cidade').val() !== '' && $('#bairro').val() !== '' && $('#uf').val() !== '' && $('#cep').val().length == 9
@@ -81,5 +105,4 @@ $(document).ready(function(){
 				}
 	});
 });
-var bin_bandeira = '';
-var hashComprador = '';
+
