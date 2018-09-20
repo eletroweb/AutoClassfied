@@ -212,6 +212,14 @@ class UserController extends AppBaseController
       return view('user.configuracoes');
     }
 
+    public function faq(Request $request){
+      return view('duvidas.faq');
+    }
+
+    public function termos_uso(Request $request){
+      return view('duvidas.termos_de_uso');
+    }
+
     public function cadastrarEndereco(Request $request){
         $endereco = new Endereco();
         $endereco->logradouro = $request->input('logradouro');

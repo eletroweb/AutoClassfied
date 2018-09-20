@@ -30,7 +30,7 @@
           enable_page_level_ads: true
      });
      </script>-->
-    <title>{{ env('app.name', 'Unicodono') }}</title>
+    <title>ÚNICODONO - Carros novos e usados, carros usados e único dono</title>
     <link rel="stylesheet" href="{{ asset('css/lightbox.min.css') }}">
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/unicodono.css') }}" rel="stylesheet">
@@ -101,11 +101,10 @@
                   <a class="dropdown-item" href="{{route('anuncie')}}">Anuncie sua moto</a>
                   <div class="dropdown-divider"></div>
                   <a class="dropdown-item" href="#">Planos para revendedores</a>
-                  <a class="dropdown-item" href="#">Cadastro para revendas</a>
-                  <a class="dropdown-item" href="#">Cadastro anúncio simples</a>
-                  <a class="dropdown-item" href="#">Avalie o seu veículo</a>
-                  <a class="dropdown-item" href="{{route('fipe')}}">Tabela FIPE</a>
-                  <a class="dropdown-item" href="#">Perguntas Frequentes</a>
+                  <a class="dropdown-item" href="{{route('contratar_revenda')}}">Cadastro para revendas</a>
+                  <a class="dropdown-item" href="{{route('anuncie')}}">Cadastro anúncio simples</a>
+                  <a class="dropdown-item" href="{{route('fipe')}}">Avalie o seu veículo</a>
+                  <a class="dropdown-item" href="{{route('faq')}}">Perguntas Frequentes</a>
                 </div>
               </li>
               <!--<li class="nav-item">
@@ -170,7 +169,7 @@
                 <a class="nav-link text-white" href="/anuncios">Ofertas de carros</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link text-white" href="#">Politica de privacidade</a>
+                <a class="nav-link text-white" href="{{route('termos_uso')}}">Politica de privacidade</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link text-white" href="#">Publicidade</a>
@@ -182,7 +181,7 @@
                 <a class="nav-link text-white" href="#">Sobre nós</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link text-white" href="#">Termos de uso</a>
+                <a class="nav-link text-white" href="{{route('termos_uso')}}">Termos de uso</a>
               </li>
             </ul>
           </div>
@@ -217,16 +216,16 @@
                 <a class="nav-link text-white" href="/fale-conosco">Fale conosco</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link text-white" href="#">Como comprar o seu veículo</a>
+                <a class="nav-link text-white" href="/como-comprar-carro">Como comprar o seu veículo</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link text-white" href="#">Como vender o seu veículo</a>
+                <a class="nav-link text-white" href="/como-vender-carro">Como vender o seu veículo</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link text-white" href="/minha-conta">Painel de controle</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link text-white" href="#">Sobre anúncios</a>
+                <a class="nav-link text-white" href="/faq">Sobre anúncios</a>
               </li>
             </ul>
           </div>
