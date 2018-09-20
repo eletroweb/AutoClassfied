@@ -64,7 +64,8 @@
     </div>
     <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
       <div class="card-body">
-        Para realizar a recuperação do seu e-mail, preencha o formulário de Fale Conosco ao lado e informe seu CPF.
+        Para resetar a sua senha basta clicar em "Esqueci a minha senha", no formulário de login, em seguida, informar o seu e-mail.
+        Os próximos passos serão enviados para você.
       </div>
     </div>
   </div>

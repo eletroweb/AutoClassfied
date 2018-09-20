@@ -18,12 +18,10 @@
         Lembre-se de que quanto mais filtros você utilizar, mais refinado será o resultado.
         <ol style="margin-left:40px; margin-right:0px !important">
         	<li><strong>Busca rápida:</strong>&nbsp;Formulário de busca com os principais filtros. Você encontra esse modelo de busca na página inicial.</li>
-        	<li><strong>Busca avançada:</strong>&nbsp;Formulário com todos os filtros de busca disponíveis para você realizar uma busca detalhada. Quanto mais filtros você utilizar, mais refinado será o resultado da sua busca. Acesse esse modelo através do submenu "Comprar" ou pelo link “Busca Avançada”, localizado acima da busca rápida.</li>
-        	<li><strong>Busca por palavra-chave:</strong>&nbsp;Busque pelas características do veículo desejado, como: Marca, Modelo, Ano ou Estado, de forma rápida e intuitiva. Você encontra esse modelo de busca na seção "Comprar".</li>
-        	<li><strong>Ranking UNICODONO :&nbsp; &nbsp; &nbsp;</strong>Na seção “Comprar”, clicando no link "Ranking <strong>UNICODONO&nbsp;</strong>", você encontra a lista de carros novos e usados mais buscados do mês! Se desejar, você também pode saber quais são as marcas e versões que lideram as buscas em nosso site clicando nos links ao lado e abaixo da lista de carros mais buscados.</li>
+        	<li><strong>Busca avançada:</strong>&nbsp;Ao acessar a página dos anúncios você encontrará do lado esquerdo um filtro contendo mais opções para refinar a sua pesquisa.</li>
+        	<li><strong>Ranking UNICODONO :&nbsp; &nbsp; &nbsp;</strong>Você também pode acessar o menu <strong>UNICODONO&nbsp;</strong>", e ir até a opção Comprar carros > Mais buscados para encontrar os anúncios mais populares do momento.</li>
         </ol>
-        <p>›&nbsp;<strong>No resultado da sua busca</strong>, você pode ordenar os anúncios por marca/modelo, ano, quilometragem e preço.</p>
-        <p>›&nbsp;<strong>Se houve pouco resultado para sua busca</strong>, remova os filtros buscados, clicando sobre eles na lateral esquerda. Ao remover cada um, um novo resultado será apresentado.</p>
+        <p>›&nbsp;<strong>Se houve pouco resultado para sua busca</strong>, remova os filtros buscados, clicando sobre eles na lateral esquerda. Ao remover cada um, e retomar a pesquisa, um novo resultado será apresentado.</p>
       </p>
     </div>
   </div>
