@@ -32,9 +32,9 @@ class PagseguroController extends Controller
       $curl = curl_init();
       $data = null;
       if($request->input('tipo_pagamento') == 'boleto'){
-        $data = $this->dataBoleto($request, $cpf, $ddd, $telefone, $cep);     
+        $data = PagseguroController::dataBoleto($request, $cpf, $ddd, $telefone, $cep);
       }else{
-        $data = $this->dataCreditCard($request, $cpf, $ddd, $telefone, $cep);    
+        $data = PagseguroController::dataCreditCard($request, $cpf, $ddd, $telefone, $cep);
       }
       curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
       curl_setopt($curl, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
@@ -49,8 +49,8 @@ class PagseguroController extends Controller
       curl_close($curl);
       return $resp;
     }
-  
-    private function dataCreditCard(Request $request, $cpf, $ddd, $telefone, $cep){
+
+    private static function dataCreditCard(Request $request, $cpf, $ddd, $telefone, $cep){
       $email = Option::getOptionValor('pagseguro_email');
       $token = Option::getOptionValor('pagseguro_token');
       $data['token'] = $token;
@@ -101,8 +101,8 @@ class PagseguroController extends Controller
       $data['billingAddressCountry']='BRA';
       return $data;
     }
-  
-    private function dataBoleto(Request $request, $cpf, $ddd, $telefone, $cep){
+
+    private static function dataBoleto(Request $request, $cpf, $ddd, $telefone, $cep){
       $email = Option::getOptionValor('pagseguro_email');
       $token = Option::getOptionValor('pagseguro_token');
       $data['token'] = $token;
@@ -114,7 +114,7 @@ class PagseguroController extends Controller
       $data['extraAmount']='0.00';
       $data['itemId1']='0001';
       $data['itemDescription1']='Anúncio Particular UnicoDono';
-      $data['itemAmount1']= str_replace(',', '.', Option::getOptionValor('pagseguro_endereco'));
+      $data['itemAmount1']= str_replace(',', '.', Option::getOptionValor('preco_anuncio'));
       $data['itemQuantity1']='1';
       $data["notificationURL"]="http://www.danielsilva.esy.es/tlek/pagseguro/testenotification.php";
       $data['reference']='REF1234';
@@ -125,7 +125,6 @@ class PagseguroController extends Controller
       $data["senderEmail"]= "c93245650383806312796@sandbox.pagseguro.com.br"; //Aqui é o e-mail do comprador
       $data['senderHash']= $request->input('senderHash');
       $data['shippingAddressRequired'] = false;
-      $data['shippingType']='3';
       /*$data['shippingAddressStreet']='Avenida Giovani Rinaldi';
       $data['shippingAddressNumber']='176';
       $data['shippingAddressComplement']='a';

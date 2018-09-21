@@ -66,13 +66,15 @@ class AnuncioController extends Controller
           $this->insertAdicionaisAnuncio($request, $anuncio);
           $this->insertAcessoriosAnuncio($request, $anuncio);
           $this->insertImagesAnuncio($anuncio, $imagens);
-          $this->insertAnuncioDados($request, $field);          
-          $title = $anuncio->getNomeFormated();
+          $this->insertAnuncioDados($request);
+          $title = $anuncio->getUrl();
           if($request->input('anuncio_destacado') == 'y'){
             if($request->has('tipo_pagamento')){
               $xml = PagseguroController::payment($request);
               $transaction = TransactionController::transactionFromXml($xml);
               $anuncio->transaction_id = $transaction->id;
+              $anuncio->patrocinado = true;
+              $anuncio->ativo = false;
             }
           }
           $anuncio->save();
@@ -81,7 +83,7 @@ class AnuncioController extends Controller
         $request->flash();
         return redirect('/anuncie')->with('status', 'Você precisa inserir no mínimo uma imagem para publicar o seu anúncio');
     }
-  
+
     private function insertAdicionaisAnuncio(Request $request, $anuncio){
       if($request->has('adicionais')){
         $adicionais = $request->input('adicionais');
@@ -95,7 +97,7 @@ class AnuncioController extends Controller
         }
       }
     }
-  
+
     private function insertAcessoriosAnuncio(Request $request, $anuncio){
       if($request->has('acessorios')){
         $adicionais = $request->input('acessorios');
@@ -109,7 +111,7 @@ class AnuncioController extends Controller
         }
       }
     }
-  
+
     private function insertAnuncioDados(Request $request){
       foreach(AnuncioField::all() as $field){
         //Enquanto encontro fields crio os metadados do anuncio (AnuncioDados)
@@ -120,7 +122,7 @@ class AnuncioController extends Controller
         $data->save();
       }
     }
-  
+
     private function insertImagesAnuncio($anuncio, $imagens){
       foreach($imagens as $img){
         $img_anuncio = new AnuncioImagem();
@@ -229,7 +231,7 @@ class AnuncioController extends Controller
       $count = Anuncio::count();
       $relacionados = array();
       //var_dump($count);exit;
-      if($count > 1){
+      if($count > 4){
         $relacionados =
           $revenda?
           Anuncio::where('user', $anuncio->users->id)->get()->random($count < 4?$count:4)

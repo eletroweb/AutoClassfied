@@ -29,6 +29,7 @@ class CreateTransactionsTable extends Migration
             $table->integer('itemcount');
             $table->integer('payment_code');
             $table->integer('payment_type');
+            $table->string('paymentLink')->nullable();
             $table->timestamps();
         });
     }
