@@ -5,7 +5,7 @@
     <h1 class="h3 mb-3 font-weight-normal text-left">Altere sua conta</h1>
     <hr>
   </div>
-  <form class="form-signup col-sm-6 {{ $errors->has('name') ? ' has-error' : '' }}" method="POST" action="/users/update">
+  <form class="form-signup col-sm-6 {{ $errors->has('name') ? ' has-error' : '' }}" method="POST" action="/users/update/{{Auth::user()->id}}">
     {{ csrf_field() }}
     <div class="form-group">
       <label for="inputName">Nome</label>
