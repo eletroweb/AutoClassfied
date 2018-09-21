@@ -157,6 +157,10 @@ class TransactionController extends AppBaseController
         return redirect(route('transactions.index'));
     }
 
+    public function transactionNotification(Request $request){
+      //Função pra ser feita...
+    }
+
     public static function transactionFromXml($xml){
       $data['payment_type'] = (string)$xml->paymentMethod->type;
       $data['payment_code'] = (string)$xml->paymentMethod->code;
@@ -172,15 +176,18 @@ class TransactionController extends AppBaseController
       $data['discountamount'] = (string)$xml->discountAmount;
       $data['installmentcount'] = (string)$xml->installmentCount;
       $data['itemcount'] = (string)$xml->itemCount;
+      $data['paymentLink'] = (string)$xml->paymentLink;
       $transaction = Transaction::create($data);
-      foreach ($xml->items->item as $item){
-        $i = array();
-        $i['pagseguro_id'] = (string)$item->id;
-        $i['description'] = (string)$item->description;
-        $i['transaction_id'] = $transaction->id;
-        $i['quantity'] = (string)$item->quantity;
-        $i['amount'] = (string)$item->amount;
-        TransactionItem::create($i);
+      if($xml->items){
+        foreach ($xml->items->item as $item){
+          $i = array();
+          $i['pagseguro_id'] = (string)$item->id;
+          $i['description'] = (string)$item->description;
+          $i['transaction_id'] = $transaction->id;
+          $i['quantity'] = (string)$item->quantity;
+          $i['amount'] = (string)$item->amount;
+          TransactionItem::create($i);
+        }
       }
       return $transaction;
     }

@@ -1,3 +1,29 @@
+<!-- Cadastrar endereço se necessário -->
+@if(!Auth::user()->endereco)
+<div class="modal fade" id="enderecoCadastro" tabindex="-1" role="dialog" aria-labelledby="enderecoCadastro" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <form action="/cadastrar-endereco" method="post" class="modal-content">
+      {{csrf_field()}}
+      <div class="modal-header">
+        <h5 class="modal-title" id="enderecoCadastro">Informe o seu endereço</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="alert alert-primary" role="alert">
+          Precisamos saber o seu endereço para que você possa publicar anúncios.
+        </div>
+        @include('enderecos.form')
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="submit" class="btn btn-primary">Salvar endereço</button>
+      </div>
+    </form>
+  </div>
+</div>
+@endif
 <div class="container">
   <form id="anunciar" method="post" action="{{route('anuncieStore')}}"  enctype="multipart/form-data">
   <div class="row">
@@ -233,30 +259,7 @@
     });
   });
 </script>
-<!-- Cadastrar endereço se necessário -->
-<div class="modal fade" id="enderecoCadastro" tabindex="-1" role="dialog" aria-labelledby="enderecoCadastro" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <form action="/cadastrar-endereco" method="post" class="modal-content">
-      {{csrf_field()}}
-      <div class="modal-header">
-        <h5 class="modal-title" id="enderecoCadastro">Informe o seu endereço</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div class="alert alert-primary" role="alert">
-          Precisamos saber o seu endereço para que você possa publicar anúncios.
-        </div>
-        @include('enderecos.form')
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-        <button type="submit" class="btn btn-primary">Salvar endereço</button>
-      </div>
-    </form>
-  </div>
-</div>
+
 <!-- Erro no anúncio -->
 <div class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="errorModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -268,7 +271,7 @@
         </button>
       </div>
       <div class="modal-body">
-        Atenção, para destacar um anúncio você deve <b>selecionar e preencher</b> a forma de pagamento 
+        Atenção, para destacar um anúncio você deve <b>selecionar e preencher</b> a forma de pagamento
         com informações válidas.
       </div>
       <div class="modal-footer">
