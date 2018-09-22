@@ -25,6 +25,12 @@ class CreateUserRequest extends FormRequest
      */
     public function rules()
     {
-        return User::$rules;
+        return [
+          'documento' => 'required|unique:users,documento,'.$this->user,
+          'name' => 'required',
+          'email' => 'required|unique:users,email,'.$this->user,
+          'password' => 'required',
+          'pessoa_fisica' => 'required'
+        ];
     }
 }

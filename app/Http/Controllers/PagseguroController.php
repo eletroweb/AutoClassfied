@@ -7,6 +7,7 @@ use App\Option;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Client;
 use Carbon\Carbon;
+use App\Notification;
 
 class PagseguroController extends Controller
 {
@@ -19,6 +20,16 @@ class PagseguroController extends Controller
       $response = $http->request('POST', "$link/v2/sessions/?email=$email&token=$token");
       $xml = simplexml_load_string($response->getBody());
       return response()->json($xml->id);
+    }
+
+    public static function getTransactionFromNotification(Notification $notification){
+      $http = new Client();
+      $link = Option::getOptionValor('pagseguro_endereco');
+      $email = Option::getOptionValor('pagseguro_email');
+      $token = Option::getOptionValor('pagseguro_token');
+      $response = $http->request('POST', "$link/v2/transactions/notifications/{$notification->notificationCode}/?email=$email&token=$token");
+      $xml = simplexml_load_string($response->getBody());
+      return $xml;
     }
 
     public static function payment(Request $request){

@@ -43,6 +43,7 @@ Route::middleware('auth')->group(function () {
   Route::post('/revenda/{id}/update', 'RevendaController@update')->name('update_revenda');
   Route::post('/cadastrar-endereco', 'UserController@cadastrarEndereco');
   Route::get('/revenda/rel/chartjs', 'RevendaController@viewsByMonth')->name('rel_chart_mes');
+  Route::post('/atualizar-dados/{id}', 'UserController@update')->name('atualizar_conta');
 });
 
 Route::get('/importxml', 'VeiculoController@updateVeiculos');

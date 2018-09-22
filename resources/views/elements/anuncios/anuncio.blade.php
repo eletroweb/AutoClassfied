@@ -60,5 +60,31 @@
         </div>
       </div>
     </a>
+    @if(isset($is_my))
+    <p>
+      <button class="btn btn-secondary" type="button" data-toggle="collapse" data-target="#collapse_{{$anuncio->id}}" aria-expanded="false" aria-controls="collapse_{{$anuncio->id}}">
+        Informações do anúncio
+      </button>
+    </p>
+    <div class="collapse" id="collapse_{{$anuncio->id}}">
+      <div class="card card-body">
+        @if(!$anuncio->patrocinado)
+          Este anúncio foi publicado sem destaques
+        @else
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="alert alert-primary" role="alert">
+                <h4 class="alert-heading">Anúncio destacado</h4>
+                <p>Status do pagamento: {{$anuncio->getStatus()}}</p>
+                <hr>
+                <p class="mb-0">Whenever you need to, be sure to use margin utilities to keep things nice and tidy.</p>
+              </div>
+              {{$anuncio->transaction->code}}
+            </div>
+          </div>
+        @endif
+      </div>
+    </div>
+    @endif
   </div>
 </div>
