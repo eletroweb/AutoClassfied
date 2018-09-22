@@ -75,7 +75,7 @@ class PagseguroController extends Controller
       $data['itemDescription1']='Anúncio Particular UnicoDono';
       $data['itemAmount1']= str_replace(',', '.', Option::getOptionValor('pagseguro_endereco'));
       $data['itemQuantity1']='1';
-      $data["notificationURL"]="http://un-dev493194.codeanyapp.com/pagseguro/notification/transaction/";
+      $data["notificationURL"]= env('PAGSEGURO_NOTIFICATION', 'notification_url');
       $data['reference']='REF1234';
       $data['senderName']= $request->input('nome');
       $data['senderCPF']= $cpf;
@@ -84,14 +84,6 @@ class PagseguroController extends Controller
       $data["senderEmail"]= "c93245650383806312796@sandbox.pagseguro.com.br";
       $data['senderHash']= $request->input('senderHash');
       $data['shippingAddressRequired'] = false;
-      /*$data['shippingAddressStreet']='Avenida Giovani Rinaldi';
-      $data['shippingAddressNumber']='176';
-      $data['shippingAddressComplement']='a';
-      $data['shippingAddressDistrict']='Parque Vitoria';
-      $data['shippingAddressPostalCode']='07854120';
-      $data['shippingAddressCity']='Sao Paulo';
-      $data['shippingAddressState']='SP';
-      $data['shippingAddressCountry']='BRA';*/
       $data['shippingType']='3';
       $data['creditCardToken']= $request->input('cardtoken');
       $data['installmentQuantity']='1';
@@ -127,7 +119,7 @@ class PagseguroController extends Controller
       $data['itemDescription1']='Anúncio Particular UnicoDono';
       $data['itemAmount1']= str_replace(',', '.', Option::getOptionValor('preco_anuncio'));
       $data['itemQuantity1']='1';
-      $data["notificationURL"]="http://un-dev493194.codeanyapp.com/pagseguro/notification/transaction/";
+      $data["notificationURL"]= env('PAGSEGURO_NOTIFICATION', 'notification_url');
       $data['reference']='REF1234';
       $data['senderName']= $request->input('nome');
       $data['senderCPF']= $cpf;
@@ -136,14 +128,6 @@ class PagseguroController extends Controller
       $data["senderEmail"]= "c93245650383806312796@sandbox.pagseguro.com.br"; //Aqui é o e-mail do comprador
       $data['senderHash']= $request->input('senderHash');
       $data['shippingAddressRequired'] = false;
-      /*$data['shippingAddressStreet']='Avenida Giovani Rinaldi';
-      $data['shippingAddressNumber']='176';
-      $data['shippingAddressComplement']='a';
-      $data['shippingAddressDistrict']='Parque Vitoria';
-      $data['shippingAddressPostalCode']='07854120';
-      $data['shippingAddressCity']='Sao Paulo';
-      $data['shippingAddressState']='SP';
-      $data['shippingAddressCountry']='BRA';*/
       return $data;
     }
 
