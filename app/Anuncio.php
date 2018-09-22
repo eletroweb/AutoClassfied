@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\AnuncioImagem;
 use App\Imagem;
 use App\Revenda;
+use App\Transaction;
 use Illuminate\Support\Facades\Storage;
 
 
@@ -14,15 +15,6 @@ class Anuncio extends Model
     protected $fillable = ['titulo', 'descricao', 'marca', 'km', 'usado', 'modelo', 'versao', 'valor', 'user', 'moto',
                             'ano', 'blindagem'];
 
-    public static $status_pagseguro = [
-      '1' => 'Aguardando pagamento',
-      '2' => 'Em análise',
-      '3' => 'Paga',
-      '4' => 'Disponível',
-      '5' => 'Em disputa',
-      '6' => 'Devolvida',
-      '7' => 'Cancelada'
-    ];
 
     public function anuncio_dados(){
         return $this->hasMany('App\AnuncioDados');
@@ -49,7 +41,7 @@ class Anuncio extends Model
     }
 
     public function getStatus(){
-      return Anuncio::$status_pagseguro[$this->transaction->status];
+      return Transaction::$status_pagseguro[$this->transaction->status];
     }
 
     public function getNomeFormated(){

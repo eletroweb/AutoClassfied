@@ -27,7 +27,7 @@ class PagseguroController extends Controller
       $link = Option::getOptionValor('pagseguro_endereco');
       $email = Option::getOptionValor('pagseguro_email');
       $token = Option::getOptionValor('pagseguro_token');
-      $response = $http->request('POST', "$link/v2/transactions/notifications/{$notification->notificationCode}/?email=$email&token=$token");
+      $response = $http->request('GET', "$link/v2/transactions/notifications/{$notification->notificationCode}/?email=$email&token=$token");
       $xml = simplexml_load_string($response->getBody());
       return $xml;
     }
@@ -75,7 +75,7 @@ class PagseguroController extends Controller
       $data['itemDescription1']='Anúncio Particular UnicoDono';
       $data['itemAmount1']= str_replace(',', '.', Option::getOptionValor('pagseguro_endereco'));
       $data['itemQuantity1']='1';
-      $data["notificationURL"]="http://www.danielsilva.esy.es/tlek/pagseguro/testenotification.php";
+      $data["notificationURL"]="http://un-dev493194.codeanyapp.com/pagseguro/notification/transaction/";
       $data['reference']='REF1234';
       $data['senderName']= $request->input('nome');
       $data['senderCPF']= $cpf;
@@ -127,7 +127,7 @@ class PagseguroController extends Controller
       $data['itemDescription1']='Anúncio Particular UnicoDono';
       $data['itemAmount1']= str_replace(',', '.', Option::getOptionValor('preco_anuncio'));
       $data['itemQuantity1']='1';
-      $data["notificationURL"]="http://www.danielsilva.esy.es/tlek/pagseguro/testenotification.php";
+      $data["notificationURL"]="http://un-dev493194.codeanyapp.com/pagseguro/notification/transaction/";
       $data['reference']='REF1234';
       $data['senderName']= $request->input('nome');
       $data['senderCPF']= $cpf;

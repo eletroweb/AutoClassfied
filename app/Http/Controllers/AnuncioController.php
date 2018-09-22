@@ -68,9 +68,14 @@ class AnuncioController extends Controller
           $this->insertImagesAnuncio($anuncio, $imagens);
           $this->insertAnuncioDados($request);
           $title = $anuncio->getUrl();
+          $anuncio->ativo = false;
           if($request->input('anuncio_destacado') == 'y'){
             if($request->has('tipo_pagamento')){
               $xml = PagseguroController::payment($request);
+              if($xml->error){
+                $request->flash();
+                return redirect('/anuncie')->with('status', "Erro ao processar pagamento [{$xml->error->code}]: {$xml->error->message}" );
+              }
               $transaction = TransactionController::transactionFromXml($xml);
               $anuncio->transaction_id = $transaction->id;
               $anuncio->patrocinado = true;

@@ -1,6 +1,5 @@
 <div class="row">
   <div class="col-sm-12">
-    <!-- /anuncios/{{$anuncio->getNomeFormated()}}_{{$anuncio->id}} -->
     <a href='{{$anuncio->getUrl()}}'
       class="list-group-item list-group-item-action flex-column align-items-start mt-1 mb-1 {{$anuncio->patrocinado?'patrocinado':''}}">
       <div class="row">
@@ -67,24 +66,28 @@
       </button>
     </p>
     <div class="collapse" id="collapse_{{$anuncio->id}}">
-      <div class="card card-body">
         @if(!$anuncio->patrocinado)
           Este anúncio foi publicado sem destaques
         @else
           <div class="row">
             <div class="col-sm-12">
-              <div class="alert alert-primary" role="alert">
+              <div class="alert alert-{{$anuncio->transaction->status==3?'success':'primary'}} " role="alert">
                 <h4 class="alert-heading">Anúncio destacado</h4>
                 <p>Status do pagamento: {{$anuncio->getStatus()}}</p>
                 <hr>
-                <p class="mb-0">Whenever you need to, be sure to use margin utilities to keep things nice and tidy.</p>
+                @if($anuncio->transaction->status==3)
+                  <p class="mb-0">Parabéns, o seu anúncio foi aprovado e já está na nossa lista de destaques!</p>
+                  Código do anúncio: <span class="badge badge-secondary">{{$anuncio->transaction->code}}</span>
+                @else
+                  <p class="mb-0">Estamos aguardando a confirmação do seu pagamento para liberarmos o seu anúncio.</p>
+                  Código do anúncio: <span class="badge badge-secondary">{{$anuncio->transaction->code}}</span>
+                @endif
               </div>
-              {{$anuncio->transaction->code}}
             </div>
           </div>
         @endif
       </div>
-    </div>
+
     @endif
   </div>
 </div>

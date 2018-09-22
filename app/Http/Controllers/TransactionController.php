@@ -6,6 +6,7 @@ use App\Http\Requests\CreateTransactionRequest;
 use App\Http\Requests\UpdateTransactionRequest;
 use App\Repositories\TransactionRepository;
 use App\Http\Controllers\AppBaseController;
+use App\Http\Controllers\PagseguroController;
 use Illuminate\Http\Request;
 use Flash;
 use Prettus\Repository\Criteria\RequestCriteria;
@@ -166,8 +167,9 @@ class TransactionController extends AppBaseController
         $notification->notificationType = $request->input('notificationType');
         $notification->save();
       }
+      $notification->save();
       $xml = PagseguroController::getTransactionFromNotification($notification);
-      TransactionController::transactionFromXml($xml);
+      $this::transactionFromXml($xml);
     }
 
     public static function transactionFromXml($xml){
@@ -189,6 +191,10 @@ class TransactionController extends AppBaseController
       $transaction->itemCount = (string)$xml->itemCount;
       $transaction->paymentLink = (string)$xml->paymentLink;
       $transaction->save();
+      if($transaction->status == 3){
+        $anuncio = Anuncio::where('transaction_id', $transaction->id)->first();
+        $anuncio->ativo = true;
+      }
       if($xml->items){
         foreach ($xml->items->item as $item){
           $i = array();
