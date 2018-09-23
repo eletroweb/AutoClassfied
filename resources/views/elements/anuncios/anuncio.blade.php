@@ -79,7 +79,13 @@
                   <p class="mb-0">Parabéns, o seu anúncio foi aprovado e já está na nossa lista de destaques!</p>
                   Código do anúncio: <span class="badge badge-secondary">{{$anuncio->transaction->code}}</span>
                 @else
-                  <p class="mb-0">Estamos aguardando a confirmação do seu pagamento para liberarmos o seu anúncio.</p>
+                  <p class="mb-0">
+                    Estamos aguardando a confirmação do seu pagamento para liberarmos o seu anúncio.
+                    Caso você ainda não tenha feito o pagamento, 
+                    @if($anuncio->transaction->payment_type == 2)
+                        <a href="{{$anuncio->transaction->paymentLink}}" class="alert-link">veja o boleto do seu anúncio aqui.</a>
+                    @endif
+                  </p>
                   Código do anúncio: <span class="badge badge-secondary">{{$anuncio->transaction->code}}</span>
                 @endif
               </div>
