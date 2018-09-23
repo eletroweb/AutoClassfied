@@ -137,7 +137,7 @@
           </div>
         </div>
       </div>
-        <div class="card" style="border: none">
+        <div class="card w-100" style="border: none">
           <div class="card-body">
             <h5 class="card-title">Anunciado por {{$anuncio->users->isRevenda()?$anuncio->users->isRevenda()->nomefantasia:$anuncio->users->name}}</h5>
             <h6 class="card-subtitle mb-2 text-muted">
@@ -147,18 +147,27 @@
                 Dados do vendedor
               @endif
             </h6>
-            <p class="card-text">
-              <ul class="list-group">
-                <li class="list-group-item"><i class="fa fa-phone"></i> {{$anuncio->users->telefone()->valor}}</li>
-                <li class="list-group-item"><i class="fa fa-map-marker-alt"></i>
-                  {{$anuncio->users->isRevenda()?$anuncio->users->isRevenda()->end->logradouro:$anuncio->users->end->logradouro}} {{$anuncio->users->isRevenda()?$anuncio->users->isRevenda()->end->numero:$anuncio->users->end->numero}},
-                  {{$anuncio->users->isRevenda()?$anuncio->users->isRevenda()->end->cidade:$anuncio->users->end->cidade}} - {{$anuncio->users->isRevenda()?$anuncio->users->isRevenda()->end->uf:$anuncio->users->end->uf}}
-                </li>
-              </ul>
+            <p>
+              <button class="btn btn-primary" type="button"
+                 onclick="contabilizarVisualizacao({{$anuncio->id}}, {{Auth::check()?Auth::user()->id:null}})"
+                 data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                Ver informações do anunciante
+              </button>
             </p>
+            <div class="collapse" id="collapseExample">
+              <p class="card-text">
+                <ul class="list-group">
+                  <li class="list-group-item"><i class="fa fa-phone"></i> {{$anuncio->users->telefone()->valor}}</li>
+                  <li class="list-group-item"><i class="fa fa-map-marker-alt"></i>
+                    {{$anuncio->users->isRevenda()?$anuncio->users->isRevenda()->end->logradouro:$anuncio->users->end->logradouro}} {{$anuncio->users->isRevenda()?$anuncio->users->isRevenda()->end->numero:$anuncio->users->end->numero}},
+                    {{$anuncio->users->isRevenda()?$anuncio->users->isRevenda()->end->cidade:$anuncio->users->end->cidade}} - {{$anuncio->users->isRevenda()?$anuncio->users->isRevenda()->end->uf:$anuncio->users->end->uf}}
+                  </li>
+                </ul>
+              </p>
+            </div>
           </div>
         </div>
-        <div class="card" style="border: 0px;">
+        <div class="card w-100" style="border: 0px;">
           <div class="card-body">
             <ul class="list-group">
               <li class="list-group-item d-flex justify-content-between align-items-center" style="font-size: 18px">

@@ -31,6 +31,8 @@ Route::get('/encontre-uma-revenda', 'RevendaController@revendas')->name('revenda
 Route::get('/faq', 'UserController@faq')->name('faq');
 Route::get('/termos-de-uso', 'UserController@termos_uso')->name('termos_uso');
 Route::get('/anuncio-inativo/{id}', 'AnuncioController@inativo')->name('anuncio_inativo');
+Route::post('/anuncios/count/visualizacao/', 'VisualizacaoDadosController@store');
+Route::post('/newsletter/fipe', 'NewsletterUserController@store');
 Route::post('/pagseguro/notification/transaction/', 'TransactionController@transactionNotification')->name('notification_pagseguro');
 Route::middleware('auth')->group(function () {
   Route::get('/minha-conta/configuracoes', 'UserController@configuracoes')->name('configuracoes_conta');

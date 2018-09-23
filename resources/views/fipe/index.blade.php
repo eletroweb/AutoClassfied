@@ -14,11 +14,11 @@
           @if(!Auth::check())
             <div class="form-group">
               <label for="nome">Nome</label>
-              <input type="text" name="nome" class="form-control" required placeholder="Digite o seu nome">
+              <input type="text" name="nome" id="nome" class="form-control" required placeholder="Digite o seu nome">
             </div>
             <div class="form-group">
               <label for="nome">E-mail</label>
-              <input type="email" name="email" class="form-control" required placeholder="Digite o seu e-mail">
+              <input type="email" name="email" id="email" class="form-control" required placeholder="Digite o seu e-mail">
             </div>
           @endif
           <div class="form-group">

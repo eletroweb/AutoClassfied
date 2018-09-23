@@ -20,10 +20,13 @@ class CheckAnuncio
         $data= $request->url();
         $data= explode("/", $data);
         $anuncio = Anuncio::findOrFail($data[8]);
-        if(!$anuncio->ativo && $anuncio->user == Auth::user()->id || $anuncio->ativo){
-            return $next($request);
-        }else{
-            return redirect(route('anuncio_inativo'));
+        if(Auth::check()){
+          if(!$anuncio->ativo && $anuncio->user == Auth::user()->id || $anuncio->ativo){
+              return $next($request);
+          }else{
+              return redirect(route('anuncio_inativo', ['anuncio'=> $anuncio]));
+          }
         }
+        return redirect(route('anuncio_inativo', ['anuncio'=> $anuncio]));
     }
 }

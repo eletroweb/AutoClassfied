@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Models;
+namespace App;
 
-use Eloquent as Model;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
@@ -18,7 +18,7 @@ class NewsletterUser extends Model
     use SoftDeletes;
 
     public $table = 'newsletter_users';
-    
+
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
 
@@ -48,8 +48,8 @@ class NewsletterUser extends Model
      * @var array
      */
     public static $rules = [
-        
+
     ];
 
-    
+
 }
