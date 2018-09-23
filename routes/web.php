@@ -37,7 +37,7 @@ Route::post('/pagseguro/notification/transaction/', 'TransactionController@trans
 Route::middleware('auth')->group(function () {
   Route::get('/minha-conta/configuracoes', 'UserController@configuracoes')->name('configuracoes_conta');
   Route::post('/pagseguro/startSession', 'PagseguroController@startSession')->name('start_session');
-  Route::get('/anuncie', 'AnuncioController@anuncie')->name('anuncie');
+  Route::get('/anuncie', 'AnuncioController@anuncie')->name('anuncie')->middleware('documento');
   Route::get('/minha-conta', 'UserController@profile')->name('minhaconta');
   Route::get('/minha-conta/meus-anuncios', 'UserController@meus_anuncios')->name('meusanuncios');
   Route::post('/anuncios/store', 'AnuncioController@anuncieStore')->name('anuncieStore');
