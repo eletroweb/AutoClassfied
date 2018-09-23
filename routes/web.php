@@ -72,3 +72,6 @@ Route::middleware(['auth','admin'])->group(function(){
   Route::resource('/admin/transactions', 'TransactionController');
   Route::resource('/admin/transactionItems', 'TransactionItemController');
 });
+
+Route::get('auth/{provider}', 'AuthController@redirectToProvider');
+Route::get('auth/{provider}/callback', 'AuthController@handleProviderCallback');

@@ -41,7 +41,7 @@
     <link rel="stylesheet" href="{{ asset('fine-uploader/fine-uploader-gallery.css') }}">
     <link rel="stylesheet" href="{{ asset('fine-uploader/fine-uploader-new.css') }}">
     <link href="https://fonts.googleapis.com/css?family=Pontano+Sans" rel="stylesheet">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
     <script src='https://www.google.com/recaptcha/api.js'></script>
     <script type="text/javascript" src="{{asset('js/Chart.bundle.min.js')}}"></script>
     <script src="{{asset('js/jquery-3.3.1.min.js')}}" charset="utf-8"></script>

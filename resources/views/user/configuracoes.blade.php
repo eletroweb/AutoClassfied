@@ -26,7 +26,8 @@
     <div class="row">
       <div class="form-group col-sm-6">
         <label for="telefone">Telefone</label>
-        <input class="form-control telefone" type="text" id="telefone" name="telefone" value="{{Auth::user()->telefone()->valor}}" placeholder="Digite o seu telefone" value="" required>
+        <input class="form-control telefone" type="text" id="telefone" name="telefone"
+         value="{{Auth::user()->telefone()}}" placeholder="Digite o seu telefone" value="" required>
       </div>
       <div class="form-group col-sm-6">
         <label for="documento" id="info_documento">CPF</label>
