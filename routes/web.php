@@ -16,7 +16,7 @@ Route::get('/ajax/veiculos/marcas', 'VeiculoController@getMarcas');
 Route::get('/ajax/veiculos/modelos', 'VeiculoController@getModelos');
 Route::get('/ajax/veiculos/versoes', 'VeiculoController@getVersoes');
 Route::get('/anuncios', 'AnuncioController@anuncios')->name('anuncios');
-Route::get('/{tipo}/{marca}/{modelo}/{versao}/{titulo}/{id}', 'AnuncioController@index')->where('id', '[0-9]+');
+Route::get('/{tipo}/{marca}/{modelo}/{versao}/{titulo}/{id}', 'AnuncioController@index')->where('id', '[0-9]+')->middleware('anuncio');
 Route::get('/fale-conosco', 'ContatoController@index')->name('fale_conosco');
 Route::post('/fale-conosco', 'ContatoController@store')->name('fale_conosco_post');
 Route::get('/como-comprar-carro', 'UserController@duvida_comprar_carro')->name('duvida_comprar_carro');
@@ -30,6 +30,7 @@ Route::get('/consulta-tabela-fipe', 'FipeController@index')->name('fipe');
 Route::get('/encontre-uma-revenda', 'RevendaController@revendas')->name('revendas');
 Route::get('/faq', 'UserController@faq')->name('faq');
 Route::get('/termos-de-uso', 'UserController@termos_uso')->name('termos_uso');
+Route::get('/anuncio-inativo/{id}', 'AnuncioController@inativo')->name('anuncio_inativo');
 Route::post('/pagseguro/notification/transaction/', 'TransactionController@transactionNotification')->name('notification_pagseguro');
 Route::middleware('auth')->group(function () {
   Route::get('/minha-conta/configuracoes', 'UserController@configuracoes')->name('configuracoes_conta');

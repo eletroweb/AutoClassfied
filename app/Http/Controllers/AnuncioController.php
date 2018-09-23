@@ -256,4 +256,9 @@ class AnuncioController extends Controller
             'anuncio'=> $anuncio, 'imagens' => $imagens, 'principal' => $imagens[0], 'relacionados'=> $relacionados]);
     }
 
+    public function inativo(Request $request, $id){
+      $anuncio = Anuncio::find($id);
+      return view('anuncios.inativo')->with('anuncio', $anuncio);
+    }
+
 }
