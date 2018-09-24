@@ -329,7 +329,7 @@ class RevendaController extends AppBaseController
       ])->first();
     if($this->filtro($veiculo)){
       if($anuncio_)
-      $anuncio = Anuncio::find($anuncio_->anuncio);
+        $anuncio = Anuncio::find($anuncio_->anuncio);
       else
       $anuncio = new Anuncio();
       $anuncio->titulo = $veiculo->make." ".$veiculo->model.' '.$veiculo->version;
@@ -392,8 +392,9 @@ class RevendaController extends AppBaseController
           
           //$this->complementos($veiculo, $anuncio);
           if($veiculo->pictures){
-            foreach($veiculo->pictures->item as $foto){
-              $old_img = Imagem::where([['url', $foto]])->first();
+            foreach($veiculo->pictures as $foto){
+              $url = (string)$foto->item->url;
+              $old_img = Imagem::where([['url', $url]])->first();
               $img = $old_img? $old_img:(new Imagem());
               $img->url= $foto;
               $img->save();
