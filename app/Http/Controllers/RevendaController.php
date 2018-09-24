@@ -185,11 +185,65 @@ class RevendaController extends AppBaseController
 
     return redirect(route('revendas.index'));
   }
+
+  public function importAll(Request $request){
+    $url = 'http://xml.dsautoestoque.com/?hash=Tm/+qav0hOhGuEQN+QfYqKVQ8IY=&l=';
+    $result = simplexml_load_string(file_get_contents($url));
+    foreach($result->ad as $anuncio){
+        //$cnpj = (string)$anuncio->cnpj;
+        $revenda = $this->importSingleRevenda($anuncio);
+        $this->importSingleAll($anuncio, $revenda);
+        /*$this->importRevendas($request, str_replace(".", "", str_replace("-", "", $cnpj)));*/
+    }
+    return true;
+  }
+
+  public function importSingleRevenda($veiculo){
+    
+    $cnpj = $veiculo->cnpj;
+    if($revenda = Revenda::where('cnpj', $cnpj)->first()){
+      return $revenda;
+    }else{
+      $user = User::where('email', $veiculo->email)->first();
+      if(!$user){
+        $user = new User();
+        $user->name = $veiculo->dealer;
+        $user->email = $veiculo->email;
+        $user->password = Hash::make($cnpj);
+        $user->pessoa_fisica = false;
+        $user->documento = $veiculo->cnpj;
+        $user->save();
+      }
+      $endereco = new Endereco();
+      $endereco->logradouro = $veiculo->address;
+      $endereco->uf= $veiculo->state;
+      $endereco->cidade= $veiculo->city;
+      $endereco->bairro= $veiculo->neighborhood;
+      $endereco->numero= 1;
+      $endereco->cep= $veiculo->postcode;
+      $endereco->save();
+      $revenda = new Revenda();
+      $revenda->razaosocial = $veiculo->dealer;
+      $revenda->nomefantasia = $veiculo->dealer;
+      $revenda->cnpj = $veiculo->cnpj;
+      $revenda->user = $user->id;
+      $revenda->endereco = $endereco->id;
+      $revenda->save();
+      $telefone = new UserDado();
+      $telefone->nome = "telefone";
+      $telefone->valor = $veiculo->phone;
+      $telefone->user = $user->id;
+      $telefone->save();
+      return $revenda;
+    }
+  }
+
   //Este método importa as revendas e seus respectivos anúncios
-  public function importRevendas(Request $request){
+  public function importRevendas(Request $request, $data = null){
     //07627884000158
     try{
-      $url = 'http://xml.dsautoestoque.com/?l='.$request->input('cnpj').'&v=2';
+      $cnpj = $data?$data:$request->input('cnpj');
+      $url = 'http://xml.dsautoestoque.com/?l='.$cnpj.'&v=2';
       $result = simplexml_load_string(file_get_contents($url));
       //var_dump((string)$result[0]);exit;
       $cons = strcmp((string)$result[0], '');
@@ -200,8 +254,10 @@ class RevendaController extends AppBaseController
         return view('revendas.admin');
       }
       //Limitar importações de revendas
-      $limite = $request->input('limite')=='-1'?-1:intval($request->input('limite'));
+      $limite = $request->input('limite')?$request->input('limite'):-1;
+      $limite = $limite=='-1'?-1:intval($request->input('limite'));
       foreach($result as $veiculo){
+        $limite = $limite?$limite:0;
         if($limite != -1){
           if($limite > 0){
             //var_dump($limite);
@@ -263,6 +319,95 @@ class RevendaController extends AppBaseController
 
   public function admin(Request $request){
     return view('revendas.admin');
+  }
+
+  private function importSingleAll($veiculo, $revenda){
+    //Esta revenda existe no nosso banco...
+    $anuncio_ = AnuncioDados::where([
+      ['nome', '=', 'id_xml'],
+      ['valor', '=', $veiculo->id]
+      ])->first();
+    if($this->filtro($veiculo)){
+      if($anuncio_)
+      $anuncio = Anuncio::find($anuncio_->anuncio);
+      else
+      $anuncio = new Anuncio();
+      $anuncio->titulo = $veiculo->make." ".$veiculo->model.' '.$veiculo->version;
+      $anuncio->descricao = (string)$veiculo->content;
+      $anuncio->marca = Marca::where('nome', $veiculo->make)->first()->id;
+      $anuncio->importado = true;
+      $anuncio->ano = $veiculo->year;
+      $anuncio->moto = $veiculo->car_type == 'moto'? true:false;
+      $anuncio->km = $veiculo->mileage;
+      $anuncio->blindagem = $veiculo->armored=='não'?false:true;
+      $anuncio->usado = $veiculo->is_new=='usado'?1:0;
+      if($modelo = Modelos::where([
+        ['nome', (string)$veiculo->model],
+        ['marca', $anuncio->marca],
+        ])->first()){
+          $anuncio->modelo = $modelo->id;
+        }else{
+          $modelo = new Modelos();
+          $modelo->nome= (string)$veiculo->model;
+          $modelo->marca = $anuncio->marca;
+          $modelo->save();
+          $anuncio->modelo = $modelo->id;
+        }
+        if($versao = Versao::where([
+          ['nome', (string)$veiculo->version],
+          ['modelo', $anuncio->modelo],
+          ])->first()){
+            $anuncio->versao = $versao->id;
+          }else{
+            $versao = new Versao();
+            $versao->nome = (string)$veiculo->version;
+            $versao->modelo = $anuncio->modelo;
+            $versao->save();
+            $anuncio->versao = $versao->id;
+          }
+          $anuncio->user = $revenda->user;
+          $anuncio->valor = str_replace(['R$ ', '.', ','], '', $veiculo->price);
+          $anuncio->save();
+          $first = true;
+          //Acredito que este trecho possa ser melhorado...
+          //$this->createAnuncioDado($anuncio, 'ano_modelo', $veiculo->anomodelo);
+          $this->createAnuncioDado($anuncio, 'cambio', $veiculo->transmission);
+          $this->createAnuncioDado($anuncio, 'portas', $veiculo->doors);
+          $this->createAnuncioDado($anuncio, 'cor', $veiculo->color);
+          $this->createAnuncioDado($anuncio, 'combustivel', $veiculo->fuel);
+          $this->createAnuncioDado($anuncio, 'id_xml', $veiculo->id, false);
+          $this->createAnuncioDado($anuncio, 'placa', substr('NNN' , 0, 2));
+          //$this->createAnuncioDado($anuncio, 'tipo_veiculo', $veiculo->tipoveiculo);
+          if($veiculo->acessory){
+            foreach($veiculo->acessory->item as $acessorio){
+              $this->createAcessorios($anuncio, (string)$acessorio);
+            }  
+          }
+          
+          if($veiculo->optional){
+            foreach($veiculo->optional->item as $adicional){
+              $this->createAdicional($anuncio, $adicional);
+            }  
+          }
+          
+          //$this->complementos($veiculo, $anuncio);
+          if($veiculo->pictures){
+            foreach($veiculo->pictures->item as $foto){
+              $old_img = Imagem::where([['url', $foto->url]])->first();
+              $img = $old_img? $old_img:(new Imagem());
+              $img->url= $foto;
+              $img->save();
+              $old = AnuncioImagem::where('imagem', $img->id)->first();
+              $img_anuncio = $old? $old:(new AnuncioImagem());
+              $img_anuncio->imagem = $img->id;
+              $img_anuncio->anuncio = $anuncio->id;
+              $img_anuncio->first = $old?$img_anuncio->first:$first;
+              $img_anuncio->save();
+              $first = false;
+            }  
+          }
+        }
+
   }
 
   private function import($veiculo, $revenda){

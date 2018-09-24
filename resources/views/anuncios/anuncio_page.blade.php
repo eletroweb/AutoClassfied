@@ -112,7 +112,7 @@
                 </div>
                 <div class="form-group">
                   <label for="telefone">Telefone</label>
-                  <input type="text" class="form-control" id="telefone" value="{{Auth::check()?Auth::user()->telefone()->valor:''}}" name="telefone" aria-describedby="telefoneHelp" placeholder="Digite o seu telefone">
+                  <input type="text" class="form-control" id="telefone" value="{{Auth::check()?Auth::user()->telefone():''}}" name="telefone" aria-describedby="telefoneHelp" placeholder="Digite o seu telefone">
                   <small id="telefoneHelp" class="form-text text-muted">Utilizaremos para entrar em contato com você.</small>
                 </div>
                 <div class="form-group form-check">
@@ -157,7 +157,7 @@
             <div class="collapse" id="collapseExample">
               <p class="card-text">
                 <ul class="list-group">
-                  <li class="list-group-item"><i class="fa fa-phone"></i> {{$anuncio->users->telefone()->valor}}</li>
+                  <li class="list-group-item"><i class="fa fa-phone"></i> {{$anuncio->users->telefone()}}</li>
                   <li class="list-group-item"><i class="fa fa-map-marker-alt"></i>
                     {{$anuncio->users->isRevenda()?$anuncio->users->isRevenda()->end->logradouro:$anuncio->users->end->logradouro}} {{$anuncio->users->isRevenda()?$anuncio->users->isRevenda()->end->numero:$anuncio->users->end->numero}},
                     {{$anuncio->users->isRevenda()?$anuncio->users->isRevenda()->end->cidade:$anuncio->users->end->cidade}} - {{$anuncio->users->isRevenda()?$anuncio->users->isRevenda()->end->uf:$anuncio->users->end->uf}}

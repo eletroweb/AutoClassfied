@@ -29,6 +29,7 @@ Route::get('/telefone/{nome}/{cidade}/{id}', 'RevendaController@homepage');
 Route::get('/consulta-tabela-fipe', 'FipeController@index')->name('fipe');
 Route::get('/encontre-uma-revenda', 'RevendaController@revendas')->name('revendas');
 Route::get('/faq', 'UserController@faq')->name('faq');
+Route::get('/cron/anuncios', 'RevendaController@importAll');
 Route::get('/termos-de-uso', 'UserController@termos_uso')->name('termos_uso');
 Route::get('/anuncio-inativo/{id}', 'AnuncioController@inativo')->name('anuncio_inativo');
 Route::post('/anuncios/count/visualizacao/', 'VisualizacaoDadosController@store');
