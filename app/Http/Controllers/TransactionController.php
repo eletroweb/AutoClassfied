@@ -6,6 +6,7 @@ use App\Http\Requests\CreateTransactionRequest;
 use App\Http\Requests\UpdateTransactionRequest;
 use App\Repositories\TransactionRepository;
 use App\Http\Controllers\AppBaseController;
+use App\Http\Controllers\PagseguroController;
 use Illuminate\Http\Request;
 use Flash;
 use Prettus\Repository\Criteria\RequestCriteria;
@@ -14,6 +15,7 @@ use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Client;
 use App\Transaction;
 use App\TransactionItem;
+use App\Notification;
 
 class TransactionController extends AppBaseController
 {
@@ -158,26 +160,41 @@ class TransactionController extends AppBaseController
     }
 
     public function transactionNotification(Request $request){
-      //Função pra ser feita...
+      $notification = Notification::where('notificationCode', $request->input('notificationCode'))->first();
+      if(!$notification){
+        $notification = new Notification();
+        $notification->notificationCode = $request->input('notificationCode');
+        $notification->notificationType = $request->input('notificationType');
+        $notification->save();
+      }
+      $notification->save();
+      $xml = PagseguroController::getTransactionFromNotification($notification);
+      $this::transactionFromXml($xml);
     }
 
     public static function transactionFromXml($xml){
-      $data['payment_type'] = (string)$xml->paymentMethod->type;
-      $data['payment_code'] = (string)$xml->paymentMethod->code;
-      $data['code'] = (string)$xml->code;
-      $data['date'] = (string)$xml->date;
-      $data['type'] = (string)$xml->type;
-      $data['status'] = (string)$xml->status;
-      $data['lasteventdate'] = (string)$xml->lastEventDate;
-      $data['grossamount'] = (string)$xml->grossAmount;
-      $data['netamount'] = (string)$xml->netAmount;
-      $data['feeamount'] = (string)$xml->feeAmount;
-      $data['extraamount'] = (string)$xml->extraAmount;
-      $data['discountamount'] = (string)$xml->discountAmount;
-      $data['installmentcount'] = (string)$xml->installmentCount;
-      $data['itemcount'] = (string)$xml->itemCount;
-      $data['paymentLink'] = (string)$xml->paymentLink;
-      $transaction = Transaction::create($data);
+      $transaction = Transaction::where('code', (string)$xml->code)->first();
+      $transaction = $transaction?$transaction:new Transaction();
+      $transaction->payment_type = (string)$xml->paymentMethod->type;
+      $transaction->payment_code = (string)$xml->paymentMethod->code;
+      $transaction->code = (string)$xml->code;
+      $transaction->date = (string)$xml->date;
+      $transaction->type = (string)$xml->type;
+      $transaction->status = (string)$xml->status;
+      $transaction->lastEventDate = (string)$xml->lastEventDate;
+      $transaction->grossAmount = (string)$xml->grossAmount;
+      $transaction->netAmount = (string)$xml->netAmount;
+      $transaction->feeAmount = (string)$xml->feeAmount;
+      $transaction->extraAmount = (string)$xml->extraAmount;
+      $transaction->discountAmount = (string)$xml->discountAmount;
+      $transaction->installmentCount = (string)$xml->installmentCount;
+      $transaction->itemCount = (string)$xml->itemCount;
+      $transaction->paymentLink = (string)$xml->paymentLink;
+      $transaction->save();
+      if($transaction->status == 3){
+        $anuncio = Anuncio::where('transaction_id', $transaction->id)->first();
+        $anuncio->ativo = true;
+      }
       if($xml->items){
         foreach ($xml->items->item as $item){
           $i = array();
@@ -191,4 +208,5 @@ class TransactionController extends AppBaseController
       }
       return $transaction;
     }
+
 }

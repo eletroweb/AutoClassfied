@@ -1,6 +1,5 @@
 <div class="row">
   <div class="col-sm-12">
-    <!-- /anuncios/{{$anuncio->getNomeFormated()}}_{{$anuncio->id}} -->
     <a href='{{$anuncio->getUrl()}}'
       class="list-group-item list-group-item-action flex-column align-items-start mt-1 mb-1 {{$anuncio->patrocinado?'patrocinado':''}}">
       <div class="row">
@@ -60,5 +59,41 @@
         </div>
       </div>
     </a>
+    @if(isset($is_my))
+    <p>
+      <button class="btn btn-secondary" type="button" data-toggle="collapse" data-target="#collapse_{{$anuncio->id}}" aria-expanded="false" aria-controls="collapse_{{$anuncio->id}}">
+        Informações do anúncio
+      </button>
+    </p>
+    <div class="collapse" id="collapse_{{$anuncio->id}}">
+        @if(!$anuncio->patrocinado)
+          Este anúncio foi publicado sem destaques
+        @else
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="alert alert-{{$anuncio->transaction->status==3?'success':'primary'}} " role="alert">
+                <h4 class="alert-heading">Anúncio destacado</h4>
+                <p>Status do pagamento: {{$anuncio->getStatus()}}</p>
+                <hr>
+                @if($anuncio->transaction->status==3)
+                  <p class="mb-0">Parabéns, o seu anúncio foi aprovado e já está na nossa lista de destaques!</p>
+                  Código do anúncio: <span class="badge badge-secondary">{{$anuncio->transaction->code}}</span>
+                @else
+                  <p class="mb-0">
+                    Estamos aguardando a confirmação do seu pagamento para liberarmos o seu anúncio.
+                    Caso você ainda não tenha feito o pagamento, 
+                    @if($anuncio->transaction->payment_type == 2)
+                        <a href="{{$anuncio->transaction->paymentLink}}" class="alert-link">veja o boleto do seu anúncio aqui.</a>
+                    @endif
+                  </p>
+                  Código do anúncio: <span class="badge badge-secondary">{{$anuncio->transaction->code}}</span>
+                @endif
+              </div>
+            </div>
+          </div>
+        @endif
+      </div>
+
+    @endif
   </div>
 </div>

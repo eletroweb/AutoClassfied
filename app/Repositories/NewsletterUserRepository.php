@@ -2,7 +2,7 @@
 
 namespace App\Repositories;
 
-use App\Models\NewsletterUser;
+use App\NewsletterUser;
 use InfyOm\Generator\Common\BaseRepository;
 
 /**

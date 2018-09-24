@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="container mt-5">
-  <style>
+<style>
 .form-signin {
   width: 100%;
   max-width: 330px;
@@ -127,6 +127,7 @@
       </div>
       <button class="btn btn-lg btn-primary btn-block" type="submit">Entrar</button>
       <a class="btn btn-lg btn-secondary btn-block" href="{{ route('register') }}">Criar Conta</a>
+      <a class="btn btn-lg btn-light btn-block" href="{{ url('/auth/facebook') }}"><i style="color: #3b5998" class="fab fa-facebook"></i> Facebook</a>
       <p class="mt-5 mb-3 text-muted text-center">Unicodono © Todos os direitos reservados</p>
     </form>
 </div>

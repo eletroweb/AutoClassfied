@@ -68,13 +68,20 @@ class AnuncioController extends Controller
           $this->insertImagesAnuncio($anuncio, $imagens);
           $this->insertAnuncioDados($request);
           $title = $anuncio->getUrl();
+          //$anuncio->ativo = false;
           if($request->input('anuncio_destacado') == 'y'){
             if($request->has('tipo_pagamento')){
               $xml = PagseguroController::payment($request);
+              if(isset($xml->error)){
+                $request->flash();
+                return redirect('/anuncie')->with('status', "Erro ao processar pagamento [{$xml->error->code}]: {$xml->error->message}" );
+              }
               $transaction = TransactionController::transactionFromXml($xml);
               $anuncio->transaction_id = $transaction->id;
               $anuncio->patrocinado = true;
               $anuncio->ativo = false;
+              $anuncio->save();
+              return redirect("{$title}")->with('status', 'Anúncio publicado, porém só será exibido após a confirmação do seu pagamento.');
             }
           }
           $anuncio->save();
@@ -139,16 +146,21 @@ class AnuncioController extends Controller
       unset($data['page']);
       if(!empty($data)){
         $filter = $this->filter_search($data);
+        var_dump($filter[0]);exit;
         //var_dump($filter[1]);exit;
         $m_buscados = $request->input('mais_buscados'); //ordem por número de visualizações
         $anuncios = Anuncio::where($filter[0])
             ->whereIn('moto', $filter[1]['tipos'])
             ->whereIn('usado', isset($filter[1]['usado'])?$filter[1]['usado']:array(0,1))
             ->whereIn('blindagem', isset($filter[1]['blindagem'])?$filter[1]['blindagem']:array(0,1))
+            ->orderBy('patrocinado', 'desc')
             ->orderBy($request->input('order')?$request->input('order'):'id', 'desc')
             ->paginate($paginacao);
       }else{
-        $anuncios = Anuncio::orderBy($request->input('order')?$request->input('order'):'id', 'desc')->paginate($paginacao);
+        $anuncios = Anuncio::where('ativo', true)
+        ->orderBy('patrocinado', 'desc')
+        ->orderBy($request->input('order')?$request->input('order'):'id', 'desc')
+        ->paginate($paginacao);
       }
       $request->flash();
       return view('anuncios.anuncios')->with('anuncios', $anuncios);
@@ -157,6 +169,7 @@ class AnuncioController extends Controller
     public static function filter_search($data){
       $param = array();
       $details = array();
+      $param[] = ['ativo', '=', '1'];
       foreach ($data as $key=>$value) {
         if($value && $key != 'mais_buscados' && $key != 'order' && $key != 'paginate'){
           if(strpos($key, '_maximo')){
@@ -241,6 +254,11 @@ class AnuncioController extends Controller
 
       return view('anuncios.anuncio_page')->with(['acessorios' => $acessorios, 'adicionais' => $adicionais, 'anunciodados'=> $dados,
             'anuncio'=> $anuncio, 'imagens' => $imagens, 'principal' => $imagens[0], 'relacionados'=> $relacionados]);
+    }
+
+    public function inativo(Request $request, $id){
+      $anuncio = Anuncio::find($id);
+      return view('anuncios.inativo')->with('anuncio', $anuncio);
     }
 
 }

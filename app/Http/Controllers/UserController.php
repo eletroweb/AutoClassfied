@@ -123,18 +123,17 @@ class UserController extends AppBaseController
     public function update($id, UpdateUserRequest $request)
     {
         $user = $this->userRepository->findWithoutFail($id);
-
-        if (empty($user)) {
-            Flash::error('User not found');
-
-            return redirect(route('users.index'));
+        if($user->id == Auth::user()->id){
+          if (empty($user)) {
+              Flash::error('User não encontrado');
+              return redirect()->back();
+          }
+          $user = $this->userRepository->update($request->all(), $id);
+          Flash::success('Usuário atualizado com sucesso!');
+          return redirect()->back();
         }
-
-        $user = $this->userRepository->update($request->all(), $id);
-
-        Flash::success('User updated successfully.');
-
-        return redirect(route('users.index'));
+        Flash::error('Você está tentando atualizar as informações alterando o código da página');
+        return redirect()->back();
     }
 
     /**

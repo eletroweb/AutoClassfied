@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\AnuncioImagem;
 use App\Imagem;
 use App\Revenda;
+use App\Transaction;
 use Illuminate\Support\Facades\Storage;
 
 
@@ -13,6 +14,7 @@ class Anuncio extends Model
 {
     protected $fillable = ['titulo', 'descricao', 'marca', 'km', 'usado', 'modelo', 'versao', 'valor', 'user', 'moto',
                             'ano', 'blindagem'];
+
 
     public function anuncio_dados(){
         return $this->hasMany('App\AnuncioDados');
@@ -36,6 +38,10 @@ class Anuncio extends Model
           $url = $imagem->url;
         }
         return $url;
+    }
+
+    public function getStatus(){
+      return Transaction::$status_pagseguro[$this->transaction->status];
     }
 
     public function getNomeFormated(){
@@ -63,6 +69,10 @@ class Anuncio extends Model
         ['nome', '=', 'Cambio'],
         ['anuncio', '=', $this->id]
       ])->first()->valor;
+    }
+
+    public function transaction(){
+      return $this->belongsTo('App\Transaction');
     }
 
     public function getUrl(){

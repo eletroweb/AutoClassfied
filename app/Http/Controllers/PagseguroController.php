@@ -7,6 +7,7 @@ use App\Option;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Client;
 use Carbon\Carbon;
+use App\Notification;
 
 class PagseguroController extends Controller
 {
@@ -19,6 +20,16 @@ class PagseguroController extends Controller
       $response = $http->request('POST', "$link/v2/sessions/?email=$email&token=$token");
       $xml = simplexml_load_string($response->getBody());
       return response()->json($xml->id);
+    }
+
+    public static function getTransactionFromNotification(Notification $notification){
+      $http = new Client();
+      $link = Option::getOptionValor('pagseguro_endereco');
+      $email = Option::getOptionValor('pagseguro_email');
+      $token = Option::getOptionValor('pagseguro_token');
+      $response = $http->request('GET', "$link/v2/transactions/notifications/{$notification->notificationCode}/?email=$email&token=$token");
+      $xml = simplexml_load_string($response->getBody());
+      return $xml;
     }
 
     public static function payment(Request $request){
@@ -64,7 +75,7 @@ class PagseguroController extends Controller
       $data['itemDescription1']='Anúncio Particular UnicoDono';
       $data['itemAmount1']= str_replace(',', '.', Option::getOptionValor('pagseguro_endereco'));
       $data['itemQuantity1']='1';
-      $data["notificationURL"]="http://www.danielsilva.esy.es/tlek/pagseguro/testenotification.php";
+      $data["notificationURL"]= env('PAGSEGURO_NOTIFICATION', 'notification_url');
       $data['reference']='REF1234';
       $data['senderName']= $request->input('nome');
       $data['senderCPF']= $cpf;
@@ -73,14 +84,6 @@ class PagseguroController extends Controller
       $data["senderEmail"]= "c93245650383806312796@sandbox.pagseguro.com.br";
       $data['senderHash']= $request->input('senderHash');
       $data['shippingAddressRequired'] = false;
-      /*$data['shippingAddressStreet']='Avenida Giovani Rinaldi';
-      $data['shippingAddressNumber']='176';
-      $data['shippingAddressComplement']='a';
-      $data['shippingAddressDistrict']='Parque Vitoria';
-      $data['shippingAddressPostalCode']='07854120';
-      $data['shippingAddressCity']='Sao Paulo';
-      $data['shippingAddressState']='SP';
-      $data['shippingAddressCountry']='BRA';*/
       $data['shippingType']='3';
       $data['creditCardToken']= $request->input('cardtoken');
       $data['installmentQuantity']='1';
@@ -116,7 +119,7 @@ class PagseguroController extends Controller
       $data['itemDescription1']='Anúncio Particular UnicoDono';
       $data['itemAmount1']= str_replace(',', '.', Option::getOptionValor('preco_anuncio'));
       $data['itemQuantity1']='1';
-      $data["notificationURL"]="http://www.danielsilva.esy.es/tlek/pagseguro/testenotification.php";
+      $data["notificationURL"]= env('PAGSEGURO_NOTIFICATION', 'notification_url');
       $data['reference']='REF1234';
       $data['senderName']= $request->input('nome');
       $data['senderCPF']= $cpf;
@@ -125,14 +128,6 @@ class PagseguroController extends Controller
       $data["senderEmail"]= "c93245650383806312796@sandbox.pagseguro.com.br"; //Aqui é o e-mail do comprador
       $data['senderHash']= $request->input('senderHash');
       $data['shippingAddressRequired'] = false;
-      /*$data['shippingAddressStreet']='Avenida Giovani Rinaldi';
-      $data['shippingAddressNumber']='176';
-      $data['shippingAddressComplement']='a';
-      $data['shippingAddressDistrict']='Parque Vitoria';
-      $data['shippingAddressPostalCode']='07854120';
-      $data['shippingAddressCity']='Sao Paulo';
-      $data['shippingAddressState']='SP';
-      $data['shippingAddressCountry']='BRA';*/
       return $data;
     }
 

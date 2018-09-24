@@ -15,8 +15,9 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'pessoa_fisica', 'documento'
+        'name', 'email', 'password', 'pessoa_fisica', 'documento', 'provider', 'provider_id'
     ];
+
 
     /**
      * The attributes that should be hidden for arrays.
@@ -28,10 +29,11 @@ class User extends Authenticatable
     ];
 
     public function telefone(){
-      return UserDado::where([
+      $telefone = UserDado::where([
           ['nome', '=', 'telefone'],
           ['user', '=', $this->id]
         ])->first();
+      return $telefone?$telefone->valor:'';
     }
 
     public function anuncios(){

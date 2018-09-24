@@ -8,6 +8,15 @@ function removeParent(element){
   console.log(element.parent().remove());
 }
 
+function contabilizarVisualizacao(anuncio, uid){
+  $.ajax({
+    url: '/anuncios/count/visualizacao/',
+    type: 'POST',
+    dataType: 'json',
+    data: {_token: $('meta[name="csrf-token"]').attr('content'), user_id: uid, anuncio_id: anuncio}
+  });
+}
+
 function showEndereco(rua, bairro, cidade, estado, numero){
   $('#endereco').html('Rua '+rua+' '+numero+', '+bairro+' - '+cidade+', '+estado);
   $('#enderecoModal').modal('show');
