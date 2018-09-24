@@ -396,7 +396,7 @@ class RevendaController extends AppBaseController
               $url = (string)$foto->item->url;
               $old_img = Imagem::where([['url', $url]])->first();
               $img = $old_img? $old_img:(new Imagem());
-              $img->url= $foto;
+              $img->url= $url;
               $img->save();
               $old = AnuncioImagem::where('imagem', $img->id)->first();
               $img_anuncio = $old? $old:(new AnuncioImagem());
