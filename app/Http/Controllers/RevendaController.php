@@ -393,7 +393,7 @@ class RevendaController extends AppBaseController
           //$this->complementos($veiculo, $anuncio);
           if($veiculo->pictures){
             foreach($veiculo->pictures->item as $foto){
-              $old_img = Imagem::where([['url', $foto->url]])->first();
+              $old_img = Imagem::where([['url', $foto]])->first();
               $img = $old_img? $old_img:(new Imagem());
               $img->url= $foto;
               $img->save();
