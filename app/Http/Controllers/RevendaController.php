@@ -188,7 +188,7 @@ class RevendaController extends AppBaseController
 
   public function importAll(Request $request){
     $url = 'http://xml.dsautoestoque.com/?hash=Tm/+qav0hOhGuEQN+QfYqKVQ8IY=&l=';
-    $result = simplexml_load_string(file_get_contents($url));
+    $result = simplexml_load_string(file_get_contents($url), null, LIBXML_NOCDATA);
     foreach($result->ad as $anuncio){
         //$cnpj = (string)$anuncio->cnpj;
         $revenda = $this->importSingleRevenda($anuncio);
@@ -329,7 +329,7 @@ class RevendaController extends AppBaseController
       ])->first();
     if($this->filtro($veiculo)){
       if($anuncio_)
-      $anuncio = Anuncio::find($anuncio_->anuncio);
+        $anuncio = Anuncio::find($anuncio_->anuncio);
       else
       $anuncio = new Anuncio();
       $anuncio->titulo = $veiculo->make." ".$veiculo->model.' '.$veiculo->version;
@@ -392,8 +392,9 @@ class RevendaController extends AppBaseController
           
           //$this->complementos($veiculo, $anuncio);
           if($veiculo->pictures){
-            foreach($veiculo->pictures->item as $foto){
-              $old_img = Imagem::where([['url', $foto->url]])->first();
+            foreach($veiculo->pictures as $foto){
+              var_dump((string)$foto->url);exit;
+              $old_img = Imagem::where([['url', (string)$foto->url]])->first();
               $img = $old_img? $old_img:(new Imagem());
               $img->url= $foto;
               $img->save();
