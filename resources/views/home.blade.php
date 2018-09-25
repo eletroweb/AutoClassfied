@@ -29,7 +29,7 @@
   <hr>
   <div class="row">
     <div class="col-sm-12">
-      <h1 class="mb-3">Últimos anúncios de veículos</h1>
+      <h1 class="mb-3 text-dark">Últimos anúncios de veículos</h1>
     </div>
       @include('elements.anuncios.carousel')
   </div>

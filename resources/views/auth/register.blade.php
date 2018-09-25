@@ -25,7 +25,7 @@
 </style>
 <div class="row text-center mt-3">
     <div class="col-sm-12">
-      <img class="mb-4" src="https://www.unicodono.com.br/web/img/topo/01.png" alt="" width="200">
+      <img class="responsive-image mb-4" src="https://www.unicodono.com.br/web/img/topo/01.png" alt="" width="200">
     </div>
   </div>
   <form class="form-signup {{ $errors->has('name') ? ' has-error' : '' }}" method="POST" action="{{ route('register') }}">
@@ -95,7 +95,7 @@
         </div>
 
       </div>
-      <button class="btn btn-lg btn-primary btn-block" type="submit">Criar conta</button>
+      <button class="btn btn-primary btn-block" type="submit">Criar conta</button>
       <p class="mt-5 mb-3 text-muted text-center">Unicodono © Todos os direitos reservados</p>
     </form>
 </div>

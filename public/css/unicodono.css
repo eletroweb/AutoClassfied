@@ -1,6 +1,7 @@
 body{
   font-family: 'Pontano Sans', sans-serif;
 }
+
 .patrocinado{
   border-color: green;
   border-width: 1px;
@@ -43,13 +44,15 @@ body{
 #pesquisa-principal{
   border-width: 0px;
 }
+
+.bg-secondary{
+  background-color: #1a1a1a !important;
+}
+
 .card{
   padding: 14px;
 }
-.btn{
-  padding-right: 20px;
-  padding-left: 20px;
-}
+
 .fale_conosco{
   background-image: url('/images/fale_conosco/background.jpg');
   margin-top: -35px;

@@ -16,7 +16,7 @@ Route::get('/ajax/veiculos/marcas', 'VeiculoController@getMarcas');
 Route::get('/ajax/veiculos/modelos', 'VeiculoController@getModelos');
 Route::get('/ajax/veiculos/versoes', 'VeiculoController@getVersoes');
 Route::get('/anuncios', 'AnuncioController@anuncios')->name('anuncios');
-Route::get('/{tipo}/{marca}/{modelo}/{versao}/{titulo}/{id}', 'AnuncioController@index')->where('id', '[0-9]+')->middleware('anuncio');
+Route::get('/{tipo}/{marca}/{modelo}/{versao}/{titulo}/{ano}/{id}', 'AnuncioController@index')->where('id', '[0-9]+')->middleware('anuncio');
 Route::get('/fale-conosco', 'ContatoController@index')->name('fale_conosco');
 Route::post('/fale-conosco', 'ContatoController@store')->name('fale_conosco_post');
 Route::get('/como-comprar-carro', 'UserController@duvida_comprar_carro')->name('duvida_comprar_carro');
