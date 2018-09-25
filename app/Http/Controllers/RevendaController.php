@@ -348,6 +348,7 @@ class RevendaController extends AppBaseController
       $anuncio->km = $veiculo->mileage;
       $anuncio->blindagem = $veiculo->armored=='não'?false:true;
       $anuncio->usado = $veiculo->is_new=='usado'?1:0;
+      $anuncio->ativo = true;
       if($modelo = Modelos::where([
         ['nome', (string)$veiculo->model],
         ['marca', $anuncio->marca],
