@@ -4,7 +4,7 @@
       class="list-group-item list-group-item-action flex-column align-items-start mt-1 mb-1 {{$anuncio->patrocinado?'patrocinado':''}}">
       <div class="row">
         <div class="col-sm-5"> 
-          <img src="{{$anuncio->urlImagemFirst()}}" width="100%" height="400px" alt="{{$anuncio->titulo}}">
+          <img src="{{$anuncio->urlImagemFirst()}}" width="100%" height="200px" alt="{{$anuncio->titulo}}">
         </div>
         <div class="col-sm-7">
           <div class="d-flex w-100 justify-content-between">
