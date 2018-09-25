@@ -146,7 +146,6 @@ class AnuncioController extends Controller
       unset($data['page']);
       if(!empty($data)){
         $filter = $this->filter_search($data);
-        var_dump($filter[0]);exit;
         //var_dump($filter[1]);exit;
         $m_buscados = $request->input('mais_buscados'); //ordem por número de visualizações
         $anuncios = Anuncio::where($filter[0])
