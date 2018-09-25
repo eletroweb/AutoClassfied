@@ -373,7 +373,7 @@ class RevendaController extends AppBaseController
             $anuncio->versao = $versao->id;
           }
           $anuncio->user = $revenda->user;
-          $anuncio->valor = str_replace(['R$ ', '.', ','], '', $veiculo->price);
+          $anuncio->valor = str_replace(['R$ ', '.', ','], '', $veiculo->price.'00');
           $anuncio->save();
           $first = true;
           //Acredito que este trecho possa ser melhorado...
@@ -399,8 +399,9 @@ class RevendaController extends AppBaseController
 
           //$this->complementos($veiculo, $anuncio);
           if($veiculo->pictures){
+            $pictures = array();
             foreach($veiculo->pictures->item as $foto){
-              $url = (string)$foto->item->url;
+              $url = (string)$foto->url;
               if(!empty($url)){
                 $old_img = Imagem::where([['url', $url]])->first();
                 $img = $old_img? $old_img:(new Imagem());
@@ -414,7 +415,8 @@ class RevendaController extends AppBaseController
                 $img_anuncio->save();
                 $first = false;                
               }
-            }  
+
+            } 
           }
         }
 
