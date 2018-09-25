@@ -26,7 +26,10 @@ class CheckAnuncio
           }else{
               return redirect(route('anuncio_inativo', ['anuncio'=> $anuncio]));
           }
+        }else{
+          if(!$anuncio->ativo && $anuncio->user == Auth::user()->id || $anuncio->ativo){
+              return $next($request);
+          }
         }
-        return redirect(route('anuncio_inativo', ['anuncio'=> $anuncio]));
     }
 }
