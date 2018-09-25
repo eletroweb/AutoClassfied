@@ -31,11 +31,13 @@ class Anuncio extends Model
     public function urlImagemFirst(){
         $img_anuncio = AnuncioImagem::where([['anuncio', $this->id]])->first();
         $url = '';
-        $imagem = Imagem::find($img_anuncio->imagem);
-        if(!$this->importado){
-          $url = Storage::url($imagem->url);
-        }else{
-          $url = $imagem->url;
+        if($img_anuncio){
+            $imagem = Imagem::find($img_anuncio->imagem);
+          if(!$this->importado){
+            $url = Storage::url($imagem->url);
+          }else{
+            $url = $imagem->url;
+          }
         }
         return $url;
     }

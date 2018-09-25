@@ -394,17 +394,19 @@ class RevendaController extends AppBaseController
           if($veiculo->pictures){
             foreach($veiculo->pictures as $foto){
               $url = (string)$foto->item->url;
-              $old_img = Imagem::where([['url', $url]])->first();
-              $img = $old_img? $old_img:(new Imagem());
-              $img->url= $url;
-              $img->save();
-              $old = AnuncioImagem::where('imagem', $img->id)->first();
-              $img_anuncio = $old? $old:(new AnuncioImagem());
-              $img_anuncio->imagem = $img->id;
-              $img_anuncio->anuncio = $anuncio->id;
-              $img_anuncio->first = $old?$img_anuncio->first:$first;
-              $img_anuncio->save();
-              $first = false;
+              if(!empty($url)){
+                $old_img = Imagem::where([['url', $url]])->first();
+                $img = $old_img? $old_img:(new Imagem());
+                $img->url= $url;
+                $img->save();
+                $old = AnuncioImagem::where('imagem', $img->id)->first();
+                $img_anuncio = $old? $old:(new AnuncioImagem());
+                $img_anuncio->imagem = $img->id;
+                $img_anuncio->anuncio = $anuncio->id;
+                $img_anuncio->first = $old?$img_anuncio->first:$first;
+                $img_anuncio->save();
+                $first = false;                
+              }
             }  
           }
         }
