@@ -188,11 +188,19 @@ class RevendaController extends AppBaseController
 
   public function importAll(Request $request){
     $url = 'http://xml.dsautoestoque.com/?hash=Tm/+qav0hOhGuEQN+QfYqKVQ8IY=&l=';
-    $result = simplexml_load_string(file_get_contents($url), null, LIBXML_NOCDATA);
+    $result = simplexml_load_string(file_get_contents($url));
     foreach($result->ad as $anuncio){
         //$cnpj = (string)$anuncio->cnpj;
         $revenda = $this->importSingleRevenda($anuncio);
-        $this->importSingleAll($anuncio, $revenda);
+        $sem_foto = false;
+        foreach($anuncio->pictures as $pictures){
+          $u = (string)$pictures->item->url;
+          if(empty($u))
+            $sem_foto = true;
+        }
+        if(!$sem_foto){
+          $this->importSingleAll($anuncio, $revenda);  
+        }
         /*$this->importRevendas($request, str_replace(".", "", str_replace("-", "", $cnpj)));*/
     }
     return true;
@@ -392,19 +400,21 @@ class RevendaController extends AppBaseController
           //$this->complementos($veiculo, $anuncio);
           if($veiculo->pictures){
             foreach($veiculo->pictures as $foto){
-              var_dump((string)$foto->url);exit;
-              $old_img = Imagem::where([['url', (string)$foto->url]])->first();
-              $img = $old_img? $old_img:(new Imagem());
-              $img->url= $foto;
-              $img->save();
-              $old = AnuncioImagem::where('imagem', $img->id)->first();
-              $img_anuncio = $old? $old:(new AnuncioImagem());
-              $img_anuncio->imagem = $img->id;
-              $img_anuncio->anuncio = $anuncio->id;
-              $img_anuncio->first = $old?$img_anuncio->first:$first;
-              $img_anuncio->save();
-              $first = false;
-            }
+              $url = (string)$foto->item->url;
+              if(!empty($url)){
+                $old_img = Imagem::where([['url', $url]])->first();
+                $img = $old_img? $old_img:(new Imagem());
+                $img->url= $url;
+                $img->save();
+                $old = AnuncioImagem::where('imagem', $img->id)->first();
+                $img_anuncio = $old? $old:(new AnuncioImagem());
+                $img_anuncio->imagem = $img->id;
+                $img_anuncio->anuncio = $anuncio->id;
+                $img_anuncio->first = $old?$img_anuncio->first:$first;
+                $img_anuncio->save();
+                $first = false;                
+              }
+            }  
           }
         }
 
