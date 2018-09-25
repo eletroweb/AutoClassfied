@@ -253,7 +253,7 @@ class AnuncioController extends Controller
       }
 
       return view('anuncios.anuncio_page')->with(['acessorios' => $acessorios, 'adicionais' => $adicionais, 'anunciodados'=> $dados,
-            'anuncio'=> $anuncio, 'imagens' => $imagens, 'principal' => $imagens[0], 'relacionados'=> $relacionados]);
+            'anuncio'=> $anuncio, 'imagens' => $imagens, 'principal' => $anuncio->urlImagemFirst(), 'relacionados'=> $relacionados]);
     }
 
     public function inativo(Request $request, $id){
