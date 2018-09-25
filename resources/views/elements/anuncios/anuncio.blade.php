@@ -3,19 +3,8 @@
     <a href='{{$anuncio->getUrl()}}'
       class="list-group-item list-group-item-action flex-column align-items-start mt-1 mb-1 {{$anuncio->patrocinado?'patrocinado':''}}">
       <div class="row">
-        <div class="col-sm-5">
-          @php
-            //var_dump($anuncio->id);exit;
-            $img_anuncio = App\AnuncioImagem::where([['anuncio', $anuncio->id]])->first();
-            $url = '';
-            $imagem = App\Imagem::find($img_anuncio->imagem);
-            if(!$anuncio->importado){
-              $url = Storage::url($imagem->url);
-            }else{
-              $url = $imagem->url;
-            }
-          @endphp
-          <img src="{{$url}}" width="100%" alt="{{$anuncio->titulo}}">
+        <div class="col-sm-5"> 
+          <img src="{{$anuncio->urlImagemFirst()}}" width="100%" alt="{{$anuncio->titulo}}">
         </div>
         <div class="col-sm-7">
           <div class="d-flex w-100 justify-content-between">
