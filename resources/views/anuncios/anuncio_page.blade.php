@@ -10,7 +10,7 @@
       @endif
       <div class="row">
         <div class="col-sm-12" style="margin-left: inherit;">
-          <a class="col-sm-2 mr-1" href="{{$imagens[0]}}" data-lightbox="roadtrip"><img src="{{$imagens[0]}}" class="img-fluid main-img m-auto" alt="Responsive image"></a>
+          <a class="col-sm-2 mr-1" href="{{$anuncio->urlImagemFirst()}}" data-lightbox="roadtrip"><img src="{{$anuncio->urlImagemFirst()}}" class="img-fluid main-img m-auto" alt="Responsive image"></a>
         </div>
       </div>
       <div class="d-flex flex-row bd-highlight mb-3 flex-wrap">
