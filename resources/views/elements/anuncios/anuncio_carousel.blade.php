@@ -1,6 +1,6 @@
 <div class="carousel-item col-md-4 active">
   <div class="card">
-    <a href="{{$r->getUrl()}}"><img class="card-img-top img-fluid" maxheight="200" src="{{$r->urlImagemFirst()}}" alt="{{$r->nome}}"></a>
+    <a href="{{$r->getUrl()}}"><img class="card-img-top img-fluid" height="200" src="{{$r->urlImagemFirst()}}" alt="{{$r->nome}}"></a>
     <div class="card-body">
       <div class="row">
           <div class="col-sm-12 mb-3">
