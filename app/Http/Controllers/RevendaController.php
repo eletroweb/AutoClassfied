@@ -199,7 +199,6 @@ class RevendaController extends AppBaseController
   }
 
   public function importSingleRevenda($veiculo){
-    
     $cnpj = $veiculo->cnpj;
     if($revenda = Revenda::where('cnpj', $cnpj)->first()){
       return $revenda;
@@ -381,15 +380,15 @@ class RevendaController extends AppBaseController
           if($veiculo->acessory){
             foreach($veiculo->acessory->item as $acessorio){
               $this->createAcessorios($anuncio, (string)$acessorio);
-            }  
+            }
           }
-          
+
           if($veiculo->optional){
             foreach($veiculo->optional->item as $adicional){
               $this->createAdicional($anuncio, $adicional);
-            }  
+            }
           }
-          
+
           //$this->complementos($veiculo, $anuncio);
           if($veiculo->pictures){
             foreach($veiculo->pictures as $foto){
@@ -405,7 +404,7 @@ class RevendaController extends AppBaseController
               $img_anuncio->first = $old?$img_anuncio->first:$first;
               $img_anuncio->save();
               $first = false;
-            }  
+            }
           }
         }
 
