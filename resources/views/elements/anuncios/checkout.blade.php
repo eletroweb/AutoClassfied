@@ -11,7 +11,7 @@
     <div class="col-sm-6">
       <div class="form-group">
         <label for="telefone">Telefone</label>
-        <input class="form-control" type="text" name="telefone" id="telefone" class="telefone" value="{{Auth::user()->telefone()->valor}}" placeholder="Digite o telefone">
+        <input class="form-control" type="text" name="telefone" id="telefone" class="telefone" value="{{Auth::user()->telefone()}}" placeholder="Digite o telefone">
       </div>
     </div>
     <div class="col-sm-6">
