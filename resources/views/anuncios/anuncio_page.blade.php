@@ -89,7 +89,7 @@
         <div class="card-body">
           <!--<a class="btn btn-primary btn-lg btn-block" data-toggle="collapse" href="#contato" role="button" aria-expanded="false" aria-controls="contato" class="card-link">Entrar em contato</a>-->
           <div class="mt-3" id="contato">
-            <h4 class="card-title" style="font-size: 30px"><span class="badge badge-success">R${{number_format(substr($anuncio->valor.'0', 0, -3), 2, ",", ".")}}</span></h4> 
+            <h4 class="card-title" style="font-size: 30px"><span class="badge badge-success">R${{number_format(substr($anuncio->valor.'0', 0, -3), 2, ",", ".")}}</span></h4>
             <div class="card card-body">
               <form action="{{route('contato_anuncio')}}" method="post">
                 {{csrf_field()}}
@@ -136,7 +136,7 @@
             <h5 class="card-title">Anunciado por {{$anuncio->users->isRevenda()?$anuncio->users->isRevenda()->nomefantasia:$anuncio->users->name}}</h5>
             <h6 class="card-subtitle mb-2 text-muted">
               @if($r = $anuncio->users->isRevenda())
-                <a class="btn btn-secondary" href="{{$r->getUrl()}}">Ver estoque completo desta revenda</a>
+                <a class="btn btn-success" href="{{$r->getUrl()}}">Ver estoque completo desta revenda</a>
               @else
                 Dados do vendedor
               @endif
