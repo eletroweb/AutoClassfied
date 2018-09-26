@@ -8,7 +8,7 @@
                   <label for="anuncio_destacado" class="custom-control-label" style="font-weight: bold; color: green;">Anúncio destacado</label>
                   <p class="plan-text">
                     Sugestão para usuários | Melhor posição </p>
-                  <span class="plan-price">R$30,00</span>
+                  <span class="plan-price">R${{str_replace(".", ",", App\Option::getOptionValor('preco_anuncio'))}}</span>
               </div>
             <div class="collapse" id="tipo_pagamento_destaque">
               <div class="card card-body">
