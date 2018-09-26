@@ -68,7 +68,7 @@ class PagseguroController extends Controller
       $data['email'] = $email;
       $data['paymentMode']='default';
       $data['paymentMethod']='creditCard';
-      $data['receiverEmail']='jsantos.class@gmail.com';
+      $data['receiverEmail']= $email;
       $data['currency']='BRL';
       $data['extraAmount']='0.00';
       $data['itemId1']='0001';
@@ -81,7 +81,7 @@ class PagseguroController extends Controller
       $data['senderCPF']= $cpf;
       $data['senderAreaCode']= $ddd;
       $data['senderPhone']= "9$telefone";
-      $data["senderEmail"]= "c93245650383806312796@sandbox.pagseguro.com.br";
+      $data["senderEmail"]= $request->input('email');
       $data['senderHash']= $request->input('senderHash');
       $data['shippingAddressRequired'] = false;
       $data['shippingType']='3';
@@ -125,7 +125,7 @@ class PagseguroController extends Controller
       $data['senderCPF']= $cpf;
       $data['senderAreaCode']= $ddd;
       $data['senderPhone']= "9$telefone";
-      $data["senderEmail"]= "c93245650383806312796@sandbox.pagseguro.com.br"; //Aqui é o e-mail do comprador
+      $data["senderEmail"]= $request->input('email'); //Aqui é o e-mail do comprador
       $data['senderHash']= $request->input('senderHash');
       $data['shippingAddressRequired'] = false;
       return $data;

@@ -9,6 +9,10 @@
           </div>
       @endif
       <div class="row">
+        <div class="col-sm-12">
+          <h3 class="mb-2" style="font-size: 30px">{{$anuncio->titulo}}</h3>
+          <hr>
+        </div>
         <div class="col-sm-12" style="margin-left: inherit;">
           <a class="col-sm-2 mr-1" href="{{$anuncio->urlImagemFirst()}}" data-lightbox="roadtrip"><img src="{{$anuncio->urlImagemFirst()}}" class="img-fluid main-img m-auto" alt="Responsive image"></a>
         </div>
@@ -22,17 +26,17 @@
       </div>
     </div>
     <div class="col-sm-5">
-      <div class="card" style="border: none">
-        <div class="card-body">
-          <h4 class="card-title" style="font-size: 30px"><span class="badge badge-success">R${{number_format(substr($anuncio->valor.'0', 0, -3), 2, ",", ".")}}</span></h4>
-          <h3 class="card-title" style="font-size: 30px">{{$anuncio->titulo}}</h3>
-          <h6 class="card-subtitle mb-2 text-muted">{{$anuncio->created_at->format('d/m/Y H:i')}}</h6>
-          <p class="card-text">
-            {{$anuncio->descricao}}
-          </p>
-        </div>
+       <div class="card" style="border: none">
+          <div class="card-body">
+            <h4 class="card-title" style="font-size: 30px"><span class="badge badge-success">R${{number_format(substr($anuncio->valor.'0', 0, -3), 2, ",", ".")}}</span></h4>
+            <h3 class="card-title" style="font-size: 30px">{{$anuncio->titulo}}</h3>
+            <h6 class="card-subtitle mb-2 text-muted">{{$anuncio->created_at->format('d/m/Y H:i')}}</h6>
+            <p class="card-text">
+              {{$anuncio->descricao}}
+            </p>
+          </div> 
+      </div>
     </div>
-  </div>
   </div>
   <div class="row">
     <div class="col-md-7">
@@ -142,7 +146,7 @@
             <h5 class="card-title">Anunciado por {{$anuncio->users->isRevenda()?$anuncio->users->isRevenda()->nomefantasia:$anuncio->users->name}}</h5>
             <h6 class="card-subtitle mb-2 text-muted">
               @if($r = $anuncio->users->isRevenda())
-                <a href="{{$r->getUrl()}}">Ver estoque completo desta revenda</a>
+                <a class="btn btn-secondary" href="{{$r->getUrl()}}">Ver estoque completo desta revenda</a>
               @else
                 Dados do vendedor
               @endif
