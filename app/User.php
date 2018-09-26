@@ -18,6 +18,12 @@ class User extends Authenticatable
         'name', 'email', 'password', 'pessoa_fisica', 'documento', 'provider', 'provider_id'
     ];
 
+    //Péssima prática de programação
+    private $adms = array(
+        'jsantos.class@gmail.com',
+        'juniorids1@hotmail.com',
+        'rogerio.unicodono@gmail.com'
+    );
 
     /**
      * The attributes that should be hidden for arrays.
@@ -41,7 +47,7 @@ class User extends Authenticatable
     }
 
     public function isAdmin(){
-      return true;
+      return in_array($this->email, $this->adms);
     }
 
     public function isRevenda(){
