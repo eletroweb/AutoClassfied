@@ -85,7 +85,7 @@ class Anuncio extends Model
       $id = $this->id;
       if($revenda = $this->users->isRevenda()){
           $nome = str_replace(' ', '-', $revenda->nomefantasia);
-          return "/$nome/$marca/$modelo/$versao/$titulo/{$this->ano}/$id/";
+          return "/$nome/$marca/$modelo/$versao/$titulo/$id/";
       }
       return "/anuncios/$marca/$modelo/$versao/$titulo/$id/";
     }
