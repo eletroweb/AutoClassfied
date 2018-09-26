@@ -82,7 +82,7 @@ class Anuncio extends Model
       $modelo = str_replace(' ', '-', trim($this->modelos->nome));
       $versao = str_replace(' ', '-', trim($this->versaos->nome));
       $titulo = $this->getNomeFormated();
-      $blindado = $this->blindado?'blindado':'preco';
+      $blindado = $this->blindagem?'blindado':'preco';
       $ano = $this->ano;
       $id = $this->id;
       if($revenda = $this->users->isRevenda()){
