@@ -199,7 +199,7 @@ class AnuncioController extends Controller
       return [$param, $details];
     }
 
-    public function index(Request $request, $tipo, $marca, $modelo, $versao, $titulo, $id){
+    public function index(Request $request, $tipo, $marca, $modelo, $versao, $titulo, $ano, $blindado, $id){
       $anuncio = Anuncio::find($id);
       if($tipo != 'anuncios'){
         if(!$anuncio->users->isRevenda()){

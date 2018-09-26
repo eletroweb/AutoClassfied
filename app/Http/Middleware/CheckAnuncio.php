@@ -19,7 +19,7 @@ class CheckAnuncio
     {
         $data= $request->url();
         $data= explode("/", $data);
-        $anuncio = Anuncio::findOrFail($data[8]);
+        $anuncio = Anuncio::findOrFail($data[10]);
         if(Auth::check()){
           if(!$anuncio->ativo && $anuncio->user == Auth::user()->id || $anuncio->ativo){
               return $next($request);
