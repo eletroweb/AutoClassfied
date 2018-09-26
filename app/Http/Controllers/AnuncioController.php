@@ -72,8 +72,7 @@ class AnuncioController extends Controller
           if($request->input('anuncio_destacado') == 'y'){
             if($request->has('tipo_pagamento')){
               $xml = PagseguroController::payment($request);
-              var_dump($xml);exit;
-              if($xml->error){
+              if(isset($xml->error)){
                 $request->flash();
                 return redirect('/anuncie')->with('status', "Erro ao processar pagamento [{$xml->error->code}]: {$xml->error->message}" );
               }
