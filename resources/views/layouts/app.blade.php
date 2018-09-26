@@ -131,9 +131,11 @@
                 <li class="nav-item">
                   <a class="nav-link" href="{{route('minhaconta')}}">Minha conta</a>
                 </li>
+                @if(Auth::user()->isAdmin())
                 <li class="nav-item">
                   <a class="nav-link" href="/admin">Admin</a>
                 </li>
+                @endif
                 <li class="nav-item">
                     <a  class="nav-link" href="{{ route('logout') }}"
                         onclick="event.preventDefault();
