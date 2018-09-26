@@ -1,15 +1,15 @@
 <div class="row">
   <div class="col-sm-12">
     <a href='{{$anuncio->getUrl()}}'
-      class="list-group-item list-group-item-action flex-column align-items-start mt-1 mb-1 {{$anuncio->patrocinado?'patrocinado':''}}">
+      class="list-group-item list-group-item-action flex-column align-items-start mt-1 mb-1 {{$anuncio->patrocinado?'patrocinado':''}} box">
       <div class="row">
         <div class="col-sm-5"> 
-          <img src="{{$anuncio->urlImagemFirst()}}" width="100%" height="200px" alt="{{$anuncio->titulo}}">
+          <img src="{{$anuncio->urlImagemFirst()}}" width="100%" height="250px" alt="{{$anuncio->titulo}}">
         </div>
         <div class="col-sm-7">
           <div class="d-flex w-100 justify-content-between">
             <h5 class="mb-1"><b>{{$anuncio->titulo}}</b></h5>
-            <small>{{$anuncio->created_at->format('d/m/Y H:i')}}</small>
+            <small>Ano {{$anuncio->ano}}</small>
           </div>
           <h5 class="mb-1">
             <span class="badge badge-success">
@@ -20,15 +20,15 @@
           <hr>
           <div class="row">
             <div class="col-sm-4 text-center">
-              <i class="fa fa-calendar-alt fa-2x"></i><br>
+              <i class="fa fa-calendar-alt fa-1x"></i><br>
               {{$anuncio->ano}}
             </div>
             <div class="col-sm-4 text-center">
-              <i class="fa fa-car fa-2x"></i><br>
+              <i class="fa fa-car fa-1x"></i><br>
               {{$anuncio->getKm()==0?'Veículo 0':$anuncio->getKm()}}KM
             </div>
             <div class="col-sm-4 text-center">
-              <i class="fa fa-exchange-alt fa-2x"></i><br>
+              <i class="fa fa-exchange-alt fa-1x"></i><br>
               {{$anuncio->getCambio()}}
             </div>
           </div>

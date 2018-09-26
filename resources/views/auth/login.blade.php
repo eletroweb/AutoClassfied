@@ -125,9 +125,9 @@
           <input type="checkbox" value="remember-me"> Lembrar de mim
         </label>
       </div>
-      <button class="btn btn-lg btn-primary btn-block" type="submit">Entrar</button>
-      <a class="btn btn-lg btn-secondary btn-block" href="{{ route('register') }}">Criar Conta</a>
-      <a class="btn btn-lg btn-light btn-block" href="{{ url('/auth/facebook') }}"><i style="color: #3b5998" class="fab fa-facebook"></i> Facebook</a>
+      <button class="btn btn-primary btn-block" type="submit">Entrar</button>
+      <a class="btn btn-secondary btn-block" href="{{ route('register') }}">Criar Conta</a>
+      <a class="btn btn-light btn-block" href="{{ url('/auth/facebook') }}"><i style="color: #3b5998" class="fab fa-facebook"></i> Facebook</a>
       <p class="mt-5 mb-3 text-muted text-center">Unicodono © Todos os direitos reservados</p>
     </form>
 </div>
