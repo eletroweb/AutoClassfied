@@ -199,7 +199,7 @@ class RevendaController extends AppBaseController
             $sem_foto = true;
         }
         if(!$sem_foto){
-          $this->importSingleAll($anuncio, $revenda);  
+          $this->importSingleAll($anuncio, $revenda);
         }
         /*$this->importRevendas($request, str_replace(".", "", str_replace("-", "", $cnpj)));*/
     }
@@ -384,23 +384,19 @@ class RevendaController extends AppBaseController
           $this->createAnuncioDado($anuncio, 'cor', $veiculo->color);
           $this->createAnuncioDado($anuncio, 'combustivel', $veiculo->fuel);
           $this->createAnuncioDado($anuncio, 'id_xml', $veiculo->id, false);
-          $this->createAnuncioDado($anuncio, 'placa', substr('NNN' , 0, 2));
+          $this->createAnuncioDado($anuncio, 'placa', 'NNN');
           //$this->createAnuncioDado($anuncio, 'tipo_veiculo', $veiculo->tipoveiculo);
           if($veiculo->acessory){
             foreach($veiculo->acessory->item as $acessorio){
               $this->createAcessorios($anuncio, (string)$acessorio);
             }
           }
-
           if($veiculo->optional){
             foreach($veiculo->optional->item as $adicional){
               $this->createAdicional($anuncio, $adicional);
             }
           }
-
-          //$this->complementos($veiculo, $anuncio);
           if($veiculo->pictures){
-            $pictures = array();
             foreach($veiculo->pictures->item as $foto){
               $url = (string)$foto->url;
               if(!empty($url)){
@@ -414,10 +410,10 @@ class RevendaController extends AppBaseController
                 $img_anuncio->anuncio = $anuncio->id;
                 $img_anuncio->first = $old?$img_anuncio->first:$first;
                 $img_anuncio->save();
-                $first = false;                
+                $first = false;
               }
 
-            } 
+            }
           }
         }
 

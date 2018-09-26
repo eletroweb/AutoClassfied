@@ -30,6 +30,15 @@
           enable_page_level_ads: true
      });
      </script>-->
+     <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-15308183-2"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-15308183-2');
+    </script>
     <title>ÚNICODONO - Carros novos e usados, carros usados e único dono</title>
     <link rel="stylesheet" href="{{ asset('css/lightbox.min.css') }}">
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">

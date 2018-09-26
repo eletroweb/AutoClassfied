@@ -42,9 +42,13 @@
     </div>
   </section>
   <div class="album py-5">
-    <div class="alert alert-primary text-center" role="alert">
-      Você pode alterar a imagem e a logo da sua revenda acessando as <a href="/revenda/{{$revenda->id}}/configuracoes" class="alert-link">Configurações da revenda</a>
-    </div>
+    @if(Auth::check())
+      @if($revenda->user == Auth::user()->id)
+      <div class="alert alert-primary text-center" role="alert">
+        Você pode alterar a imagem e a logo da sua revenda acessando as <a href="/revenda/{{$revenda->id}}/configuracoes" class="alert-link">Configurações da revenda</a>
+      </div>
+      @endif
+    @endif
     <div class="container">
       <div class="row">
         @forelse($anuncios as $anuncio)
