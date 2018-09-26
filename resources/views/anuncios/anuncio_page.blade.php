@@ -24,38 +24,21 @@
         </div>
         @endforeach
       </div>
-    </div>
-    <div class="col-sm-5">
-       <div class="card" style="border: none">
-          <div class="card-body">
-            <h4 class="card-title" style="font-size: 30px"><span class="badge badge-success">R${{number_format(substr($anuncio->valor.'0', 0, -3), 2, ",", ".")}}</span></h4>
-            <h3 class="card-title" style="font-size: 30px">{{$anuncio->titulo}}</h3>
-            <h6 class="card-subtitle mb-2 text-muted">{{$anuncio->created_at->format('d/m/Y H:i')}}</h6>
-            <p class="card-text">
-              {{$anuncio->descricao}}
-            </p>
-          </div> 
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-7">
-
       <!-- Tabs -->
       <section id="tabs">
-      	<div class="container">
-      		<!--<h6 class="section-title h1">Tabs</h6>-->
-      		<div class="row">
-      			<div class="col-xs-12 text-center">
-      				<nav>
-      					<div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
-      						<a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Informações</a>
-      						<a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Adicionais do veículo</a>
-      						<a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Acessórios</a>
-      					</div>
-      				</nav>
-      				<div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
-      					<div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+        <div class="container">
+          <!--<h6 class="section-title h1">Tabs</h6>-->
+          <div class="row">
+            <div class="col-xs-12 text-center">
+              <nav>
+                <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+                  <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Informações</a>
+                  <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Adicionais do veículo</a>
+                  <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Acessórios</a>
+                </div>
+              </nav>
+              <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
+                <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
                   <div class="d-flex flex-row bd-highlight mb-3 flex-wrap text-center">
                     <div class="p-2 bd-highlight">
                       <p style="font-size: 14px;"><b style="font-size: 18px;">Quilometragem</b><br> {{$anuncio->km}}KM</p>
@@ -69,8 +52,8 @@
                       </div>
                     @endforeach
                   </div>
-      					</div>
-      					<div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                </div>
+                <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
                   <div class="d-flex flex-row bd-highlight mb-3 flex-wrap">
                     @foreach($adicionais as $adicional)
                     <div class="p-2 bd-highlight">
@@ -78,8 +61,8 @@
                     </div>
                     @endforeach
                   </div>
-      					</div>
-      					<div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+                </div>
+                <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
                   <div class="d-flex flex-row bd-highlight mb-3 flex-wrap">
                     @foreach($acessorios as $acessorio)
                       <div class="p-2 bd-highlight">
@@ -87,19 +70,26 @@
                       </div>
                     @endforeach
                   </div>
-      					</div>
-      				</div>
-      			</div>
-      		</div>
-      	</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
       <!-- ./Tabs -->
+      <hr>
+      <h1>Descrição do anúncio</h1>
+
+      <p class="card-text">
+        {{$anuncio->descricao}}
+      </p>
     </div>
-    <div class="col-md-5">
-      <div class="card w-100" style="border: none">
+    <div class="col-sm-5">
+       <div class="card w-100" style="border: none">
         <div class="card-body">
-          <a class="btn btn-primary btn-lg btn-block" data-toggle="collapse" href="#contato" role="button" aria-expanded="false" aria-controls="contato" class="card-link">Entrar em contato</a>
-          <div class="collapse mt-3" id="contato">
+          <!--<a class="btn btn-primary btn-lg btn-block" data-toggle="collapse" href="#contato" role="button" aria-expanded="false" aria-controls="contato" class="card-link">Entrar em contato</a>-->
+          <div class="mt-3" id="contato">
+            <h4 class="card-title" style="font-size: 30px"><span class="badge badge-success">R${{number_format(substr($anuncio->valor.'0', 0, -3), 2, ",", ".")}}</span></h4> 
             <div class="card card-body">
               <form action="{{route('contato_anuncio')}}" method="post">
                 {{csrf_field()}}
@@ -140,8 +130,8 @@
             </div>
           </div>
         </div>
-      </div>
-        <div class="card w-100" style="border: none">
+    </div>
+    <div class="card w-100" style="border: none">
           <div class="card-body">
             <h5 class="card-title">Anunciado por {{$anuncio->users->isRevenda()?$anuncio->users->isRevenda()->nomefantasia:$anuncio->users->name}}</h5>
             <h6 class="card-subtitle mb-2 text-muted">
@@ -171,32 +161,7 @@
             </div>
           </div>
         </div>
-        <div class="card w-100" style="border: 0px;">
-          <div class="card-body">
-            <ul class="list-group">
-              <li class="list-group-item d-flex justify-content-between align-items-center" style="font-size: 18px">
-                <b>Financie o seu veículo</b>
-                <span ><i class="fa fa-dollar-sign fa-2x"></i></span>
-              </li>
-              <li class="list-group-item d-flex justify-content-between align-items-center" style="font-size: 18px">
-                <b>Venda o seu veículo</b>
-                <span ><i class="fa fa-car fa-2x"></i></span>
-              </li>
-              <li class="list-group-item d-flex justify-content-between align-items-center" style="font-size: 18px">
-                <b>Catálogo 0km</b>
-                <span ><i class="fa fa-search fa-2x"></i></span>
-              </li>
-              <li class="list-group-item d-flex justify-content-between align-items-center" style="font-size: 18px">
-                <b>Seguro online</b>
-                <span ><i class="fa fa-lock fa-2x"></i></span>
-              </li>
-            </ul>
-          </div>
-        </div>
-    </div>
   </div>
-  <div class="row mt-4">
-
   </div>
   <!-- Anúncios relacionados -->
   <div class="row">
