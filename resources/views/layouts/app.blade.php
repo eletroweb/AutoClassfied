@@ -59,6 +59,16 @@
     <link rel="stylesheet" href="{{asset('css/hover-min.css')}}">
 </head>
 <body>
+  <div id="fb-root"></div>
+<div id="fb-root"></div>
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = 'https://connect.facebook.net/pt_BR/sdk.js#xfbml=1&version=v3.1&appId=2296749937007477&autoLogAppEvents=1';
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+    </script>
     <div id="app">
         <nav id="menu-principal" class="navbar navbar-expand-lg navbar-dark bg-primary">
           <a class="navbar-brand" href="/">

@@ -89,7 +89,7 @@
         <div class="card-body">
           <!--<a class="btn btn-primary btn-lg btn-block" data-toggle="collapse" href="#contato" role="button" aria-expanded="false" aria-controls="contato" class="card-link">Entrar em contato</a>-->
           <div class="mt-3" id="contato">
-            <h4 class="card-title" style="font-size: 30px"><span class="badge badge-success">R${{number_format(substr($anuncio->valor.'0', 0, -3), 2, ",", ".")}}</span></h4>
+            <h4 class="card-title" style="font-size: 30px"><span class="badge badge-success">R$ {{number_format(substr($anuncio->valor.'0', 0, -3), 2, ",", ".")}}</span></h4>
             <div class="card card-body">
               <form action="{{route('contato_anuncio')}}" method="post">
                 {{csrf_field()}}
@@ -160,6 +160,7 @@
               </p>
             </div>
           </div>
+          <div class="fb-share-button" data-href="{{$anuncio->getFullUrl()}}" data-layout="button" data-size="large" data-mobile-iframe="true"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{$anuncio->getFullUrl()}}&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Compartilhar</a></div>
         </div>
   </div>
   </div>

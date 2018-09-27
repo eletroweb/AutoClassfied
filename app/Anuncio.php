@@ -92,4 +92,8 @@ class Anuncio extends Model
       return "/anuncios/$marca/$modelo/$versao/$titulo/$ano/$blindado/$id/";
     }
 
+    public function getFullUrl(){
+      return env('APP_URL').$this->getUrl();
+    }
+
 }
