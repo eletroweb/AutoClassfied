@@ -242,7 +242,6 @@ class AnuncioController extends Controller
       $revenda = $anuncio->users->isRevenda();
       $count = Anuncio::count();
       $relacionados = array();
-      //var_dump($count);exit;
       if($count > 4){
         $relacionados =
           $revenda?
@@ -251,13 +250,28 @@ class AnuncioController extends Controller
           Anuncio::where([['id', '!=', $anuncio->id]])->get()->random($count < 4?$count:4);
       }
 
-      return view('anuncios.anuncio_page')->with(['acessorios' => $acessorios, 'adicionais' => $adicionais, 'anunciodados'=> $dados,
-            'anuncio'=> $anuncio, 'imagens' => $imagens, 'principal' => $anuncio->urlImagemFirst(), 'relacionados'=> $relacionados]);
+      return view('anuncios.anuncio_page')
+        ->with(
+          [
+            'acessorios' => $acessorios, 'adicionais' => $adicionais, 'anunciodados'=> $dados,
+            'anuncio'=> $anuncio, 'imagens' => $imagens, 'principal' => $anuncio->urlImagemFirst(),
+            'relacionados'=> $relacionados, 'shares' => $this->sharedLinks($anuncio)
+          ]
+        );
     }
 
     public function inativo(Request $request, $id){
       $anuncio = Anuncio::find($id);
       return view('anuncios.inativo')->with('anuncio', $anuncio);
+    }
+
+    private function sharedLinks(Anuncio $anuncio){
+      $local = env('APP_URL');
+      return [
+        'facebook' => '<a href="http://facebook.com/share.php?u='.$local.'/'.$anuncio->getUrl().'&amp;t='.$anuncio->titulo.
+                      ' target="_blank" title="Compartilhar '.$local.'/'.$anuncio->titulo.' no Facebook">Facebook</a>',
+        'twitter' => '<a href="http://twitter.com/intent/tweet?text='.$anuncio->titulo.'&url='.$local.'/'.$anuncio->getUrl().'" title="Twittar sobre '.$anuncio->titulo.'" target="_blank">Twitter</a>'
+      ];
     }
 
 }
