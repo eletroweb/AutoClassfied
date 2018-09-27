@@ -10,7 +10,7 @@
       @endif
       <div class="row">
         <div class="col-sm-12">
-          <h3 class="mb-2" style="font-size: 30px">{{$anuncio->titulo}}</h3>
+          <h3 class="mb-2" style="font-size: 30px">{{$anuncio->titulo}} <span class="badge badge-primary">{{$anuncio->ano}}</span></h3>
           <hr>
         </div>
         <div class="col-sm-12" style="margin-left: inherit;">
@@ -32,9 +32,9 @@
             <div class="col-xs-12 text-center">
               <nav>
                 <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
-                  <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Informações</a>
-                  <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Adicionais do veículo</a>
-                  <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Acessórios</a>
+                  <a class="nav-item nav-link btn btn-light active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Informações</a>
+                  <a class="nav-item nav-link btn btn-light" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Adicionais do veículo</a>
+                  <a class="nav-item nav-link btn btn-light" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Acessórios</a>
                 </div>
               </nav>
               <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
@@ -159,8 +159,9 @@
                 </ul>
               </p>
             </div>
+            <div class="fb-share-button" data-href="{{$anuncio->getFullUrl()}}" data-layout="button" data-size="large" data-mobile-iframe="true"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{$anuncio->getFullUrl()}}&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Compartilhar</a></div>
           </div>
-          <div class="fb-share-button" data-href="{{$anuncio->getFullUrl()}}" data-layout="button" data-size="large" data-mobile-iframe="true"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{$anuncio->getFullUrl()}}&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Compartilhar</a></div>
+          
         </div>
   </div>
   </div>

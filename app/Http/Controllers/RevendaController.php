@@ -344,9 +344,9 @@ class RevendaController extends AppBaseController
       $anuncio->marca = Marca::where('nome', $veiculo->make)->first()->id;
       $anuncio->importado = true;
       $anuncio->ano = $veiculo->year;
-      $anuncio->moto = $veiculo->car_type == 'moto'? true:false;
+      $anuncio->moto = (string)$veiculo->car_type == 'moto'? true:false;
       $anuncio->km = $veiculo->mileage;
-      $anuncio->blindagem = $veiculo->armored=='não'?false:true;
+      $anuncio->blindagem = (string)$veiculo->armored=='não'?false:true;
       $anuncio->usado = $veiculo->is_new=='usado'?1:0;
       $anuncio->ativo = true;
       if($modelo = Modelos::where([
