@@ -16,6 +16,7 @@ use App\Revenda;
 use App\VisualizacaoAnuncio;
 use App\Contato;
 use App\Endereco;
+use App\UserDado;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
@@ -122,18 +123,31 @@ class UserController extends AppBaseController
      */
     public function update($id, UpdateUserRequest $request)
     {
-        $user = $this->userRepository->findWithoutFail($id);
-        if($user->id == Auth::user()->id){
-          if (empty($user)) {
-              Flash::error('User não encontrado');
-              return redirect()->back();
+        $user = User::find($id);
+        if(!empty($user)){
+          if($user->id == Auth::user()->id){
+            //$user = $this->userRepository->update($request->all(), $id);
+            $user->name = $request->input('name');
+            $user->email = $request->input('email');
+            $user->password = bcrypt($request->input('password'));
+            $user->documento = $request->input('documento');
+            $user->pessoa_fisica = $request->input('pessoa_fisica');
+            $user->save();
+            $telefone = UserDado::where('nome', 'telefone')->first();
+            $telefone = $telefone?$telefone:new UserDado();
+            $telefone->nome = 'telefone';
+            $telefone->valor = $request->input('telefone');
+            $telefone->user = $user->id;
+            $telefone->save();
+            Flash::success('Usuário atualizado com sucesso!');
+            return redirect()->back();
           }
-          $user = $this->userRepository->update($request->all(), $id);
-          Flash::success('Usuário atualizado com sucesso!');
+          Flash::error('Você está tentando atualizar as informações alterando o código da página');
+          return redirect()->back();
+        }else{
+          Flash::error('Usuário não encontrado');
           return redirect()->back();
         }
-        Flash::error('Você está tentando atualizar as informações alterando o código da página');
-        return redirect()->back();
     }
 
     /**

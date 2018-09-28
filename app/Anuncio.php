@@ -96,4 +96,9 @@ class Anuncio extends Model
       return env('APP_URL').$this->getUrl();
     }
 
+    public function generateTitle(){
+      $this->titulo = $this->marcas->nome." ".$this->modelos->nome.' '.$this->versaos->nome;
+      $this->save();
+    }
+
 }
