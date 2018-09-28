@@ -23,7 +23,6 @@ class AnuncioController extends Controller
 
     public function anuncieStore(Request $request){
         $validatedData = $request->validate([
-           'titulo' => 'required',
            'marca' => 'required',
            'modelo' => 'required',
            'versao' => 'required',
@@ -42,7 +41,9 @@ class AnuncioController extends Controller
         }
         if($request->has('imagens')){
           $imagens = $request->input('imagens');
+          $validatedData['titulo'] = 'building...';
           $anuncio = Anuncio::create($validatedData);
+          $anuncio->generateTitle();
           $img_principal = new AnuncioImagem();
           $img_principal->imagem= Imagem::where('url', str_replace("\"", "", $imagens[0]))->first()->id;
           $img_principal->anuncio= $anuncio->id;
