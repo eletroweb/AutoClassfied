@@ -346,7 +346,7 @@ class RevendaController extends AppBaseController
       $anuncio->ano = $veiculo->year;
       $anuncio->moto = strcmp((string)$veiculo->car_type, 'moto')==0? true:false;
       $anuncio->km = $veiculo->mileage;
-      $anuncio->blindagem = strcmp((string)$veiculo->armored, 'não')!=0?true:false;
+      $anuncio->blindagem = strcmp((string)$veiculo->armored, ' não ')!=0?true:false;
       $anuncio->usado = strcmp($veiculo->is_new, 'usado')==0?1:0;
       $anuncio->ativo = true;
       if($modelo = Modelos::where([
