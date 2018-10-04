@@ -57,6 +57,10 @@
     <script type="text/javascript" src="https://stc.sandbox.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.directpayment.js"></script>
     <link rel="stylesheet" type="text/css" href="{{asset('css/pagamento.css')}}">
     <link rel="stylesheet" href="{{asset('css/hover-min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/jquery.steps.css') }}">
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+
+    <script type="text/javascript" src="{{ asset('js/jquery.steps.min.js') }}"></script>
 </head>
 <body>
   <div id="fb-root"></div>
