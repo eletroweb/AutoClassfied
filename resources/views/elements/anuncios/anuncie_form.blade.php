@@ -25,7 +25,7 @@
 </div>
 @endif
 <div class="container">
-  <form id="anunciar" method="post" action="{{route('anuncieStore')}}"  enctype="multipart/form-data">
+  <!--<form method="post" action="{{route('anuncieStore')}}"  enctype="multipart/form-data">
   <div class="row">
     <div class="col-sm-6">
         @if (session('status'))
@@ -34,121 +34,6 @@
             </div>
         @endif
         @include('flash::message')
-        {{csrf_field()}}
-        <h2>Informações básicas</h2>
-        <hr>
-        <input type="hidden" name="cardtoken" id="card-token">
-        <div class="row">
-          <div class="col-sm-6">
-            <div class="form-group">
-              <label for="veiculo">Marca</label>
-              <select required class="form-control select2" name="marca" id="marca">
-                <option value="">Selecione a marca...</option>
-              </select>
-            </div>
-          </div>
-          <div class="col-sm-6">
-            <div class="form-group">
-              <label for="veiculo">Modelo</label>
-              <select required class="form-control select2" name="modelo" id="modelo">
-                <option value="">Selecione o modelo...</option>
-              </select>
-            </div>
-          </div>
-          <div class="col-sm-6">
-            <div class="form-group">
-              <label for="veiculo">Versão</label>
-              <select required class="form-control select2" name="versao" id="versao">
-                <option value="">Selecione a marca...</option>
-              </select>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-sm-6">
-            <div class="form-group">
-              <label for="valor">Valor</label>
-              <input required type="text" value="{{old('valor')}}" class="form-control" name="valor" id="valor" aria-describedby="valorHelp" placeholder="Digite o preço">
-              <small id="valorHelp" class="form-text text-muted">Este preço será exibido no anúncio</small>
-            </div>
-          </div>
-          <div class="col-sm-6">
-            <div class="form-group">
-              <label for="ano">Ano</label>
-              <input required type="text" value="{{old('ano')}}" class="form-control" name="ano" id="ano" aria-describedby="anoHelp" placeholder="Digite o ano do veículo">
-              <small id="anoHelp" class="form-text text-muted">O ano será exibido no anúncio</small>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-sm-6">
-            <div class="form-group">
-              <label for="ano">Quilometragem</label>
-              <input required type="number" value="{{old('km')}}" class="form-control" name="km" id="km" aria-describedby="anoHelp" placeholder="Digite a quilometragem do veículo">
-              <small id="kmHelp" class="form-text text-muted">Informe a quilometragem do veículo</small>
-            </div>
-          </div>
-          <div class="col-sm-6">
-            <div class="form-group">
-              <label for="ano">Cambio</label>
-              <select class="form-control" name="cambio" required="required">
-                <option value="">Selecione o cambio...</option>
-                <option value="Manual">Manual</option>
-                <option value="Automático">Automático</option>
-              </select>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-sm-6">
-            <div class="form-group">
-              <label for="combustivel">Combustível</label>
-              <select id="combustivel" name="combustivel" class="form-control" required="required">
-                <option value="">Selecione o combustível...</option>
-                <option value="Gasolina">Gasolina</option>
-                <option value="Alcool">Alcool</option>
-                <option value="Diesel">Diesel</option>
-                <option value="Elétrico">Elétrico</option>
-              </select>
-            </div>
-          </div>
-          <div class="col-sm-6">
-            <div class="form-group">
-              <label for="cor">Cor</label>
-              <input type="text" name="cor" value="{{old('cor')}}" class="form-control" id="cor" placeholder="Digite o nome da cor" required="required">
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-sm-6">
-            <div class="form-group">
-              <label for="cor">Portas</label>
-              <input type="number" class="form-control" value="{{old('portas')}}" name="portas" id="portas" placeholder="Digite o número de portas" required="required">
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-sm-6">
-            <div class="form-group">
-              <div class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input" id="usado" name="usado" value="1">
-                <label class="custom-control-label" for="usado">
-                  Veículo usado
-                </label>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-6">
-            <div class="form-group">
-              <div class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input" id="blindagem" name="blindagem" value="1">
-                <label class="custom-control-label" for="blindagem">
-                  Blindado
-                </label>
-              </div>
-            </div>
-          </div>
-        </div>
         <input type="hidden" name="user" value="{{Auth::user()->id}}">
         <div class="form-group">
           <label for="descricao">Descrição</label>
@@ -212,7 +97,6 @@
           </div>
         </div>
         @include('elements.anuncios.selecionar_pagamento')
-        <button type="submit" onclick="beforeStoreAnuncio()" class="mt-2 btn btn-primary">Anunciar</button>
         <div class="modal fade" id="checkoutModal" tabindex="-1" role="dialog" aria-labelledby="checkoutModalLabel" aria-hidden="true">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -239,10 +123,216 @@
       <h2>Imagens do anúncio</h2>
       <hr>
       <div  id="dropzone" class="row mt-3 mb-3 box">
+        <div class="row">
+          <div class="col-sm-12">
+            <p class="text-center text-muted">
+              Clique ou arraste uma imagem para carregá-la
+            </p>
+          </div>
+        </div>
       </div>
     </div>
 </div>
+<div class="row">
+  <div class="col-sm-6">
+    <button type="submit" onclick="beforeStoreAnuncio()" class="mt-2 btn btn-primary">Anunciar</button>
+  </div>
 </div>
+</div>-->
+
+<form id="anunciar" method="post" action="{{route('anuncieStore')}}"  enctype="multipart/form-data">
+    <div class="container">
+        <h3>Informações básicas</h3>
+        {{csrf_field()}}
+        <section>
+          <input type="hidden" name="cardtoken" id="card-token">
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="veiculo">Marca</label>
+                <select required class="form-control select2" name="marca" id="marca">
+                  <option value="">Selecione a marca...</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="veiculo">Modelo</label>
+                <select required class="form-control select2" name="modelo" id="modelo">
+                  <option value="">Selecione o modelo...</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="veiculo">Versão</label>
+                <select required class="form-control select2" name="versao" id="versao">
+                  <option value="">Selecione a marca...</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="valor">Valor</label>
+                <input required type="text" value="{{old('valor')}}" class="form-control" name="valor" id="valor" aria-describedby="valorHelp" placeholder="Digite o preço">
+                <small id="valorHelp" class="form-text text-muted">Este preço será exibido no anúncio</small>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="ano">Ano</label>
+                <input required type="text" value="{{old('ano')}}" class="form-control" name="ano" id="ano" aria-describedby="anoHelp" placeholder="Digite o ano do veículo">
+                <small id="anoHelp" class="form-text text-muted">O ano será exibido no anúncio</small>
+              </div>
+            </div>
+          </div>
+        </section>
+        <h3>Mais informações</h3>
+        <section>
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="ano">Quilometragem</label>
+                <input required type="number" value="{{old('km')}}" class="form-control" name="km" id="km" aria-describedby="anoHelp" placeholder="Digite a quilometragem do veículo">
+                <small id="kmHelp" class="form-text text-muted">Informe a quilometragem do veículo</small>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="ano">Cambio</label>
+                <select class="form-control" name="cambio" required="required">
+                  <option value="">Selecione o cambio...</option>
+                  <option value="Manual">Manual</option>
+                  <option value="Automático">Automático</option>
+                </select>
+              </div>
+            </div>
+        </div>
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label for="combustivel">Combustível</label>
+            <select id="combustivel" name="combustivel" class="form-control" required="required">
+              <option value="">Selecione o combustível...</option>
+              <option value="Gasolina">Gasolina</option>
+              <option value="Alcool">Alcool</option>
+              <option value="Diesel">Diesel</option>
+              <option value="Elétrico">Elétrico</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label for="cor">Cor</label>
+            <input type="text" name="cor" value="{{old('cor')}}" class="form-control" id="cor" placeholder="Digite o nome da cor" required="required">
+          </div>
+        </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label for="cor">Portas</label>
+              <input type="number" class="form-control" value="{{old('portas')}}" name="portas" id="portas" placeholder="Digite o número de portas" required="required">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="form-group">
+              <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="usado" name="usado" value="1">
+                <label class="custom-control-label" for="usado">
+                  Veículo usado
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group">
+              <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="blindagem" name="blindagem" value="1">
+                <label class="custom-control-label" for="blindagem">
+                  Blindado
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+        </section>
+        <h3>Imagens</h3>
+        <section>
+          <div class="col-sm-12">
+            <div  id="dropzone" class="row mt-3 mb-3 box">
+              <div class="row">
+                <div class="col-sm-12">
+                  <p class="text-center text-muted">
+                    Clique ou arraste uma imagem para carregá-la
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <h3>Pagamento</h3>
+        <section>
+          @include('elements.anuncios.selecionar_pagamento')
+          <div class="modal fade" id="checkoutModal" tabindex="-1" role="dialog" aria-labelledby="checkoutModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="checkoutModalLabel">Informações de pagamento</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  @include('elements.anuncios.checkout')
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                  <button type="button" id="btnPagar" class="btn btn-success">Prosseguir com o pagamento</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+    </div>
+
+</form>
+<script type="text/javascript">
+  var form = $("#anunciar");
+  form.validate({
+      errorPlacement: function errorPlacement(error, element) { element.before(error); },
+      rules: {
+          confirm: {
+              equalTo: "#password"
+          }
+      }
+  });
+  form.children("div").steps({
+      headerTag: "h3",
+      bodyTag: "section",
+      transitionEffect: "slideLeft",
+      next: 'Próximo',
+      onStepChanging: function (event, currentIndex, newIndex)
+      {
+          form.validate().settings.ignore = ":disabled,:hidden";
+          return form.valid();
+      },
+      onFinishing: function (event, currentIndex)
+      {
+          form.validate().settings.ignore = ":disabled";
+          return form.valid();
+      },
+      onFinished: function (event, currentIndex)
+      {
+          alert("Submitted!");
+      }
+  });
+</script>
+
 <input type="hidden" id="endereco" value="{{Auth::user()->endereco}}">
 <script type="text/javascript">
   $(document).ready(function(){
