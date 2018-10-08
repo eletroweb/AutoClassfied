@@ -25,14 +25,15 @@
 </div>
 @endif
 <div class="container">
+  @if (session('status'))
+      <div class="alert alert-danger">
+          {{ session('status') }}
+      </div>
+  @endif
   <!--<form method="post" action="{{route('anuncieStore')}}"  enctype="multipart/form-data">
   <div class="row">
     <div class="col-sm-6">
-        @if (session('status'))
-            <div class="alert alert-danger">
-                {{ session('status') }}
-            </div>
-        @endif
+
         @include('flash::message')
         <input type="hidden" name="user" value="{{Auth::user()->id}}">
         <div class="form-group">
@@ -144,8 +145,8 @@
     <div class="container">
         <h3>Informações básicas</h3>
         {{csrf_field()}}
+        <input type="hidden" name="cardtoken" id="card-token">
         <section>
-          <input type="hidden" name="cardtoken" id="card-token">
           <div class="row">
             <div class="col-sm-6">
               <div class="form-group">
@@ -166,7 +167,7 @@
             <div class="col-sm-6">
               <div class="form-group">
                 <label for="veiculo">Versão</label>
-                <select required class="form-control select2" name="versao" id="versao">
+                <select required class="form-control versao" name="versao" id="versao">
                   <option value="">Selecione a marca...</option>
                 </select>
               </div>
@@ -188,9 +189,24 @@
               </div>
             </div>
           </div>
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="alert alert-primary" role="alert">
+                Dúvidas para definir o seu preço de venda? Consulte a <a target="_blank" href="{{route('fipe')}}" class="alert-link">tabela fipe</a>.
+              </div>
+            </div>
+          </div>
         </section>
         <h3>Mais informações</h3>
         <section>
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="form-group">
+                <label for="descricao">Descreva o seu anúncio</label>
+                <textarea class="form-control" name="descricao" rows="5" placeholder="Conte nos sobre o seu veículo..."></textarea>
+              </div>
+            </div>
+          </div>
           <div class="row">
             <div class="col-sm-6">
               <div class="form-group">
@@ -263,15 +279,15 @@
         </section>
         <h3>Imagens</h3>
         <section>
+          <h3>Selecione as imagens do seu anúncio (Maximo 12):</h3>
           <div class="col-sm-12">
             <div  id="dropzone" class="row mt-3 mb-3 box">
-              <div class="row">
-                <div class="col-sm-12">
-                  <p class="text-center text-muted">
-                    Clique ou arraste uma imagem para carregá-la
-                  </p>
-                </div>
-              </div>
+
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12">
+              <button class="btn btn-primary" onclick="drop_anuncio.click()" type="button" name="button">Selecionar imagem...</button>
             </div>
           </div>
         </section>
@@ -301,6 +317,7 @@
     </div>
 
 </form>
+<script type="text/javascript" src="{{asset('js/anuncio/pagseguro.js')}}"></script>
 <script type="text/javascript">
   var form = $("#anunciar");
   form.validate({
@@ -309,13 +326,36 @@
           confirm: {
               equalTo: "#password"
           }
+      },
+      messages: {
+          marca: "Você precisa selecionar uma marca",
+          modelo: "Você precisa selecionar o modelo",
+          versao: "Você precisa selecionar a versão",
+          ano: "Preencha com o ano do veículo",
+          km: "Este campo precisa ser preenchido",
+          valor: 'Digite o valor',
+          cambio: 'Informe o câmbio do veículo',
+          combustivel: 'Informe o tipo de combustível',
+          cor: 'Informe a cor do veículo',
+          portas: 'Informe o número de portas',
       }
   });
+  /*form.validator.setDefaults({
+
+  });*/
   form.children("div").steps({
       headerTag: "h3",
       bodyTag: "section",
       transitionEffect: "slideLeft",
-      next: 'Próximo',
+      labels:{
+          next: 'Próximo',
+          previous: 'Anterior',
+          cancel: "Cancelar",
+          current: "Etapa:",
+          pagination: "Paginação",
+          finish: "Concluir",
+          loading: "Carregando..."
+      },
       onStepChanging: function (event, currentIndex, newIndex)
       {
           form.validate().settings.ignore = ":disabled,:hidden";
@@ -328,7 +368,7 @@
       },
       onFinished: function (event, currentIndex)
       {
-          alert("Submitted!");
+          $('#anunciar').submit();
       }
   });
 </script>

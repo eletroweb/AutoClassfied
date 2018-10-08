@@ -355,3 +355,8 @@ section .section-title {
     background: #C5C5F1;
     text-decoration: none;
 }
+
+.wizard .content{
+  overflow-y: auto !important;
+  padding-bottom: 10px;
+}

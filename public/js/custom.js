@@ -1,3 +1,5 @@
+var drop_anuncio;
+
 function autoRemove(element){
   if(confirm('Deseja realmente remover?')){
     element.remove();
@@ -23,7 +25,7 @@ function showEndereco(rua, bairro, cidade, estado, numero){
 }
 
 $(document).ready(function(){
-  var drop_anuncio = $('#dropzone').dropzone({
+  drop_anuncio = $('#dropzone').dropzone({
     url: "/imagens/store",
     uploadMultiple: true,
     parallelUploads: 12,
@@ -31,7 +33,7 @@ $(document).ready(function(){
     autoQueue: true,
     acceptedFiles: "image/*",
     paramName: "imagem", // The name that will be used to transfer the file
-    maxFilesize: 2, // MB
+    maxFilesize: 1, // MB
     dictDefaultMessage: 'Awaaaaaaaaaaaay',
     previewTemplate: '<div class="dz-preview dz-file-preview col-sm-4">'+
                       '<div class="dz-details">'+
@@ -80,6 +82,10 @@ $(document).ready(function(){
     $('#plano').val($(this).val());
   });
   $('.select2').select2({
+    theme: 'bootstrap'
+  });
+  $('.versao').select2({
+    tags: true,
     theme: 'bootstrap'
   });
   $('#addAdicional').click(function(){

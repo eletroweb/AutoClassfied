@@ -42,6 +42,13 @@ class AnuncioController extends Controller
         if($request->has('imagens')){
           $imagens = $request->input('imagens');
           $validatedData['titulo'] = 'building...';
+          if(!Versao::find($request->input('versao'))){
+            $versao = new Versao();
+            $versao->nome = $request->input('versao');
+            $versao->modelo = $request->input('modelo');
+            $versao->save();
+            $validatedData['versao'] = $versao->id;
+          }
           $anuncio = Anuncio::create($validatedData);
           $anuncio->generateTitle();
           $img_principal = new AnuncioImagem();
