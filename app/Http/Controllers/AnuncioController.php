@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use App\Imagem;
 use App\Http\Controllers\PagseguroController;
+use App\Versao;
 
 class AnuncioController extends Controller
 {
@@ -28,17 +29,17 @@ class AnuncioController extends Controller
            'versao' => 'required',
            'valor' => 'required',
            'descricao' => 'required',
-           'user' => 'required',
+           //'user' => 'required',
            'ano'=> 'required',
            'moto' => '',
            'km'=> 'required',
            'usado'=> '',
            'cambio'=> 'required'
         ]);
-        $user = $request->input('user');
-        if(Auth::user()->id != intval($user)){
+        $validatedData['user']= Auth::user()->id;
+        /*if(Auth::user()->id != intval($user)){
           return redirect('/anuncie')->with('status', 'Você está trapaceando para publicar este anúncio');
-        }
+        }*/
         if($request->has('imagens')){
           $imagens = $request->input('imagens');
           $validatedData['titulo'] = 'building...';
