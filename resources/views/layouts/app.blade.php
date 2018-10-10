@@ -58,7 +58,7 @@
     <link rel="stylesheet" type="text/css" href="{{asset('css/pagamento.css')}}">
     <link rel="stylesheet" href="{{asset('css/hover-min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/jquery.steps.css') }}">
-    <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
 
     <script type="text/javascript" src="{{ asset('js/jquery.steps.min.js') }}"></script>
 </head>
@@ -260,25 +260,25 @@
                 <a class="nav-link text-white" href="#"><b class="text-white">Sites</b></a>
               </li>
               <li class="nav-item">
-                <a class="nav-link text-white" href="http://www.detran.sp.gov.br" target="_blank">Detran São Paulo</a>
+                <a class="nav-link text-white" href="https://www.detran.sp.gov.br" target="_blank">Detran São Paulo</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link text-white" href="http://veiculos.fipe.gov.br" target="_blank">Tabela Fipe</a>
+                <a class="nav-link text-white" href="https://veiculos.fipe.gov.br" target="_blank">Tabela Fipe</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link text-white" href="http://detran.mg.gov.br" target="_blank">Detran Minas Gerais</a>
+                <a class="nav-link text-white" href="https://detran.mg.gov.br" target="_blank">Detran Minas Gerais</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link text-white" href="http://detran.sc.gov.br" target="_blank">Detran Santa-Catarina</a>
+                <a class="nav-link text-white" href="https://detran.sc.gov.br" target="_blank">Detran Santa-Catarina</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link text-white" href="http://detran.pr.gov.br" target="_blank">Detran Paraná</a>
+                <a class="nav-link text-white" href="https://detran.pr.gov.br" target="_blank">Detran Paraná</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link text-white" href="http://detran.rj.gov.br" target="_blank">Detran Rio de Janeiro</a>
+                <a class="nav-link text-white" href="https://detran.rj.gov.br" target="_blank">Detran Rio de Janeiro</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link text-white" href="http://detran.rs.gov.br" target="_blank">Detran Rio Grande do Sul</a>
+                <a class="nav-link text-white" href="https://detran.rs.gov.br" target="_blank">Detran Rio Grande do Sul</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link text-white" href="https://postodevistoria.com.br" target="_blank">Postos de Vistoria no Brasil - Encontre o mais próximo !</a>
