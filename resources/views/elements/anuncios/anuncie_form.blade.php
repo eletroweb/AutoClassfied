@@ -172,6 +172,15 @@
                 </select>
               </div>
             </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="veiculo">Veículo único dono?</label>
+                <select required class="form-control" name="unicodono" id="unicodono">
+                  <option value="1">Sim, veículo único dono</option>
+                  <option value="1">Não, veículo já pertenceu a mais de um</option>
+                </select>
+              </div>
+            </div>
           </div>
           <div class="row">
             <div class="col-sm-6">
@@ -183,9 +192,43 @@
             </div>
             <div class="col-sm-6">
               <div class="form-group">
-                <label for="ano">Ano</label>
+                <label for="ano">Ano de fabricação</label>
                 <input required type="text" value="{{old('ano')}}" class="form-control" name="ano" id="ano" aria-describedby="anoHelp" placeholder="Digite o ano do veículo">
                 <small id="anoHelp" class="form-text text-muted">O ano será exibido no anúncio</small>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="ano">Ano do modelo</label>
+                <input required type="text" value="{{old('ano_modelo')}}" class="form-control" name="ano_modelo" id="ano_modelo" aria-describedby="anoModeloHelp" placeholder="Digite o ano do modelo do veículo">
+                <small id="anoModeloHelp" class="form-text text-muted">O ano do modelo será exibido no anúncio</small>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <label for="">Blindagem e estado do veículo</label>
+              <div class="row">
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <div class="custom-control custom-checkbox">
+                      <input type="checkbox" class="custom-control-input" id="usado" name="usado" value="1">
+                      <label class="custom-control-label" for="usado">
+                        Veículo usado
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <div class="custom-control custom-checkbox">
+                      <input type="checkbox" class="custom-control-input" id="blindagem" name="blindagem" value="1">
+                      <label class="custom-control-label" for="blindagem">
+                        Blindado
+                      </label>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -199,14 +242,14 @@
         </section>
         <h3>Mais informações</h3>
         <section>
-          <div class="row">
+          <!--<div class="row">
             <div class="col-sm-12">
               <div class="form-group">
                 <label for="descricao">Descreva o seu anúncio</label>
                 <textarea class="form-control" name="descricao" rows="5" placeholder="Conte nos sobre o seu veículo..."></textarea>
               </div>
             </div>
-          </div>
+          </div>-->
           <div class="row">
             <div class="col-sm-6">
               <div class="form-group">
@@ -227,7 +270,49 @@
                 </select>
               </div>
             </div>
-        </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                  <label for="manual">Possui manual do veículo?</label>
+                  <select class="form-control" name="manual" id="manual" required>
+                    <option value="">Selecione uma opção...</option>
+                    <option value="1">Sim, possuo</option>
+                    <option value="0">Não possuo</option>
+                  </select>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                  <label for="chave_reserva">Possui chave reserva?</label>
+                  <select class="form-control" name="chave_reserva" id="chave_reserva" required>
+                    <option value="">Selecione uma opção...</option>
+                    <option value="1">Sim, possuo</option>
+                    <option value="0">Não possuo</option>
+                  </select>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                  <label for="comprovante_manutencao">Possui comprovante de manutenção?</label>
+                  <select class="form-control" name="comprovante_manutencao" id="comprovante_manutencao" required>
+                    <option value="">Selecione uma opção...</option>
+                    <option value="1">Sim, possuo</option>
+                    <option value="0">Não possuo</option>
+                  </select>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                  <label for="estuda_troca">Estuda troca?</label>
+                  <select class="form-control" name="estuda_troca" id="estuda_troca" required>
+                    <option value="">Selecione uma opção...</option>
+                    <option value="1">Sim, pretendo realizar a troca</option>
+                    <option value="0">Não pretendo realizar a troca</option>
+                  </select>
+              </div>
+            </div>
+          </div>
       <div class="row">
         <div class="col-sm-6">
           <div class="form-group">
@@ -260,26 +345,7 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-sm-6">
-            <div class="form-group">
-              <div class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input" id="usado" name="usado" value="1">
-                <label class="custom-control-label" for="usado">
-                  Veículo usado
-                </label>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-6">
-            <div class="form-group">
-              <div class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input" id="blindagem" name="blindagem" value="1">
-                <label class="custom-control-label" for="blindagem">
-                  Blindado
-                </label>
-              </div>
-            </div>
-          </div>
+
         </div>
         </section>
         <h3>Imagens</h3>
