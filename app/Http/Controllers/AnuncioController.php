@@ -19,7 +19,12 @@ use App\Versao;
 class AnuncioController extends Controller
 {
     public function anuncie(Request $request){
-      return view('anuncios.anuncie');
+      $opcionais = [
+                    'Ar-condicionado', 'Direção hidráulica', 'Vidros Elétricos', 'Travas Elétricas',
+                    'Alarme', 'Ar quente', 'Banco de motorista com regulagem', 'Airbag', 'ABS', 'Teto solar',
+                    'Bancos de couro', 'DVD/Multimídia', 'Computador de bordo', 'Rodas de liga leve', 'Tração 4x4'
+                  ];
+      return view('anuncios.anuncie')->with('opcionais', $opcionais);
     }
 
     public function anuncieStore(Request $request){
@@ -73,7 +78,7 @@ class AnuncioController extends Controller
           $ad->anuncio = $anuncio->id;
           $ad->save();
           $this->insertAdicionaisAnuncio($request, $anuncio);
-          $this->insertAcessoriosAnuncio($request, $anuncio);
+          //$this->insertAcessoriosAnuncio($request, $anuncio);
           $this->insertImagesAnuncio($anuncio, $imagens);
           $this->insertAnuncioDados($request);
           $title = $anuncio->getUrl();
@@ -101,8 +106,8 @@ class AnuncioController extends Controller
     }
 
     private function insertAdicionaisAnuncio(Request $request, $anuncio){
-      if($request->has('adicionais')){
-        $adicionais = $request->input('adicionais');
+      if($request->has('opcionais')){
+        $adicionais = $request->input('opcionais');
         foreach ($adicionais as $a) {
           if($a != ''){
             $adicional = new Adicional();

@@ -347,37 +347,20 @@ Clique ou arraste uma imagem para carregá-la
     </section>
     <h3>Adicionais do veículo</h3>
     <section>
+      <h3>O meu veículo tem (selecione):</h3>
       <div class="d-flex flex-row bd-highlight mb-3 flex-wrap">
+        @foreach($opcionais as $key => $op)
         <div class="p-2 bd-highlight">
           <div class="form-group">
             <div class="custom-control custom-checkbox">
-              <input type="checkbox" class="custom-control-input" id="blindagem" name="blindagem" value="1">
+              <input type="checkbox" class="custom-control-input" id="opicional_{{$key}}" name="opicionais[]" value="{{$op}}">
               <label class="custom-control-label" for="blindagem">
-                Blindado
+                {{ $op }}
               </label>
             </div>
           </div>
         </div>
-        <div class="p-2 bd-highlight">
-          <div class="form-group">
-            <div class="custom-control custom-checkbox">
-              <input type="checkbox" class="custom-control-input" id="blindagem" name="blindagem" value="1">
-              <label class="custom-control-label" for="blindagem">
-                Blindado
-              </label>
-            </div>
-          </div>
-        </div>
-        <div class="p-2 bd-highlight">
-          <div class="form-group">
-            <div class="custom-control custom-checkbox">
-              <input type="checkbox" class="custom-control-input" id="blindagem" name="blindagem" value="1">
-              <label class="custom-control-label" for="blindagem">
-                Blindado
-              </label>
-            </div>
-          </div>
-        </div>
+        @endforeach
       </div>
     </section>
     <h3>Imagens</h3>
