@@ -30,117 +30,6 @@
     {{ session('status') }}
   </div>
   @endif
-  <!--<form method="post" action="{{route('anuncieStore')}}"  enctype="multipart/form-data">
-  <div class="row">
-  <div class="col-sm-6">
-
-  @include('flash::message')
-  <input type="hidden" name="user" value="{{Auth::user()->id}}">
-  <div class="form-group">
-  <label for="descricao">Descrição</label>
-  <textarea required class="form-control" value="{{old('descricao')}}" name="descricao" id="descricao" rows="3" placeholder="Descreve detalhadamento o que você está anunciando"></textarea>
-  <small id="descricaoHelp" class="form-text text-muted">Seja objetivo, o título será exibido na listagem dos veículos.</small>
-</div>
-<div class="form-group">
-<div class="custom-control custom-checkbox">
-<input type="checkbox" class="custom-control-input" id="moto" name="moto" value="1">
-<label class="custom-control-label" for="moto">
-Estou anunciando uma motocicleta
-</label>
-</div>
-</div>
-<div class="row">
-@foreach(App\AnuncioField::all() as $field)
-<div class="form-group col-sm-6">
-<label for="{{$field->nome_prog}}">{{$field->nome}}</label>
-<input required type="{{$field->type}}" value="{{old($field->nome)}}" class="form-control" id="{{$field->nome_prog}}" name="{{$field->nome_prog}}" aria-describedby="{{$field->nome_prog}}Help"
-placeholder="{{$field->place_holder}}" {{ $field->type=='number'? "step=$field->step" : '' }} >
-<small id="{{$field->nome_prog}}Help" class="form-text text-muted">{{$field->helpText}}</small>
-</div>
-@endforeach
-</div>
-<h2>Informações adicionais e imagens</h2>
-<hr>
-<div class="box">
-<div class="card-body">
-<div class="form-group">
-<label for="adicional">Itens adicionais do veículo</label>
-<div class="input-group mb-3">
-<input type="text" class="form-control" id="adicional" placeholder="Digite o nome do adicional que pretende adicionar" aria-describedby="adicionalHelp" aria-label="Digite o nome do adicional que pretende adicionar" aria-describedby="button-addon2">
-<div class="input-group-append">
-<button class="btn btn-outline-secondary" type="button" id="addAdicional">Adicionar</button>
-</div>
-</div>
-<small id="adicionalHelp" class="form-text text-muted">Um adicional é um atributo específico do veículo que você deseja citar.</small>
-</div>
-<div class="form-group">
-<div class="list-group" id="adicionais">
-</div>
-</div>
-</div>
-</div>
-<div class="box mt-2">
-<div class="card-body">
-<div class="form-group">
-<label for="acessorio">Acessórios do veículo</label>
-<div class="input-group mb-3">
-<input type="text" class="form-control" id="acessorio" placeholder="Digite o nome do acessório que pretende adicionar" aria-describedby="acessorioHelp" aria-label="Digite o nome do acessório que pretende adicionar" aria-describedby="button-addon2">
-<div class="input-group-append">
-<button class="btn btn-outline-secondary" type="button" id="addAcessorio">Adicionar</button>
-</div>
-</div>
-<small id="acessorioHelp" class="form-text text-muted">Descreva os acessórios do seu veículo por unidade.</small>
-</div>
-<div class="form-group">
-<div class="list-group" id="acessorios">
-</div>
-</div>
-</div>
-</div>
-@include('elements.anuncios.selecionar_pagamento')
-<div class="modal fade" id="checkoutModal" tabindex="-1" role="dialog" aria-labelledby="checkoutModalLabel" aria-hidden="true">
-<div class="modal-dialog" role="document">
-<div class="modal-content">
-<div class="modal-header">
-<h5 class="modal-title" id="checkoutModalLabel">Informações de pagamento</h5>
-<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-<span aria-hidden="true">&times;</span>
-</button>
-</div>
-<div class="modal-body">
-@include('elements.anuncios.checkout')
-</div>
-<div class="modal-footer">
-<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-<button type="button" id="btnPagar" class="btn btn-success">Prosseguir com o pagamento</button>
-</div>
-</div>
-</div>
-</div>
-<script type="text/javascript" src="{{asset('js/anuncio/pagseguro.js')}}"></script>
-</form>
-</div>
-<div class="col-sm-6">
-<h2>Imagens do anúncio</h2>
-<hr>
-<div  id="dropzone" class="row mt-3 mb-3 box">
-<div class="row">
-<div class="col-sm-12">
-<p class="text-center text-muted">
-Clique ou arraste uma imagem para carregá-la
-</p>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="row">
-<div class="col-sm-6">
-<button type="submit" onclick="beforeStoreAnuncio()" class="mt-2 btn btn-primary">Anunciar</button>
-</div>
-</div>
-</div>-->
-
 <form id="anunciar" method="post" action="{{route('anuncieStore')}}"  enctype="multipart/form-data">
   <div class="container">
     <h3>Informações básicas</h3>
@@ -174,10 +63,11 @@ Clique ou arraste uma imagem para carregá-la
         </div>
         <div class="col-sm-6">
           <div class="form-group">
-            <label for="veiculo">Veículo único dono?</label>
+            <label for="unicodono">Veículo único dono?</label>
             <select required class="form-control" name="unicodono" id="unicodono">
+              <option value="">Selecione uma opção...</option>
               <option value="1">Sim, veículo único dono</option>
-              <option value="1">Não, veículo já pertenceu a mais de um</option>
+              <option value="0">Não, veículo já pertenceu a mais de um</option>
             </select>
           </div>
         </div>
@@ -207,28 +97,25 @@ Clique ou arraste uma imagem para carregá-la
           </div>
         </div>
         <div class="col-sm-6">
-          <label for="">Blindagem e estado do veículo</label>
-          <div class="row">
-            <div class="col-sm-6">
-              <div class="form-group">
-                <div class="custom-control custom-checkbox">
-                  <input type="checkbox" class="custom-control-input" id="usado" name="usado" value="1">
-                  <label class="custom-control-label" for="usado">
-                    Veículo usado
-                  </label>
-                </div>
-              </div>
-            </div>
-            <div class="col-sm-6">
-              <div class="form-group">
-                <div class="custom-control custom-checkbox">
-                  <input type="checkbox" class="custom-control-input" id="blindagem" name="blindagem" value="1">
-                  <label class="custom-control-label" for="blindagem">
-                    Blindado
-                  </label>
-                </div>
-              </div>
-            </div>
+          <div class="form-group">
+              <label for="usado">Veículo usado?</label>
+              <select class="form-control" name="usado" id="usado" required>
+                <option value="">Selecione uma opção...</option>
+                <option value="1">Sim, veículo usado</option>
+                <option value="0">Não, veículo novo</option>
+              </select>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+              <label for="blindagem">Veículo blindado?</label>
+              <select class="form-control" name="blindagem" id="blindagem" required>
+                <option value="">Selecione uma opção...</option>
+                <option value="1">Sim, veículo blindado</option>
+                <option value="0">Sem blindagem</option>
+              </select>
           </div>
         </div>
       </div>
@@ -353,8 +240,8 @@ Clique ou arraste uma imagem para carregá-la
         <div class="p-2 bd-highlight">
           <div class="form-group">
             <div class="custom-control custom-checkbox">
-              <input type="checkbox" class="custom-control-input" id="opicional_{{$key}}" name="opicionais[]" value="{{$op}}">
-              <label class="custom-control-label" for="blindagem">
+              <input type="checkbox" class="custom-control-input" id="opicional_{{$key}}" name="opcionais[]" value="{{$op}}">
+              <label class="custom-control-label" for="opicional_{{$key}}">
                 {{ $op }}
               </label>
             </div>
@@ -363,13 +250,22 @@ Clique ou arraste uma imagem para carregá-la
         @endforeach
       </div>
     </section>
+    <h3>Descrição</h3>
+    <section>
+      <h3>Fale sobre o seu veículo</h3>
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="form-group">
+            <textarea class="form-control" name="descricao" rows="8" placeholder="Conte nos sobre o seu veículo..."></textarea>
+          </div>
+        </div>
+      </div>
+    </section>
     <h3>Imagens</h3>
     <section>
       <h3>Selecione as imagens do seu anúncio (Maximo 12):</h3>
       <div class="col-sm-12">
-        <div  id="dropzone" class="row mt-3 mb-3 box">
-
-        </div>
+        <div id="dropzone" class="row mt-3 mb-3 box"></div>
       </div>
       <div class="row">
         <div class="col-sm-12">
@@ -423,6 +319,16 @@ form.validate({
     combustivel: 'Informe o tipo de combustível',
     cor: 'Informe a cor do veículo',
     portas: 'Informe o número de portas',
+    descricao: 'Você precisa descrever o seu anúncio',
+    ano_modelo: 'Informa o ano do modelo',
+    unicodono: 'Informe se o veículo é único dono',
+    usado: 'O veículo é usado?',
+    blindagem: 'Selecione uma opção de blindagem',
+    manual: 'Você tem o manual do veículo?',
+    chave_reserva: 'Você tem uma chave reserva?',
+    comprovante_manutencao: 'Você tem um comprovante de manutenção?',
+    estuda_troca: 'Você estuda trocar o veículo?',
+    laudo_cautelar: 'Possui o laudo cautelar?'
   }
 });
 /*form.validator.setDefaults({

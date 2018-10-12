@@ -33,6 +33,13 @@ class CreateAnunciosTable extends Migration
             $table->boolean('ativo')->default(true);
             $table->boolean('patrocinado')->default(false);
             $table->boolean('revenda')->default(false);
+            $table->boolean('unicodono')->default(false);
+            $table->boolean('chave_reserva')->default(false);
+            $table->boolean('laudo_cautelar')->default(false);
+            $table->boolean('comprovante_manutencao')->default(false);
+            $table->integer('ano_modelo')->nullable();
+            $table->boolean('estuda_troca')->default(false);
+            $table->boolean('manual')->default(false);
             $table->timestamps();
         });
     }

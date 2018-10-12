@@ -33,8 +33,8 @@
               <nav>
                 <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
                   <a class="nav-item nav-link btn btn-light active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Informações</a>
-                  <a class="nav-item nav-link btn btn-light" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Adicionais do veículo</a>
-                  <a class="nav-item nav-link btn btn-light" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Acessórios</a>
+                  <a class="nav-item nav-link btn btn-light" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Adicionais e acessórios</a>
+                  <!--<a class="nav-item nav-link btn btn-light" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Acessórios</a>-->
                 </div>
               </nav>
               <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
@@ -60,10 +60,6 @@
                       <p>{{ucfirst($adicional->nome)}}</p>
                     </div>
                     @endforeach
-                  </div>
-                </div>
-                <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
-                  <div class="d-flex flex-row bd-highlight mb-3 flex-wrap">
                     @foreach($acessorios as $acessorio)
                       <div class="p-2 bd-highlight">
                         <p>{{ucfirst($acessorio->nome)}}</p>
@@ -161,7 +157,7 @@
             </div>
             <div class="fb-share-button" data-href="{{$anuncio->getFullUrl()}}" data-layout="button" data-size="large" data-mobile-iframe="true"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{$anuncio->getFullUrl()}}&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Compartilhar</a></div>
           </div>
-          
+
         </div>
   </div>
   </div>
