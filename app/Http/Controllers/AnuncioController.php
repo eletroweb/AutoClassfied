@@ -62,21 +62,6 @@ class AnuncioController extends Controller
           $img_principal->anuncio= $anuncio->id;
           $img_principal->first= true;
           $img_principal->save();
-          $ad = new AnuncioDados();
-          $ad->nome = "cambio";
-          $ad->valor = $request->input('cambio');
-          $ad->anuncio = $anuncio->id;
-          $ad->save();
-          $ad = new AnuncioDados();
-          $ad->nome = "portas";
-          $ad->valor = $request->input('portas');
-          $ad->anuncio = $anuncio->id;
-          $ad->save();
-          $ad = new AnuncioDados();
-          $ad->nome = "combustivel";
-          $ad->valor = $request->input('combustivel');
-          $ad->anuncio = $anuncio->id;
-          $ad->save();
           $this->insertAdicionaisAnuncio($request, $anuncio);
           //$this->insertAcessoriosAnuncio($request, $anuncio);
           $this->insertImagesAnuncio($anuncio, $imagens);
@@ -103,6 +88,24 @@ class AnuncioController extends Controller
         }
         $request->flash();
         return redirect('/anuncie')->with('status', 'Você precisa inserir no mínimo uma imagem para publicar o seu anúncio');
+    }
+
+    private function insertAditionalData(Request $request){
+      $ad = new AnuncioDados();
+      $ad->nome = "cambio";
+      $ad->valor = $request->input('cambio');
+      $ad->anuncio = $anuncio->id;
+      $ad->save();
+      $ad = new AnuncioDados();
+      $ad->nome = "portas";
+      $ad->valor = $request->input('portas');
+      $ad->anuncio = $anuncio->id;
+      $ad->save();
+      $ad = new AnuncioDados();
+      $ad->nome = "combustivel";
+      $ad->valor = $request->input('combustivel');
+      $ad->anuncio = $anuncio->id;
+      $ad->save();
     }
 
     private function insertAdicionaisAnuncio(Request $request, $anuncio){

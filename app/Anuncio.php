@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Storage;
 class Anuncio extends Model
 {
     protected $fillable = ['titulo', 'descricao', 'marca', 'km', 'usado', 'modelo', 'versao', 'valor', 'user', 'moto',
-                            'ano', 'blindagem'];
+                            'ano', 'blindagem', 'chave_reserva', 'laudo_cautelar', 'comprovante_manutencao', 'unicodono', 'ano_modelo'];
 
 
     public function anuncio_dados(){
