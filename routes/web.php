@@ -22,7 +22,7 @@ Route::post('/fale-conosco', 'ContatoController@store')->name('fale_conosco_post
 Route::get('/como-comprar-carro', 'UserController@duvida_comprar_carro')->name('duvida_comprar_carro');
 Route::get('/como-vender-carro', 'UserController@duvida_vender_carro')->name('duvida_vender_carro');
 Route::get('/duvidas-anuncios', 'UserController@duvida_anuncios')->name('duvida_anuncios');
-Route::get('/', 'HomeController@index'); 
+Route::get('/', 'HomeController@index');
 Route::get('/cronjob/update/all', 'VeiculoController@importMarcaModelos');
 Route::post('/anuncio/contato', 'ContatoAnuncioController@store')->name('contato_anuncio');
 Route::get('/telefone/{nome}/{cidade}/{id}', 'RevendaController@homepage');
@@ -36,6 +36,7 @@ Route::post('/anuncios/count/visualizacao/', 'VisualizacaoDadosController@store'
 Route::post('/newsletter/fipe', 'NewsletterUserController@store');
 Route::post('/pagseguro/notification/transaction/', 'TransactionController@transactionNotification')->name('notification_pagseguro');
 Route::middleware('auth')->group(function () {
+  Route::post('/anuncios/{id}/desabilitar', 'AnuncioController@desabilitar')->name('desabilitar_anuncio');
   Route::get('/minha-conta/configuracoes', 'UserController@configuracoes')->name('configuracoes_conta');
   Route::post('/pagseguro/startSession', 'PagseguroController@startSession')->name('start_session');
   Route::get('/anuncie', 'AnuncioController@anuncie')->name('anuncie')->middleware('documento');
