@@ -46,6 +46,23 @@
                     <div class="p-2 bd-highlight">
                       <p style="font-size: 14px;"><b style="font-size: 18px;">Blindado</b><br> {{$anuncio->blindagem?'Sim':'Não'}}</p>
                     </div>
+                    <div class="p-2 bd-highlight">
+                      <p style="font-size: 14px;"><b style="font-size: 18px;">Estuda troca</b><br> {{$anuncio->estuda_troca?'Sim':'Não'}}</p>
+                    </div>
+                    <div class="p-2 bd-highlight">
+                      <p style="font-size: 14px;"><b style="font-size: 18px;">Único dono</b><br> {{$anuncio->unicodono?'Sim':'Não'}}</p>
+                    </div>
+                    <div class="p-2 bd-highlight">
+                      <p style="font-size: 14px;"><b style="font-size: 18px;">Possui manual</b><br> {{$anuncio->manual?'Sim':'Não'}}</p>
+                    </div>
+
+                    <div class="p-2 bd-highlight">
+                      <p style="font-size: 14px;"><b style="font-size: 18px;">Manutenção comprovada</b><br> {{$anuncio->comprovante_manutencao?'Sim':'Não'}}</p>
+                    </div>
+                    <div class="p-2 bd-highlight">
+                      <p style="font-size: 14px;"><b style="font-size: 18px;">Laudo cautelar</b><br> {{$anuncio->laudo_cautelar?'Sim':'Não'}}</p>
+                    </div>
+
                     @foreach($anunciodados as $dado)
                       <div class="p-2 bd-highlight">
                         <p style="font-size: 14px;"><b style="font-size: 18px;">{{ucfirst($dado->nome)}}</b><br> {{$dado->valor}}</p>
@@ -74,11 +91,14 @@
       </section>
       <!-- ./Tabs -->
       <hr>
-      <h1>Descrição do anúncio</h1>
-
-      <p class="card-text">
-        {{$anuncio->descricao}}
-      </p>
+      <div class="row">
+        <div class="col-sm-6">
+          <h1>Descrição do anúncio</h1>
+          <p class="text-justify w-100">
+            {{$anuncio->descricao}}
+          </p>
+        </div>
+      </div>
     </div>
     <div class="col-sm-5">
        <div class="card w-100" style="border: none">

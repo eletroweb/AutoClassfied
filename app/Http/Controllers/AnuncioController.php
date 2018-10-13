@@ -45,6 +45,7 @@ class AnuncioController extends Controller
         /*if(Auth::user()->id != intval($user)){
           return redirect('/anuncie')->with('status', 'Você está trapaceando para publicar este anúncio');
         }*/
+
         if($request->has('imagens')){
           $imagens = $request->input('imagens');
           $validatedData['titulo'] = 'building...';
@@ -56,6 +57,7 @@ class AnuncioController extends Controller
             $validatedData['versao'] = $versao->id;
           }
           $anuncio = Anuncio::create($validatedData);
+          $this->insertAditionalData($request, $anuncio->id);
           $anuncio->generateTitle();
           $img_principal = new AnuncioImagem();
           $img_principal->imagem= Imagem::where('url', str_replace("\"", "", $imagens[0]))->first()->id;
@@ -90,22 +92,31 @@ class AnuncioController extends Controller
         return redirect('/anuncie')->with('status', 'Você precisa inserir no mínimo uma imagem para publicar o seu anúncio');
     }
 
-    private function insertAditionalData(Request $request){
+    private function insertAditionalData(Request $request, $id){
       $ad = new AnuncioDados();
       $ad->nome = "cambio";
       $ad->valor = $request->input('cambio');
-      $ad->anuncio = $anuncio->id;
+      $ad->anuncio = $id;
       $ad->save();
       $ad = new AnuncioDados();
       $ad->nome = "portas";
       $ad->valor = $request->input('portas');
-      $ad->anuncio = $anuncio->id;
+      $ad->anuncio = $id;
       $ad->save();
       $ad = new AnuncioDados();
       $ad->nome = "combustivel";
       $ad->valor = $request->input('combustivel');
-      $ad->anuncio = $anuncio->id;
+      $ad->anuncio = $id;
       $ad->save();
+    }
+
+    public function desabilitar(Request $request, $id){
+      $anuncio = Anuncio::find($id);
+      if(Auth::user()->id == $anuncio->user){
+        $anuncio->ativo = !$anuncio->ativo;
+        $anuncio->save();
+      }
+      return redirect()->back();
     }
 
     private function insertAdicionaisAnuncio(Request $request, $anuncio){

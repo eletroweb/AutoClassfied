@@ -3,7 +3,7 @@
     <a href='{{$anuncio->getUrl()}}'
       class="list-group-item list-group-item-action flex-column align-items-start mt-1 mb-1 {{$anuncio->patrocinado?'patrocinado':''}} box">
       <div class="row">
-        <div class="col-sm-5"> 
+        <div class="col-sm-5">
           <img src="{{$anuncio->urlImagemFirst()}}" width="100%" height="250px" alt="{{$anuncio->titulo}}">
         </div>
         <div class="col-sm-7">
@@ -43,6 +43,14 @@
             <small class="col-sm-6 w-100 text-right" >
               {!! $anuncio->patrocinado?'<span class="badge badge-success">Anúncio em destaque</span>':'' !!}
             </small>
+            @if($anuncio->user == Auth::user()->id)
+            <form action="{{ route('desabilitar_anuncio', ['id'=> $anuncio->id]) }}" method="post">
+              {{csrf_field()}}
+              <small class="col-sm-6 w-100 text-left" >
+                <button type="submit" onclick="confirm('Tem certeza que deseja realizar a alteração?')" class="btn {{$anuncio->ativo?'btn-warning':'btn-success'}} btn-sm">{{$anuncio->ativo?'Desabilitar anúncio':'Habilitar anúncio'}}</button>
+              </small>
+            </form>
+            @endif
           </div>
 
         </div>
@@ -70,7 +78,7 @@
                 @else
                   <p class="mb-0">
                     Estamos aguardando a confirmação do seu pagamento para liberarmos o seu anúncio.
-                    Caso você ainda não tenha feito o pagamento, 
+                    Caso você ainda não tenha feito o pagamento,
                     @if($anuncio->transaction->payment_type == 2)
                         <a href="{{$anuncio->transaction->paymentLink}}" class="alert-link">veja o boleto do seu anúncio aqui.</a>
                     @endif
