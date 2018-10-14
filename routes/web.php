@@ -26,6 +26,7 @@ Route::get('/', 'HomeController@index');
 Route::get('/cronjob/update/all', 'VeiculoController@importMarcaModelos');
 Route::post('/anuncio/contato', 'ContatoAnuncioController@store')->name('contato_anuncio');
 Route::get('/telefone/{nome}/{cidade}/{id}', 'RevendaController@homepage');
+Route::get('/telefone/{nome}/{cidade}/{id}/videos', 'VideoController@index');
 Route::get('/consulta-tabela-fipe', 'FipeController@index')->name('fipe');
 Route::get('/encontre-uma-revenda', 'RevendaController@revendas')->name('revendas');
 Route::get('/faq', 'UserController@faq')->name('faq');
@@ -35,7 +36,10 @@ Route::get('/anuncio-inativo/{id}', 'AnuncioController@inativo')->name('anuncio_
 Route::post('/anuncios/count/visualizacao/', 'VisualizacaoDadosController@store');
 Route::post('/newsletter/fipe', 'NewsletterUserController@store');
 Route::post('/pagseguro/notification/transaction/', 'TransactionController@transactionNotification')->name('notification_pagseguro');
+
 Route::middleware('auth')->group(function () {
+  Route::get('/telefone/{nome}/{cidade}/{id}/videos/adicionar', 'VideoController@create');
+  Route::post('/videos/store', 'VideoController@store')->name('revenda_add_video');
   Route::post('/anuncios/{id}/desabilitar', 'AnuncioController@desabilitar')->name('desabilitar_anuncio');
   Route::get('/minha-conta/configuracoes', 'UserController@configuracoes')->name('configuracoes_conta');
   Route::post('/pagseguro/startSession', 'PagseguroController@startSession')->name('start_session');

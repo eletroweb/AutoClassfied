@@ -16,10 +16,13 @@ class CreateVideosTable extends Migration
         Schema::create('videos', function (Blueprint $table) {
             $table->increments('id');
             $table->string('link');
-            $table->integer('anuncio');
+            $table->integer('anuncio')->nullable();
+            $table->boolean('isHomeVideo')->default(false); //É vídeo da página da revenda
             $table->boolean('ativo')->default(true);
+            $table->integer('thumbnail')->nullable();
+            $table->integer('user_id');
             $table->timestamps();
-        });
+        }); 
     }
 
     /**
