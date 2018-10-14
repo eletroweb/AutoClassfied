@@ -286,6 +286,7 @@ class RevendaController extends AppBaseController
             $user = new User();
             $user->name = $veiculo->loja->contato->nome;
             $user->email = $veiculo->loja->contato->email;
+            $cnpj= str_replace('/', '', str_replace('-', '', str_replace('.', '', $cnpj)));
             $user->password = Hash::make($cnpj);
             $user->pessoa_fisica = false;
             $user->documento = $veiculo->loja->cnpj;

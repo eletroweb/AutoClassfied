@@ -41,6 +41,25 @@
       </div>
     </div>
   </section>
+  <div class="container">
+  	<h2>Últimos vídeos</h2>
+  	<hr>
+  	<div class="row">
+  		<div class="col-sm-6 m-auto pb-2">
+			<div id="video-gallery">
+			  <a href="https://www.youtube.com/watch?v=meBbDqAXago" data-poster="video-poster1.jpg" >
+			      <img src="img/thumb1.jpg" />
+			  </a>
+			  <a href="https://vimeo.com/1084537" data-poster="video-poster2.jpg">
+			      <img src="img/thumb2.jpg" />
+			  </a>
+			</div>	  			
+  		</div>
+  		<script>
+  			lightGallery(document.getElementById('video-gallery')); 
+  		</script>
+  	</div>
+  </div>
   <div class="album py-5">
     @if(Auth::check())
       @if($revenda->user == Auth::user()->id)
