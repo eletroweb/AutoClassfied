@@ -30,7 +30,7 @@ use Illuminate\Support\Facades\Storage;
 use App\VisualizacaoAnuncio;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
-
+use App\Video;
 
 class RevendaController extends AppBaseController
 {
@@ -286,6 +286,7 @@ class RevendaController extends AppBaseController
             $user = new User();
             $user->name = $veiculo->loja->contato->nome;
             $user->email = $veiculo->loja->contato->email;
+            $cnpj= str_replace('/', '', str_replace('-', '', str_replace('.', '', $cnpj)));
             $user->password = Hash::make($cnpj);
             $user->pessoa_fisica = false;
             $user->documento = $veiculo->loja->cnpj;
@@ -427,78 +428,78 @@ class RevendaController extends AppBaseController
       ])->first();
       if($this->filtro($veiculo)){
         if($anuncio_)
-        $anuncio = Anuncio::find($anuncio_->anuncio);
+          $anuncio = Anuncio::find($anuncio_->anuncio);
         else
-        $anuncio = new Anuncio();
-        $anuncio->titulo = $veiculo->marca." ".$veiculo->modelo.' '.$veiculo->versao;
-        $anuncio->descricao = (string)$veiculo->observacao;
-        $anuncio->marca = Marca::where('nome', $veiculo->marca)->first()->id;
-        $anuncio->importado = true;
-        $anuncio->ano = $veiculo->anomodelo;
-        $anuncio->moto = $veiculo->tipoveiculo == 'Carro'? false:true;
-        $anuncio->km = $veiculo->km;
-        $anuncio->blindagem = $this->isBlindado($veiculo);
-        $anuncio->usado = $veiculo->zerokm=='N'?1:0;
-        if($modelo = Modelos::where([
-          ['nome', (string)$veiculo->modelo],
-          ['marca', $anuncio->marca],
-          ])->first()){
-            $anuncio->modelo = $modelo->id;
-          }else{
-            $modelo = new Modelos();
-            $modelo->nome= (string)$veiculo->modelo;
-            $modelo->marca = $anuncio->marca;
-            $modelo->save();
-            $anuncio->modelo = $modelo->id;
-          }
-          if($versao = Versao::where([
-            ['nome', (string)$veiculo->versao],
-            ['modelo', $anuncio->modelo],
-            ])->first()){
-              $anuncio->versao = $versao->id;
-            }else{
-              $versao = new Versao();
-              $versao->nome = (string)$veiculo->versao;
-              $versao->modelo = $anuncio->modelo;
-              $versao->save();
-              $anuncio->versao = $versao->id;
-            }
-            $anuncio->user = $revenda->user;
-            $anuncio->valor = str_replace(['R$ ', '.', ','], '', $veiculo->preco);
-            $anuncio->save();
-            $first = true;
-            //Acredito que este trecho possa ser melhorado...
-            //$this->createAnuncioDado($anuncio, 'ano_modelo', $veiculo->anomodelo);
-            $this->createAnuncioDado($anuncio, 'cambio', $veiculo->cambio);
-            $this->createAnuncioDado($anuncio, 'portas', $veiculo->portas);
-            $this->createAnuncioDado($anuncio, 'cor', $veiculo->cor);
-            $this->createAnuncioDado($anuncio, 'combustivel', $veiculo->combustivel);
-            $this->createAnuncioDado($anuncio, 'id_xml', $veiculo->id, false);
-            $this->createAnuncioDado($anuncio, 'placa', substr($veiculo->placa , 0, 2));
-            //$this->createAnuncioDado($anuncio, 'tipo_veiculo', $veiculo->tipoveiculo);
-            foreach($veiculo->acessorios->acessorio as $acessorio){
-              $this->createAcessorios($anuncio, (string)$acessorio);
-            }
-            foreach($veiculo->opcionais->opcional as $adicional){
-              $this->createAdicional($anuncio, $adicional);
-            }
-            //$this->complementos($veiculo, $anuncio);
-            foreach($veiculo->fotos->foto as $foto){
-              $old_img = Imagem::where([['url', $foto]])->first();
-              $img = $old_img? $old_img:(new Imagem());
-              $img->url= $foto;
-              $img->save();
-              $old = AnuncioImagem::where('imagem', $img->id)->first();
-              $img_anuncio = $old? $old:(new AnuncioImagem());
-              $img_anuncio->imagem = $img->id;
-              $img_anuncio->anuncio = $anuncio->id;
-              $img_anuncio->first = $old?$img_anuncio->first:$first;
-              $img_anuncio->save();
-              $first = false;
-            }
-          }
+          $anuncio = new Anuncio();
+    $anuncio->titulo = $veiculo->marca." ".$veiculo->modelo.' '.$veiculo->versao;
+    $anuncio->descricao = (string)$veiculo->observacao;
+    $anuncio->marca = Marca::where('nome', $veiculo->marca)->first()->id;
+    $anuncio->importado = true;
+    $anuncio->ano = $veiculo->anomodelo;
+    $anuncio->moto = $veiculo->tipoveiculo == 'Carro'? false:true;
+    $anuncio->km = $veiculo->km;
+    $anuncio->blindagem = $this->isBlindado($veiculo);
+    $anuncio->usado = $veiculo->zerokm=='N'?1:0;
+    if($modelo = Modelos::where([
+      ['nome', (string)$veiculo->modelo],
+      ['marca', $anuncio->marca],
+      ])->first()){
+        $anuncio->modelo = $modelo->id;
+      }else{
+        $modelo = new Modelos();
+        $modelo->nome= (string)$veiculo->modelo;
+        $modelo->marca = $anuncio->marca;
+        $modelo->save();
+        $anuncio->modelo = $modelo->id;
+      }
+    if($versao = Versao::where([
+      ['nome', (string)$veiculo->versao],
+      ['modelo', $anuncio->modelo],
+      ])->first()){
+        $anuncio->versao = $versao->id;
+      }else{
+        $versao = new Versao();
+        $versao->nome = (string)$veiculo->versao;
+        $versao->modelo = $anuncio->modelo;
+        $versao->save();
+        $anuncio->versao = $versao->id;
+      }
+      $anuncio->user = $revenda->user;
+      $anuncio->valor = str_replace(['R$ ', '.', ','], '', $veiculo->preco);
+      $anuncio->save();
+      $first = true;
+      //Acredito que este trecho possa ser melhorado...
+      //$this->createAnuncioDado($anuncio, 'ano_modelo', $veiculo->anomodelo);
+      $this->createAnuncioDado($anuncio, 'cambio', $veiculo->cambio);
+      $this->createAnuncioDado($anuncio, 'portas', $veiculo->portas);
+      $this->createAnuncioDado($anuncio, 'cor', $veiculo->cor);
+      $this->createAnuncioDado($anuncio, 'combustivel', $veiculo->combustivel);
+      $this->createAnuncioDado($anuncio, 'id_xml', $veiculo->id, false);
+      $this->createAnuncioDado($anuncio, 'placa', substr($veiculo->placa , 0, 2));
+      //$this->createAnuncioDado($anuncio, 'tipo_veiculo', $veiculo->tipoveiculo);
+      foreach($veiculo->acessorios->acessorio as $acessorio){
+        $this->createAcessorios($anuncio, (string)$acessorio);
+      }
+      foreach($veiculo->opcionais->opcional as $adicional){
+        $this->createAdicional($anuncio, $adicional);
+      }
+      //$this->complementos($veiculo, $anuncio);
+      foreach($veiculo->fotos->foto as $foto){
+        $old_img = Imagem::where([['url', $foto]])->first();
+        $img = $old_img? $old_img:(new Imagem());
+        $img->url= $foto;
+        $img->save();
+        $old = AnuncioImagem::where('imagem', $img->id)->first();
+        $img_anuncio = $old? $old:(new AnuncioImagem());
+        $img_anuncio->imagem = $img->id;
+        $img_anuncio->anuncio = $anuncio->id;
+        $img_anuncio->first = $old?$img_anuncio->first:$first;
+        $img_anuncio->save();
+        $first = false;
+      }
+    }
 
-        }
+  }
 
   public function createAnuncioDado($anuncio, $key, $value, $visible = true){
     $old = AnuncioDados::where([
@@ -608,7 +609,12 @@ class RevendaController extends AppBaseController
       $param = AnuncioController::filter_search($data);
       $anuncios = Anuncio::where('user', $revenda->user)->where($param[0])->orderBy('id', 'desc')->paginate(20);
     }
-    return view('revendas.homepage.revenda')->with(['revenda'=> $revenda, 'anuncios'=> $anuncios]);
+    $videos = Video::where([
+      ['user_id', $revenda->user],
+      ['ativo', true],
+      ['isHomeVideo', true]
+    ])->paginate(20);
+    return view('revendas.homepage.revenda')->with(['revenda'=> $revenda, 'anuncios'=> $anuncios, 'videos' => $videos]);
   }
 
   public function config(Request $request, $id){

@@ -63,4 +63,9 @@ class Revenda extends Model
       return "/telefone/$nome/$cidade/$id";
     }
 
+    public function getVideoUrl(){
+      $url = $this->getUrl();
+      return "$url/videos";
+    }
+
 }

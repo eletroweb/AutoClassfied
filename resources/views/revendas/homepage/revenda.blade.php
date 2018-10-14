@@ -40,12 +40,41 @@
         </form>
       </div>
     </div>
-  </section>
+  </section> 
+  <div class="container">
+  	<h2>Últimos vídeos</h2>
+  	<hr>
+  	<div class="row">
+  		<div class="col-sm-12 m-auto pb-2">
+        <div id="video-gallery">
+          @forelse($videos as $v)
+            <a href="https://www.youtube.com/watch?v=meBbDqAXago" data-poster="video-poster1.jpg" >
+                <img src="https://via.placeholder.com/150x150" />
+            </a>
+          @empty
+            <div class="alert alert-primary" role="alert">
+              Ainda não há videos publicados por aqui
+            </div>
+          @endforelse
+        </div>	  			
+  		</div>
+  		<script>
+  			$('#video-gallery').lightGallery({
+  				thumbnail:true,
+  			    animateThumb: true,
+  			    showThumbByDefault: true
+  	  		}); 
+  		</script>
+  	</div>
+  </div>
   <div class="album py-5">
     @if(Auth::check())
       @if($revenda->user == Auth::user()->id)
       <div class="alert alert-primary text-center" role="alert">
         Você pode alterar a imagem e a logo da sua revenda acessando as <a href="/revenda/{{$revenda->id}}/configuracoes" class="alert-link">Configurações da revenda</a>
+      </div>
+      <div class="alert alert-primary text-center" role="alert">
+        Que tal compartilhar seus próprios videos com os seus clientes? <a href="{{$revenda->getVideoUrl()}}" class="alert-link">conheça o seu próprio canal da revenda</a>
       </div>
       @endif
     @endif
