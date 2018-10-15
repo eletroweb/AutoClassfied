@@ -46,9 +46,11 @@
       <div class="col-sm-5 m-auto">
         <div class="card">
           <div class="card-body text-center">
+@if(Auth::check())
             @if(Auth::user()->id == $revenda->user)
               <a class="btn btn-light" href="/revenda/{{ $revenda->id }}/configuracao"><i class="fa fa-cogs fa-3x"></i></a>
             @endif
+@endif
             <a class="btn btn-light" href="{{ $revenda->getUrl().'/videos' }}"><i class="fa fa-tv fa-3x"></i></a>
           </div>
         </div>
