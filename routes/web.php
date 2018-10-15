@@ -57,6 +57,7 @@ Route::middleware('auth')->group(function () {
 
 Route::get('/importxml', 'VeiculoController@updateVeiculos');
 Route::middleware(['auth','admin'])->group(function(){
+  Route::get('/admin/anuncios/', 'AnuncioController@admin')->name('anuncios_adm');
   Route::post('/admin/option/update', 'OptionController@update')->name('option_update');
   Route::get('/admin/pagseguro', 'PagseguroController@admin')->name('pagseguro_config');
   Route::get('/contratar-revenda', 'RevendaController@sejarevendedor')->name('contratar_revenda');

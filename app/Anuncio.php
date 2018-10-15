@@ -13,7 +13,8 @@ use Illuminate\Support\Facades\Storage;
 class Anuncio extends Model
 {
     protected $fillable = ['titulo', 'descricao', 'marca', 'km', 'usado', 'modelo', 'versao', 'valor', 'user', 'moto',
-                            'ano', 'blindagem', 'chave_reserva', 'laudo_cautelar', 'comprovante_manutencao', 'unicodono', 'ano_modelo'];
+                            'ano', 'blindagem', 'chave_reserva', 'laudo_cautelar', 'comprovante_manutencao', 'unicodono',
+                            'ano_modelo'];
 
 
     public function anuncio_dados(){
@@ -99,6 +100,10 @@ class Anuncio extends Model
     public function generateTitle(){
       $this->titulo = $this->marcas->nome." ".$this->modelos->nome.' '.$this->versaos->nome;
       $this->save();
+    }
+
+    public function getValor(){
+      return number_format(substr($this->valor.'0', 0, -3), 2, ",", ".");
     }
 
 }

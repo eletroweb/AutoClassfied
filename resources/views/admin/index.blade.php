@@ -20,13 +20,14 @@
     <link rel="stylesheet" href="{{asset('css/admin/style.blue.css')}}" id="theme-stylesheet">
     <!-- Custom stylesheet - for your changes-->
     <link rel="stylesheet" href="{{asset('css/admin/custom.css')}}">
+    <link rel="stylesheet" href="/css/titatoggle-dist-min.css">
     <!-- Favicon-->
     <!--<link rel="shortcut icon" href="{{asset('img/favicon.ico')}}">-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
     <!-- Tweaks for older IEs--><!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
-
+    <script src="{{asset('js/jquery-3.3.1.min.js')}}" charset="utf-8"></script>
   </head>
   <body>
     <div class="page">
@@ -134,6 +135,7 @@
             <li><a href="/admin/revendas"> <i class="fa fa-store"></i>Revendas </a></li>
             <li><a href="#anuncios" aria-expanded="false" data-toggle="collapse"> <i class="fa fa-newspaper"></i>Anúncios</a>
               <ul id="anuncios" class="collapse list-unstyled ">
+                <li><a href="/admin/anuncios">Ver todos</a></li>
                 <li><a href="/admin/anuncioFields">Campos personalizados</a></li>
                 <li><a href="/admin/revenda">Importar revenda</a></li>
                 <!--<li><a href="#">Pagina</a></li>-->
@@ -175,7 +177,7 @@
       </div>
     </div>
     <!-- JavaScript files-->
-    <script src="{{asset('js/jquery-3.3.1.min.js')}}" charset="utf-8"></script>
+
     <script src="{{asset('js/jquery.mask.min.js')}}" charset="utf-8"></script>
     <script src="{{asset('vendor/popper.js/umd/popper.min.js')}}"></script>
     <script src="{{asset('vendor/bootstrap/js/bootstrap.min.js')}}"></script>
