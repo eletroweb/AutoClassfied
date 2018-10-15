@@ -387,16 +387,16 @@ class RevendaController extends AppBaseController
           $this->createAnuncioDado($anuncio, 'id_xml', $veiculo->id, false);
           $this->createAnuncioDado($anuncio, 'placa', 'NNN');
           //$this->createAnuncioDado($anuncio, 'tipo_veiculo', $veiculo->tipoveiculo);
-          if($veiculo->acessory){
+          //if($veiculo->acessory){
             foreach($veiculo->acessory->item as $acessorio){
               $this->createAcessorios($anuncio, (string)$acessorio);
             }
-          }
-          if($veiculo->optional){
+          //}
+          //if($veiculo->optional){
             foreach($veiculo->optional->item as $adicional){
               $this->createAdicional($anuncio, $adicional);
             }
-          }
+          //}
           if($veiculo->pictures){
             foreach($veiculo->pictures->item as $foto){
               $url = (string)$foto->url;
