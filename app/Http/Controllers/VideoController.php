@@ -30,8 +30,10 @@ class VideoController extends Controller
         return redirect($revenda->getUrl());
     }
 
-    public function index(Request $request){
-        return view('');
+    public function index(Request $request, $nome, $cidade, $id){
+        $revenda= Revenda::findOrFail($id);
+        $videos = Video::where('user_id', $revenda->user)->paginate(30);
+        return view('revendas.canal')->with('videos', $videos)->with('revenda', $revenda);
     }
 
     public function view(Request $request){

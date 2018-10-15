@@ -42,14 +42,26 @@
     </div>
   </section> 
   <div class="container">
+    <div class="row">
+      <div class="col-sm-5 m-auto">
+        <div class="card">
+          <div class="card-body text-center">
+            @if(Auth::user()->id == $revenda->user)
+              <a class="btn btn-light" href="/revenda/{{ $revenda->id }}/configuracao"><i class="fa fa-cogs fa-3x"></i></a>
+            @endif
+            <a class="btn btn-light" href="{{ $revenda->getUrl().'/videos' }}"><i class="fa fa-tv fa-3x"></i></a>
+          </div>
+        </div>
+      </div>  
+    </div>
   	<h2>Últimos vídeos</h2>
   	<hr>
   	<div class="row">
   		<div class="col-sm-12 m-auto pb-2">
         <div id="video-gallery">
           @forelse($videos as $v)
-            <a href="https://www.youtube.com/watch?v=meBbDqAXago" data-poster="video-poster1.jpg" >
-                <img src="https://via.placeholder.com/150x150" />
+            <a href="{{ $v->link }}" data-poster="video-poster1.jpg" >
+                <img src="{{ $v->thumbnail }}" />
             </a>
           @empty
             <div class="alert alert-primary" role="alert">
@@ -60,7 +72,7 @@
   		</div>
   		<script>
   			$('#video-gallery').lightGallery({
-  				thumbnail:true,
+  				  thumbnail:true,
   			    animateThumb: true,
   			    showThumbByDefault: true
   	  		}); 

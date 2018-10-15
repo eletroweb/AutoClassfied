@@ -602,6 +602,7 @@ class RevendaController extends AppBaseController
 
   public function homepage(Request $request, $nome, $cidade, $id){
     $data = $request->all();
+    unset($data['page']);
     $revenda = Revenda::find($id);
     if(empty($data)){
       $anuncios = Anuncio::where('user', $revenda->user)->orderBy('id', 'desc')->paginate(20);
