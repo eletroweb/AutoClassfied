@@ -310,7 +310,7 @@
                       <!-- Item-->
                       <div class="item">
                         <div class="feed d-flex justify-content-between">
-                          <div class="feed-body d-flex justify-content-between"><a href="#" class="feed-profile"><img src="img/avatar-5.jpg" alt="person" class="img-fluid rounded-circle"></a>
+                          <div class="feed-body d-flex justify-content-between"><a href="#" class="feed-profile"></a>
                             <div class="content">
                               <h5>{{$contato->nome}}</h5><span>{{$contato->email}}</span>
                               <div class="full-date"><small>{{$contato->created_at->format('H:i')}} - {{$contato->created_at->format('d/m/Y')}}</small></div>
@@ -336,7 +336,7 @@
                     <div class="card-header">
                       <h3 class="h4">Últimos logs</h3>
                     </div>
-                    <div class="card-body no-padding">
+                    <!-- <div class="card-body no-padding">
                       <div class="item">
                         <div class="row">
                           <div class="col-4 date-holder text-right">
@@ -373,7 +373,7 @@
                           </div>
                         </div>
                       </div>
-                    </div>
+                    </div> -->
                   </div>
                 </div>
               </div>
