@@ -303,7 +303,7 @@ class AnuncioController extends Controller
     }
 
     public function admin(Request $request){
-      $anuncios = Anuncio::paginate(50);
+      $anuncios = Anuncio::orderBy('id', 'desc')->paginate(50);
       return view('anuncios.index')->with('anuncios', $anuncios);
     }
 
