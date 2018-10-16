@@ -170,7 +170,7 @@
         </div>
         @endforelse
       </div>
-      {{$anuncios->links()}}
+      {{$anuncios->appends(request()->input())->links()}}
     </div>
 </div>
 </div>

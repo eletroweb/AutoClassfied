@@ -307,5 +307,11 @@ class AnuncioController extends Controller
       return view('anuncios.index')->with('anuncios', $anuncios);
     }
 
+    public function changeStatus(Request $request){
+      $anuncio = Anuncio::find($request->input('anuncio'));
+      $anuncio->ativo = !$anuncio->ativo;
+      $anuncio->save();
+      return response()->json('Status modificado com sucesso!');
+    }
 
 }

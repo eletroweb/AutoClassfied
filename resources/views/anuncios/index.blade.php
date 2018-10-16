@@ -1,6 +1,7 @@
 @extends('admin.index')
 @section('content')
 <div class="row">
+  @include('elements.search')
   <div class="col-lg-12">
     <div class="card">
       <div class="card-close">
@@ -23,7 +24,7 @@
                 <th>Modelo</th>
                 <th>Versão</th>
                 <th>Preço</th>
-                <th>Ações</th>
+                <th>Ativo</th>
               </tr>
             </thead>
             <tbody>
@@ -44,7 +45,15 @@
                         <script>
                           $(document).ready(function(){
                             $('#status_{{$anuncio->id}}').change(function(){
-                              console.log('Testando');
+                              $.ajax({
+                                url: '/admin/anuncios/desabilitar',
+                                type: 'post',
+                                dataType: 'json',
+                                data: { anuncio: '{{$anuncio->id}}', _token: $('meta[name="csrf-token"]').attr('content') },
+                                success: function(data){
+                                  alert(data);
+                                }
+                              });
                             });
                           });
                         </script>
