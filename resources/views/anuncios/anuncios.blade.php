@@ -1,32 +1,33 @@
 @extends('layouts.app')
 @section('content')
 <form>
-<div class="row bg-primary mb-2">
-  <div class="col-sm-12 p-2">
-    <div class="container">
-      <div class="row">
-        <div class="col-sm-6">
-          <h4 class="text-white pt-1">Ordenar pesquisa</h4>
-        </div>
-        <div class="col-sm-6">
-          <div class="form-inline">
-            <select class="form-control mr-2" name="paginate">
-              <option value="10">10 anúncios por página</option>
-              <option value="20">20 anúncios por página</option>
-              <option value="30">30 anúncios por página</option>
-              <option value="30">40 anúncios por página</option>
-            </select>
-            <select class="form-control" name="order">
-              <option value="visualizacoes">Ordenar por relevância</option>
-              <option value="created_at">Ordenar por data de criação</option>
-            </select>
+
+<div class="container">
+  <div class="row bg-primary mb-2">
+    <div class="col-sm-12 p-2">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-6">
+            <h4 class="text-white pt-1">Ordenar pesquisa</h4>
+          </div>
+          <div class="col-sm-6">
+            <div class="form-inline">
+              <select class="form-control mr-2" name="paginate">
+                <option value="10">10 anúncios por página</option>
+                <option value="20">20 anúncios por página</option>
+                <option value="30">30 anúncios por página</option>
+                <option value="30">40 anúncios por página</option>
+              </select>
+              <select class="form-control" name="order">
+                <option value="visualizacoes">Ordenar por relevância</option>
+                <option value="created_at">Ordenar por data de criação</option>
+              </select>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
-<div class="container">
   <div class="row">
     <div class="col-sm-3">
       <h5>Filtros</h5>
