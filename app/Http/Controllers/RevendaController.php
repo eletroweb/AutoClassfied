@@ -51,7 +51,7 @@ class RevendaController extends AppBaseController
   public function index(Request $request)
   {
     $this->revendaRepository->pushCriteria(new RequestCriteria($request));
-    $revendas = $this->revendaRepository->all();
+    $revendas = $this->revendaRepository->paginate(30);
 
     return view('revendas.index')
     ->with('revendas', $revendas);
@@ -637,6 +637,13 @@ class RevendaController extends AppBaseController
                                         ->first();
     }
     return response()->json($visualizacoes);
+  }
+
+  public function changeStatus(Request $request){
+    $revenda = Revenda::find($request->input('revenda'));
+    $revenda->ativo = !$revenda->ativo;
+    $revenda->save();
+    return response()->json('Status modificado com sucesso!');
   }
 
 }

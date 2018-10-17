@@ -58,6 +58,7 @@ Route::middleware('auth')->group(function () {
 Route::get('/importxml', 'VeiculoController@updateVeiculos');
 Route::middleware(['auth','admin'])->group(function(){
   Route::post('/admin/anuncios/desabilitar', 'AnuncioController@changeStatus')->name('anuncio_change_status');
+  Route::post('/admin/revendas/desabilitar', 'RevendaController@changeStatus')->name('revenda_change_status');
   Route::get('/admin/anuncios/', 'AnuncioController@admin')->name('anuncios_adm');
   Route::post('/admin/option/update', 'OptionController@update')->name('option_update');
   Route::get('/admin/pagseguro', 'PagseguroController@admin')->name('pagseguro_config');

@@ -21,7 +21,9 @@
                     <th>Ativo</th>
                     <th>Endereco</th>
                     <th>Destaques</th>
+                    <th>Status</th>
                     <th colspan="3">Ações</th>
+
                 </tr>
             </thead>
             <tbody>
@@ -36,6 +38,28 @@
                        '{{$revenda->end->cidade}}', '{{$revenda->end->uf}}', '{{$revenda->end->numero}}')" class="btn btn-info">Ver</button></td>
                     <td>{!! $revenda->destaques !!}</td>
                     <td>
+                      <div class="form-check checkbox-slider--b-flat">
+                        <label>
+                          <input type="checkbox" id="status_{{$revenda->id}}" {{$revenda->ativo?'checked':''}}><span id="label_{{$revenda->id}}">.</span>
+                        </label>
+                      </div>
+                      <script>
+                        $(document).ready(function(){
+                          $('#status_{{$revenda->id}}').change(function(){
+                            $.ajax({
+                              url: '/admin/revendas/desabilitar',
+                              type: 'post',
+                              dataType: 'json',
+                              data: { revenda: '{{$revenda->id}}', _token: $('meta[name="csrf-token"]').attr('content') },
+                              success: function(data){
+                                alert(data);
+                              }
+                            });
+                          });
+                        });
+                      </script>
+                    </td>
+                    <td>
                         {!! Form::open(['route' => ['revendas.destroy', $revenda->id], 'method' => 'delete']) !!}
                         <div class='btn-group'>
                             <a href="{!! route('revendas.edit', [$revenda->id]) !!}" class='btn btn-default btn-xs'><i class="fas fa-edit"></i></a>
@@ -48,6 +72,7 @@
             </tbody>
         </table>
       </div>
+      {{$revendas->links()}}
     </div>
     <!-- Modal -->
     <div class="modal fade" id="enderecoModal" tabindex="-1" role="dialog" aria-labelledby="enderecoModalLabel" aria-hidden="true">

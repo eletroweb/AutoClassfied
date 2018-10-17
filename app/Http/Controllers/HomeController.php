@@ -15,7 +15,7 @@ class HomeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(){
-        $recentes = Anuncio::where('ativo', true)->orderBy('id', 'desc')->paginate(10);
+        $recentes = Anuncio::where('ativo', true)->orderBy('id', 'desc')->get()->random(10);
         $marcas = Marca::all();
         return view('home')->with(['recentes' => $recentes, 'home'=>true, 'marcas'=> $marcas]);
     }

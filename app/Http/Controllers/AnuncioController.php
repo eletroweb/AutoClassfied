@@ -42,10 +42,6 @@ class AnuncioController extends Controller
            'cambio'=> 'required'
         ]);
         $validatedData['user']= Auth::user()->id;
-        /*if(Auth::user()->id != intval($user)){
-          return redirect('/anuncie')->with('status', 'Você está trapaceando para publicar este anúncio');
-        }*/
-
         if($request->has('imagens')){
           $imagens = $request->input('imagens');
           $validatedData['titulo'] = 'building...';
@@ -84,6 +80,8 @@ class AnuncioController extends Controller
               $anuncio->save();
               return redirect("{$title}")->with('status', 'Anúncio publicado, porém só será exibido após a confirmação do seu pagamento.');
             }
+          }else{
+              
           }
           $anuncio->save();
           return redirect("{$title}")->with('status', 'Anúncio publicado com sucesso!');
