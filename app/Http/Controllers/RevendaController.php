@@ -51,7 +51,11 @@ class RevendaController extends AppBaseController
   public function index(Request $request)
   {
     $this->revendaRepository->pushCriteria(new RequestCriteria($request));
-    $revendas = $this->revendaRepository->paginate(30);
+    $s = $request->input('s');
+    $revendas = Revenda::where('nomefantasia', 'like', '%'.$s.'%')
+                ->orWhere('razaosocial', 'like', '%'.$s.'%')
+                ->orWhere('cnpj', 'like', '%'.$s.'%')
+                ->paginate(30);
 
     return view('revendas.index')
     ->with('revendas', $revendas);
