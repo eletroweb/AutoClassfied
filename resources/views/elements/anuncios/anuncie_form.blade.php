@@ -276,6 +276,7 @@
     <h3>Pagamento</h3>
     <section>
       @include('elements.anuncios.selecionar_pagamento')
+      <div class="g-recaptcha" data-sitekey="6LfJEm0UAAAAAKCvlnrl_9VdbGI6CGbL4jNlMKSt"></div>
     </section>
   </div>
 </form>
