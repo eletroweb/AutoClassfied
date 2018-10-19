@@ -92,7 +92,7 @@
       <!-- ./Tabs -->
       <hr>
       <div class="row">
-        <div class="col-sm-6">
+        <div class="col-sm-12">
           <h1>Descrição do anúncio</h1>
           <p class="text-justify w-100">
             {{$anuncio->descricao}}
