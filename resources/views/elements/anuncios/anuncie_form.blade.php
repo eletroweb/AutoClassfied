@@ -281,7 +281,9 @@
           <strong>{{ $errors->first('g-recaptcha-response') }}</strong>
       </span>
       @endif
-       {!! NoCaptcha::renderJs() !!}
+      <div class="form-group">
+        {!! NoCaptcha::display() !!}
+      </div>
     </section>
   </div>
 </form>
