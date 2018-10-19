@@ -39,7 +39,8 @@ class AnuncioController extends Controller
            'moto' => '',
            'km'=> 'required',
            'usado'=> '',
-           'cambio'=> 'required'
+           'cambio'=> 'required',
+           'g-recaptcha-response' => 'required|captcha'
         ]);
         $validatedData['user']= Auth::user()->id;
         if($request->has('imagens')){
@@ -81,7 +82,7 @@ class AnuncioController extends Controller
               return redirect("{$title}")->with('status', 'Anúncio publicado, porém só será exibido após a confirmação do seu pagamento.');
             }
           }else{
-              
+
           }
           $anuncio->save();
           return redirect("{$title}")->with('status', 'Anúncio publicado com sucesso!');

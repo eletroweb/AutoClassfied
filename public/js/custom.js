@@ -25,10 +25,6 @@ function showEndereco(rua, bairro, cidade, estado, numero){
 }
 
 $(document).ready(function(){
-  var recaptcha = $('#g-recaptcha-response');
-  if(recaptcha) {
-      recaptcha.prop("required", "required");
-  }
   drop_anuncio = $('#dropzone').dropzone({
     url: "/imagens/store",
     uploadMultiple: true,
