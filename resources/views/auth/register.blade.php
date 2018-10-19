@@ -95,7 +95,12 @@
         </div>
 
       </div>
-      <div class="g-recaptcha" data-sitekey="6LfJEm0UAAAAAKCvlnrl_9VdbGI6CGbL4jNlMKSt"></div>
+      @if ($errors->has('g-recaptcha-response'))
+      <span class="help-block">
+          <strong>{{ $errors->first('g-recaptcha-response') }}</strong>
+      </span>
+      @endif
+       {!! NoCaptcha::renderJs() !!}
       <button class="btn btn-primary btn-block" type="submit">Criar conta</button>
       <p class="mt-5 mb-3 text-muted text-center">Unicodono © Todos os direitos reservados</p>
     </form>
