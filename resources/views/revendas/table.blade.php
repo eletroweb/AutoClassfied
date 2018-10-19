@@ -17,7 +17,7 @@
                     <th>Razaosocial</th>
                     <th>Nomefantasia</th>
                     <th>Cnpj</th>
-                    <th>Usuário</th>
+                    <th>E-mail</th>
                     <th>Ativo</th>
                     <th>Endereco</th>
                     <th>Destaques</th>
@@ -32,7 +32,7 @@
                     <td>{!! $revenda->razaosocial !!}</td>
                     <td>{!! $revenda->nomefantasia !!}</td>
                     <td>{!! $revenda->cnpj !!}</td>
-                    <td>{!! $revenda->usuario->name !!}</td>
+                    <td>{!! $revenda->usuario->email !!}</td>
                     <td>{!! $revenda->ativo?'Sim':'Não' !!}</td>
                     <td><button type="button" onclick="showEndereco('{{$revenda->end->logradouro}}', '{{$revenda->end->bairro}}',
                        '{{$revenda->end->cidade}}', '{{$revenda->end->uf}}', '{{$revenda->end->numero}}')" class="btn btn-info">Ver</button></td>
