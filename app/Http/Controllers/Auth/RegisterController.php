@@ -54,7 +54,8 @@ class RegisterController extends Controller
             'password' => 'required|string|min:6|confirmed',
             'documento' => 'required|unique:users',
             'pessoa_fisica' => 'required',
-            'telefone' => 'required'
+            'telefone' => 'required',
+            'g-recaptcha-response' => 'required|captcha'
         ]);
     }
 
