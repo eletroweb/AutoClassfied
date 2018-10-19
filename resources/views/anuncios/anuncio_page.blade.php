@@ -141,6 +141,16 @@
                   <label for="mensagem">Mensagem</label>
                   <textarea class="form-control" id="mensagem" name="mensagem" rows="3" placeholder="Tire as dúvidas sobre o anúncio e faça a sua proposta ao anunciante"></textarea>
                 </div>
+                <div class="form-group">
+                  @if ($errors->has('g-recaptcha-response'))
+                  <span class="help-block">
+                      <strong>{{ $errors->first('g-recaptcha-response') }}</strong>
+                  </span>
+                  @endif
+                  <div class="form-group">
+                    {!! NoCaptcha::display() !!}
+                  </div>
+                </div>
                 <button type="submit" class="btn btn-secondary">Enviar contato</button>
               </form>
             </div>

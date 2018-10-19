@@ -10,6 +10,16 @@ use App\Mail\ContatoAnuncio as EmailAnuncio;
 class ContatoAnuncioController extends Controller
 {
     public function store(Request $request){
+      $validatedData = $request->validate([
+          'nome' => 'required',
+          'email' => 'required',
+          'mensagem' => 'required',
+          'telefone' => 'required',
+          'contato_whatsapp' => '',
+          'desejo_financiamento' => '',
+          'veiculo_troca' => '',
+          'g-recaptcha-response' => 'required|captcha'
+      ]);
       $contato = ContatoAnuncio::create($request->all());
       Mail::to($contato->getAnuncio()->users)->send(new EmailAnuncio($contato));
       return redirect("/anuncios/{$contato->getAnuncio()->nome}".'_'.$contato->getAnuncio()->id)
