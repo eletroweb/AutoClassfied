@@ -100,7 +100,10 @@
           <strong>{{ $errors->first('g-recaptcha-response') }}</strong>
       </span>
       @endif
-       {!! NoCaptcha::renderJs() !!}
+      <div class="form-group">
+          {!! NoCaptcha::display() !!}
+      </div>
+
       <button class="btn btn-primary btn-block" type="submit">Criar conta</button>
       <p class="mt-5 mb-3 text-muted text-center">Unicodono © Todos os direitos reservados</p>
     </form>
