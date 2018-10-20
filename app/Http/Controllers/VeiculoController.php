@@ -72,10 +72,10 @@ class VeiculoController extends Controller
     }
 
     public function getModelos(Request $request){
-      return response()->json(Modelos::where('marca', $request->input('marca'))->get());
+      return response()->json(Modelos::where('marca', $request->input('marca'))->select('nome', 'id')->get());
     }
 
     public function getVersoes(Request $request){
-      return response()->json(Versao::where('modelo', $request->input('modelo'))->get());
+      return response()->json(Versao::where('modelo', $request->input('modelo'))->select('nome', 'id')->get());
     }
 }

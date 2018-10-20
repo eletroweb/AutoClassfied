@@ -1,6 +1,6 @@
 @php
 	$m = $marcas->filter(function ($marca, $key)use($nome) {
-	    return strcmp(strtolower($marca->nome), $nome) == 0;
+	    return strcmp(strtolower($marca->label), $nome) == 0;
 	})->first();
 @endphp
 

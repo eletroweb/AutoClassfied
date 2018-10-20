@@ -5,7 +5,7 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-require('./bootstrap');
+//require('./bootstrap');
 
 window.Vue = require('vue');
 
@@ -14,9 +14,23 @@ window.Vue = require('vue');
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
-
-Vue.component('example', require('./components/Example.vue'));
+//import VueRouter from 'vue-router';
+//window.Vue.use(Vue);
+import VueResource from 'vue-resource'
+window.Vue.use(VueResource);
+import AnuncioComponent from './components/anuncios/Anuncio.vue'
+import NavBarComponent from './components/layout/NavBar.vue'
+import LoginComponent from './components/user/Login.vue'
+import AnuncioSearchComponent from './components/home/AnuncioSearch.vue'
+import VueSelect from 'vue-select';
 
 const app = new Vue({
-    el: '#app'
+    el: '#app',
+    components:{
+      'anuncio': AnuncioComponent,
+      'navbar': NavBarComponent,
+      'login': LoginComponent,
+      'anuncio-search-home': AnuncioSearchComponent,
+      'v-select': VueSelect
+    }
 });

@@ -164,6 +164,7 @@
     <div class="col-sm-9">
       <div class="list-group">
         @forelse($anuncios as $anuncio)
+          <anuncio anuncio="{{ $anuncio }}"></anuncio>
           @include('elements.anuncios.anuncio', ['anuncio'=> $anuncio])
         @empty
         <div class="alert alert-primary" role="alert">

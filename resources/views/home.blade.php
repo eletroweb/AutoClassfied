@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container-fluid" id="banner_principal">
-    @include('elements.homepage.anuncios_pesquisa')
+    <anuncio-search-home></anuncio-search-home>
 </div>
 <div class="container-fluid bg-primary text-center text-white p-4 d-none d-sm-block">
   <div class="row mt-3">

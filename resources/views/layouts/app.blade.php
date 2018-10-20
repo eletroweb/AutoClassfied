@@ -68,118 +68,32 @@
     }(document, 'script', 'facebook-jssdk'));
     </script>
     <div id="app">
-        <nav id="menu-principal" class="navbar navbar-expand-lg navbar-dark bg-primary">
-          <a class="navbar-brand" href="/">
-            <img src="{{asset('images/01.png')}}"  height="40" alt="">
-          </a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarColor01">
-            <ul class="navbar-nav mr-auto">
-              <li class="nav-item active">
-                <a class="nav-link" href="/">Início <span class="sr-only">(current)</span></a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{{route('anuncios')}}">Anúncios</a>
-              </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Comprar carros
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="/anuncios?tipo[]=carro&valor_maximo=&valor_minimo=&ano_maximo=&ano_minimo=&marca=&modelo=&versao=">Ofertas de carros</a>
-                  <a class="dropdown-item" href="/anuncios?tipo[]=moto&valor_maximo=&valor_minimo=&ano_maximo=&ano_minimo=&marca=&modelo=&versao=">Ofertas de moto</a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="/anuncios?tipo[]=carro&mais_buscados=1">Carros mais buscados</a>
-                  <a class="dropdown-item" href="/anuncios?tipo[]=moto&mais_buscados=1">Motos mais buscadas</a>
-                  <!--<a class="dropdown-item" href="#">Busca avançada</a>-->
-                  <a class="dropdown-item" href="{{route('revendas')}}">Encontre um revendedor</a>
-                  <a class="dropdown-item" href="{{route('fipe')}}">Avalie o seu carro</a>
-                </div>
-              </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Revendedores
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  @if(!Auth::check())
-                  <a class="dropdown-item" href="/login">Fazer login</a>
-                  @endif
-                  <a class="dropdown-item" href="{{route('contratar_revenda')}}">Quero contratar</a>
-                </div>
-              </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Vender carros
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="{{route('anuncie')}}">Anuncie seu carro</a>
-                  <a class="dropdown-item" href="{{route('anuncie')}}">Anuncie sua moto</a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="#">Planos para revendedores</a>
-                  <a class="dropdown-item" href="{{route('contratar_revenda')}}">Cadastro para revendas</a>
-                  <a class="dropdown-item" href="{{route('anuncie')}}">Cadastro anúncio simples</a>
-                  <a class="dropdown-item" href="{{route('fipe')}}">Avalie o seu veículo</a>
-                  <a class="dropdown-item" href="{{route('faq')}}">Perguntas Frequentes</a>
-                </div>
-              </li>
-              <!--<li class="nav-item">
-                <a class="nav-link" href="#">Avalie o seu veículo</a>
-              </li>-->
-              <!--<li class="nav-item">
-                <a class="nav-link" href="#">Financie o seu veículo</a>
-              </li>-->
-              <li class="nav-item">
-                <a class="nav-link" href="https://blog.unicodono.com.br" target="_blank">Blog</a>
-              </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Dúvidas
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="{{route('duvida_comprar_carro')}}">Como comprar seu veículo</a>
-                  <a class="dropdown-item" href="{{route('duvida_vender_carro')}}">Como vender seu veículo</a>
-                  <a class="dropdown-item" href="{{route('duvida_anuncios')}}">Anúncios</a>
-                  <a class="dropdown-item" href="{{route('fale_conosco')}}">Fale conosco</a>
-                </div>
-              </li>
-              @if(Auth::check())
-                <li class="nav-item">
-                  <a class="nav-link" href="{{route('minhaconta')}}">Minha conta</a>
-                </li>
-                @if(Auth::user()->isRevenda())
-                <li class="nav-item">
-                  <a class="nav-link" href="{{Auth::user()->isRevenda()->getUrl()}}">Minha revenda</a>
-                </li>
-                @endif
-                @if(Auth::user()->isAdmin())
-                <li class="nav-item">
-                  <a class="nav-link" href="/admin">Admin</a>
-                </li>
-                @endif
-                <li class="nav-item">
-                    <a  class="nav-link" href="{{ route('logout') }}"
-                        onclick="event.preventDefault();
-                                 document.getElementById('logout-form').submit();">
-                        Sair
-                    </a>
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                        {{ csrf_field() }}
-                    </form>
-                </li>
-              @else
-              <li class="nav-item">
-                <a class="nav-link" href="/login">Entrar</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/register">Criar conta</a>
-              </li>
-              @endif
-            </ul>
-          </div>
-        </nav>
-        @yield('content')
+        <navbar logo="{{asset('images/01.png')}}" anuncios="{{route('anuncios')}}"
+                ofertas_carros="/anuncios?tipo[]=carro&valor_maximo=&valor_minimo=&ano_maximo=&ano_minimo=&marca=&modelo=&versao="
+                ofertas_motos="/anuncios?tipo[]=moto&valor_maximo=&valor_minimo=&ano_maximo=&ano_minimo=&marca=&modelo=&versao="
+                carros_buscados="/anuncios?tipo[]=carro&mais_buscados=1"
+                motos_bucadas="/anuncios?tipo[]=moto&mais_buscados=1"
+                revendas="{{route('revendas')}}"
+                avalie_carro="{{route('fipe')}}"
+                login="/login"
+                contratar_revenda="{{route('contratar_revenda')}}"
+                anuncie_moto="{{route('anuncie')}}"
+                anuncie_carro="{{route('anuncie')}}"
+                fipe="{{route('fipe')}}"
+                faq="{{route('faq')}}"
+                blog="https://blog.unicodono.com.br"
+                faq_comprar_carro="{{route('duvida_comprar_carro')}}"
+                faq_vender_carro="{{route('duvida_vender_carro')}}"
+                faq_anuncios="{{route('duvida_anuncios')}}"
+                fale_conosco="{{route('fale_conosco')}}"
+                minha_conta="{{route('minhaconta')}}"
+                minha_revenda="{{ Auth::check()? Auth::user()->isRevenda()? Auth::user()->isRevenda()->getUrl() : '' : ''}}"
+                logado="{{Auth::check()?true:false}}"
+                logout="{{route('logout')}}"
+                criar_conta="/register"
+                >
+         </navbar>
+         @yield('content')
     </div>
     <footer>
       <div class="container-fluid">
@@ -307,6 +221,6 @@
     <script src="{{asset('js/dropzone.js')}}" charset="utf-8"></script>
     <script src="{{asset('js/custom.js')}}" charset="utf-8"></script>
     <script src="{{asset('js/recaptcha.js')}}" charset="utf-8"></script>
-
+    <script src="{{ asset('js/app.js') }}" charset="utf-8"></script>
 </body>
 </html>
