@@ -40,29 +40,41 @@
               <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
                 <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
                   <div class="d-flex flex-row bd-highlight mb-3 flex-wrap text-center">
+                    @if($anuncio->km > 0)
                     <div class="p-2 bd-highlight">
                       <p style="font-size: 14px;"><b style="font-size: 18px;">Quilometragem</b><br> {{$anuncio->km}}KM</p>
                     </div>
+                    @endif
+                    @if($anuncio->blindado)
                     <div class="p-2 bd-highlight">
                       <p style="font-size: 14px;"><b style="font-size: 18px;">Blindado</b><br> {{$anuncio->blindagem?'Sim':'Não'}}</p>
                     </div>
+                    @endif
+                    @if($anuncio->estuda_troca)
                     <div class="p-2 bd-highlight">
                       <p style="font-size: 14px;"><b style="font-size: 18px;">Estuda troca</b><br> {{$anuncio->estuda_troca?'Sim':'Não'}}</p>
                     </div>
+                    @endif
+                    @if($anuncio->unicodono)
                     <div class="p-2 bd-highlight">
                       <p style="font-size: 14px;"><b style="font-size: 18px;">Único dono</b><br> {{$anuncio->unicodono?'Sim':'Não'}}</p>
                     </div>
+                    @endif
+                    @if($anuncio->comprovante_manutencao)
                     <div class="p-2 bd-highlight">
                       <p style="font-size: 14px;"><b style="font-size: 18px;">Possui manual</b><br> {{$anuncio->manual?'Sim':'Não'}}</p>
                     </div>
-
+                    @endif
+                    @if($anuncio->comprovante_manutencao)
                     <div class="p-2 bd-highlight">
                       <p style="font-size: 14px;"><b style="font-size: 18px;">Manutenção comprovada</b><br> {{$anuncio->comprovante_manutencao?'Sim':'Não'}}</p>
                     </div>
+                    @endif
+                    @if($anuncio->laudo_cautelar)
                     <div class="p-2 bd-highlight">
                       <p style="font-size: 14px;"><b style="font-size: 18px;">Laudo cautelar</b><br> {{$anuncio->laudo_cautelar?'Sim':'Não'}}</p>
                     </div>
-
+                    @endif
                     @foreach($anunciodados as $dado)
                       <div class="p-2 bd-highlight">
                         <p style="font-size: 14px;"><b style="font-size: 18px;">{{ucfirst($dado->nome)}}</b><br> {{$dado->valor}}</p>
@@ -186,6 +198,7 @@
               </p>
             </div>
             <div class="fb-share-button" data-href="{{$anuncio->getFullUrl()}}" data-layout="button" data-size="large" data-mobile-iframe="true"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{$anuncio->getFullUrl()}}&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Compartilhar</a></div>
+            <a class="btn btn-primary" href="https://wa.me/?text={{$anuncio->getFullUrl()}}"><i class="fab fab-whatsapp"></i>WhatsApp</a>
           </div>
 
         </div>

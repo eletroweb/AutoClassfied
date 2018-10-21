@@ -220,7 +220,7 @@ class RevendaController extends AppBaseController
         $user = new User();
         $user->name = $veiculo->dealer;
         $user->email = $veiculo->email;
-        $user->password = Hash::make($cnpj);
+        $user->password = Hash::make(str_replace('/', '', str_replace('-', '', str_replace('.', '', $cnpj))));
         $user->pessoa_fisica = false;
         $user->documento = $veiculo->cnpj;
         $user->save();
@@ -239,6 +239,7 @@ class RevendaController extends AppBaseController
       $revenda->cnpj = $veiculo->cnpj;
       $revenda->user = $user->id;
       $revenda->endereco = $endereco->id;
+      $revenda->ativo = true;
       $revenda->save();
       $telefone = new UserDado();
       $telefone->nome = "telefone";
@@ -398,6 +399,10 @@ class RevendaController extends AppBaseController
           }
           if($veiculo->optional){
             foreach($veiculo->optional->item as $adicional){
+              if(strcmp($adicional, 'Único dono') == 0){
+                $anuncio->unicodono = true;
+                $anuncio->save();
+              }
               $this->createAdicional($anuncio, $adicional);
             }
           }
