@@ -49,10 +49,11 @@
 @if(Auth::check())
             @if(Auth::user()->id == $revenda->user)
               <a class="btn btn-light" href="/revenda/{{ $revenda->id }}/configuracoes"><i class="fa fa-cogs fa-3x"></i></a>
+              <a class="btn btn-light" href="{{ $revenda->getUrl().'/videos/adicionar' }}"><i class="fa fa-plus-square fa-3x"></i></a>
             @endif
-@endif 
+@endif
             <a class="btn btn-light" href="{{ $revenda->getUrl().'/videos' }}"><i class="fa fa-tv fa-3x"></i></a>
-            <a class="btn btn-light" href="{{ $revenda->getUrl().'/videos/adicionar' }}"><i class="fa fa-plus-square fa-3x"></i></a>
+
           </div>
         </div>
       </div>
