@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Imagem;
 use App\Http\Controllers\PagseguroController;
 use App\Versao;
+use App\Marca;
 
 class AnuncioController extends Controller
 {
@@ -173,7 +174,6 @@ class AnuncioController extends Controller
       unset($data['page']);
       if(!empty($data)){
         $filter = $this->filter_search($data);
-        //var_dump($filter[1]);exit;
         $m_buscados = $request->input('mais_buscados'); //ordem por número de visualizações
         $anuncios = Anuncio::where($filter[0])
             ->whereIn('moto', $filter[1]['tipos'])
@@ -189,7 +189,7 @@ class AnuncioController extends Controller
         ->paginate($paginacao);
       }
       $request->flash();
-      return view('anuncios.anuncios')->with('anuncios', $anuncios);
+      return view('anuncios.anuncios')->with(['anuncios'=> $anuncios, 'marca_detected'=> $this->searchByMarcaName($request->titulo)]);
     }
 
     public static function filter_search($data){
@@ -312,6 +312,15 @@ class AnuncioController extends Controller
       $anuncio->ativo = !$anuncio->ativo;
       $anuncio->save();
       return response()->json('Status modificado com sucesso!');
+    }
+
+    private function searchByMarcaName($nome){
+      $nomes = explode(" ", $nome);
+      foreach($nomes as $n){
+        if($marca = Marca::where('nome', $n)->first()){
+          return $marca->id;
+        }
+      }
     }
 
 }

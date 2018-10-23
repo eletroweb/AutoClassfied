@@ -55,6 +55,18 @@
     <script type="text/javascript" src="{{ asset('js/jquery.steps.min.js') }}"></script>
     <link rel="stylesheet" src=" {{ asset('lightGallery/css/lightgallery.min.css') }}">
     <script type="text/javascript" src="{{ asset('lightGallery/js/lightgallery-all.min.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+    <script src="{{asset('js/jquery.mask.min.js')}}" charset="utf-8"></script>
+    <script src="{{asset('js/anuncio/main.js')}}" charset="utf-8"></script>
+    <script src="{{asset('js/owl.carousel.min.js')}}" charset="utf-8"></script>
+    <script src="{{asset('js/lightbox.min.js')}}" charset="utf-8"></script>
+    <script type="text/javascript" src="{{asset('js/select2.full.min.js')}}"></script>
+    <script src="{{asset('js/fipe.js')}}" charset="utf-8"></script>
+    <script src="{{asset('js/cidades_estados.js')}}" charset="utf-8"></script>
+    <script src="{{asset('js/dropzone.js')}}" charset="utf-8"></script>
+    <script src="{{asset('js/custom.js')}}" charset="utf-8"></script>
+    <script src="{{asset('js/recaptcha.js')}}" charset="utf-8"></script>
 </head>
 <body>
   <div id="fb-root"></div>
@@ -295,18 +307,5 @@
         </div>
       </div>
     </footer>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
-    <script src="{{asset('js/jquery.mask.min.js')}}" charset="utf-8"></script>
-    <script src="{{asset('js/anuncio/main.js')}}" charset="utf-8"></script>
-    <script src="{{asset('js/owl.carousel.min.js')}}" charset="utf-8"></script>
-    <script src="{{asset('js/lightbox.min.js')}}" charset="utf-8"></script>
-    <script type="text/javascript" src="{{asset('js/select2.full.min.js')}}"></script>
-    <script src="{{asset('js/fipe.js')}}" charset="utf-8"></script>
-    <script src="{{asset('js/cidades_estados.js')}}" charset="utf-8"></script>
-    <script src="{{asset('js/dropzone.js')}}" charset="utf-8"></script>
-    <script src="{{asset('js/custom.js')}}" charset="utf-8"></script>
-    <script src="{{asset('js/recaptcha.js')}}" charset="utf-8"></script>
-
 </body>
 </html>

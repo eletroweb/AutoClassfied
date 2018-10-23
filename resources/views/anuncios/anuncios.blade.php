@@ -35,7 +35,7 @@
     </div>
     <div class="col-sm-9">
         <div class="input-group mb-3">
-          <input type="text" class="form-control" name="titulo" placeholder="Digite o que está procurando" aria-label="Digite o que está procurando" aria-describedby="basic-addon2">
+          <input type="text" class="form-control" name="titulo" value="" placeholder="Digite o que está procurando" aria-label="Digite o que está procurando" aria-describedby="basic-addon2">
           <div class="input-group-append">
             <button class="btn btn-outline-primary" type="submit">Procurar</button>
           </div>
@@ -122,15 +122,6 @@
                <select class="form-control select2" name="marca" id="marca">
                        <option value="">Selecione a marca</option>
                </select>
-
-                <script type="text/javascript">
-
-                    $('#marca').val("{{old('marca')}}");
-                    $('#marca').trigger('change');
-
-
-                </script>
-
          </li>
          <li class="nav-item mt-2">
                <select class="form-control select2" name="modelo" id="modelo">

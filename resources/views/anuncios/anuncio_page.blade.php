@@ -199,7 +199,9 @@
               </p>
             </div>
             <div class="fb-share-button" data-href="{{$anuncio->getFullUrl()}}" data-layout="button" data-size="large" data-mobile-iframe="true"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{$anuncio->getFullUrl()}}&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Compartilhar</a></div>
-            <a class="btn btn-primary" href="https://wa.me/?text={{$anuncio->getFullUrl()}}"><i class="fab fab-whatsapp"></i>WhatsApp</a>
+            <a class="btn btn-success rounded" href="https://wa.me/?text={{$anuncio->getFullUrl()}}"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+            <a class="btn btn-light rounded" style="background-color: #db4437; color:white" href="https://plus.google.com/share?url={{$anuncio->getFullUrl()}}"><i class="fab fa-google-plus"></i> Google+</a>
+            <a class="btn btn-light rounded" style="background-color: #00aced; border:#00aced; color:white" href="http://twitter.com/share?text={{$anuncio->titulo}}&url=http://{{$anuncio->getFullUrl()}}"><i class="fab fa-twitter"></i> Twitter</a>
           </div>
 
         </div>
