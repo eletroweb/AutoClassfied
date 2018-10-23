@@ -11,6 +11,11 @@
     <div class="col-sm-3">
       <nav class="nav flex-column">
         <a class="nav-link" href="{{route('meusanuncios')}}">Meus anúncios</a>
+        @if(Auth::user()->isRevenda())
+        <li class="nav-item">
+          <a class="nav-link" href="{{Auth::user()->isRevenda()->getUrl()}}">Minha revenda</a>
+        </li>
+        @endif
         <a class="nav-link" href="{{route('configuracoes_conta')}}">Configurações</a>
       </nav>
     </div>

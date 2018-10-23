@@ -39,7 +39,7 @@
         var myChart = new Chart(ctx, {
             type: 'line',
             data: {
-                labels: ["Janeiro", "Fevereiro", "Março", "Abril", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Dezembro"],
+                labels: ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"],
                 datasets: [{
                     label: 'Visualizações da sua revenda',
                     data: dados,
@@ -86,7 +86,7 @@
             }
         });
       }
-    });   
+    });
     </script>
   </div>
 </div>

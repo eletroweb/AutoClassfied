@@ -160,11 +160,7 @@
                 <li class="nav-item">
                   <a class="nav-link" href="{{route('minhaconta')}}">Minha conta</a>
                 </li>
-                @if(Auth::user()->isRevenda())
-                <li class="nav-item">
-                  <a class="nav-link" href="{{Auth::user()->isRevenda()->getUrl()}}">Minha revenda</a>
-                </li>
-                @endif
+                
                 @if(Auth::user()->isAdmin())
                 <li class="nav-item">
                   <a class="nav-link" href="/admin">Admin</a>

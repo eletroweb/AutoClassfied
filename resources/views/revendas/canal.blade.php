@@ -12,13 +12,23 @@
 				    {{$revenda->nomefantasia}}">
 			    @else
 			      <h1 class="jumbotron-heading">{{$revenda->nomefantasia}}</h1>
-			    @endif	
-		  	</div>		
+			    @endif
+		  	</div>
   		</div>
   	</div>
   </div>
 </div>
 <div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="{{ $revenda->getUrl() }}">Página da revenda</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Videos</li>
+        </ol>
+      </nav>
+    </div>
+  </div>
 	<h1>Vídeos do canal</h1>
 	<hr>
 	<div class="row">
@@ -26,17 +36,17 @@
 			<div id="video-gallery" class="d-flex flex-row bd-highlight mb-3 flex-wrap text-center">
 	          @forelse($videos as $v)
 	            <a href="{{ $v->link }}">
-	                <img src="{{ $v->thumbnail }}"/>
+	                <img height="100" src="{{ $v->thumb? Storage::url($v->thumb->url): '' }}"/>
 	            </a>
 	          @empty
 	            <div class="alert alert-primary" role="alert">
 	              Ainda não há videos publicados por aqui
 	            </div>
 	          @endforelse
-	        </div>	
+	        </div>
 		</div>
 		<div class="col-sm-4">
-			
+
 		</div>
 	</div>
 </div>
@@ -45,6 +55,6 @@
 		thumbnail:true,
 	    animateThumb: true,
 	    showThumbByDefault: true
-	}); 
+	});
 </script>
 @endsection
