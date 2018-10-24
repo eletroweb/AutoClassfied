@@ -283,7 +283,7 @@
                           <div class="info d-flex">
                             <div class="icon"><i class="fa fa-newspaper"></i></div>
                             <div class="title">
-                              <h5><a href="/anuncios/{{$recentes->getNomeFormated()}}_{{$recentes->id}}"> {{$recentes->titulo}}</a></h5>
+                              <h5><a href="{{$recentes->getUrl()}}"> {{$recentes->titulo}}</a></h5>
                               <p>{{str_limit($recentes->descricao, 100)}}</p>
                             </div>
                           </div>
