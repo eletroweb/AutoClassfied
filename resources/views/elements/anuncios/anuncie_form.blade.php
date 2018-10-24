@@ -261,7 +261,7 @@
         </div>
       </div>
     </section>
-    <h3>Imagens</h3>
+    <h3>Imagens e video</h3>
     <section>
       <h3>Selecione as imagens do seu anúncio (Maximo 12):</h3>
       <div class="col-sm-12">
@@ -271,7 +271,12 @@
         <div class="col-sm-12">
           <button class="btn btn-primary" onclick="drop_anuncio.click()" type="button" name="button">Selecionar imagem...</button>
         </div>
+        <div class="form-group">
+          <label for="video">Você também pode inserir um vídeo:</label>
+          <input class="form-control" type="text" name="video" id="video" value="" placeholder="Insira a url do seu vídeo">
+        </div>
       </div>
+
     </section>
     <h3>Pagamento</h3>
     <section>

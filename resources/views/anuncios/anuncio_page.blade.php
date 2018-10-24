@@ -8,6 +8,7 @@
               {{ session('status') }}
           </div>
       @endif
+      @include('flash::message')
       <div class="row">
         <div class="col-sm-12">
           <h3 class="mb-2" style="font-size: 30px">{{$anuncio->titulo}} <span class="badge badge-primary">{{$anuncio->ano}}</span></h3>
@@ -124,18 +125,18 @@
                 {{csrf_field()}}
                 <div class="form-group">
                   <label for="nome">Nome completo:</label>
-                  <input type="text" class="form-control" id="nome" name="nome" value="{{Auth::check()?Auth::user()->name:''}}" aria-describedby="nomeHelp" placeholder="Digite o seu nome">
+                  <input required type="text" class="form-control" id="nome" name="nome" value="{{Auth::check()?Auth::user()->name:''}}" aria-describedby="nomeHelp" placeholder="Digite o seu nome">
                   <small id="nomeHelp" class="form-text text-muted">Nome usado para identificarmos você.</small>
                 </div>
                 <input type="hidden" name="anuncio" value="{{$anuncio->id}}">
                 <div class="form-group">
                   <label for="email">E-mail:</label>
-                  <input type="email" class="form-control" id="email" value="{{Auth::check()?Auth::user()->email:''}}" name="email" aria-describedby="emailHelp" placeholder="Digite o seu email">
+                  <input required type="email" class="form-control" id="email" value="{{Auth::check()?Auth::user()->email:''}}" name="email" aria-describedby="emailHelp" placeholder="Digite o seu email">
                   <small id="emailHelp" class="form-text text-muted">Utilizaremos para entrar em contato com você.</small>
                 </div>
                 <div class="form-group">
                   <label for="telefone">Telefone</label>
-                  <input type="text" class="form-control" id="telefone" value="{{Auth::check()?Auth::user()->telefone():''}}" name="telefone" aria-describedby="telefoneHelp" placeholder="Digite o seu telefone">
+                  <input required type="text" class="form-control" id="telefone" value="{{Auth::check()?Auth::user()->telefone():''}}" name="telefone" aria-describedby="telefoneHelp" placeholder="Digite o seu telefone">
                   <small id="telefoneHelp" class="form-text text-muted">Utilizaremos para entrar em contato com você.</small>
                 </div>
                 <div class="form-group form-check">
@@ -152,7 +153,7 @@
                 </div>
                 <div class="form-group">
                   <label for="mensagem">Mensagem</label>
-                  <textarea class="form-control" id="mensagem" name="mensagem" rows="3" placeholder="Tire as dúvidas sobre o anúncio e faça a sua proposta ao anunciante"></textarea>
+                  <textarea required class="form-control" id="mensagem" name="mensagem" rows="3" placeholder="Tire as dúvidas sobre o anúncio e faça a sua proposta ao anunciante"></textarea>
                 </div>
                 <div class="form-group">
                   @if ($errors->has('g-recaptcha-response'))

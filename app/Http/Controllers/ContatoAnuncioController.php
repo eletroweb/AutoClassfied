@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\ContatoAnuncio;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\ContatoAnuncio as EmailAnuncio;
+use Flash;
 
 class ContatoAnuncioController extends Controller
 {
@@ -22,7 +23,7 @@ class ContatoAnuncioController extends Controller
       ]);
       $contato = ContatoAnuncio::create($request->all());
       Mail::to($contato->getAnuncio()->users)->send(new EmailAnuncio($contato));
-      return redirect("/anuncios/{$contato->getAnuncio()->nome}".'_'.$contato->getAnuncio()->id)
-              ->with('status', 'Contato enviado com sucesso! Aguarde o retorno do anunciante.');
+      Flash::success('Contato enviado com sucesso! Aguarde o retorno do anunciante.');
+      return redirect($contato->getAnuncio()->getUrl());
     }
 }

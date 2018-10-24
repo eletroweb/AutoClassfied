@@ -23,16 +23,16 @@
               </div>
             </div>
           </div>
-          <div class="plan-selection custom-control custom-radio">
+          <!--<div class="plan-selection custom-control custom-radio">
               <div class="plan-data">
                   <input id="anuncio_padrao" class="custom-control-input tipo_anuncio" name="anuncio_destacado" type="radio" value="n" />
                   <label for="anuncio_padrao" class="custom-control-label">Anúncio padrão</label>
                   <p class="plan-text">
-                    Não destacar anúncio                  
+                    Não destacar anúncio
                   </p>
                   <span class="plan-price" style="color: gray;">Gratuito</span>
               </div>
-          </div>
+          </div>-->
         </div>
     </div>
 </div>

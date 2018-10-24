@@ -70,13 +70,13 @@
                         </div>
                         <div class="row">
                           <div class="col-sm-6">
-                            <div class="custom-control custom-checkbox d-none d-sm-block">
+                            <div class="custom-control custom-checkbox">
                               <input type="checkbox" class="custom-control-input" id="usado" name="usado[]" value="1" checked>
                               <label class="custom-control-label" for="usado">Usado</label>
                             </div>
                           </div>
                           <div class="col-sm-6">
-                            <div class="custom-control custom-checkbox d-none d-sm-block">
+                            <div class="custom-control custom-checkbox">
                               <input type="checkbox" class="custom-control-input" id="nao_usado" name="usado[]" value="0" checked>
                               <label class="custom-control-label" for="nao_usado">Novo</label>
                             </div>

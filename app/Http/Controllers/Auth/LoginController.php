@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Auth;
 
 class LoginController extends Controller
 {
@@ -25,7 +26,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/';
+    protected $redirectTo = '/minha-conta';
 
     /**
      * Create a new controller instance.
@@ -36,4 +37,22 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
+    /**
+     * Handle an authentication attempt.
+     *
+     * @return Response
+     */
+    /*public function authenticate()
+    {
+        if (Auth::attempt(['email' => $email, 'password' => $password])) {
+            $user = Auth::user();
+            if($revenda = $user->isRevenda()){
+                $url = $revenda->getUrl();
+                return redirect($url);
+            }
+            return redirect('/anuncios');
+        }
+    }*/
+
 }

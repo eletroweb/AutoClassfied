@@ -16,6 +16,7 @@ use App\Imagem;
 use App\Http\Controllers\PagseguroController;
 use App\Versao;
 use App\Marca;
+use App\Video;
 
 class AnuncioController extends Controller
 {
@@ -38,6 +39,7 @@ class AnuncioController extends Controller
            //'user' => 'required',
            'ano'=> 'required',
            'moto' => '',
+           'video' => '',
            'km'=> 'required',
            'usado'=> '',
            'cambio'=> 'required',
@@ -82,8 +84,14 @@ class AnuncioController extends Controller
               $anuncio->save();
               return redirect("{$title}")->with('status', 'Anúncio publicado, porém só será exibido após a confirmação do seu pagamento.');
             }
-          }else{
-
+          }
+          if($request->has('video')){
+            $video = new Video();
+            $video->link = $request->input('video');
+            $video->anuncio_id = $anuncio->id;
+            $video->isHomeVideo = false;
+            $video->user_id = $anuncio->user;
+            $video->save();
           }
           $anuncio->save();
           return redirect("{$title}")->with('status', 'Anúncio publicado com sucesso!');
