@@ -49,8 +49,9 @@
 	              {{csrf_field()}}
 	              <small class="col-sm-6 w-100 text-left" >
 	                <button type="submit" onclick="confirm('Tem certeza que deseja realizar a alteração?')" class="btn {{$anuncio->ativo?'btn-warning':'btn-success'}} btn-sm">{{$anuncio->ativo?'Desabilitar anúncio':'Habilitar anúncio'}}</button>
-	              </small>
+                </small>
 	            </form>
+
 	            @endif
             @endif
           </div>
@@ -63,6 +64,7 @@
       <button class="btn btn-secondary" type="button" data-toggle="collapse" data-target="#collapse_{{$anuncio->id}}" aria-expanded="false" aria-controls="collapse_{{$anuncio->id}}">
         Informações do anúncio
       </button>
+      <a class="btn btn-primary" href="/anuncios/{{$anuncio->id}}/editar">Editar anúncio</a>
     </p>
     <div class="collapse" id="collapse_{{$anuncio->id}}">
         @if(!$anuncio->patrocinado)

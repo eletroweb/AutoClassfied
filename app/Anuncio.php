@@ -18,11 +18,11 @@ class Anuncio extends Model
 
 
     public function anuncio_dados(){
-        return $this->hasMany('App\AnuncioDados');
+        return $this->hasMany('App\AnuncioDados', 'anuncio');
     }
 
     public function anuncio_imagens(){
-        return $this->hasMany('App\AnuncioImagem');
+        return $this->hasMany('App\AnuncioImagem', 'anuncio');
     }
 
     public function users(){
@@ -104,6 +104,10 @@ class Anuncio extends Model
 
     public function getValor(){
       return number_format(substr($this->valor.'0', 0, -3), 2, ",", ".");
+    }
+
+    public function video(){
+      return $this->hasOne('App\Video');
     }
 
 }

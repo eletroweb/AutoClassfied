@@ -26,9 +26,9 @@
 @endif
 <div class="container">
   @if (session('status'))
-  <div class="alert alert-danger">
-    {{ session('status') }}
-  </div>
+    <div class="alert alert-danger">
+      {{ session('status') }}
+    </div>
   @endif
 <form id="anunciar" method="post" action="{{route('anuncieStore')}}"  enctype="multipart/form-data">
   <div class="container">
@@ -39,10 +39,16 @@
       <div class="row">
         <div class="col-sm-6">
           <div class="form-group">
+            {{isset($anuncio)}}
             <label for="veiculo">Marca</label>
             <select required class="form-control select2" name="marca" id="marca">
               <option value="">Selecione a marca...</option>
             </select>
+            <script type="text/javascript">
+              @isset($anuncio)
+                  $('#marca').val({{$anuncio->marca}}).trigger('change');
+              @endisset
+            </script>
           </div>
         </div>
         <div class="col-sm-6">
@@ -51,6 +57,11 @@
             <select required class="form-control select2" name="modelo" id="modelo">
               <option value="">Selecione o modelo...</option>
             </select>
+            <script type="text/javascript">
+            @isset($anuncio)
+              $('#modelo').val({{$anuncio->modelo}}).trigger('change');
+            @endisset
+            </script>
           </div>
         </div>
         <div class="col-sm-6">
@@ -59,6 +70,11 @@
             <select required class="form-control versao" name="versao" id="versao">
               <option value="">Selecione a marca...</option>
             </select>
+            <script type="text/javascript">
+            @isset($anuncio)
+              $('#versao').val({{$anuncio->versao}}).trigger('change');
+            @endisset
+            </script>
           </div>
         </div>
         <div class="col-sm-6">
@@ -66,8 +82,8 @@
             <label for="unicodono">Veículo único dono?</label>
             <select required class="form-control" name="unicodono" id="unicodono">
               <option value="">Selecione uma opção...</option>
-              <option value="1">Sim, veículo único dono</option>
-              <option value="0">Não, veículo já pertenceu a mais de um</option>
+              <option value="1" {{ isset($anuncio)? $anuncio->unicodono?'selected':'' :'' }}>Sim, veículo único dono</option>
+              <option value="0" {{ isset($anuncio)? !$anuncio->unicodono?'selected':'' :'' }}>Não, veículo já pertenceu a mais de um</option>
             </select>
           </div>
         </div>
@@ -76,14 +92,14 @@
         <div class="col-sm-6">
           <div class="form-group">
             <label for="valor">Valor</label>
-            <input required type="text" value="{{old('valor')}}" class="form-control" name="valor" id="valor" aria-describedby="valorHelp" placeholder="Digite o preço">
+            <input required type="text" value="{{ old('valor')? old('valor'): isset($anuncio)? $anuncio->valor:'' }}" class="form-control" name="valor" id="valor" aria-describedby="valorHelp" placeholder="Digite o preço">
             <small id="valorHelp" class="form-text text-muted">Este preço será exibido no anúncio</small>
           </div>
         </div>
         <div class="col-sm-6">
           <div class="form-group">
             <label for="ano">Ano de fabricação</label>
-            <input required type="text" value="{{old('ano')}}" class="form-control" name="ano" id="ano" aria-describedby="anoHelp" placeholder="Digite o ano do veículo">
+            <input required type="text" value="{{ old('ano')? old('ano'): isset($anuncio)? $anuncio->ano:'' }}" class="form-control" name="ano" id="ano" aria-describedby="anoHelp" placeholder="Digite o ano do veículo">
             <small id="anoHelp" class="form-text text-muted">O ano será exibido no anúncio</small>
           </div>
         </div>
@@ -92,7 +108,7 @@
         <div class="col-sm-6">
           <div class="form-group">
             <label for="ano">Ano do modelo</label>
-            <input required type="text" value="{{old('ano_modelo')}}" class="form-control" name="ano_modelo" id="ano_modelo" aria-describedby="anoModeloHelp" placeholder="Digite o ano do modelo do veículo">
+            <input required type="text" value="{{ old('ano_modelo')? old('ano_modelo'): isset($anuncio)? $anuncio->ano_modelo:'' }}" class="form-control" name="ano_modelo" id="ano_modelo" aria-describedby="anoModeloHelp" placeholder="Digite o ano do modelo do veículo">
             <small id="anoModeloHelp" class="form-text text-muted">O ano do modelo será exibido no anúncio</small>
           </div>
         </div>
@@ -101,8 +117,8 @@
               <label for="usado">Veículo usado?</label>
               <select class="form-control" name="usado" id="usado" required>
                 <option value="">Selecione uma opção...</option>
-                <option value="1">Sim, veículo usado</option>
-                <option value="0">Não, veículo novo</option>
+                <option value="1" {{ isset($anuncio)? $anuncio->usado?'selected':'' :'' }}>Sim, veículo usado</option>
+                <option value="0" {{ isset($anuncio)? !$anuncio->usado?'selected':'' :'' }}>Não, veículo novo</option>
               </select>
           </div>
         </div>
@@ -113,8 +129,8 @@
               <label for="blindagem">Veículo blindado?</label>
               <select class="form-control" name="blindagem" id="blindagem" required>
                 <option value="">Selecione uma opção...</option>
-                <option value="1">Sim, veículo blindado</option>
-                <option value="0">Sem blindagem</option>
+                <option value="1" {{ isset($anuncio)? $anuncio->blindagem?'selected':'' :'' }}>Sim, veículo blindado</option>
+                <option value="0" {{ isset($anuncio)? !$anuncio->blindagem?'selected':'' :'' }}>Sem blindagem</option>
               </select>
           </div>
         </div>
@@ -133,7 +149,7 @@
         <div class="col-sm-6">
           <div class="form-group">
             <label for="ano">Quilometragem</label>
-            <input required type="number" value="{{old('km')}}" class="form-control" name="km" id="km" aria-describedby="anoHelp" placeholder="Digite a quilometragem do veículo">
+            <input required type="number" value="{{ old('km')? old('km'): isset($anuncio)? $anuncio->km:'' }}" class="form-control" name="km" id="km" aria-describedby="anoHelp" placeholder="Digite a quilometragem do veículo">
             <small id="kmHelp" class="form-text text-muted">Informe a quilometragem do veículo</small>
           </div>
         </div>
@@ -142,10 +158,10 @@
             <label for="ano">Cambio</label>
             <select class="form-control" name="cambio" required="required">
               <option value="">Selecione o cambio...</option>
-              <option value="Manual">Manual</option>
-              <option value="Automático">Automático</option>
-              <option value="Automatizado">Automatizado</option>
-              <option value="Semi-Automático">Semi-Automático</option>
+              <option value="Manual" {{ isset($anuncio)? $anuncio->cambio=='Manual'?'selected':'' :'' }}>Manual</option>
+              <option value="Automático" {{ isset($anuncio)? $anuncio->cambio=='Automático'?'selected':'' :'' }}>Automático</option>
+              <option value="Automatizado" {{ isset($anuncio)? $anuncio->cambio=='Automatizado'?'selected':'' :'' }}>Automatizado</option>
+              <option value="Semi-Automático" {{ isset($anuncio)? $anuncio->cambio=='Semi-Automático'?'selected':'' :'' }}>Semi-Automático</option>
             </select>
           </div>
         </div>
@@ -156,8 +172,8 @@
             <label for="manual">Possui manual do veículo?</label>
             <select class="form-control" name="manual" id="manual" required>
               <option value="">Selecione uma opção...</option>
-              <option value="1">Sim, possuo</option>
-              <option value="0">Não possuo</option>
+              <option value="1"{{ isset($anuncio)? $anuncio->manual?'selected':'' :'' }}>Sim, possuo</option>
+              <option value="0"{{ isset($anuncio)? !$anuncio->manual?'selected':'' :'' }}>Não possuo</option>
             </select>
           </div>
         </div>
@@ -166,8 +182,8 @@
             <label for="chave_reserva">Possui chave reserva?</label>
             <select class="form-control" name="chave_reserva" id="chave_reserva" required>
               <option value="">Selecione uma opção...</option>
-              <option value="1">Sim, possuo</option>
-              <option value="0">Não possuo</option>
+              <option value="1" {{ isset($anuncio)? !$anuncio->chave_reserva?'selected':'' :'' }}>Sim, possuo</option>
+              <option value="0" {{ isset($anuncio)? $anuncio->chave_reserva?'selected':'' :'' }}>Não possuo</option>
             </select>
           </div>
         </div>
@@ -176,8 +192,8 @@
             <label for="comprovante_manutencao">Possui comprovante de manutenção?</label>
             <select class="form-control" name="comprovante_manutencao" id="comprovante_manutencao" required>
               <option value="">Selecione uma opção...</option>
-              <option value="1">Sim, possuo</option>
-              <option value="0">Não possuo</option>
+              <option value="1" {{ isset($anuncio)? $anuncio->comprovante_manutencao?'selected':'' :'' }}>Sim, possuo</option>
+              <option value="0" {{ isset($anuncio)? !$anuncio->comprovante_manutencao?'selected':'' :'' }}>Não possuo</option>
             </select>
           </div>
         </div>
@@ -186,8 +202,8 @@
             <label for="estuda_troca">Estuda troca?</label>
             <select class="form-control" name="estuda_troca" id="estuda_troca" required>
               <option value="">Selecione uma opção...</option>
-              <option value="1">Sim, pretendo realizar a troca</option>
-              <option value="0">Não pretendo realizar a troca</option>
+              <option value="1" {{ isset($anuncio)? $anuncio->estuda_troca?'selected':'' :'' }}>Sim, pretendo realizar a troca</option>
+              <option value="0" {{ isset($anuncio)? !$anuncio->estuda_troca?'selected':'' :'' }}>Não pretendo realizar a troca</option>
             </select>
           </div>
         </div>
@@ -196,8 +212,8 @@
             <label for="estuda_troca">Possui laudo cautelar?</label>
             <select class="form-control" name="laudo_cautelar" id="laudo_cautelar" required>
               <option value="">Selecione uma opção...</option>
-              <option value="1">Sim, possuo laudor cautelar</option>
-              <option value="0">Não possuo laudo cautelar</option>
+              <option value="1" {{ isset($anuncio)? $anuncio->laudo_cautelar?'selected':'' :'' }}>Sim, possuo laudor cautelar</option>
+              <option value="0" {{ isset($anuncio)? !$anuncio->laudo_cautelar?'selected':'' :'' }}>Não possuo laudo cautelar</option>
             </select>
           </div>
         </div>
@@ -206,13 +222,13 @@
             <label for="combustivel">Combustível</label>
             <select id="combustivel" name="combustivel" class="form-control" required="required">
               <option value="">Selecione o combustível...</option>
-              <option value="Gasolina">Gasolina</option>
-              <option value="Alcool">Alcool</option>
-              <option value="Diesel">Diesel</option>
-              <option value="Flex">Flex</option>
-              <option value="Hibrido">Híbrido</option>
-              <option value="Gás natural">Gás natural</option>
-              <option value="Elétrico">Elétrico</option>
+              <option value="Gasolina" {{ isset($anuncio)? $anuncio->combustivel =='Gasolina' ? 'selected':'' :'' }}>Gasolina</option>
+              <option value="Alcool" {{ isset($anuncio)? $anuncio->combustivel =='Alcool' ? 'selected':'' :'' }}>Alcool</option>
+              <option value="Diesel" {{ isset($anuncio)? $anuncio->combustivel =='Diesel' ? 'selected':'' :'' }}>Diesel</option>
+              <option value="Flex" {{ isset($anuncio)? $anuncio->combustivel =='Flex' ? 'selected':'' :'' }}>Flex</option>
+              <option value="Hibrido" {{ isset($anuncio)? $anuncio->combustivel =='Híbrido' ? 'selected':'' :'' }}>Híbrido</option>
+              <option value="Gás natural" {{ isset($anuncio)? $anuncio->combustivel =='Gás natural' ? 'selected':'' :'' }}>Gás natural</option>
+              <option value="Elétrico" {{ isset($anuncio)? $anuncio->combustivel =='Elétrico' ? 'selected':'' :'' }}>Elétrico</option>
             </select>
           </div>
         </div>
@@ -221,13 +237,13 @@
         <div class="col-sm-6">
           <div class="form-group">
             <label for="cor">Cor</label>
-            <input type="text" name="cor" value="{{old('cor')}}" class="form-control" id="cor" placeholder="Digite o nome da cor" required="required">
+            <input type="text" name="cor" value="{{ old('cor')? old('cor'): isset($anuncio)? $anuncio->cor:'' }}" class="form-control" id="cor" placeholder="Digite o nome da cor" required="required">
           </div>
         </div>
         <div class="col-sm-6">
           <div class="form-group">
             <label for="cor">Portas</label>
-            <input type="number" class="form-control" value="{{old('portas')}}" name="portas" id="portas" placeholder="Digite o número de portas" required="required">
+            <input type="number" class="form-control" value="{{ old('portas')? old('portas'): isset($anuncio)? $anuncio->portas:'' }}" name="portas" id="portas" placeholder="Digite o número de portas" required="required">
           </div>
         </div>
       </div>
@@ -240,7 +256,8 @@
         <div class="p-2 bd-highlight">
           <div class="form-group">
             <div class="custom-control custom-checkbox">
-              <input type="checkbox" class="custom-control-input" id="opicional_{{$key}}" name="opcionais[]" value="{{$op}}">
+              <input {{ isset($anuncio)? $anuncio->anuncio_dados->contains($op)? 'checked':'' : '' }}
+                type="checkbox" class="custom-control-input" id="opicional_{{$key}}" name="opcionais[]" value="{{$op}}">
               <label class="custom-control-label" for="opicional_{{$key}}">
                 {{ $op }}
               </label>
@@ -256,7 +273,15 @@
       <div class="row">
         <div class="col-sm-12">
           <div class="form-group">
-            <textarea class="form-control" name="descricao" rows="8" placeholder="Conte nos sobre o seu veículo..."></textarea>
+            <textarea class="form-control" name="descricao" rows="8" placeholder="Conte nos sobre o seu veículo...">
+              @if(old('descricao'))
+                {{ old('descricao') }}
+              @else
+                @isset($anuncio)
+                  {{ $anuncio->descricao }}
+                @endisset
+              @endif
+            </textarea>
           </div>
         </div>
       </div>
@@ -265,7 +290,19 @@
     <section>
       <h3>Selecione as imagens do seu anúncio (Maximo 12):</h3>
       <div class="col-sm-12">
-        <div id="dropzone" class="row mt-3 mb-3 box"></div>
+        @isset($anuncio)
+          @foreach($anuncio->anuncio_imagens as $a)
+          <div id="dropzone" class="row mt-3 mb-3 box">
+            <div class="dz-details">
+              <div class="dz-filename">
+                <span data-dz-name="" class="badge badge-primary">Imagem do anúncio</span>
+              </div>
+              <img data-dz-thumbnail="" alt="Imagem do anúncio" src="{{ Storage::url($a->imagems->url) }}">
+              <button type="button" class="excluir_imagem btn btn-danger">Excluir</button>
+            </div>
+          </div>
+          @endforeach
+        @endisset
       </div>
       <div class="row">
         <div class="col-sm-12">
@@ -273,11 +310,14 @@
         </div>
         <div class="form-group">
           <label for="video">Você também pode inserir um vídeo:</label>
-          <input class="form-control" type="text" name="video" id="video" value="" placeholder="Insira a url do seu vídeo">
+          <input class="form-control" type="text" name="video" id="video"
+            value="{{ old('video')? old('video'): isset($anuncio) ? isset($anuncio->video->url)?$anuncio->video->url:'':'' }}" placeholder="Insira a url do seu vídeo">
         </div>
       </div>
-
     </section>
+    @isset($anuncio)
+
+    @else
     <h3>Pagamento</h3>
     <section>
       @include('elements.anuncios.selecionar_pagamento')
@@ -290,6 +330,7 @@
         {!! NoCaptcha::display() !!}
       </div>
     </section>
+    @endisset
   </div>
 </form>
 <script type="text/javascript" src="{{asset('js/anuncio/pagseguro.js')}}"></script>
@@ -377,10 +418,9 @@ form.children("div").steps({
 });
 </script>
 
-<input type="hidden" id="endereco" value="{{Auth::user()->endereco}}">
 <script type="text/javascript">
 $(document).ready(function(){
-  if($('#endereco').val() == ''){
+  if({{!Auth::user()->endereco}}){
     $('#enderecoCadastro').modal();
   }
   $('#enderecoCadastro').on('hidden.bs.modal', function (e) {

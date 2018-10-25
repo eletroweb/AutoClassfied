@@ -20,13 +20,23 @@ use App\Video;
 
 class AnuncioController extends Controller
 {
+
+  private $opcionais = [
+                'Ar-condicionado', 'Direção hidráulica', 'Vidros Elétricos', 'Travas Elétricas',
+                'Alarme', 'Ar quente', 'Banco de motorista com regulagem', 'Airbag', 'ABS', 'Teto solar',
+                'Bancos de couro', 'DVD/Multimídia', 'Computador de bordo', 'Rodas de liga leve', 'Tração 4x4'
+              ];
+
     public function anuncie(Request $request){
-      $opcionais = [
-                    'Ar-condicionado', 'Direção hidráulica', 'Vidros Elétricos', 'Travas Elétricas',
-                    'Alarme', 'Ar quente', 'Banco de motorista com regulagem', 'Airbag', 'ABS', 'Teto solar',
-                    'Bancos de couro', 'DVD/Multimídia', 'Computador de bordo', 'Rodas de liga leve', 'Tração 4x4'
-                  ];
-      return view('anuncios.anuncie')->with('opcionais', $opcionais);
+      return view('anuncios.anuncie')->with('opcionais', $this->opcionais);
+    }
+
+    public function edit(Request $request, $id){
+      $anuncio = Anuncio::findOrFail($id);
+      if(Auth::user()->id == $anuncio->user or Auth::user()->isAdmin()){
+        return view('anuncios.anuncie')->with(['anuncio'=> $anuncio, 'opcionais'=> $this->opcionais]);
+      }
+      return redirect('/');
     }
 
     public function anuncieStore(Request $request){
