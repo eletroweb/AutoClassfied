@@ -133,6 +133,7 @@
             <li><a href="/admin/modelos"> <i class="fa fa-car"></i>Modelos </a></li>
             <li><a href="/admin/versoes"> <i class="fa fa-list-ol"></i>Versões </a></li>
             <li><a href="/admin/revendas"> <i class="fa fa-store"></i>Revendas </a></li>
+            <li><a><i class="fa fa-comments"></i>Contatos</a></li>
             <li><a href="#anuncios" aria-expanded="false" data-toggle="collapse"> <i class="fa fa-newspaper"></i>Anúncios</a>
               <ul id="anuncios" class="collapse list-unstyled ">
                 <li><a href="/admin/anuncios">Ver todos</a></li>
