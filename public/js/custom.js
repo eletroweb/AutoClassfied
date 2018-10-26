@@ -24,6 +24,11 @@ function showEndereco(rua, bairro, cidade, estado, numero){
   $('#enderecoModal').modal('show');
 }
 
+function showModalMessage(message){
+  $('#messageModal').html(message);
+  $('#modalMessage').modal('show');
+}
+
 $(document).ready(function(){
   $('#destaques').slick({
       infinite: true,

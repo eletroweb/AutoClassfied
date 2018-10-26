@@ -26,4 +26,16 @@ class ContatoAnuncioController extends Controller
       Flash::success('Contato enviado com sucesso! Aguarde o retorno do anunciante.');
       return redirect($contato->getAnuncio()->getUrl());
     }
+
+    public function index(Request $request){
+      if($s = $request->input('s')){
+        $contatos = ContatoAnuncio::join('anuncios', 'anuncios.id', '=', 'contato_anuncios.anuncio')
+                                  ->where('anuncios.titulo', 'like', "%$s%")
+                                  ->select(['anuncios.*', 'contato_anuncios.*'])
+                                  ->orderBy('contato_anuncios.id', 'desc')->paginate(15);
+        return view('contatos.index')->with('contatos', $contatos);
+      }
+      $contatos = ContatoAnuncio::orderBy('id', 'desc')->paginate(15);
+      return view('contatos.index')->with('contatos', $contatos);
+    }
 }

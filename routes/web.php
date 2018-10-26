@@ -58,6 +58,7 @@ Route::middleware('auth')->group(function () {
 
 Route::get('/importxml', 'VeiculoController@updateVeiculos');
 Route::middleware(['auth','admin'])->group(function(){
+  Route::get('/admin/contatos', 'ContatoAnuncioController@index')->name('contatos_anuncios');
   Route::post('/admin/anuncios/desabilitar', 'AnuncioController@changeStatus')->name('anuncio_change_status');
   Route::post('/admin/revendas/desabilitar', 'RevendaController@changeStatus')->name('revenda_change_status');
   Route::get('/admin/anuncios/', 'AnuncioController@admin')->name('anuncios_adm');
