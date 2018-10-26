@@ -12,7 +12,7 @@
 				  <div class="input-group-append">
 				    <button class="btn btn-outline-primary" type="submit" id="button-addon2">Pesquisar</button>
 				  </div>
-				</div>	
+				</div>
   			</form>
   		</div>
   	</div>
@@ -44,7 +44,7 @@
                   <tr>
                       <td>{!! $c->nome !!}</td>
                       <td>{!! $c->email !!}</td>
-                      <td><button onclick="showModalMessage('{{str_replace(['\n', '\r'], '', $c->mensagem)}}')" class="btn btn-info">Ver</button></td>
+                      <td><button class="showModalMessage btn btn-info" text="{{$c->mensagem}}" class="btn btn-info">Ver</button></td>
                       <td>{!! $c->telefone !!}</td>
                       <td><a class="btn btn-info" target="_blank" href="{{ App\Anuncio::find($c->anuncio)->getUrl() }}">Ver</a></td>
                       <td>{!! $c->contato_whatsapp? 'Sim':'Não'!!}</td>

@@ -30,6 +30,9 @@ function showModalMessage(message){
 }
 
 $(document).ready(function(){
+  $('.showModalMessage').click(function(){
+    showModalMessage($(this).attr('text'));
+  });
   $('#destaques').slick({
       infinite: true,
       slidesToShow: 3,
