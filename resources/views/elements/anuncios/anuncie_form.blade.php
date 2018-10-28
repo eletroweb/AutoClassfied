@@ -44,14 +44,8 @@
             <select required class="form-control select2" name="marca" id="marca">
               <option value="">Selecione a marca...</option>
             </select>
+            <input type="hidden" id="marca_loaded" value="{{$anuncio->marca}}">
             <script type="text/javascript">
-              $('#marca').val('{{$anuncio->marca}}').trigger('change.select2');
-              @isset($anuncio)
-              $(document).ready(function(){
-                  
-                });
-                
-              @endisset
             </script>
           </div>
         </div>
@@ -61,11 +55,7 @@
             <select required class="form-control select2" name="modelo" id="modelo">
               <option value="">Selecione o modelo...</option>
             </select>
-            <script type="text/javascript">
-            @isset($anuncio)
-              $('#modelo').val('{{$anuncio->modelo}}').trigger('change');
-            @endisset
-            </script>
+            <input type="hidden" id="modelo_loaded" value="{{$anuncio->modelo}}">
           </div>
         </div>
         <div class="col-sm-6">
@@ -74,11 +64,7 @@
             <select required class="form-control versao" name="versao" id="versao">
               <option value="">Selecione a marca...</option>
             </select>
-            <script type="text/javascript">
-            @isset($anuncio)
-              $('#versao').val('{{}$anuncio->versao}').trigger('change');
-            @endisset
-            </script>
+            <input type="hidden" id="versao_loaded" value="{{$anuncio->versao}}">
           </div>
         </div>
         <div class="col-sm-6">

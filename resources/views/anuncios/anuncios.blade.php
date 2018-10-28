@@ -1,7 +1,6 @@
 @extends('layouts.app')
 @section('content')
 <form>
-
 <div class="container">
   <div class="row bg-primary mb-2">
     <div class="col-sm-12 p-2">
@@ -122,26 +121,20 @@
                <select class="form-control select2" name="marca" id="marca">
                        <option value="">Selecione a marca</option>
                </select>
+               <input type="hidden" id="marca_loaded" value="{{ old('marca') }}">
          </li>
          <li class="nav-item mt-2">
                <select class="form-control select2" name="modelo" id="modelo">
                        <option value="">Selecione o modelo</option>
                </select>
-
-                <script type="text/javascript">
-                  $('#modelo').val("{{old('modelo')}}");
-                </script>
+               <input type="hidden" id="modelo_loaded" value="{{ old('modelo') }}">
 
          </li>
          <li class="nav-item mt-2">
                <select class="form-control select2" name="versao" id="versao">
                        <option value="">Selecione a versão</option>
                </select>
-               @if(old('versao'))
-                <script type="text/javascript">
-                  $('#versao').val("{{old('versao')}}");
-                </script>
-               @endif
+               <input type="hidden" id="versao_loaded" value="{{ old('versao') }}">
          </li>
          <input type="hidden" name="mais_buscados" value="0">
          <li class="nav-item mt-2">

@@ -17,6 +17,7 @@ use App\Http\Controllers\PagseguroController;
 use App\Versao;
 use App\Marca;
 use App\Video;
+use App\Modelos as Modelo;
 
 class AnuncioController extends Controller
 {
@@ -190,6 +191,8 @@ class AnuncioController extends Controller
       $paginacao = $request->input('paginate')?intval($request->input('paginate')):20;
       $data = $request->all();
       unset($data['page']);
+      $marca_detected = null;
+      $modelo_detected = null;
       if(!empty($data)){
         $filter = $this->filter_search($data);
         $m_buscados = $request->input('mais_buscados'); //ordem por número de visualizações
@@ -207,7 +210,34 @@ class AnuncioController extends Controller
         ->paginate($paginacao);
       }
       $request->flash();
-      return view('anuncios.anuncios')->with(['anuncios'=> $anuncios, 'marca_detected'=> $this->searchByMarcaName($request->titulo)]);
+      return view('anuncios.anuncios')->with(['anuncios'=> $anuncios,
+       'marca_detected'=> $marca_detected, 'modelo_detected'=> $modelo_detected
+      ]);
+    }
+
+    private static function extractMarca($titulo){
+      if(!empty($e)){
+        $e = explode($titulo, ' ');
+        foreach ($e as $word) {
+          if($marca = Marca::where('nome', "%$word%")->first()){
+            return $marca->id;
+          }
+        }
+      }
+      return null;
+    }
+
+    private static function extractModelo($titulo){
+      if(!empty($e)){
+        $e = explode($titulo, ' ');
+        foreach ($e as $word) {
+          if($modelo = Modelo::where('nome', "%$word%")->first()){
+            return $modelo->id;
+          }
+        }
+      }
+      
+      return null;
     }
 
     public static function filter_search($data){
@@ -241,10 +271,18 @@ class AnuncioController extends Controller
           }
         }
       }
+      if($marca = AnuncioController::extractMarca($data['titulo'])){
+        $param['marca'] = $marca;
+      }
+    
+      if($modelo = AnuncioController::extractModelo($data['titulo'])){
+        $param['modelo'] = $modelo;
+      }
+      
       return [$param, $details];
     }
 
-    public function index(Request $request, $tipo, $marca, $modelo, $versao, $titulo, $ano, $blindado, $id){
+    public function view(Request $request, $tipo, $marca, $modelo, $versao, $titulo, $ano, $blindado, $id){
       $anuncio = Anuncio::find($id);
       if($tipo != 'anuncios'){
         if(!$anuncio->users->isRevenda()){

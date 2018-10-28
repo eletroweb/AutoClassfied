@@ -225,6 +225,10 @@ $(document).ready(function(){
             text : item.nome
         }));
       });
+      if($('#marca_loaded') !== undefined){
+        $('#marca').val($('#marca_loaded').val()).trigger('change');
+      }
+      
     }
   });
   $('#marca').change(function(){
@@ -244,6 +248,9 @@ $(document).ready(function(){
                 text : item.nome
             }));
           });
+          if($('#modelo_loaded') !== undefined){
+            $('#modelo').val($('#modelo_loaded').val()).trigger('change');
+          } 
         }
       }
     });
@@ -265,6 +272,9 @@ $(document).ready(function(){
             }));
           });
         }
+        if($('#versao_loaded') !== undefined){
+          $('#versao').val($('#versao_loaded').val()).trigger('change');
+        } 
       }
     });
   });
