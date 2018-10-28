@@ -6,10 +6,10 @@
   }})">
     <div class="container">
       <div class="row">
-        <form class="col-sm-5 m-auto" style="z-index: 10;">
-          <div id="avatar-revenda">
+        <form class="col-sm-5 m-auto" style="z-index: 10;" enctype="multipart/form-data">
+          <div class="avatar-revenda">
             @if($revenda->logo)
-            <img src="{{Storage::url($revenda->logo)}}" width="300" class="mx-auto d-block" alt="
+            <img src="{{Storage::url($revenda->logo)}}" width="130" class="mx-auto d-block" alt="
             {{$revenda->nomefantasia}}">
             @else
               <h1 class="jumbotron-heading">{{$revenda->nomefantasia}}</h1>

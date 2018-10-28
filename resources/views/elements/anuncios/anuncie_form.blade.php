@@ -45,8 +45,12 @@
               <option value="">Selecione a marca...</option>
             </select>
             <script type="text/javascript">
+              $('#marca').val('{{$anuncio->marca}}').trigger('change.select2');
               @isset($anuncio)
-                  $('#marca').val({{$anuncio->marca}}).trigger('change');
+              $(document).ready(function(){
+                  
+                });
+                
               @endisset
             </script>
           </div>
@@ -59,7 +63,7 @@
             </select>
             <script type="text/javascript">
             @isset($anuncio)
-              $('#modelo').val({{$anuncio->modelo}}).trigger('change');
+              $('#modelo').val('{{$anuncio->modelo}}').trigger('change');
             @endisset
             </script>
           </div>
@@ -72,7 +76,7 @@
             </select>
             <script type="text/javascript">
             @isset($anuncio)
-              $('#versao').val({{$anuncio->versao}}).trigger('change');
+              $('#versao').val('{{}$anuncio->versao}').trigger('change');
             @endisset
             </script>
           </div>
