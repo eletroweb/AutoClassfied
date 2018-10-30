@@ -30,7 +30,7 @@
       {{ session('status') }}
     </div>
   @endif
-<form id="anunciar" method="post" action="{{route('anuncieStore')}}"  enctype="multipart/form-data">
+<form id="anunciar" method="post" action="{{ $anuncio? route('update_anuncio', ['id'=> $anuncio->id]):route('anuncieStore')}}"  enctype="multipart/form-data">
   <div class="container">
     <h3>Informações básicas</h3>
     {{csrf_field()}}

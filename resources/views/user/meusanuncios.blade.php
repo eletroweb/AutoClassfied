@@ -9,6 +9,7 @@
         Você não tem nenhum anúncio ativo
       </div>
     @endforelse
+    {{ $anuncios->links() }}
   </div>
 </div>
 @endsection

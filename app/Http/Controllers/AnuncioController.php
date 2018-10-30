@@ -32,6 +32,24 @@ class AnuncioController extends Controller
       return view('anuncios.anuncie')->with('opcionais', $this->opcionais);
     }
 
+    public function update(Request $request, $id){
+      $anuncio = Anuncio::find($id);
+      $anuncio->marca = $request->input('marca');
+      $anuncio->modelo = $request->input('modelo');
+      $anuncio->versao = $request->input('versao');
+      $anuncio->valor = $request->input('valor');
+      $anuncio->descricao = $request->input('descricao');
+      $anuncio->ano = $request->input('ano');
+      $anuncio->moto = $request->input('moto');
+      $anuncio->video = $request->input('video');
+      $anuncio->ano = $request->input('ano');
+      $anuncio->usado = $request->input('usado');
+      $anuncio->usado = $request->input('cambio');
+      $anuncio->save();
+      Flash::success('Anúncio atualizado com sucesso!');
+      return redirect($anuncio->getUrl());
+    }
+
     public function edit(Request $request, $id){
       $anuncio = Anuncio::findOrFail($id);
       if(Auth::user()->id == $anuncio->user or Auth::user()->isAdmin()){

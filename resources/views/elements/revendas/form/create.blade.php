@@ -10,7 +10,7 @@
       @endif
       </div>
       <div class="form-group">
-        <label for="capa">Capa da sua página ( 1200x106 )</label>
+        <label for="capa">Capa da sua página ( 1200x250 )</label>
         <input id="capa" type="file" name="capa" class="form-control" accept="image/*">
         @if ($errors->has('capa'))
             <span class="help-block">
@@ -20,7 +20,7 @@
       </div>
       <div class="form-group">
       @if(isset($revenda) && $revenda->logo)
-          <img src="{{Storage::url($revenda->logo)}}" class="thumbnail" height="50%" width="50%">
+          <img src="{{Storage::url($revenda->logo)}}" class="thumbnail" height="130" width="130">
       @endif
       </div>
       <div class="form-group">
