@@ -289,14 +289,15 @@ class AnuncioController extends Controller
           }
         }
       }
-      if($marca = AnuncioController::extractMarca($data['titulo'])){
-        $param['marca'] = $marca;
-      }
-    
-      if($modelo = AnuncioController::extractModelo($data['titulo'])){
-        $param['modelo'] = $modelo;
-      }
+      if(isset($data['titulo'])){
+        if($marca = AnuncioController::extractMarca($data['titulo'])){
+          $param['marca'] = $marca;
+        }
       
+        if($modelo = AnuncioController::extractModelo($data['titulo'])){
+          $param['modelo'] = $modelo;
+        }  
+      }
       return [$param, $details];
     }
 
