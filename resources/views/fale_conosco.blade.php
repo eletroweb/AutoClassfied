@@ -33,7 +33,7 @@
         </div>
         <div class="form-group">
           <label for="telefone">Telefone:</label>
-          <input type="text" class="form-control" name="telefone" id="telefone" aria-describedby="telefoneHelp" placeholder="Digite o seu telefone" required>
+          <input type="text" class="form-control telefone" name="telefone" aria-describedby="telefoneHelp" placeholder="Digite o seu telefone" required>
           <small id="telefoneHelp" class="form-text text-muted">Utilizaremos o seu telefone para um possível retorno.</small>
         </div>
         <div class="form-group">
