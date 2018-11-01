@@ -214,7 +214,8 @@ class AnuncioController extends Controller
       if(!empty($data)){
         $filter = $this->filter_search($data);
         $m_buscados = $request->input('mais_buscados'); //ordem por número de visualizações
-        $anuncios = Anuncio::where($filter[0])
+        $anuncios = Anuncio::
+            where($filter[0])
             ->whereIn('moto', $filter[1]['tipos'])
             ->whereIn('usado', isset($filter[1]['usado'])?$filter[1]['usado']:array(0,1))
             ->whereIn('blindagem', isset($filter[1]['blindagem'])?$filter[1]['blindagem']:array(0,1))
@@ -378,10 +379,7 @@ class AnuncioController extends Controller
     }
 
     public function admin(Request $request){
-      $anuncios = Anuncio::join('anuncios_imagems', 'anuncios.id', '=', 'anuncios_imagems.anuncio')
-                  ->select('anuncios.*')
-                  ->where(DB::raw("count(anuncios_imagems.anuncio) as count"), '>', '0')
-                  ->orderBy('id', 'desc')->paginate(50);
+      $anuncios = Anuncio::orderBy('id', 'desc')->paginate(50);
       return view('anuncios.index')->with('anuncios', $anuncios);
     }
 

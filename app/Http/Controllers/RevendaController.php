@@ -421,21 +421,18 @@ class RevendaController extends AppBaseController
                 $img = $old_img? $old_img:(new Imagem());
                 $img->url= $url;
                 $img->save();
-                if($old = AnuncioImagem::where('imagem', $img->id)->first()){
-                  if($anuncio->id !== $old->anuncio){
-                    $img_anuncio = $old? $old:(new AnuncioImagem());
-                    $img_anuncio->imagem = $img->id;
-                    $img_anuncio->anuncio = $anuncio->id;
-                    $img_anuncio->first = $old?$img_anuncio->first:$first;
-                    $img_anuncio->save();
-                    $first = false;  
-                  }
+                if(!AnuncioImagem::where([['imagem', '=', $img->id],['anuncio', '=', $anuncio->id]])->first()){
+                  $img_anuncio = new AnuncioImagem();
+                  $img_anuncio->imagem = $img->id;
+                  $img_anuncio->anuncio = $anuncio->id;
+                  $img_anuncio->first = $first;
+                  $img_anuncio->save();
+                  $first = false;  
                 }
               }
             }
           }
         }
-
   }
 
   private function import($veiculo, $revenda){
