@@ -17,7 +17,7 @@ class CreateContatoAnunciosTable extends Migration
             $table->increments('id');
             $table->string('nome');
             $table->string('email');
-            $table->string('telefone');
+            $table->string('telefone')->nullable();
             $table->boolean('contato_whatsapp')->default(false);
             $table->boolean('desejo_financiamento')->default(false);
             $table->boolean('veiculo_troca')->default(false);
