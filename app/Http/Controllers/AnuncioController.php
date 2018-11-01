@@ -345,13 +345,13 @@ class AnuncioController extends Controller
       $revenda = $anuncio->users->isRevenda();
       $count = Anuncio::count();
       $relacionados = array();
-      if($count > 4){
-        $relacionados =
-          $revenda?
-          Anuncio::where('user', $anuncio->users->id)->get()->random($count < 4?$count:4)
-          :
-          Anuncio::where([['id', '!=', $anuncio->id]])->get()->random($count < 4?$count:4);
+      if ($revenda) {
+        $myCount = Anuncio::where('user', $anuncio->users->id)->count();
+        $relacionados = Anuncio::where('user', $anuncio->users->id)->get()->random($myCount < 4?$myCount:4);
+      }else{
+        $relacionados = Anuncio::where([['id', '!=', $anuncio->id]])->get()->random($count < 4?$count:4);
       }
+      
 
       return view('anuncios.anuncio_page')
         ->with(
