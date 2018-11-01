@@ -378,7 +378,10 @@ class AnuncioController extends Controller
     }
 
     public function admin(Request $request){
-      $anuncios = Anuncio::orderBy('id', 'desc')->paginate(50);
+      $anuncios = Anuncio::join('anuncios_imagems', 'anuncios.id', '=', 'anuncios_imagems.anuncio')
+                  ->select('anuncios.*')
+                  ->where(DB::raw("count(anuncios_imagems.anuncio) as count"), '>', '0')
+                  ->orderBy('id', 'desc')->paginate(50);
       return view('anuncios.index')->with('anuncios', $anuncios);
     }
 
