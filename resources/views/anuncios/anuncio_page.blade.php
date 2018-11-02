@@ -136,7 +136,7 @@
                 </div>
                 <div class="form-group">
                   <label for="telefone">Telefone</label>
-                  <input required="telefone" type="text" class="form-control" id="telefone" value="{{Auth::check()?Auth::user()->telefone():''}}" name="telefone" aria-describedby="telefoneHelp" placeholder="Digite o seu telefone">
+                  <input type="text" class="form-control" id="telefone" value="{{Auth::check()?Auth::user()->telefone():''}}" name="telefone" aria-describedby="telefoneHelp" placeholder="Digite o seu telefone">
                   <small id="telefoneHelp" class="form-text text-muted">Utilizaremos para entrar em contato com você.</small>
                 </div>
                 <div class="form-group form-check">

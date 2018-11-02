@@ -15,7 +15,7 @@ class ContatoAnuncioController extends Controller
           'nome' => 'required',
           'email' => 'required',
           'mensagem' => 'required',
-          'telefone' => 'required',
+          'telefone' => '',
           'contato_whatsapp' => '',
           'desejo_financiamento' => '',
           'veiculo_troca' => '',
