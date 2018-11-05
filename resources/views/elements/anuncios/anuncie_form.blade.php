@@ -30,7 +30,7 @@
       {{ session('status') }}
     </div>
   @endif
-<form id="anunciar" method="post" action="{{ $anuncio? route('update_anuncio', ['id'=> $anuncio->id]):route('anuncieStore')}}"  enctype="multipart/form-data">
+<form id="anunciar" method="post" action="{{ isset($anuncio)? route('update_anuncio', ['id'=> $anuncio->id]):route('anuncieStore')}}"  enctype="multipart/form-data">
   <div class="container">
     <h3>Informações básicas</h3>
     {{csrf_field()}}
@@ -44,7 +44,7 @@
             <select required class="form-control select2" name="marca" id="marca">
               <option value="">Selecione a marca...</option>
             </select>
-            <input type="hidden" id="marca_loaded" value="{{$anuncio->marca}}">
+            <input type="hidden" id="marca_loaded" value="{{ isset($anuncio)? $anuncio->marca: ''}}">
             <script type="text/javascript">
             </script>
           </div>
@@ -55,7 +55,7 @@
             <select required class="form-control select2" name="modelo" id="modelo">
               <option value="">Selecione o modelo...</option>
             </select>
-            <input type="hidden" id="modelo_loaded" value="{{$anuncio->modelo}}">
+            <input type="hidden" id="modelo_loaded" value="{{ isset($anuncio)? $anuncio->modelo:''}}">
           </div>
         </div>
         <div class="col-sm-6">
@@ -64,7 +64,7 @@
             <select required class="form-control versao" name="versao" id="versao">
               <option value="">Selecione a marca...</option>
             </select>
-            <input type="hidden" id="versao_loaded" value="{{$anuncio->versao}}">
+            <input type="hidden" id="versao_loaded" value="{{ isset($anuncio)? $anuncio->versao : ''}}">
           </div>
         </div>
         <div class="col-sm-6">
@@ -82,7 +82,12 @@
         <div class="col-sm-6">
           <div class="form-group">
             <label for="valor">Valor</label>
-            <input required type="text" value="{{ old('valor')? old('valor'): isset($anuncio)? $anuncio->valor:'' }}" class="form-control" name="valor" id="valor" aria-describedby="valorHelp" placeholder="Digite o preço">
+            @if(isset($anuncio))
+              <input required type="text" value="{{ old('valor')? old('valor'): $anuncio->valor }}" class="form-control" name="valor" id="valor" aria-describedby="valorHelp" placeholder="Digite o preço">
+            @else
+              <input required type="text" value="{{ old('valor')? old('valor'): '' }}" class="form-control" name="valor" id="valor" aria-describedby="valorHelp" placeholder="Digite o preço">
+            @endif
+            
             <small id="valorHelp" class="form-text text-muted">Este preço será exibido no anúncio</small>
           </div>
         </div>
@@ -280,9 +285,9 @@
     <section>
       <h3>Selecione as imagens do seu anúncio (Maximo 12):</h3>
       <div class="col-sm-12">
+        <div id="dropzone" class="row mt-3 mb-3 box">
         @isset($anuncio)
           @foreach($anuncio->anuncio_imagens as $a)
-          <div id="dropzone" class="row mt-3 mb-3 box">
             <div class="dz-details">
               <div class="dz-filename">
                 <span data-dz-name="" class="badge badge-primary">Imagem do anúncio</span>
@@ -290,15 +295,15 @@
               <img data-dz-thumbnail="" alt="Imagem do anúncio" src="{{ Storage::url($a->imagems->url) }}">
               <button type="button" class="excluir_imagem btn btn-danger">Excluir</button>
             </div>
-          </div>
           @endforeach
         @endisset
+        </div>
       </div>
       <div class="row">
         <div class="col-sm-12">
           <button class="btn btn-primary" onclick="drop_anuncio.click()" type="button" name="button">Selecionar imagem...</button>
         </div>
-        <div class="form-group">
+        <div class="form-group col-sm-6">
           <label for="video">Você também pode inserir um vídeo:</label>
           <input class="form-control" type="text" name="video" id="video"
             value="{{ old('video')? old('video'): isset($anuncio) ? isset($anuncio->video->url)?$anuncio->video->url:'':'' }}" placeholder="Insira a url do seu vídeo">
@@ -410,7 +415,7 @@ form.children("div").steps({
 
 <script type="text/javascript">
 $(document).ready(function(){
-  if({{!Auth::user()->endereco}}){
+  if({{Auth::user()->endereco == null? 'true' : 'false' }}){
     $('#enderecoCadastro').modal();
   }
   $('#enderecoCadastro').on('hidden.bs.modal', function (e) {
