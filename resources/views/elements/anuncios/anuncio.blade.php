@@ -9,7 +9,7 @@
         <div class="col-sm-7">
           <div class="d-flex w-100 justify-content-between">
             <h5 class="mb-1"><b>{{$anuncio->titulo}}</b></h5>
-            <small>Ano {{$anuncio->ano}}</small>
+            <small>Ano {{$anuncio->ano_modelo}}</small>
           </div>
           <h5 class="mb-1">
             <span class="badge badge-success">
