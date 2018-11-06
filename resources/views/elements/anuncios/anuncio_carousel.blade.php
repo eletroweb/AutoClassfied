@@ -8,7 +8,7 @@
           </div>
           <div class="col-sm-12">
             <span class="badge badge-success mb-1" style="font-size: 14px;">R${{number_format(substr($r->valor.'0', 0, -3), 2, ",", ".")}}</span>
-            <span class="badge badge-primary">{{$r->ano}}</span>
+            <span class="badge badge-primary">{{$r->ano_modelo}}</span>
           </div>
       </div>
       <p class="card-text">{{str_limit($r->descricao, 200, '...')}}</p>
