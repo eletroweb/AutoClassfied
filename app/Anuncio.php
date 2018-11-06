@@ -84,7 +84,7 @@ class Anuncio extends Model
       $versao = str_replace(' ', '-', trim($this->versaos->nome));
       $titulo = $this->getNomeFormated();
       $blindado = $this->blindagem?'blindado':'preco';
-      $ano = $this->ano_modelo;
+      $ano = $this->ano_modelo?$this->ano_modelo:$this->ano;
       $id = $this->id;
       if($revenda = $this->users->isRevenda()){
           $nome = str_replace(' ', '-', $revenda->nomefantasia);
