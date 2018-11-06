@@ -46,6 +46,10 @@
                       <p style="font-size: 14px;"><b style="font-size: 18px;">Quilometragem</b><br> {{$anuncio->km}}KM</p>
                     </div>
                     @endif
+                    <div class="p-2 bd-highlight">
+                      <p style="font-size: 14px;"><b style="font-size: 18px;">Ano do modelo</b><br>
+                       {{$anuncio->ano_modelo}}</p>
+                    </div>
                     @if($anuncio->blindado)
                     <div class="p-2 bd-highlight">
                       <p style="font-size: 14px;"><b style="font-size: 18px;">Blindado</b><br> {{$anuncio->blindagem?'Sim':'Não'}}</p>
@@ -61,7 +65,7 @@
                       <p style="font-size: 14px;"><b style="font-size: 18px;">Único dono</b><br> {{$anuncio->unicodono?'Sim':'Não'}}</p>
                     </div>
                     @endif
-                    @if($anuncio->comprovante_manutencao)
+                    @if($anuncio->manual)
                     <div class="p-2 bd-highlight">
                       <p style="font-size: 14px;"><b style="font-size: 18px;">Possui manual</b><br> {{$anuncio->manual?'Sim':'Não'}}</p>
                     </div>
