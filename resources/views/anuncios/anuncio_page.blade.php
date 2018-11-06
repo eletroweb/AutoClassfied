@@ -47,8 +47,8 @@
                     </div>
                     @endif
                     <div class="p-2 bd-highlight">
-                      <p style="font-size: 14px;"><b style="font-size: 18px;">Ano do modelo</b><br>
-                       {{$anuncio->ano_modelo}}</p>
+                      <p style="font-size: 14px;"><b style="font-size: 18px;">Ano</b><br>
+                       {{$anuncio->ano}}/{{$anuncio->ano_modelo}}</p>
                     </div>
                     @if($anuncio->blindado)
                     <div class="p-2 bd-highlight">
