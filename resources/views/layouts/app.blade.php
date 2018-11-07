@@ -70,6 +70,7 @@
     <script src="{{asset('js/custom.js')}}" charset="utf-8"></script>
     <script src="{{asset('js/recaptcha.js')}}" charset="utf-8"></script>
     <script src="{{asset('slick/slick.min.js')}}" charset="utf-8"></script>
+    <meta name="google-site-verification" content="52jYonIJEO_OHq32-bOwaFQNQ7OTY440WRrDbdPdyt0" />
 </head>
 <body>
   <div id="fb-root"></div>
