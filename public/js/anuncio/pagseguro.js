@@ -63,7 +63,7 @@ $(document).ready(function(){
 	});
 	$('#btnPagar').click(function(){
 		var tipo_pagamento = $('.tipo_pagamento').val();
-		console.log(tipo_pagamento);
+		console.log($('.tipo_pagamento'));
 		if(tipo_pagamento !== 'boleto'){
 			if($('#nome').val() !== '' && $('#telefone').val().length >= 10 && $('#cpf').val().length == 14 && $('#logradouro').val() !== ''
 				&& $('#cidade').val() !== '' && $('#bairro').val() !== '' && $('#uf').val() !== '' && $('#cep').val().length == 9
