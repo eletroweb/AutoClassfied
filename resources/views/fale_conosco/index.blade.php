@@ -36,6 +36,7 @@
                 <th>Celular</th>
                 <th>Assunto</th>
                 <th>Mensagem</th>
+                <th>Data<th>
               </tr>
             </thead>
             <tbody>
@@ -48,6 +49,7 @@
                       <td>{!! $c->celular !!}</td>
                       <td>{!! $c->assunto !!}</td>
                       <td><button class="showModalMessage btn btn-info" text="{{$c->mensagem}}" class="btn btn-info">Ver</button></td>
+                      <td>{{ $c->created_at->format('d/m/Y H:i') }}</td>
                   </tr>
               @empty
                 <tr>
