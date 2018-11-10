@@ -8,7 +8,17 @@ use App\Contato;
 class ContatoController extends Controller
 {
     public function store(Request $request){
-      Contato::create($request->all());
+       $validated = $request->validate([
+            'nome' => 'required',
+            'email' => 'required',
+            'cpf' => 'required',
+            'telefone' => 'required',
+            'celular' => '',
+            'mensagem' => 'required',
+            'assunto' => 'required',
+            'g-recaptcha-response' => 'required|captcha'
+        ]);
+      Contato::create($validated);
       return redirect('/fale-conosco')->with('status', 'Obrigado por entrar em contato conosco!');
     }
 
