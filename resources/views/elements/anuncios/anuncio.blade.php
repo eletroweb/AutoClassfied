@@ -21,7 +21,7 @@
           <div class="row">
             <div class="col-sm-4 text-center">
               <i class="fa fa-calendar-alt fa-1x"></i><br>
-              {{$anuncio->ano}}
+              {{$anuncio->ano_modelo}}
             </div>
             <div class="col-sm-4 text-center">
               <i class="fa fa-car fa-1x"></i><br>

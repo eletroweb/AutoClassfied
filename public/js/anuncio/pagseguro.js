@@ -44,65 +44,79 @@ $(document).ready(function(){
   //Tipo anúncio é y para anúncios destacados
 	$('.tipo_anuncio').change(function(){
 		if($(this).val() == 'y'){
-      $('#tipo_pagamento_destaque').collapse('show');
-      $('.tipo_pagamento').change(function(){
-        if($(this).val() === 'boleto'){
-            loadSenderHash();
-        }else{
-          $('#checkoutModal').modal();    
-        }
-      });
+	      $('#tipo_pagamento_destaque').collapse('show');
+	      $('.tipo_pagamento').change(function(){
+	        if($(this).val() === 'boleto'){
+	            //loadSenderHash();
+	            $('.credito').css('display', 'none');
+	            $('#alert_message').html('Iremos gerar e disponibilizar um boleto para que você possa realizar o pagamento. O seu anúncio será aprovado após a confirmação do pagamento por parte do banco. A aprovação do pagamento do boleto costuma demorar no máximo 72 horas.');
+	        	$('#checkoutModal').modal();  
+	        }else{
+	        	$('.credito').css('display', 'block');
+	          	$('#alert_message').html('O pagamento só será efetivado após a realização do anúncio. Nós não armazenamos os seus dados do cartão de crédito.');  
+	          	$('#checkoutModal').modal();  
+	        }
+	      });
 		}else{
-      $('#tipo_pagamento_destaque').collapse('hide');
-    }
+	      $('#tipo_pagamento_destaque').collapse('hide');
+	    }
 	});
 	$('#btnPagar').click(function(){
-		if($('#nome').val() !== '' && $('#telefone').val().length >= 10 && $('#cpf').val().length == 14 && $('#logradouro').val() !== ''
+		var tipo_pagamento = $('.tipo_pagamento').val();
+		if(tipo_pagamento !== 'boleto'){
+			if($('#nome').val() !== '' && $('#telefone').val().length >= 10 && $('#cpf').val().length == 14 && $('#logradouro').val() !== ''
 				&& $('#cidade').val() !== '' && $('#bairro').val() !== '' && $('#uf').val() !== '' && $('#cep').val().length == 9
 				&& $('#cartao').val().length == 19 && $('#month').val().length == 2 && $('#year').val().length == 4) {
-					//Se o formulário estiver todo preenchido...
-					$('#btnPagar').prop('disabled', true);
-					$('#btnPagar').html('Processando informações...');
-					PagSeguroDirectPayment.getBrand({
-						cardBin: $('#cartao').cleanVal(),
-							success: function(response) {
-								//bandeira encontrada
-								var param = {
-										cardNumber: $('#cartao').cleanVal(),
-										brand: response.bin,
-										cvv: $('#cvv').val(),
-										expirationMonth: $('#month').val(),
-										expirationYear: $('#year').val(),
-										success: function(r) {
-												$('#card-token').val(r.card.token);
-												$('#btnPagar').html('Informações processadas');
-                        $('#checkoutModal').modal('hide');
-										},
-										error: function(r) {
-												//tratamento do erro
-												alert('Erro ao processar informações de pagamento.');
-												$('#btnPagar').html('Processar informações');
-												$('#btnPagar').prop('disabled', false);
-												console.log(r);
-										},
-										complete: function(r) {
-												//tratamento comum para todas chamadas
-												//$('#btnPagar').html('Processar pagamento');
-										}
+			//Se o formulário estiver todo preenchido...
+			$('#btnPagar').prop('disabled', true);
+			$('#btnPagar').html('Processando informações...');
+			PagSeguroDirectPayment.getBrand({
+				cardBin: $('#cartao').cleanVal(),
+					success: function(response) {
+						//bandeira encontrada
+						var param = {
+								cardNumber: $('#cartao').cleanVal(),
+								brand: response.bin,
+								cvv: $('#cvv').val(),
+								expirationMonth: $('#month').val(),
+								expirationYear: $('#year').val(),
+								success: function(r) {
+										$('#card-token').val(r.card.token);
+										$('#btnPagar').html('Informações processadas');
+                						$('#checkoutModal').modal('hide');
+								},
+								error: function(r) {
+										//tratamento do erro
+										alert('Erro ao processar informações de pagamento.');
+										$('#btnPagar').html('Processar informações');
+										$('#btnPagar').prop('disabled', false);
+										console.log(r);
+								},
+								complete: function(r) {
+										//tratamento comum para todas chamadas
+										//$('#btnPagar').html('Processar pagamento');
 								}
-								PagSeguroDirectPayment.createCardToken(param);
-							},
-							error: function(response) {
-								alert('Erro ao processar bandeira do cartão, verifique se o número foi digitado corretamente.');
-								console.log(response);
-							},
-							complete: function(response) {
+						}
+						PagSeguroDirectPayment.createCardToken(param);
+					},
+					error: function(response) {
+						alert('Erro ao processar bandeira do cartão, verifique se o número foi digitado corretamente.');
+						console.log(response);
+					},
+					complete: function(response) {
 
-							}
-					});
-				}else{
-					alert('Você precisa preencher todas as informações para prosseguir');
-				}
+					}
+			});
+			}else{
+				alert('Você precisa preencher todas as informações para prosseguir');
+			}
+		}else{
+			if($('#nome').val() !== '' && $('#telefone').val().length >= 10 && $('#cpf').val().length == 14 && $('#logradouro').val() !== ''
+				&& $('#cidade').val() !== '' && $('#bairro').val() !== '' && $('#uf').val() !== '' && $('#cep').val().length == 9){
+				$('#btnPagar').html('Informações processadas');
+                $('#checkoutModal').modal('hide');
+			}
+		}
 	});
 });
 
