@@ -8,6 +8,7 @@ use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Client;
 use Carbon\Carbon;
 use App\Notification;
+use Auth;
 
 class PagseguroController extends Controller
 {
@@ -33,16 +34,18 @@ class PagseguroController extends Controller
     }
 
     public static function payment(Request $request){
+      $tipo_pagamento = $request->input('tipo_pagamento');
+      $isBoleto = $tipo_pagamento == 'boleto';
       $link = Option::getOptionValor('pagseguro_endereco');
-      $cpf = $request->input('cpf');
+      $cpf = $isBoleto? Auth::user()->documento : $request->input('cpf');
       $cpf = trim(str_replace("-", "", str_replace(".", "", $cpf)));
-      $tel_exploded = explode(") ", $request->input('telefone'));
+      $tel_exploded = explode(") ", $isBoleto? Auth::user()->telefone() : $request->input('telefone'));
       $ddd = str_replace("(", "", $tel_exploded[0]);
       $telefone = str_replace("-", "", $tel_exploded[1]);
-      $cep = str_replace("-", "", $request->input('cep'));
+      $cep = str_replace("-", "", $isBoleto? Auth::user()->end->cep : $request->input('cep'));
       $curl = curl_init();
       $data = null;
-      if($request->input('tipo_pagamento') == 'boleto'){
+      if($tipo_pagamento == 'boleto'){
         $data = PagseguroController::dataBoleto($request, $cpf, $ddd, $telefone, $cep);
       }else{
         $data = PagseguroController::dataCreditCard($request, $cpf, $ddd, $telefone, $cep);

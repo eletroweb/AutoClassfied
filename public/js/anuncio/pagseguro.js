@@ -47,15 +47,15 @@ $(document).ready(function(){
 	      $('#tipo_pagamento_destaque').collapse('show');
 	      $('.tipo_pagamento').change(function(){
 	        if($(this).val() === 'boleto'){
-	            //loadSenderHash();
-	            $('.credito').css('display', 'none');
-	            $('#alert_message').html('Iremos gerar e disponibilizar um boleto para que você possa realizar o pagamento. O seu anúncio será aprovado após a confirmação do pagamento por parte do banco. A aprovação do pagamento do boleto costuma demorar no máximo 72 horas.');
-	        	$('#checkoutModal').modal();  
-	        }else{
+	            //$('.credito').css('display', 'none');
+	            //$('#alert_message').html('Iremos gerar e disponibilizar um boleto para que você possa realizar o pagamento. O seu anúncio será aprovado após a confirmação do pagamento por parte do banco. A aprovação do pagamento do boleto costuma demorar no máximo 72 horas.');
+	        	//$('#checkoutModal').modal();  
+	        } else {
 	        	$('.credito').css('display', 'block');
 	          	$('#alert_message').html('O pagamento só será efetivado após a realização do anúncio. Nós não armazenamos os seus dados do cartão de crédito.');  
-	          	$('#checkoutModal').modal();  
+	          	$('#checkoutModal').modal(); 
 	        }
+	        $('#method_payment').val($(this).val());
 	      });
 		}else{
 	      $('#tipo_pagamento_destaque').collapse('hide');
@@ -63,8 +63,14 @@ $(document).ready(function(){
 	});
 	$('#btnPagar').click(function(){
 		var tipo_pagamento = $('.tipo_pagamento').val();
-		console.log($('.tipo_pagamento'));
-		if(tipo_pagamento !== 'boleto'){
+		var pagamentos = $('.tipo_pagamento');
+		var tipo = '';
+		$.each(pagamentos, function(k, v){
+			if($(v).val() !== ''){
+				tipo = $(v).val();
+			}
+		});
+		if($('#method_payment').val() !== 'boleto'){
 			if($('#nome').val() !== '' && $('#telefone').val().length >= 10 && $('#cpf').val().length == 14 && $('#logradouro').val() !== ''
 				&& $('#cidade').val() !== '' && $('#bairro').val() !== '' && $('#uf').val() !== '' && $('#cep').val().length == 9
 				&& $('#cartao').val().length == 19 && $('#month').val().length == 2 && $('#year').val().length == 4) {
@@ -91,7 +97,7 @@ $(document).ready(function(){
 										alert('Erro ao processar informações de pagamento.');
 										$('#btnPagar').html('Processar informações');
 										$('#btnPagar').prop('disabled', false);
-										console.log(r);
+										//console.log(r);
 								},
 								complete: function(r) {
 										//tratamento comum para todas chamadas
@@ -105,7 +111,8 @@ $(document).ready(function(){
 						console.log(response);
 					},
 					complete: function(response) {
-
+						$('#btnPagar').prop('disabled', false);
+						$('#btnPagar').html('Processar informações');
 					}
 			});
 			}else{
