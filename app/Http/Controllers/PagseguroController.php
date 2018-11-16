@@ -41,7 +41,7 @@ class PagseguroController extends Controller
       $cpf = trim(str_replace("-", "", str_replace(".", "", $cpf)));
       $tel_exploded = explode(") ", $isBoleto? Auth::user()->telefone() : $request->input('telefone'));
       $ddd = str_replace("(", "", $tel_exploded[0]);
-      $telefone = str_replace("-", "", $tel_exploded[1]);
+      $telefone = str_replace("-", "", substr($tel_exploded[1], 2, strlen($tel_exploded[1]) ) );
       $cep = str_replace("-", "", $isBoleto? Auth::user()->end->cep : $request->input('cep'));
       $curl = curl_init();
       $data = null;
@@ -124,11 +124,11 @@ class PagseguroController extends Controller
       $data['itemQuantity1']='1';
       $data["notificationURL"]= env('PAGSEGURO_NOTIFICATION', 'notification_url');
       $data['reference']='REF1234';
-      $data['senderName']= $request->input('nome');
+      $data['senderName']= $request->input('nome')? $request->input('nome') : Auth::user()->name;
       $data['senderCPF']= $cpf;
       $data['senderAreaCode']= $ddd;
       $data['senderPhone']= "9$telefone";
-      $data["senderEmail"]= $request->input('email'); //Aqui é o e-mail do comprador
+      $data["senderEmail"]= $request->input('email')? $request->input('email') : Auth::user()->email; //Aqui é o e-mail do comprador
       $data['senderHash']= $request->input('senderHash');
       $data['shippingAddressRequired'] = false;
       return $data;

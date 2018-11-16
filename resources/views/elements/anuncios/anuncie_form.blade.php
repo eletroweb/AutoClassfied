@@ -94,7 +94,7 @@
         <div class="col-sm-6">
           <div class="form-group">
             <label for="ano">Ano de fabricação</label>
-            <input required type="text" value="{{ old('ano')? old('ano'): isset($anuncio)? $anuncio->ano:'' }}" class="form-control" name="ano" id="ano" aria-describedby="anoHelp" placeholder="Digite o ano do veículo">
+            <input required type="text" value="{{ old('ano')? old('ano'): (isset($anuncio)? $anuncio->ano:'') }}" class="form-control" name="ano" id="ano" aria-describedby="anoHelp" placeholder="Digite o ano do veículo">
             <small id="anoHelp" class="form-text text-muted">O ano será exibido no anúncio</small>
           </div>
         </div>
@@ -103,7 +103,7 @@
         <div class="col-sm-6">
           <div class="form-group">
             <label for="ano">Ano do modelo</label>
-            <input required type="text" value="{{ old('ano_modelo')? old('ano_modelo'): isset($anuncio)? $anuncio->ano_modelo:'' }}" class="form-control" name="ano_modelo" id="ano_modelo" aria-describedby="anoModeloHelp" placeholder="Digite o ano do modelo do veículo">
+            <input required type="text" value="{{ old('ano_modelo')? old('ano_modelo'): (isset($anuncio)? $anuncio->ano_modelo:'') }}" class="form-control" name="ano_modelo" id="ano_modelo" aria-describedby="anoModeloHelp" placeholder="Digite o ano do modelo do veículo">
             <small id="anoModeloHelp" class="form-text text-muted">O ano do modelo será exibido no anúncio</small>
           </div>
         </div>
@@ -144,7 +144,7 @@
         <div class="col-sm-6">
           <div class="form-group">
             <label for="ano">Quilometragem</label>
-            <input required type="number" value="{{ old('km')? old('km'): isset($anuncio)? $anuncio->km:'' }}" class="form-control" name="km" id="km" aria-describedby="anoHelp" placeholder="Digite a quilometragem do veículo">
+            <input required type="number" value="{{ old('km')? old('km'): (isset($anuncio)? $anuncio->km:'') }}" class="form-control" name="km" id="km" aria-describedby="anoHelp" placeholder="Digite a quilometragem do veículo">
             <small id="kmHelp" class="form-text text-muted">Informe a quilometragem do veículo</small>
           </div>
         </div>
@@ -232,13 +232,13 @@
         <div class="col-sm-6">
           <div class="form-group">
             <label for="cor">Cor</label>
-            <input type="text" name="cor" value="{{ old('cor')? old('cor'): isset($anuncio)? $anuncio->cor:'' }}" class="form-control" id="cor" placeholder="Digite o nome da cor" required="required">
+            <input type="text" name="cor" value="{{ old('cor')? old('cor'): (isset($anuncio)? $anuncio->cor:'') }}" class="form-control" id="cor" placeholder="Digite o nome da cor" required="required">
           </div>
         </div>
         <div class="col-sm-6">
           <div class="form-group">
             <label for="cor">Portas</label>
-            <input type="number" class="form-control" value="{{ old('portas')? old('portas'): isset($anuncio)? $anuncio->portas:'' }}" name="portas" id="portas" placeholder="Digite o número de portas" required="required">
+            <input type="number" class="form-control" value="{{ old('portas')? old('portas'): (isset($anuncio)? $anuncio->portas:'') }}" name="portas" id="portas" placeholder="Digite o número de portas" required="required">
           </div>
         </div>
       </div>
@@ -306,7 +306,7 @@
         <div class="form-group col-sm-6">
           <label for="video">Você também pode inserir um vídeo:</label>
           <input class="form-control" type="text" name="video" id="video"
-            value="{{ old('video')? old('video'): isset($anuncio) ? isset($anuncio->video->url)?$anuncio->video->url:'':'' }}" placeholder="Insira a url do seu vídeo">
+            value="{{ old('video')? old('video'): (isset($anuncio) ? isset($anuncio->video->url)?$anuncio->video->url:'':'') }}" placeholder="Insira a url do seu vídeo">
         </div>
       </div>
     </section>
