@@ -89,7 +89,7 @@ $(document).ready(function(){
       if(data.xhr.responseText !== 'false'){
           var input = $('<input type="hidden">');
           input.attr('name', 'imagens[]');
-          input.val(data.xhr.responseText.replace('"', '').replace('\\', ''));
+          input.val(data.xhr.responseText.replace('\"', '').replace('\\', ''));
           $('#anunciar').append(input);
       }
     }

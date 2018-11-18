@@ -18,6 +18,7 @@ use App\Versao;
 use App\Marca;
 use App\Video;
 use App\Modelos as Modelo;
+use Flash;
 
 class AnuncioController extends Controller
 {
@@ -34,17 +35,19 @@ class AnuncioController extends Controller
 
     public function update(Request $request, $id){
       $anuncio = Anuncio::find($id);
-      $anuncio->marca = $request->input('marca');
-      $anuncio->modelo = $request->input('modelo');
-      $anuncio->versao = $request->input('versao');
-      $anuncio->valor = $request->input('valor');
-      $anuncio->descricao = $request->input('descricao');
-      $anuncio->ano = $request->input('ano');
-      $anuncio->moto = $request->input('moto');
-      $anuncio->video = $request->input('video');
-      $anuncio->ano = $request->input('ano');
-      $anuncio->usado = $request->input('usado');
-      $anuncio->usado = $request->input('cambio');
+      $anuncio->fill($request->all());
+      $anuncio->push();
+      $anuncio->setVideo($request->input('video'));
+      $anuncio->setDado('Combustivel', $request->input('combustivel'));
+      $anuncio->setDado('Cambio', $request->input('cambio'));
+      $anuncio->setDado('Cor', $request->input('cor'));
+      $anuncio->setDado('Portas', $request->input('portas'));
+      $imagens = $request->input('imagens');
+      AnuncioImagem::where('anuncio', $anuncio->id)->delete();
+      Adicional::where('anuncio', $anuncio->id)->delete();
+      $this->insertAdicionaisAnuncio($request, $anuncio);
+      $this->insertImagesAnuncio($anuncio, $imagens);
+      //$anuncio->usado = $request->input('usado');
       $anuncio->save();
       Flash::success('Anúncio atualizado com sucesso!');
       return redirect($anuncio->getUrl());
@@ -67,6 +70,7 @@ class AnuncioController extends Controller
            'descricao' => 'required',
            //'user' => 'required',
            'ano'=> 'required',
+           'ano_modelo' => 'required',
            'moto' => '',
            'video' => '',
            'km'=> 'required',
@@ -195,6 +199,7 @@ class AnuncioController extends Controller
       }
     }
 
+    //Corrigir erro aqui!
     private function insertImagesAnuncio($anuncio, $imagens){
       foreach($imagens as $img){
         $img_anuncio = new AnuncioImagem();

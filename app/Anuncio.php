@@ -8,6 +8,7 @@ use App\Imagem;
 use App\Revenda;
 use App\Transaction;
 use Illuminate\Support\Facades\Storage;
+use App\Video;
 
 
 class Anuncio extends Model
@@ -19,6 +20,10 @@ class Anuncio extends Model
 
     public function anuncio_dados(){
         return $this->hasMany('App\AnuncioDados', 'anuncio');
+    }
+
+    public function adicionais(){
+      return $this->hasMany('App\Adicional', 'anuncio');
     }
 
     public function anuncio_imagens(){
@@ -74,6 +79,31 @@ class Anuncio extends Model
       ])->first()->valor;
     }
 
+    public function getCombustivel(){
+      return AnuncioDados::where([
+        ['nome', '=', 'Combustivel'],
+        ['anuncio', '=', $this->id]
+      ])->first()->valor;
+    }
+
+    public function getDado($dado_key){
+      $dado= AnuncioDados::where([
+        ['nome', '=', $dado_key],
+        ['anuncio', '=', $this->id]
+      ])->first();
+      if($dado)
+        return $dado->valor;
+      else
+        return '';
+    }
+
+    public function setDado($dado_key, $dado_value){
+      AnuncioDados::updateOrCreate(
+        ['nome'=> $dado_key, 'anuncio'=> $this->id],
+        ['valor'=> $dado_value]
+      );
+    }
+
     public function transaction(){
       return $this->belongsTo('App\Transaction');
     }
@@ -108,6 +138,22 @@ class Anuncio extends Model
 
     public function video(){
       return $this->hasOne('App\Video');
+    }
+
+    public function setVideo($link){
+      if($link){
+        Video::updateOrCreate(
+          ['anuncio_id' => $this->id ],
+          [
+            'link' => $link,
+            'thumbnail' => '',
+            'ativo' => true,
+            'user_id' => $this->user,
+            'isHomeVideo' => false,
+            //'anuncio_id'=> $this->id
+          ]
+        );  
+      }
     }
 
 }

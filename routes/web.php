@@ -54,7 +54,7 @@ Route::middleware('auth')->group(function () {
   Route::get('/revenda/rel/chartjs', 'RevendaController@viewsByMonth')->name('rel_chart_mes');
   Route::post('/atualizar-dados/{id}', 'UserController@update')->name('atualizar_conta');
   Route::get('/anuncios/{id}/editar', 'AnuncioController@edit');
-  Route::get('/anuncios/{id}/update', 'AnuncioController@update')->name('update_anuncio');
+  Route::post('/anuncios/{id}/update', 'AnuncioController@update')->name('update_anuncio');
 });
 
 Route::get('/importxml', 'VeiculoController@updateVeiculos');

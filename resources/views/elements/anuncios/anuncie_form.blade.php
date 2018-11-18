@@ -39,7 +39,6 @@
       <div class="row">
         <div class="col-sm-6">
           <div class="form-group">
-            {{isset($anuncio)}}
             <label for="veiculo">Marca</label>
             <select required class="form-control select2" name="marca" id="marca">
               <option value="">Selecione a marca...</option>
@@ -153,10 +152,10 @@
             <label for="ano">Cambio</label>
             <select class="form-control" name="cambio" required="required">
               <option value="">Selecione o cambio...</option>
-              <option value="Manual" {{ isset($anuncio)? $anuncio->cambio=='Manual'?'selected':'' :'' }}>Manual</option>
-              <option value="Automático" {{ isset($anuncio)? $anuncio->cambio=='Automático'?'selected':'' :'' }}>Automático</option>
-              <option value="Automatizado" {{ isset($anuncio)? $anuncio->cambio=='Automatizado'?'selected':'' :'' }}>Automatizado</option>
-              <option value="Semi-Automático" {{ isset($anuncio)? $anuncio->cambio=='Semi-Automático'?'selected':'' :'' }}>Semi-Automático</option>
+              <option value="Manual" {{ isset($anuncio)? $anuncio->getCambio()=='Manual'?'selected':'' :'' }}>Manual</option>
+              <option value="Automático" {{ isset($anuncio)? $anuncio->getCambio()=='Automático'?'selected':'' :'' }}>Automático</option>
+              <option value="Automatizado" {{ isset($anuncio)? $anuncio->getCambio()=='Automatizado'?'selected':'' :'' }}>Automatizado</option>
+              <option value="Semi-Automático" {{ isset($anuncio)? $anuncio->getCambio()=='Semi-Automático'?'selected':'' :'' }}>Semi-Automático</option>
             </select>
           </div>
         </div>
@@ -217,13 +216,13 @@
             <label for="combustivel">Combustível</label>
             <select id="combustivel" name="combustivel" class="form-control" required="required">
               <option value="">Selecione o combustível...</option>
-              <option value="Gasolina" {{ isset($anuncio)? $anuncio->combustivel =='Gasolina' ? 'selected':'' :'' }}>Gasolina</option>
-              <option value="Alcool" {{ isset($anuncio)? $anuncio->combustivel =='Alcool' ? 'selected':'' :'' }}>Alcool</option>
-              <option value="Diesel" {{ isset($anuncio)? $anuncio->combustivel =='Diesel' ? 'selected':'' :'' }}>Diesel</option>
-              <option value="Flex" {{ isset($anuncio)? $anuncio->combustivel =='Flex' ? 'selected':'' :'' }}>Flex</option>
-              <option value="Hibrido" {{ isset($anuncio)? $anuncio->combustivel =='Híbrido' ? 'selected':'' :'' }}>Híbrido</option>
-              <option value="Gás natural" {{ isset($anuncio)? $anuncio->combustivel =='Gás natural' ? 'selected':'' :'' }}>Gás natural</option>
-              <option value="Elétrico" {{ isset($anuncio)? $anuncio->combustivel =='Elétrico' ? 'selected':'' :'' }}>Elétrico</option>
+              <option value="Gasolina" {{ isset($anuncio)? $anuncio->getCombustivel() =='Gasolina' ? 'selected':'' :'' }}>Gasolina</option>
+              <option value="Alcool" {{ isset($anuncio)? $anuncio->getCombustivel() =='Alcool' ? 'selected':'' :'' }}>Alcool</option>
+              <option value="Diesel" {{ isset($anuncio)? $anuncio->getCombustivel() =='Diesel' ? 'selected':'' :'' }}>Diesel</option>
+              <option value="Flex" {{ isset($anuncio)? $anuncio->getCombustivel() =='Flex' ? 'selected':'' :'' }}>Flex</option>
+              <option value="Hibrido" {{ isset($anuncio)? $anuncio->getCombustivel() =='Híbrido' ? 'selected':'' :'' }}>Híbrido</option>
+              <option value="Gás natural" {{ isset($anuncio)? $anuncio->getCombustivel() =='Gás natural' ? 'selected':'' :'' }}>Gás natural</option>
+              <option value="Elétrico" {{ isset($anuncio)? $anuncio->getCombustivel() =='Elétrico' ? 'selected':'' :'' }}>Elétrico</option>
             </select>
           </div>
         </div>
@@ -232,13 +231,19 @@
         <div class="col-sm-6">
           <div class="form-group">
             <label for="cor">Cor</label>
-            <input type="text" name="cor" value="{{ old('cor')? old('cor'): (isset($anuncio)? $anuncio->cor:'') }}" class="form-control" id="cor" placeholder="Digite o nome da cor" required="required">
+            <input type="text" name="cor" value="{{ old('cor')? old('cor'): (isset($anuncio)? $anuncio->getDado('cor'):'') }}" class="form-control" id="cor" placeholder="Digite o nome da cor" required="required">
           </div>
         </div>
         <div class="col-sm-6">
           <div class="form-group">
             <label for="cor">Portas</label>
-            <input type="number" class="form-control" value="{{ old('portas')? old('portas'): (isset($anuncio)? $anuncio->portas:'') }}" name="portas" id="portas" placeholder="Digite o número de portas" required="required">
+            <select class="form-control" name="portas" id="portas" required="required">
+              <option value="">Selecione o número de portas...</option>
+              <option value="2" {{ old('portas')=='2'? 'selected': (isset($anuncio)? $anuncio->getDado('Portas') == '2'? 'selected':'' :'') }}>2 Portas</option>
+              <option value="4" {{ old('portas')=='4'? 'selected': (isset($anuncio)? $anuncio->getDado('Portas') == '4'? 'selected':'' :'') }}>4 Portas</option>
+              <option value="6" {{ old('portas')=='6'? 'selected': (isset($anuncio)? $anuncio->getDado('Portas') == '6'? 'selected':'' :'') }}>6 Portas</option>
+              <option value="0" {{ old('portas')=='0'? 'selected': (isset($anuncio)? $anuncio->getDado('Portas') == '0'? 'selected':'' :'') }}>É uma moto</option>
+            </select>
           </div>
         </div>
       </div>
@@ -251,9 +256,10 @@
         <div class="p-2 bd-highlight">
           <div class="form-group">
             <div class="custom-control custom-checkbox">
-              <input {{ isset($anuncio)? $anuncio->anuncio_dados->contains($op)? 'checked':'' : '' }}
-                type="checkbox" class="custom-control-input" id="opicional_{{$key}}" name="opcionais[]" value="{{$op}}">
-              <label class="custom-control-label" for="opicional_{{$key}}">
+              <input {{ isset($anuncio)? 
+                        $anuncio->adicionais->filter(function($item)use($op) { return $item->nome == $op; })->first()? 'checked':'' : '' }}
+                type="checkbox" class="custom-control-input" id="opcional_{{$key}}" name="opcionais[]" value="{{$op}}">
+              <label class="custom-control-label" for="opcional_{{$key}}">
                 {{ $op }}
               </label>
             </div>
@@ -268,15 +274,7 @@
       <div class="row">
         <div class="col-sm-12">
           <div class="form-group">
-            <textarea class="form-control" name="descricao" rows="8" placeholder="Conte nos sobre o seu veículo...">
-              @if(old('descricao'))
-                {{ old('descricao') }}
-              @else
-                @isset($anuncio)
-                  {{ $anuncio->descricao }}
-                @endisset
-              @endif
-            </textarea>
+            <textarea class="form-control" name="descricao" rows="8" placeholder="Conte nos sobre o seu veículo...">@if(old('descricao')){{ old('descricao') }} @else @isset($anuncio) {{ $anuncio->descricao }} @endisset  @endif</textarea>
           </div>
         </div>
       </div>
@@ -288,12 +286,13 @@
         <div id="dropzone" class="row mt-3 mb-3 box">
         @isset($anuncio)
           @foreach($anuncio->anuncio_imagens as $a)
-            <div class="dz-details">
+            <div class="dz-details" id="img_{{$a->id}}">
               <div class="dz-filename">
                 <span data-dz-name="" class="badge badge-primary">Imagem do anúncio</span>
               </div>
-              <img data-dz-thumbnail="" alt="Imagem do anúncio" src="{{ Storage::url($a->imagems->url) }}">
-              <button type="button" class="excluir_imagem btn btn-danger">Excluir</button>
+              <img data-dz-thumbnail="" height="100" alt="Imagem do anúncio" src="{{ Storage::url($a->imagems->url) }}">
+              <input type="hidden" name="imagens[]" value="{{ str_replace('/storage/', 'public/', Storage::url($a->imagems->url)) }}">
+              <button type="button" onclick="$('#img_{{$a->id}}').remove();" class="btn btn-danger m-2"><i class="fa fa-window-close"></i></button>
             </div>
           @endforeach
         @endisset
@@ -306,7 +305,7 @@
         <div class="form-group col-sm-6">
           <label for="video">Você também pode inserir um vídeo:</label>
           <input class="form-control" type="text" name="video" id="video"
-            value="{{ old('video')? old('video'): (isset($anuncio) ? isset($anuncio->video->url)?$anuncio->video->url:'':'') }}" placeholder="Insira a url do seu vídeo">
+            value="{{ old('video')? old('video'): (isset($anuncio) ? isset($anuncio->video->link)?$anuncio->video->link:'':'') }}" placeholder="Insira a url do seu vídeo">
         </div>
       </div>
     </section>

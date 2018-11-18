@@ -11,7 +11,7 @@
       @include('flash::message')
       <div class="row">
         <div class="col-sm-12">
-          <h3 class="mb-2" style="font-size: 30px">{{$anuncio->titulo}} <span class="badge badge-primary">{{$anuncio->ano_modelo}}</span></h3>
+          <h3 class="mb-2" style="font-size: 30px">{{$anuncio->titulo}} <span class="badge badge-primary">{{$anuncio->ano_modelo}}</span><a href="/anuncios/{{$anuncio->id}}/editar" class="btn btn-primary m-2">Editar anúncio</a></h3>
           <hr>
         </div>
         <div class="col-sm-12" style="margin-left: inherit;">
