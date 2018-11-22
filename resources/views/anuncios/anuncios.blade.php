@@ -142,6 +142,18 @@
              Filtrar
            </button>
           </li>
+          <li class="nav-item mt-2">
+            <select class="form-control" name="cambio">
+              <option value="">Selecione o cambio...</option>
+              <option value="Manual" {{ old('cambio')? old('cambio')=='Manual'?'selected':'' :'' }}>Manual</option>
+              <option value="Automático" {{ old('cambio')? old('cambio')=='Automático'?'selected':'' :'' }}>Automático</option>
+              <option value="Automatizado" {{ old('cambio')? old('cambio')=='Automatizado'?'selected':'' :'' }}>Automatizado</option>
+              <option value="Semi-Automático" {{ old('cambio')? old('cambio')=='Semi-Automático'?'selected':'' :'' }}>Semi-Automático</option>
+            </select>
+          </li>
+          <li class="nav-tem mt-2">
+              <input type="text" name="cor" class="form-control" placeholder="Sua cor preferida">
+          </li>
        </ul>
       </form>
     </div>
