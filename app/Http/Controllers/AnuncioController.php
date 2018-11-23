@@ -222,8 +222,8 @@ class AnuncioController extends Controller
         $m_buscados = $request->input('mais_buscados'); //ordem por número de visualizações
         $anuncios = Anuncio::
             where($filter[0])
-            //->join('anuncio_dados', 'anuncio_dados.anuncio', '=', 'anuncios.id')
-            ->join('anuncio_dados', function($join) use($request) {
+            ->join('anuncio_dados', 'anuncio_dados.anuncio', '=', 'anuncios.id')
+            /*->join('anuncio_dados', function($join) use($request) {
                 $join->on('anuncio_dados.anuncio', '=', 'anuncios.id')
                       ->where([
                         ['anuncio_dados.nome', '=', 'Cor'],
@@ -233,9 +233,9 @@ class AnuncioController extends Controller
                         ['anuncio_dados.nome', '=', 'Cambio'],
                         ['anuncio_dados.valor', 'like', '%'.$request->input('cambio').'%']
                       ]);
-            })
-            //->whereRaw("anuncio_dados.nome = 'Cambio' && anuncio_dados.valor like '%{$request->input('cambio')}%'")
-            //->whereRaw("anuncio_dados.nome = 'Cor' && anuncio_dados.valor like '%{$request->input('cor')}%'")
+            })*/
+            ->whereRaw("anuncio_dados.nome = 'cambio' && anuncio_dados.valor like '%{$request->input('cambio')}%'")
+            ->whereRaw("anuncio_dados.nome = 'cor' && anuncio_dados.valor like '%{$request->input('cor')}%'")
             ->whereIn('moto', $filter[1]['tipos'])
             ->whereIn('usado', isset($filter[1]['usado'])?$filter[1]['usado']:array(0,1))
             ->whereIn('blindagem', isset($filter[1]['blindagem'])?$filter[1]['blindagem']:array(0,1))
@@ -243,21 +243,6 @@ class AnuncioController extends Controller
             ->orderBy($request->input('order')?$request->input('order'):'id', 'desc')
             ->select('anuncios.*')
             ->paginate($paginacao);
-        /*$anuncios = $anuncios->filter(function($value, $key) use($request){
-          $result = false;
-          foreach ($value->adicionais as $adicional) {
-              $result = strpos($adicional->nome, $request->input('cambio'));
-          }
-          return $result;
-        });
-        $anuncios = $anuncios->filter(function($value, $key) use($request){
-          $result = false;
-          foreach ($value->adicionais as $adicional) {
-              $result = strpos($adicional->nome, $request->input('cor'));
-          }
-          return $result;
-        });
-        $anuncios = $anuncios->paginate($paginate);*/
       }else{
         $anuncios = Anuncio::where('ativo', true)
         ->orderBy('patrocinado', 'desc')

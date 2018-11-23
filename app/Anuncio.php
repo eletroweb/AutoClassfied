@@ -74,14 +74,14 @@ class Anuncio extends Model
 
     public function getCambio(){
       return AnuncioDados::where([
-        ['nome', '=', 'Cambio'],
+        ['nome', '=', 'cambio'],
         ['anuncio', '=', $this->id]
       ])->first()->valor;
     }
 
     public function getCombustivel(){
       return AnuncioDados::where([
-        ['nome', '=', 'Combustivel'],
+        ['nome', '=', 'combustivel'],
         ['anuncio', '=', $this->id]
       ])->first()->valor;
     }
