@@ -146,9 +146,9 @@
             <option value="Semi-Automático" {{ old('cambio')? old('cambio')=='Semi-Automático'?'selected':'' :'' }}>Semi-Automático</option>
           </select>
         </li>
-        <li class="nav-tem mt-2">
+        <!--<li class="nav-tem mt-2">
             <input type="text" name="cor" class="form-control" placeholder="Sua cor preferida">
-        </li>
+        </li> -->
          <li class="nav-item mt-2">
            <button class="btn btn-primary">
              Filtrar

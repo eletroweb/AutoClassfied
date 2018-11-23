@@ -235,7 +235,7 @@ class AnuncioController extends Controller
                       ]);
             })*/
             ->whereRaw("anuncio_dados.nome = 'cambio' && anuncio_dados.valor like '%{$request->input('cambio')}%'")
-            ->whereRaw("anuncio_dados.nome = 'cor' && anuncio_dados.valor like '%{$request->input('cor')}%'")
+            //->whereRaw("anuncio_dados.nome = 'cor' && anuncio_dados.valor like '%{$request->input('cor')}%'")
             ->whereIn('moto', $filter[1]['tipos'])
             ->whereIn('usado', isset($filter[1]['usado'])?$filter[1]['usado']:array(0,1))
             ->whereIn('blindagem', isset($filter[1]['blindagem'])?$filter[1]['blindagem']:array(0,1))
