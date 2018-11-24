@@ -290,8 +290,19 @@
               <div class="dz-filename">
                 <span data-dz-name="" class="badge badge-primary">Imagem do anúncio</span>
               </div>
-              <img data-dz-thumbnail="" height="100" alt="Imagem do anúncio" src="{{ Storage::url($a->imagems->url) }}">
-              <input type="hidden" name="imagens[]" value="{{ str_replace('/storage/', 'public/', Storage::url($a->imagems->url)) }}">
+              @if(strpos($a->imagems->url, 'https://') === false)
+                <script type="text/javascript">
+                  console.log('Não é da amazon {{$a->imagems->url}}');
+                </script>
+                <img data-dz-thumbnail="" height="100" alt="Imagem do anúncio" src="{{ Storage::url($a->imagems->url) }}">
+                <input type="hidden" name="imagens[]" value="{{ str_replace('/storage/', 'public/', Storage::url($a->imagems->url)) }}">
+              @else
+                <script type="text/javascript">
+                  console.log('É da amazon');
+                </script>
+                <img data-dz-thumbnail="" height="100" alt="Imagem do anúncio" src="{{ $a->imagems->url }}">
+                <input type="hidden" name="imagens[]" value="{{ $a->imagems->url }}">
+              @endif
               <button type="button" onclick="$('#img_{{$a->id}}').remove();" class="btn btn-danger m-2"><i class="fa fa-window-close"></i></button>
             </div>
           @endforeach
