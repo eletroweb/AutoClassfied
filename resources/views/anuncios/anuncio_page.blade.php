@@ -12,8 +12,10 @@
       <div class="row">
         <div class="col-sm-12">
           <h3 class="mb-2" style="font-size: 30px">{{$anuncio->titulo}} <span class="badge badge-primary">{{$anuncio->ano_modelo}}</span>
-            @if(Auth::user()->isAdmin() || Auth::user()->id == $anuncio->user)
-              <a href="/anuncios/{{$anuncio->id}}/editar" class="btn btn-primary m-2">Editar anúncio</a>
+            @if(Auth::user())
+              @if(Auth::user()->isAdmin() || Auth::user()->id == $anuncio->user)
+                <a href="/anuncios/{{$anuncio->id}}/editar" class="btn btn-primary m-2">Editar anúncio</a>
+              @endif  
             @endif
           </h3>
           <hr>
