@@ -30,7 +30,7 @@ class CreateAnunciosTable extends Migration
             $table->integer('visualizacoes')->default(0);
             $table->boolean('importado')->default(false);
             $table->boolean('moto')->default(false);
-            $table->boolean('ativo')->default(true);
+            $table->boolean('ativo')->default(false);
             $table->boolean('patrocinado')->default(false);
             $table->boolean('revenda')->default(false);
             $table->boolean('unicodono')->default(false);
