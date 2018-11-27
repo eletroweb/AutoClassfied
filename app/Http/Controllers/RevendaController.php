@@ -561,14 +561,14 @@ class RevendaController extends AppBaseController
 
   //Estas são as condições para que o anúncio vindo do xml seja importado para o sistema.
   public function filtro($veiculo){
-    return $veiculo->km == 0  || intval($veiculo->anomodelo) >= 2015 || $this->isUnicoDono($veiculo);
+    return $veiculo->km == 0  || intval($veiculo->anomodelo) >= 2016 || $this->isUnicoDono($veiculo);
   }
 
   /*
     Método para filtrar os veículos da importação geral
   */
   public function filtroAll($veiculo){
-    return $veiculo->km == 0  || intval($veiculo->year_model) >= 2015 || $this->isUnicoDono($veiculo);
+    return $veiculo->km == 0  || intval($veiculo->year_model) >= 2016 || $this->isUnicoDono($veiculo);
   }
 
   public function sejarevendedor(Request $request){
