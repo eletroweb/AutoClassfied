@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "7ccb7bddb040f6e9246cf9a75b135d9e",
-    "content-hash": "e7335f614862d1cbd7d8e12979b3c025",
+    "hash": "f0882394436ed34771ba999679b5bd8c",
+    "content-hash": "3e68dc04d80a823c8e990fce3d78accb",
     "packages": [
         {
             "name": "anhskohbo/no-captcha",
@@ -972,7 +972,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/InfyOmLabs/laravel-generator/zipball/3aea0372637deba65788eee708a70ad7cef1851b",
+                "url": "https://api.github.com/repos/InfyOmLabs/laravel-generator/zipball/5a6ef614a1686af507c24f218b7d91496b798abe",
                 "reference": "bf34df143a6ded4a6c6483223bcf38d13d90be26",
                 "shasum": ""
             },
@@ -1496,6 +1496,46 @@
             "description": "HTML and Form Builders for the Laravel Framework",
             "homepage": "https://laravelcollective.com",
             "time": "2018-03-24 00:39:21"
+        },
+        {
+            "name": "laravellegends/pt-br-validator",
+            "version": "5.1.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/LaravelLegends/pt-br-validator.git",
+                "reference": "652039d964d6ba18f445e47e637cf8e2de00fbeb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/LaravelLegends/pt-br-validator/zipball/652039d964d6ba18f445e47e637cf8e2de00fbeb",
+                "reference": "652039d964d6ba18f445e47e637cf8e2de00fbeb",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "5.0.* || 5.1.* || 5.2.* || 5.3.* || 5.4.* || 5.5.*"
+            },
+            "require-dev": {
+                "orchestra/testbench": "3.1.*",
+                "phpunit/phpunit": "4.8.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "LaravelLegends\\PtBrValidator\\": "src/pt-br-validator"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Wallace de Souza Vizerra",
+                    "email": "wallacemaxters@gmail.com"
+                }
+            ],
+            "description": "Uma biblioteca contendo validações de formatos Brasileiros, para o Laravel 5",
+            "time": "2018-05-07 18:05:16"
         },
         {
             "name": "league/flysystem",

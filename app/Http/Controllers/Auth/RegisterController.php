@@ -48,13 +48,14 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
+
         return Validator::make($data, [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
-            'documento' => 'required|unique:users',
+            'documento' => 'bail|required|unique:users|'. count($data['documento']) > 14? 'cnpj':'cpf',
             'pessoa_fisica' => 'required',
-            'telefone' => 'required',
+            'celular' => 'required|celular_com_ddd',
             'g-recaptcha-response' => 'required|captcha'
         ]);
     }
@@ -76,7 +77,7 @@ class RegisterController extends Controller
         ]);
         $dado = new UserDado();
         $dado->nome = 'telefone';
-        $dado->valor= $data['telefone'];
+        $dado->valor= $data['celular'];
         $dado->user = $user->id;
         $dado->save();
         return $user;

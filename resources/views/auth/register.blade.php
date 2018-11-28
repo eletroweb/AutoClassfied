@@ -45,8 +45,13 @@
         @endif
       </div>
       <div class="form-group">
-        <label for="telefone">Telefone</label>
-        <input class="form-control telefone" type="text" id="telefone" name="telefone" placeholder="Digite o seu telefone" value="" required>
+        <label for="telefone">Celular</label>
+        <input class="form-control telefone" type="text" name="celular" placeholder="Digite o seu telefone" value="" required>
+        @if ($errors->has('celular'))
+            <span class="help-block">
+                <strong>{{ $errors->first('celular') }}</strong>
+            </span>
+        @endif
       </div>
       <div class="form-group">
         <label for="documento" id="info_documento">CPF</label>
