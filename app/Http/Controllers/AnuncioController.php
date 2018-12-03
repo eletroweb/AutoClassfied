@@ -120,12 +120,15 @@ class AnuncioController extends Controller
             }
           }
           if($request->has('video')){
-            $video = new Video();
-            $video->link = $request->input('video');
-            $video->anuncio_id = $anuncio->id;
-            $video->isHomeVideo = false;
-            $video->user_id = $anuncio->user;
-            $video->save();
+            $link = $request->input('video');
+            if(!empty($link)){
+              $video = new Video();
+              $video->link = $request->input('video');
+              $video->anuncio_id = $anuncio->id;
+              $video->isHomeVideo = false;
+              $video->user_id = $anuncio->user;
+              $video->save();  
+            }
           }
           $anuncio->save();
           return redirect("{$title}")->with('status', 'Anúncio publicado com sucesso!');
