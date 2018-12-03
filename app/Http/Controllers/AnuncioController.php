@@ -77,7 +77,9 @@ class AnuncioController extends Controller
            'km'=> 'required',
            'usado'=> '',
            'cambio'=> 'required',
-           'g-recaptcha-response' => 'required|captcha'
+           'g-recaptcha-response' => 'required|captcha',
+           'anuncio_destacado' =>'required',
+           'tipo_pagamento' => 'required'
         ]);
         $validatedData['user']= Auth::user()->id;
         if($request->has('imagens')){
@@ -104,21 +106,21 @@ class AnuncioController extends Controller
           $this->insertAnuncioDados($request);
           $title = $anuncio->getUrl();
           //$anuncio->ativo = false;
-          if($request->input('anuncio_destacado') == 'y'){
-            if($request->has('tipo_pagamento')){
-              $xml = PagseguroController::payment($request);
-              if(isset($xml->error)){
-                $request->flash();
-                return redirect('/anuncie')->with('status', "Erro ao processar pagamento [{$xml->error->code}]: {$xml->error->message}" );
-              }
-              $transaction = TransactionController::transactionFromXml($xml);
-              $anuncio->transaction_id = $transaction->id;
-              $anuncio->patrocinado = true;
-              $anuncio->ativo = false;
-              $anuncio->save();
-              return redirect("{$title}")->with('status', 'Anúncio publicado, porém só será exibido após a confirmação do seu pagamento.');
-            }
+          //if($request->input('anuncio_destacado') == 'y'){
+            //if($request->has('tipo_pagamento')){
+          $xml = PagseguroController::payment($request);
+          if(isset($xml->error)){
+            $request->flash();
+            return redirect('/anuncie')->with('status', "Erro ao processar pagamento [{$xml->error->code}]: {$xml->error->message}" );
           }
+          $transaction = TransactionController::transactionFromXml($xml);
+          $anuncio->transaction_id = $transaction->id;
+          $anuncio->patrocinado = true;
+          $anuncio->ativo = false;
+          $anuncio->save();
+          return redirect("{$title}")->with('status', 'Anúncio publicado, porém só será exibido após a confirmação do seu pagamento.');
+            //}
+          //}
           if($request->has('video')){
             $link = $request->input('video');
             if(!empty($link)){
