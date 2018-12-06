@@ -4,7 +4,7 @@
     <div class="card-body">
       <div class="row">
           <div class="col-sm-12 mb-3">
-            <h4 class="card-title"><a style="color: black;" href="{{$r->getUrl()}}">{{$r->titulo}}</a></h4>
+            <h4 class="card-title"><a style="color: black;" href="{{$r->getUrl()}}">{{$r->titulo}}ss</a></h4>
           </div>
           <div class="col-sm-12">
             <span class="badge badge-success mb-1" style="font-size: 14px;">R${{number_format(substr($r->valor.'0', 0, -3), 2, ",", ".")}}</span>

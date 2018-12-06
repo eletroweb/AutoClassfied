@@ -48,12 +48,11 @@
           <div class="card-body text-center">
           @if(Auth::check())
             @if(Auth::user()->id == $revenda->user)
-              <a class="btn btn-light" href="/revenda/{{ $revenda->id }}/configuracoes"><i class="fa fa-cogs fa-3x"></i></a>
-              <a class="btn btn-light" href="{{ $revenda->getUrl().'/videos/adicionar' }}"><i class="fa fa-plus-square fa-3x"></i></a>
+              <a class="btn btn-light" href="/revenda/{{ $revenda->id }}/configuracoes" title="Configurações da revenda"><i class="fa fa-cogs fa-3x"></i></a>
+              <a class="btn btn-primary" href="{{ $revenda->getUrl().'/videos/adicionar' }}" title="Adicionar novo vídeo"><i class="fa fa-plus-square fa-3x"></i></a>
             @endif
           @endif
-            <a class="btn btn-light" href="{{ $revenda->getUrl().'/videos' }}"><i class="fa fa-tv fa-3x"></i></a>
-
+            <a class="btn btn-light" href="{{ $revenda->getUrl().'/videos' }}" title="Videos do seu canal"><i class="fa fa-tv fa-3x"></i></a>
           </div>
         </div>
       </div>
@@ -65,7 +64,11 @@
         <div id="video-gallery">
           @forelse($videos as $v)
             <a href="{{ $v->link }}" data-poster="video-poster1.jpg" >
+              @if($v->thumbnail)
                 <img src="{{ $v->thumbnail }}" />
+              @else
+                <img src="{{ asset('/images/thumbnail.jpeg') }}">
+              @endif
             </a>
           @empty
             <div class="alert alert-primary" role="alert">
@@ -101,7 +104,8 @@
           <div class="card mb-4 shadow-sm">
             <img class="card-img-top" src="{{$anuncio->urlImagemFirst()}}" alt="{{$anuncio->titulo}}">
             <div class="card-body">
-              <h5 class="card-title"><a href="{{$anuncio->getUrl()}}" style="color: black">{{$anuncio->titulo}}</a></h4>
+              <h5 class="card-title"><a href="{{$anuncio->getUrl()}}" style="color: black">{{$anuncio->titulo}}
+                <span class="badge badge-primary">{{$anuncio->ano_modelo}}</span></a></h4>
               <p class="card-text">{{str_limit($anuncio->descricao, 150)}}</p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
