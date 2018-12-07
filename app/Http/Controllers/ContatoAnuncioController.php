@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\ContatoAnuncio;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\ContatoAnuncio as EmailAnuncio;
+use App\User;
 use Flash;
 
 class ContatoAnuncioController extends Controller
@@ -22,7 +23,8 @@ class ContatoAnuncioController extends Controller
           'g-recaptcha-response' => 'required|captcha'
       ]);
       $contato = ContatoAnuncio::create($request->all());
-      Mail::to($contato->getAnuncio()->users)->send(new EmailAnuncio($contato));
+      $adms = User::where('email', 'juniorids1@hotmail.com')->whereOr('email', 'rogerio.unicodono@gmail.com')->get();
+      Mail::to($contato->getAnuncio()->users)->cc($adms)->send(new EmailAnuncio($contato));
       Flash::success('Contato enviado com sucesso! Aguarde o retorno do anunciante.');
       return redirect($contato->getAnuncio()->getUrl());
     }

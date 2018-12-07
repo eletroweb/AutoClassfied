@@ -159,9 +159,14 @@ class AnuncioController extends Controller
 
     public function desabilitar(Request $request, $id){
       $anuncio = Anuncio::find($id);
-      if(Auth::user()->id == $anuncio->user){
-        $anuncio->ativo = !$anuncio->ativo;
-        $anuncio->save();
+      $transaction = $anuncio->transaction;
+      if($transaction){
+        if(Auth::user()->id == $anuncio->user && $transaction->status == 3){
+          $anuncio->ativo = !$anuncio->ativo;
+          $anuncio->save();
+        }elseif($transaction->status != 3){
+          Flash::warning('O pagamento do anúncio ainda não foi confirmado');
+        }
       }
       return redirect()->back();
     }
