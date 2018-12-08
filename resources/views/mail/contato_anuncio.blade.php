@@ -3,7 +3,7 @@
   <head>
     <meta name="viewport" content="width=device-width" />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>Simple Transactional Email</title>
+    <title>Contato Anúncio - Único dono</title>
     <style>
       /* -------------------------------------
           GLOBAL RESETS
@@ -280,7 +280,7 @@
         <td>&nbsp;</td>
         <td class="container">
           <div class="content">
-
+            <img src="{{ asset('/images/01.png') }}" height="100" alt="Logotipo Único dono">
             <!-- START CENTERED WHITE CONTAINER -->
             <span class="preheader">Você recebeu o contato de um visitante no anúncio {{$contato->getAnuncio()->nome}}.</span>
             <table class="main">

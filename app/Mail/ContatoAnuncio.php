@@ -30,6 +30,6 @@ class ContatoAnuncio extends Mailable
      */
     public function build()
     {
-        return $this->view('mail.contato_anuncio');
+        return $this->subject('Contato Anúncio - Único dono')->view('mail.contato_anuncio');
     }
 }
