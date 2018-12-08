@@ -44,15 +44,20 @@
               {!! $anuncio->patrocinado?'<span class="badge badge-success">Anúncio em destaque</span>':'' !!}
             </small>
             @if(Auth::check())
-				@if($anuncio->user == Auth::user()->id)
+				    @if($anuncio->user == Auth::user()->id)
+              @if($anuncio->transaction && $anuncio->transaction->status == 3)
 	            <form action="{{ route('desabilitar_anuncio', ['id'=> $anuncio->id]) }}" method="post">
 	              {{csrf_field()}}
 	              <small class="col-sm-6 w-100 text-left" >
 	                <button type="submit" onclick="confirm('Tem certeza que deseja realizar a alteração?')" class="btn {{$anuncio->ativo?'btn-warning':'btn-success'}} btn-sm">{{$anuncio->ativo?'Desabilitar anúncio':'Habilitar anúncio'}}</button>
                 </small>
 	            </form>
-
-	            @endif
+              @else
+                <div class="alert alert-warning" role="alert">
+                  Aguardando confirmação do pagamento
+                </div>
+              @endif
+	           @endif
             @endif
           </div>
 
