@@ -300,6 +300,7 @@
                           <b>Deseja contato via WhatsApp</b>: {{$contato->contato_whatsapp?'Sim':'Não'}}<br>
                           <b>Pretende financiar</b>: {{$contato->desejo_financiamento?'Sim':'Não'}}<br>
                           <b>Pretende usar veículo na negociação</b>: {{$contato->veiculo_troca?'Sim':'Não'}}<br>
+                          <p><b>Mensagem: {{ $contato->mensagem }}</b></p>
                         </p>
                         <table border="0" cellpadding="0" cellspacing="0" class="btn btn-primary">
                           <tbody>
