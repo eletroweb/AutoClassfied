@@ -8,10 +8,13 @@ use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Client;
 use Carbon\Carbon;
 use App\Notification;
+use Illuminate\Notifications\Notifiable;
 use Auth;
 
 class PagseguroController extends Controller
 {
+
+    use Notifiable;
 
     public function startSession(Request $request){
       $http = new Client();

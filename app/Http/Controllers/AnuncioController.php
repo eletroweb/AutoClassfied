@@ -20,9 +20,13 @@ use App\Video;
 use App\Modelos as Modelo;
 use Flash;
 use DB;
+use Illuminate\Notifications\Notifiable;
+use App\Notifications\PaymentRequest;
 
 class AnuncioController extends Controller
 {
+
+  use Notifiable;
 
   private $opcionais = [
                 'Ar-condicionado', 'Direção hidráulica', 'Vidros Elétricos', 'Travas Elétricas',
@@ -133,6 +137,9 @@ class AnuncioController extends Controller
             }
           }
           $anuncio->save();
+          if($transaction->paymentLink){
+            $this->notify(new PaymentRequest($anuncio));  
+          }
           return redirect("{$title}")->with('status', 'Anúncio publicado com sucesso!');
         }
         $request->flash();

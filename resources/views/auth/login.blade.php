@@ -100,7 +100,7 @@
 
   <div class="row text-center">
     <div class="col-sm-12">
-      <img class="mb-4" src="https://www.unicodono.com.br/web/img/topo/01.png" alt="" width="200">
+      <img class="mb-4" src="asset('/images/01.png')" alt="" width="200">
     </div>
   </div>
   <form method="post" class="form-signin h-100" action="{{route('login')}}">
@@ -124,6 +124,9 @@
         <label>
           <input type="checkbox" value="remember-me"> Lembrar de mim
         </label>
+      </div>
+      <div class="form-group">
+        <a href="/password/reset">Esqueci minha senha</a>
       </div>
       <button class="btn btn-primary btn-block" type="submit">Entrar</button>
       <a class="btn btn-secondary btn-block" href="{{ route('register') }}">Criar Conta</a>
