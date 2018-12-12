@@ -72,9 +72,11 @@ class PagseguroController extends Controller
       $token = Option::getOptionValor('pagseguro_token');
       $data['token'] = $token;
       $data['email'] = $email;
+      //
       $data['paymentMode']='default';
       $data['paymentMethod']='creditCard';
       $data['receiverEmail']= $email;
+      //$data['receiverEmail'] = 'v99653605279754850839@sandbox.pagseguro.com.br';
       $data['currency']='BRL';
       $data['extraAmount']='0.00';
       $data['itemId1']='0001';
@@ -119,6 +121,7 @@ class PagseguroController extends Controller
       $data['paymentMode']='default';
       $data['paymentMethod']='boleto';
       $data['receiverEmail']= $email; //Aqui é o email de quem vai receber o pagamento
+      //$data['receiverEmail']= 'junior@sandbox.pagseguro.com.br'; //Aqui é o email de quem vai receber o pagamento
       $data['currency']='BRL';
       $data['extraAmount']='0.00';
       $data['itemId1']='0001';
@@ -131,7 +134,12 @@ class PagseguroController extends Controller
       $data['senderCPF']= $cpf;
       $data['senderAreaCode']= $ddd;
       $data['senderPhone']= "9$telefone";
-      $data["senderEmail"]= $request->input('email')? $request->input('email') : Auth::user()->email; //Aqui é o e-mail do comprador
+      if(env('APP_ENV') == 'local'){
+        $data['senderEmail'] = 'c93245650383806312796@sandbox.pagseguro.com.br';
+      }
+      else {
+        $data["senderEmail"]= $request->input('email')? $request->input('email') : Auth::user()->email; //Aqui é o e-mail do comprador
+      }
       $data['senderHash']= $request->input('senderHash');
       $data['shippingAddressRequired'] = false;
       return $data;

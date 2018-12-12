@@ -118,13 +118,14 @@ class AnuncioController extends Controller
             return redirect('/anuncie')->with('status', "Erro ao processar pagamento [{$xml->error->code}]: {$xml->error->message}" );
           }
           $transaction = TransactionController::transactionFromXml($xml);
+          
           $anuncio->transaction_id = $transaction->id;
           $anuncio->patrocinado = true;
           $anuncio->ativo = false;
           $anuncio->save();
-          return redirect("{$title}")->with('status', 'Anúncio publicado, porém só será exibido após a confirmação do seu pagamento.');
-            //}
-          //}
+          if($transaction->paymentLink){
+              $this->notify(new PaymentRequest($anuncio));  
+          }
           if($request->has('video')){
             $link = $request->input('video');
             if(!empty($link)){
@@ -135,12 +136,8 @@ class AnuncioController extends Controller
               $video->user_id = $anuncio->user;
               $video->save();  
             }
-          }
-          $anuncio->save();
-          if($transaction->paymentLink){
-            $this->notify(new PaymentRequest($anuncio));  
-          }
-          return redirect("{$title}")->with('status', 'Anúncio publicado com sucesso!');
+          } 
+          return redirect("{$title}")->with('status', 'Anúncio publicado, porém só será exibido após a confirmação do seu pagamento.');
         }
         $request->flash();
         return redirect('/anuncie')->with('status', 'Você precisa inserir no mínimo uma imagem para publicar o seu anúncio');
@@ -436,6 +433,11 @@ class AnuncioController extends Controller
           return $marca->id;
         }
       }
+    }
+
+    public function routeNotificationForMail()
+    {
+        return Auth::user()->email;
     }
 
 }

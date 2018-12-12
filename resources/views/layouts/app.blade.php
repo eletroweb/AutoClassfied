@@ -47,7 +47,11 @@
     <script src='https://www.google.com/recaptcha/api.js'></script>
     <script type="text/javascript" src="{{asset('js/Chart.bundle.min.js')}}"></script>
     <script src="{{asset('js/jquery-3.3.1.min.js')}}" charset="utf-8"></script>
-    <script type="text/javascript" src="https://stc.sandbox.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.directpayment.js"></script>
+    @if(env('APP_ENV') == 'local')
+        <script type="text/javascript" src="https://stc.sandbox.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.directpayment.js"></script>
+    @else
+        <script type="text/javascript" src="https://stc.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.directpayment.js"></script>
+    @endif
     <link rel="stylesheet" type="text/css" href="{{asset('css/pagamento.css')}}">
     <link rel="stylesheet" href="{{asset('css/hover-min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/jquery.steps.css') }}">

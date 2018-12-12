@@ -7,7 +7,7 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
-class PaymentRequest extends Notification
+class PaymentCredit extends Notification
 {
     use Queueable;
 
@@ -21,7 +21,7 @@ class PaymentRequest extends Notification
     public function __construct($anuncio)
     {
         $this->anuncio = $anuncio;
-        $this->email = $this->anuncio->users->email;
+        $this->email_address = $this->anuncio->users->email;
         $this->transaction = $anuncio->transaction;
     }
 
@@ -36,7 +36,6 @@ class PaymentRequest extends Notification
         return ['mail'];
     }
 
-
     /**
      * Get the mail representation of the notification.
      *
@@ -47,10 +46,9 @@ class PaymentRequest extends Notification
     {
         return (new MailMessage)
                     ->subject('Pagamento do seu anúncio')
-                    ->line("Olá {$this->anuncio->users->name}, você optou por realizar o pagamento do seu anúncio por boleto.")
-                    ->line('Caso não saiba, boletos tem um prazo de até 3 dias úteis para a confirmação do seu pagamento.')
-                    ->action('Boleto', $this->anuncio->transaction->paymentLink)
-                    ->line('Obrigado pelo confiança, desejamos boas vendas!');
+                    ->line('The introduction to the notification.')
+                    ->action('Notification Action', url('/'))
+                    ->line('Thank you for using our application!');
     }
 
     /**
