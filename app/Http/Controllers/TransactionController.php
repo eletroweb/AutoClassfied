@@ -16,9 +16,15 @@ use GuzzleHttp\Client;
 use App\Transaction;
 use App\TransactionItem;
 use App\Notification;
+use App\Notification\PaymentSuccess;
+use Illuminate\Notifications\Notifiable;
 
 class TransactionController extends AppBaseController
 {
+    use Notifiable;
+
+    private $email = '';
+
     /** @var  TransactionRepository */
     private $transactionRepository;
 
@@ -194,6 +200,9 @@ class TransactionController extends AppBaseController
       if($transaction->status == 3){
         $anuncio = Anuncio::where('transaction_id', $transaction->id)->first();
         $anuncio->ativo = true;
+        $anuncio->save();
+        $this->email = $anuncio->users->email;
+        $this->notify(new PaymentSuccess($anuncio));
       }
       if($xml->items){
         foreach ($xml->items->item as $item){
@@ -207,6 +216,10 @@ class TransactionController extends AppBaseController
         }
       }
       return $transaction;
+    }
+
+    public function routeNotificationForMail(){
+      return $this->email;
     }
 
 }

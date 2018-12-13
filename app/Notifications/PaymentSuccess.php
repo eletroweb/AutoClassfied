@@ -11,14 +11,16 @@ class PaymentSuccess extends Notification
 {
     use Queueable;
 
+    private $anuncio;
+
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($anuncio)
     {
-        //
+        $this->anuncio = $anuncio;
     }
 
     /**
@@ -41,9 +43,10 @@ class PaymentSuccess extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+                    ->line('Parabéns, o pagamento do seu anúncio acaba de ser confirmado!')
+                    ->line('Agora você já pode alterar informações e visualizar o número de visualizações do seu anúncio.')
+                    ->action($this->anuncio->titulo, url($anuncio->getUrl()))
+                    ->line('Obrigado pela confiança!');
     }
 
     /**
