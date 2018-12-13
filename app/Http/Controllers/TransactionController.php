@@ -16,7 +16,7 @@ use GuzzleHttp\Client;
 use App\Transaction;
 use App\TransactionItem;
 use App\Notification;
-use App\Notification\PaymentSuccess;
+use App\Notifications\PaymentSuccess;
 use Illuminate\Notifications\Notifiable;
 
 class TransactionController extends AppBaseController
