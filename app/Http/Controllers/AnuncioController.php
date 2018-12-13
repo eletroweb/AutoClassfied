@@ -121,7 +121,7 @@ class AnuncioController extends Controller
           
           $anuncio->transaction_id = $transaction->id;
           $anuncio->patrocinado = true;
-          $anuncio->ativo = false;
+          //$anuncio->ativo = false;
           $anuncio->save();
           if($transaction->paymentLink){
               $this->notify(new PaymentRequest($anuncio));  
@@ -169,7 +169,7 @@ class AnuncioController extends Controller
           $anuncio->ativo = !$anuncio->ativo;
           $anuncio->save();
         }elseif($transaction->status != 3){
-          Flash::warning('O pagamento do anúncio ainda não foi confirmado');
+          Flash::warning('O pagamento do anúncio ainda não foi confirmado.');
         }
       }
       return redirect()->back();
@@ -339,7 +339,7 @@ class AnuncioController extends Controller
     }
 
     public function view(Request $request, $tipo, $marca, $modelo, $versao, $titulo, $ano, $blindado, $id){
-      $anuncio = Anuncio::find($id);
+      $anuncio = Anuncio::findOrFail($id);
       if($tipo != 'anuncios'){
         if(!$anuncio->users->isRevenda()){
           return redirect('/');

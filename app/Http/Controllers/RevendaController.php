@@ -674,10 +674,19 @@ class RevendaController extends AppBaseController
   }
 
   public function changeStatus(Request $request){
-    $revenda = Revenda::find($request->input('revenda'));
+    $revenda = Revenda::findOrFail($request->input('revenda'));
     $revenda->ativo = !$revenda->ativo;
     $revenda->save();
     return response()->json('Status modificado com sucesso!');
+  }
+
+  public function inativo(Request $request, $id){
+    $revenda = Revenda::findOrFail($id);
+    if($revenda->ativo){
+      return redirect('/');
+    }else{
+      return view('revendas.inativo')->with('revenda', $revenda);
+    }
   }
 
 }

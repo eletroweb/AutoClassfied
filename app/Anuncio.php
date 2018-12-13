@@ -137,7 +137,7 @@ class Anuncio extends Model
     }
 
     public function video(){
-      return $this->hasOne('App\Video');
+      return $this->belongsTo('App\Video');
     }
 
     public function setVideo($link){

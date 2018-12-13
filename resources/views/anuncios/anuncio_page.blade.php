@@ -118,9 +118,16 @@
       <div class="row">
         <div class="col-sm-12">
           <h1>Descrição do anúncio</h1>
-          <p class="text-justify w-100">
+          <p class="text-justify w-100 box">
             {{$anuncio->descricao}}
           </p>
+          @if($anuncio->video)
+            <hr>
+            <h1>Vídeo do veículo</h1>
+            <div class="embed-responsive embed-responsive-16by9">
+              <iframe class="embed-responsive-item" src="{{ $anuncio->video->link }}" allowfullscreen></iframe>
+            </div>
+          @endif
         </div>
       </div>
     </div>
@@ -202,10 +209,12 @@
               <p class="card-text">
                 <ul class="list-group">
                   <li class="list-group-item"><i class="fa fa-phone"></i> {{$anuncio->users->telefone()}}</li>
+                  @if($anuncio->users->isRevenda())
                   <li class="list-group-item"><i class="fa fa-map-marker-alt"></i>
-                    {{$anuncio->users->isRevenda()?$anuncio->users->isRevenda()->end->logradouro:$anuncio->users->end->logradouro}} {{$anuncio->users->isRevenda()?$anuncio->users->isRevenda()->end->numero:$anuncio->users->end->numero}},
-                    {{$anuncio->users->isRevenda()?$anuncio->users->isRevenda()->end->cidade:$anuncio->users->end->cidade}} - {{$anuncio->users->isRevenda()?$anuncio->users->isRevenda()->end->uf:$anuncio->users->end->uf}}
+                    {{$anuncio->users->isRevenda()->end->logradouro}} {{$anuncio->users->isRevenda()->end->numero}},
+                    {{$anuncio->users->isRevenda()->end->cidade}} - {{$anuncio->users->isRevenda()->end->uf}}
                   </li>
+                  @endif
                 </ul>
               </p>
             </div>

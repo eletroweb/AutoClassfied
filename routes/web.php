@@ -33,6 +33,7 @@ Route::get('/faq', 'UserController@faq')->name('faq');
 Route::get('/cron/anuncios', 'RevendaController@importAll');
 Route::get('/termos-de-uso', 'UserController@termos_uso')->name('termos_uso');
 Route::get('/anuncio-inativo/{id}', 'AnuncioController@inativo')->name('anuncio_inativo');
+Route::get('/revenda-inativa/{id}', 'RevendaController@inativo')->name('revenda_inativa');
 Route::post('/anuncios/count/visualizacao/', 'VisualizacaoDadosController@store');
 Route::post('/newsletter/fipe', 'NewsletterUserController@store');
 Route::post('/pagseguro/notification/transaction/', 'TransactionController@transactionNotification')->name('notification_pagseguro');
