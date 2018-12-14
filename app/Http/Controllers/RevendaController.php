@@ -31,9 +31,14 @@ use App\VisualizacaoAnuncio;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use App\Video;
+use Illuminate\Notifications\Notifiable;
+use App\Notifications\ImportSuccess;
 
 class RevendaController extends AppBaseController
 {
+
+  use Notifiable;
+
   /** @var  RevendaRepository */
   private $revendaRepository;
 
@@ -207,6 +212,7 @@ class RevendaController extends AppBaseController
         }
         /*$this->importRevendas($request, str_replace(".", "", str_replace("-", "", $cnpj)));*/
     }
+    $this->notify(new ImportSuccess());
     return true;
   }
 
@@ -687,6 +693,11 @@ class RevendaController extends AppBaseController
     }else{
       return view('revendas.inativo')->with('revenda', $revenda);
     }
+  }
+
+  public function routeNotificationForMail()
+  {
+      return 'rogerio.unicodono@gmail.com';
   }
 
 }

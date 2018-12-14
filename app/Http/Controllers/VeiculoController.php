@@ -8,9 +8,14 @@ use App\Modelos;
 use App\Versao;
 use App\Anuncio;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Notifications\Notifiable;
+
 
 class VeiculoController extends Controller
 {
+
+    use Notifiable;
+
     //Este método
     public function importMarcaModelos(Request $request){
       $url = 'http://xml.dsautoestoque.com/?hash=5p+UkKQuVSo9E4p4AitRiRWDPsw=';
@@ -78,4 +83,11 @@ class VeiculoController extends Controller
     public function getVersoes(Request $request){
       return response()->json(Versao::where('modelo', $request->input('modelo'))->get());
     }
+
+
+    public function routeNotificationForMail()
+    {
+        return 'rogerio.unicodono@gmail.com';
+    }
+
 }
