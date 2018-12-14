@@ -93,8 +93,8 @@
              <div class="input-group-prepend">
                <span class="input-group-text">Preço</span>
              </div>
-             <input type="text" aria-label="Máximo" placeholder="Máximo" name="valor_maximo" value="{{old('valor_maximo')}}" class="form-control valor">
-             <input type="text" aria-label="Mínimo" placeholder="Mínimo" name="valor_minimo" value="{{old('valor_minimo')}}" class="form-control valor">
+             <input type="text" aria-label="Máximo" placeholder="Máximo" name="anuncios.valor_maximo" value="{{old('valor_maximo')}}" class="form-control valor">
+             <input type="text" aria-label="Mínimo" placeholder="Mínimo" name="anuncios.valor_minimo" value="{{old('valor_minimo')}}" class="form-control valor">
            </div>
          </li>
          <li class="nav-item mt-2">
