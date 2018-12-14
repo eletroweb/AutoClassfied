@@ -35,8 +35,8 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">Faixa de preço</span>
                                             </div>
-                                            <input type="text" name="preco_minimo" placeholder="Preço mínimo" class="form-control valor">
-                                            <input type="text" name="preco_maximo" placeholder="Preço máximo" class="form-control valor">
+                                            <input type="text" name="valor_minimo" placeholder="Preço mínimo" class="form-control valor">
+                                            <input type="text" name="valor_maximo" placeholder="Preço máximo" class="form-control valor">
                                         </div>
                                 </div>
                             </div>
