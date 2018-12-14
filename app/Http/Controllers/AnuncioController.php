@@ -300,6 +300,9 @@ class AnuncioController extends Controller
       $param[] = ['ativo', '=', '1'];
       $except = array('mais_buscados', 'order', 'paginate', 'cambio', 'cor');
       foreach ($data as $key=>$value) {
+        if($key == 'valor'){
+          $key = 'anuncios.valor';
+        }
         if($value && !in_array($key, $except)/*$key != 'mais_buscados' && $key != 'order' && $key != 'paginate'*/){
           if(strpos($key, '_maximo')){
             $exploded = explode("_", $key);
