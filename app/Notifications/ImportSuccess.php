@@ -43,9 +43,10 @@ class ImportSuccess extends Notification
     {
         $count = Anuncio::count();
         return (new MailMessage)
-                    ->line('Olá administrador, uma importação de veículos acaba de acontecer.')
-                    ->line('O número total de anúncios após a importação é: '.$count.' anúncio(s)')
-                    ->line('As importações estão programadas para acontecer toda madrugada às 01h');
+                ->subject('Importação realizada!')
+                ->line('Uma importação de veículos acaba de acontecer.')
+                ->line('O número total de anúncios após a importação é: '.$count.' anúncio(s)')
+                ->line('As importações estão programadas para acontecer toda madrugada às 01h');
     }
 
     /**

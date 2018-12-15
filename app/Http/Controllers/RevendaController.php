@@ -33,6 +33,7 @@ use Illuminate\Support\Facades\DB;
 use App\Video;
 use Illuminate\Notifications\Notifiable;
 use App\Notifications\ImportSuccess;
+use Illuminate\Support\Facades\Log;
 
 class RevendaController extends AppBaseController
 {
@@ -198,6 +199,7 @@ class RevendaController extends AppBaseController
   public function importAll(Request $request){
     $url = 'http://xml.dsautoestoque.com/?hash=Tm/+qav0hOhGuEQN+QfYqKVQ8IY=&l=';
     $result = simplexml_load_string(file_get_contents($url));
+    Log::info('Importação de veículos iniciada...');
     foreach($result->ad as $anuncio){
         //$cnpj = (string)$anuncio->cnpj;
         $revenda = $this->importSingleRevenda($anuncio);
@@ -213,6 +215,7 @@ class RevendaController extends AppBaseController
         /*$this->importRevendas($request, str_replace(".", "", str_replace("-", "", $cnpj)));*/
     }
     $this->notify(new ImportSuccess());
+    Log::info('Importação concluída com sucesso!');
     return true;
   }
 
@@ -697,7 +700,7 @@ class RevendaController extends AppBaseController
 
   public function routeNotificationForMail()
   {
-      return 'rogerio.unicodono@gmail.com';
+      return 'jsantos.class@gmail.com';
   }
 
 }
