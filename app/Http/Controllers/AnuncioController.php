@@ -320,7 +320,8 @@ class AnuncioController extends Controller
           }elseif(strpos($key, '_minimo')){
             $exploded = explode("_", $key);
             $value = str_replace([',','.'], '', $value);
-            $param[] = [$exploded[0], '>=', $value];
+            $k = $exploded[0] == 'valor'? 'anuncios.valor':$exploded[0];
+            $param[] = [$k, '>=', $value];
           }else{
             $prefix = is_numeric($value)?'':'%';
             $param[] =  [$key, is_numeric($value)? '=':'like', $prefix.strtoupper($value).$prefix];
