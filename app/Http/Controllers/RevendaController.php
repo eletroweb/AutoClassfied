@@ -216,7 +216,7 @@ class RevendaController extends AppBaseController
     }
     $this->notify(new ImportSuccess());
     Log::info('Importação concluída com sucesso!');
-    return true;
+    return 'Importação concluída';
   }
 
   public function importSingleRevenda($veiculo){
@@ -700,7 +700,7 @@ class RevendaController extends AppBaseController
 
   public function routeNotificationForMail()
   {
-      return 'jsantos.class@gmail.com';
+      return 'rogerio.unicodono@gmail.com';
   }
 
 }
