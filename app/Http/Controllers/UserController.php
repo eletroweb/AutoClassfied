@@ -38,9 +38,10 @@ class UserController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $this->userRepository->pushCriteria(new RequestCriteria($request));
-        $users = $this->userRepository->paginate(20);
-
+        /*$this->userRepository->pushCriteria(new RequestCriteria($request));
+        $users = $this->userRepository->paginate(20);*/
+        $s = $request->input('s');
+        $users = User::where('name', 'like', '%'.$s.'%')->orWhere('email', 'like', '%'.$s.'%')->paginate(20);
         return view('users.index')
             ->with('users', $users);
     }

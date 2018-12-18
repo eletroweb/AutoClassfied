@@ -138,7 +138,7 @@
             <li><a href="#anuncios" aria-expanded="false" data-toggle="collapse"> <i class="fa fa-newspaper"></i>Anúncios</a>
               <ul id="anuncios" class="collapse list-unstyled ">
                 <li><a href="/admin/anuncios">Ver todos</a></li>
-                <li><a href="/admin/anuncioFields">Campos personalizados</a></li>
+                <!--<li><a href="/admin/anuncioFields">Campos personalizados</a></li>-->
                 <li><a href="/admin/revenda">Importar revenda</a></li>
                 <!--<li><a href="#">Pagina</a></li>-->
               </ul>
@@ -147,7 +147,6 @@
             <li><a href="/admin/transactions/"> <i class="fa fa-dollar-sign"></i>Transações </a></li>
             <li><a href="#usuarios" aria-expanded="false" data-toggle="collapse"><i class="fa fa-users"></i>Usuários</a>
               <ul id="usuarios" class="collapse list-unstyled ">
-                <li><a href="#">Campos de cadastro</a></li>
                 <li><a href="/admin/users">Usuários cadastrados</a></li>
 
               </ul>
