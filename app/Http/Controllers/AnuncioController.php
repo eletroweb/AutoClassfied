@@ -109,9 +109,15 @@ class AnuncioController extends Controller
           $this->insertImagesAnuncio($anuncio, $imagens);
           $this->insertAnuncioDados($request);
           $title = $anuncio->getUrl();
-          //$anuncio->ativo = false;
-          //if($request->input('anuncio_destacado') == 'y'){
-            //if($request->has('tipo_pagamento')){
+          $link = $request->input('video');
+          if(!empty($link)){
+            $video = new Video();
+            $video->link = $request->input('video');
+            $video->anuncio_id = $anuncio->id;
+            $video->isHomeVideo = false;
+            $video->user_id = $anuncio->user;
+            $video->save();  
+          }
           $xml = PagseguroController::payment($request);
           if(isset($xml->error)){
             $request->flash();
@@ -126,17 +132,7 @@ class AnuncioController extends Controller
           if($transaction->paymentLink){
               $this->notify(new PaymentRequest($anuncio));  
           }
-          if($request->has('video')){
-            $link = $request->input('video');
-            if(!empty($link)){
-              $video = new Video();
-              $video->link = $request->input('video');
-              $video->anuncio_id = $anuncio->id;
-              $video->isHomeVideo = false;
-              $video->user_id = $anuncio->user;
-              $video->save();  
-            }
-          } 
+          
           return redirect("{$title}")->with('status', 'Anúncio publicado, porém só será exibido após a confirmação do seu pagamento.');
         }
         $request->flash();
