@@ -116,7 +116,7 @@ class AnuncioController extends Controller
             $video->anuncio_id = $anuncio->id;
             $video->isHomeVideo = false;
             $video->user_id = $anuncio->user;
-            $video->save();  
+            $video->save();
           }
           $xml = PagseguroController::payment($request);
           if(isset($xml->error)){
@@ -124,15 +124,15 @@ class AnuncioController extends Controller
             return redirect('/anuncie')->with('status', "Erro ao processar pagamento [{$xml->error->code}]: {$xml->error->message}" );
           }
           $transaction = TransactionController::transactionFromXml($xml);
-          
+
           $anuncio->transaction_id = $transaction->id;
           $anuncio->patrocinado = true;
           //$anuncio->ativo = false;
           $anuncio->save();
           if($transaction->paymentLink){
-              $this->notify(new PaymentRequest($anuncio));  
+              $this->notify(new PaymentRequest($anuncio));
           }
-          
+
           return redirect("{$title}")->with('status', 'Anúncio publicado, porém só será exibido após a confirmação do seu pagamento.');
         }
         $request->flash();
@@ -233,17 +233,12 @@ class AnuncioController extends Controller
         $anuncios = Anuncio::
             where($filter[0])
             ->join('anuncio_dados', 'anuncio_dados.anuncio', '=', 'anuncios.id')
-            /*->join('anuncio_dados', function($join) use($request) {
-                $join->on('anuncio_dados.anuncio', '=', 'anuncios.id')
-                      ->where([
-                        ['anuncio_dados.nome', '=', 'Cor'],
-                        ['anuncio_dados.valor', 'like', '%'.$request->input('cor').'%']
-                      ])
-                      ->orWhere([
-                        ['anuncio_dados.nome', '=', 'Cambio'],
-                        ['anuncio_dados.valor', 'like', '%'.$request->input('cambio').'%']
-                      ]);
-            })*/
+            ->join('users', 'users.id', '=', 'anuncios.user')
+            ->join('enderecos', 'enderecos.user', '=', 'users.id')
+            ->where([
+              ['enderecos.cidade', 'like', '%'. $request->input('cidade') .'%'],
+              ['enderecos.estado', 'like', '%'. $request->input('estado') .'%'],
+            ])
             ->whereRaw("anuncio_dados.nome = 'cambio' && anuncio_dados.valor like '%{$request->input('cambio')}%'")
             //->whereRaw("anuncio_dados.nome = 'cor' && anuncio_dados.valor like '%{$request->input('cor')}%'")
             ->whereIn('moto', $filter[1]['tipos'])
@@ -286,7 +281,7 @@ class AnuncioController extends Controller
           }
         }
       }
-      
+
       return null;
     }
 
@@ -294,7 +289,7 @@ class AnuncioController extends Controller
       $param = array();
       $details = array();
       $param[] = ['ativo', '=', '1'];
-      $except = array('mais_buscados', 'order', 'paginate', 'cambio', 'cor');
+      $except = array('mais_buscados', 'order', 'paginate', 'cambio', 'cor', 'cidade', 'estado');
       foreach ($data as $key=>$value) {
         if($value && !in_array($key, $except)/*$key != 'mais_buscados' && $key != 'order' && $key != 'paginate'*/){
           if(strpos($key, '_maximo')){
@@ -328,10 +323,10 @@ class AnuncioController extends Controller
         if($marca = AnuncioController::extractMarca($data['titulo'])){
           $param['marca'] = $marca;
         }
-      
+
         if($modelo = AnuncioController::extractModelo($data['titulo'])){
           $param['modelo'] = $modelo;
-        }  
+        }
       }
       return [$param, $details];
     }
@@ -386,7 +381,7 @@ class AnuncioController extends Controller
       }else{
         $relacionados = Anuncio::where([['id', '!=', $anuncio->id]])->get()->random($count < 4?$count:4);
       }
-      
+
 
       return view('anuncios.anuncio_page')
         ->with(
