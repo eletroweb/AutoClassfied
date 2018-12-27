@@ -234,10 +234,10 @@ class AnuncioController extends Controller
             where($filter[0])
             ->join('anuncio_dados', 'anuncio_dados.anuncio', '=', 'anuncios.id')
             ->join('users', 'users.id', '=', 'anuncios.user')
-            ->join('enderecos', 'enderecos.user', '=', 'users.id')
+            ->join('enderecos', 'users.endereco', '=', 'enderecos.id')
             ->where([
               ['enderecos.cidade', 'like', '%'. $request->input('cidade') .'%'],
-              ['enderecos.estado', 'like', '%'. $request->input('estado') .'%'],
+              ['enderecos.uf', '=', '%'. $request->input('estado') .'%'],
             ])
             ->whereRaw("anuncio_dados.nome = 'cambio' && anuncio_dados.valor like '%{$request->input('cambio')}%'")
             //->whereRaw("anuncio_dados.nome = 'cor' && anuncio_dados.valor like '%{$request->input('cor')}%'")
