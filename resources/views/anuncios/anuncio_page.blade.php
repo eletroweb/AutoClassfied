@@ -1,4 +1,9 @@
 @extends('layouts.app')
+@section('facebook')
+<meta property="og:title" content="{{$anuncio->titulo}}" />
+<meta property="og:description" content="Veja este anúncio e muitos outros no Únicodono!" />
+<meta property="og:image" content="{{$anuncio->urlImagemFirst()}}" />
+@endsection
 @section('content')
 <div class="container">
   <div class="row">
@@ -15,7 +20,7 @@
             @if(Auth::user())
               @if(Auth::user()->isAdmin() || Auth::user()->id == $anuncio->user)
                 <a href="/anuncios/{{$anuncio->id}}/editar" class="btn btn-primary m-2">Editar anúncio</a>
-              @endif  
+              @endif
             @endif
           </h3>
           <hr>

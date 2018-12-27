@@ -23,6 +23,7 @@
     <meta name="url" content="www.unicodono.com.br" />
     <link rel="shortcut icon" href="{{asset('images/favicon.jpg')}}" type="image/x-icon" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    @yield('facebook')
      <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-15308183-2"></script>
     <script>
