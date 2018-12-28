@@ -225,8 +225,6 @@ class AnuncioController extends Controller
       $paginacao = $request->input('paginate')?intval($request->input('paginate')):20;
       $data = $request->all();
       unset($data['page']);
-      var_dump($data);
-      exit;
       $marca_detected = null;
       $modelo_detected = null;
       if(!empty($data)){
