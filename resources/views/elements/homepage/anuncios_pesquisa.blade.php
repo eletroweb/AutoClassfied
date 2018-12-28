@@ -6,12 +6,8 @@
                     <h6 class="card-subtitle mb-2 text-muted">Pesquise por marca, nome, modelo, ano ou tudo isso junto!</h6>
                     <p class="card-text">
                         <div class="row">
-                            <!--<div class="col-sm-12">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="O que está procurando?" name="titulo" id="nome">
-                                </div>
-                            </div>-->
-                            <div class="col-sm-6">
+
+                            <!--<div class="col-sm-6">
                               <div class="form-group">
                                 <label for="estado">Estado</label>
                                 <select class="form-control" class="uf" name="uf" id="uf" required>
@@ -51,7 +47,7 @@
                                 <label for="cidade">Cidade</label>
                                 <input type="text" id="cidade" name="cidade" value="" placeholder="Digite a cidade">
                               </div>
-                            </div>
+                            </div>-->
                         </div>
                         <div class="row">
                             <div class="col-sm-6">
