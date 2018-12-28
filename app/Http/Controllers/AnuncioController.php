@@ -225,6 +225,8 @@ class AnuncioController extends Controller
       $paginacao = $request->input('paginate')?intval($request->input('paginate')):20;
       $data = $request->all();
       unset($data['page']);
+      var_dump($data);
+      exit;
       $marca_detected = null;
       $modelo_detected = null;
       if(!empty($data)){
@@ -237,7 +239,7 @@ class AnuncioController extends Controller
             ->join('enderecos', 'users.endereco', '=', 'enderecos.id')
             ->where([
               ['enderecos.cidade', 'like', '%'. $request->input('cidade') .'%'],
-              ['enderecos.uf', '=', '%'. $request->input('estado') .'%'],
+              ['enderecos.uf', 'like', '%'. $request->input('uf') .'%'],
             ])
             ->whereRaw("anuncio_dados.nome = 'cambio' && anuncio_dados.valor like '%{$request->input('cambio')}%'")
             //->whereRaw("anuncio_dados.nome = 'cor' && anuncio_dados.valor like '%{$request->input('cor')}%'")

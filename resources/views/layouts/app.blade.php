@@ -115,7 +115,7 @@
                   <a class="dropdown-item" href="/anuncios?tipo[]=carro&mais_buscados=1">Carros mais buscados</a>
                   <a class="dropdown-item" href="/anuncios?tipo[]=moto&mais_buscados=1">Motos mais buscadas</a>
                   <!--<a class="dropdown-item" href="#">Busca avançada</a>-->
-                  <a class="dropdown-item" href="{{route('revendas')}}">Encontre um revendedor</a>
+
                   <a class="dropdown-item" href="{{route('fipe')}}">Avalie o seu carro</a>
                 </div>
               </li>
@@ -123,11 +123,13 @@
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   Revendedores
                 </a>
+
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                   @if(!Auth::check())
                   <a class="dropdown-item" href="/login">Fazer login</a>
                   @endif
                   <a class="dropdown-item" href="{{route('contratar_revenda')}}">Quero contratar</a>
+                  <a class="dropdown-item" href="{{route('revendas')}}">Encontre um revendedor</a>
                 </div>
               </li>
               <li class="nav-item dropdown">

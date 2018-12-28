@@ -1,5 +1,8 @@
 <div class="row">
     <div class="col-sm-12">
+      <img src="https://assets.pagseguro.com.br/ps-integration-assets/banners/pagamento/todos_animado_550_50.gif" alt="Logotipos de meios de pagamento do PagSeguro" title="Este site aceita pagamentos com as principais bandeiras e bancos, saldo em conta PagSeguro e boleto.">
+    </div>
+    <div class="col-sm-12">
       <div class="alert alert-warning" id="alert_message" role="alert">
       </div>
       <div class="form-group">
