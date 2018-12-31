@@ -10,13 +10,20 @@
   <div class="row">
     <div class="col-sm-3">
       <nav class="nav flex-column">
-        <a class="nav-link" href="{{route('meusanuncios')}}">Meus anúncios</a>
+        <li class="nav-item">
+          <a href="{{route('meusanuncios')}}" class="nav-link btn btn-light btn-lg">Meus anúncios</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link btn btn-light btn-lg" href="{{route('configuracoes_conta')}}">Configurações</a>
+        </li>
         @if(Auth::user()->isRevenda())
         <li class="nav-item">
           <a class="nav-link" href="{{Auth::user()->isRevenda()->getUrl()}}">Minha revenda</a>
         </li>
         @endif
-        <a class="nav-link" href="{{route('configuracoes_conta')}}">Configurações</a>
+        <li class="nav-item">
+          <a href="/anuncie" class="nav-link btn btn-warning btn-lg">Anunciar veículo</a>
+        </li>
       </nav>
     </div>
     <div class="col-sm-9">
