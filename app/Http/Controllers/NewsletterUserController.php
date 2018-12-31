@@ -36,6 +36,7 @@ class NewsletterUserController extends AppBaseController
         }else{
             $newsletterUsers = NewsletterUser::where('nome', 'like', '%'.$s.'%')
                                               ->orWhere('email', 'like', '%'.$s.'%')
+                                              ->distinct()
                                               ->orderBy('id', 'desc')->paginate(20);
         }
         return view('newsletter_users.index')
