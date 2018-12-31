@@ -134,6 +134,7 @@
             <li><a href="/admin/versoes"> <i class="fa fa-list-ol"></i>Versões </a></li>
             <li><a href="/admin/revendas"> <i class="fa fa-store"></i>Revendas </a></li>
             <li><a href="/admin/contatos"><i class="fa fa-comments"></i>Contatos</a></li>
+            <li><a href="/admin/newsletterUsers"><i class="fas fa-at"></i>E-mails capturados</a></li>
             <li><a href="/admin/fale-conosco"><i class="fa fa-envelope"></i>Fale conosco</a></li>
             <li><a href="#anuncios" aria-expanded="false" data-toggle="collapse"> <i class="fa fa-newspaper"></i>Anúncios</a>
               <ul id="anuncios" class="collapse list-unstyled ">

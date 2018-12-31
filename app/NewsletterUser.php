@@ -15,15 +15,11 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class NewsletterUser extends Model
 {
-    use SoftDeletes;
 
     public $table = 'newsletter_users';
 
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
-
-
-    protected $dates = ['deleted_at'];
 
 
     public $fillable = [

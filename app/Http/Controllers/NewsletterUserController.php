@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Flash;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
+use App\NewsletterUser;
 
 class NewsletterUserController extends AppBaseController
 {
@@ -29,9 +30,14 @@ class NewsletterUserController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $this->newsletterUserRepository->pushCriteria(new RequestCriteria($request));
-        $newsletterUsers = $this->newsletterUserRepository->all();
-
+        $s = $request->input('s');
+        if(empty($s)){
+            $newsletterUsers = NewsletterUser::orderBy('id', 'desc')->paginate(20);
+        }else{
+            $newsletterUsers = NewsletterUser::where('nome', 'like', '%'.$s.'%')
+                                              ->orWhere('email', 'like', '%'.$s.'%')
+                                              ->orderBy('id', 'desc')->paginate(20);
+        }
         return view('newsletter_users.index')
             ->with('newsletterUsers', $newsletterUsers);
     }
@@ -77,7 +83,7 @@ class NewsletterUserController extends AppBaseController
         $newsletterUser = $this->newsletterUserRepository->findWithoutFail($id);
 
         if (empty($newsletterUser)) {
-            Flash::error('Newsletter User not found');
+            Flash::error('Newsletter User não encontrado');
 
             return redirect(route('newsletterUsers.index'));
         }
@@ -97,7 +103,7 @@ class NewsletterUserController extends AppBaseController
         $newsletterUser = $this->newsletterUserRepository->findWithoutFail($id);
 
         if (empty($newsletterUser)) {
-            Flash::error('Newsletter User not found');
+            Flash::error('Newsletter User não encontrado');
 
             return redirect(route('newsletterUsers.index'));
         }
@@ -118,14 +124,14 @@ class NewsletterUserController extends AppBaseController
         $newsletterUser = $this->newsletterUserRepository->findWithoutFail($id);
 
         if (empty($newsletterUser)) {
-            Flash::error('Newsletter User not found');
+            Flash::error('Newsletter User não encontrado');
 
             return redirect(route('newsletterUsers.index'));
         }
 
         $newsletterUser = $this->newsletterUserRepository->update($request->all(), $id);
 
-        Flash::success('Newsletter User updated successfully.');
+        Flash::success('Newsletter User atualizado com sucesso.');
 
         return redirect(route('newsletterUsers.index'));
     }
@@ -142,14 +148,14 @@ class NewsletterUserController extends AppBaseController
         $newsletterUser = $this->newsletterUserRepository->findWithoutFail($id);
 
         if (empty($newsletterUser)) {
-            Flash::error('Newsletter User not found');
+            Flash::error('Newsletter User não encontrado');
 
             return redirect(route('newsletterUsers.index'));
         }
 
         $this->newsletterUserRepository->delete($id);
 
-        Flash::success('Newsletter User deleted successfully.');
+        Flash::success('Newsletter User apagado com sucesso.');
 
         return redirect(route('newsletterUsers.index'));
     }
