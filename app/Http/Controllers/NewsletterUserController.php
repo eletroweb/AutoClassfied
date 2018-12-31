@@ -63,12 +63,9 @@ class NewsletterUserController extends AppBaseController
     public function store(CreateNewsletterUserRequest $request)
     {
         $input = $request->all();
-
-        $newsletterUser = $this->newsletterUserRepository->create($input);
-
-        //Flash::success('Newsletter User saved successfully.');
-
-        //return redirect(route('newsletterUsers.index'));
+        if(NewsletterUser::where('email', $input['email'])->count() <= 0){
+            $newsletterUser = $this->newsletterUserRepository->create($input);
+        }
         return response()->json('Veículo consultado com sucesso');
     }
 
