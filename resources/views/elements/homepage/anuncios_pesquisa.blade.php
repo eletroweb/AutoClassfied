@@ -1,6 +1,6 @@
 <div class="container m-auto">
-  <form action="/anuncios" method="get">
-    <div class="col-sm-12">
+  <form class="row justify-content-md-center" action="/anuncios" method="get">
+    <div class="col-sm-8">
       <div class="card shadow">
         <div class="card-body">
           <h4 class="card-title">Encontre os principais anúncios</h4>
