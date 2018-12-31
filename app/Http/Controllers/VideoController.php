@@ -48,4 +48,29 @@ class VideoController extends Controller
             return redirect('/');
     }
 
+    public function videos(Request $request, $id){
+      $videos = Video::join('users', 'users.id', '=', 'videos.user_id')
+                     ->join('revendas', 'revendas.user', '=', 'users.id')
+                     ->where([
+                        ['revendas.id', '=', $id],
+                        ['revendas.user', '=', Auth::user()->id]
+                      ])
+                     ->paginate(20);
+      return view('revendas.videos')->with('videos', $videos);
+    }
+
+    public function delete(Request $request){
+      $video = Video::findOrFail($request->input('video_id'));
+      if(Auth::check()){
+        $user = Auth::user();
+        if($user->id == $video->user_id){
+          $video->delete();
+          Flash::success('Vídeo excluído com sucesso!');
+        }else{
+          Flash::warning('Você precisa ser o proprietário da revenda para excluir um vídeo');
+        }
+      }
+      return redirect()->back();
+    }
+
 }

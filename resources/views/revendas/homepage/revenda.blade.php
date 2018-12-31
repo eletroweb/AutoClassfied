@@ -67,7 +67,7 @@
               @if($v->thumbnail)
                 <img src="{{ $v->thumbnail }}" />
               @else
-                <img src="{{ asset('/images/thumbnail.jpeg') }}">
+                <img width="100" src="{{ asset('/img/thumbnail.jpeg') }}">
               @endif
             </a>
           @empty
@@ -76,6 +76,11 @@
             </div>
           @endforelse
         </div>
+        @if(Auth::check())
+          @if($revenda->user == Auth::user()->id)
+            <a href="/videos/{{$revenda->id}}/revenda" style="font-size: 14px;" class="badge badge-primary">Gerenciar vídeos</a>
+          @endif
+        @endif
   		</div>
   		<script>
   			$('#video-gallery').lightGallery({

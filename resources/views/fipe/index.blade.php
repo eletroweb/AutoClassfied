@@ -67,6 +67,12 @@
       </div>
     </div>
   </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="alert alert-primary mt-1" role="alert">
+        Aproveite para <a href="/anuncie" class="alert-link">anunciar o seu veículo</a> após a consulta na tabela fipe.
+      </div>
+    </div>
+  </div>
 </div>
-
 @endsection

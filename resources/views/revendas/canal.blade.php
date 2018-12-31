@@ -35,9 +35,10 @@
 		<div class="col-sm-8">
 			<div id="video-gallery" class="d-flex flex-row bd-highlight mb-3 flex-wrap text-center">
 	          @forelse($videos as $v)
-	            <a href="{{ $v->link }}">
-	                <img height="100" src="{{ $v->thumb? Storage::url($v->thumb->url): '' }}"/>
-	            </a>
+              <a href="{{ $v->link }}">
+                <!--<iframe src="{{ $v->link }}" height="150"></iframe>-->
+                <img height="150" src="{{ $v->thumb? Storage::url($v->thumb->url) : '/img/thumbnail.jpeg' }}"/>
+              </a>
 	          @empty
 	            <div class="alert alert-primary" role="alert">
 	              Ainda não há videos publicados por aqui

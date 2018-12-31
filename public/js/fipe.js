@@ -50,11 +50,13 @@ $(document).ready(function(){
   });
   $('#buscar_fipe').click(function(){
     if($('#marca_fipe').val() !== '' && $('#modelo_fipe').val() !== '' && $('#versao_fipe').val() !== '' && $('#nome').val() !== '' && $('#email').val()!==''){
-      $.ajax({
-        url: '/newsletter/fipe',
-        type: 'post',
-        data: {_token: $('meta[name="csrf-token"]').attr('content'), nome: $('#nome').val(), email: $('#email').val()},
-      });
+      if($('#nome').val() !== '' && $('#email').val() !== ''){
+        $.ajax({
+          url: '/newsletter/fipe',
+          type: 'post',
+          data: {_token: $('meta[name="csrf-token"]').attr('content'), nome: $('#nome').val(), email: $('#email').val()},
+        });
+      }
       $.ajax({
               url: 'https://fipeapi.appspot.com/api/1/carros/veiculo/'+$('#marca_fipe').val()+'/'+$('#modelo_fipe').val()+'/'+$('#versao_fipe').val()+'.json',
               type: 'get',
