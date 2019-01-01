@@ -44,7 +44,7 @@
               {!! $anuncio->patrocinado?'<span class="badge badge-success">Anúncio em destaque</span>':'' !!}
             </small>
             @if(Auth::check())
-				    @if($anuncio->user == Auth::user()->id)
+				    @if($anuncio->user == Auth::user()->id && !Auth::user()->isRevenda())
               @if($anuncio->transaction && $anuncio->transaction->status == 3)
 	            <form action="{{ route('desabilitar_anuncio', ['id'=> $anuncio->id]) }}" method="post">
 	              {{csrf_field()}}
@@ -72,6 +72,16 @@
       <a class="btn btn-primary" href="/anuncios/{{$anuncio->id}}/editar">Editar anúncio</a>
     </p>
     <div class="collapse" id="collapse_{{$anuncio->id}}">
+      <ul class="list-group">
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          Visualizações
+          <span class="badge badge-primary badge-pill">{{$anuncio->visualizacoes()}}</span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          Visualizações do contato
+          <span class="badge badge-primary badge-pill">{{$anuncio->visualizacoes()}}</span>
+        </li>
+      </ul>
         @if(!$anuncio->patrocinado)
           Este anúncio foi publicado sem destaques
         @else

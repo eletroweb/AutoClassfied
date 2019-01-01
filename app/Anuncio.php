@@ -9,7 +9,8 @@ use App\Revenda;
 use App\Transaction;
 use Illuminate\Support\Facades\Storage;
 use App\Video;
-
+use App\VisualizacaoAnuncio;
+use App\VisualizacaoDados;
 
 class Anuncio extends Model
 {
@@ -152,8 +153,16 @@ class Anuncio extends Model
             'isHomeVideo' => false,
             //'anuncio_id'=> $this->id
           ]
-        );  
+        );
       }
+    }
+
+    public function visualizacoes(){
+      return VisualizacaoAnuncio::where('anuncio', $this->id)->count();
+    }
+
+    public function visualizacoesDados(){
+      return VisualizacaoDados::where('anuncio_id', $this->id)->count();
     }
 
 }

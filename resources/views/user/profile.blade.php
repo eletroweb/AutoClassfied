@@ -18,8 +18,11 @@
         </li>
         @if(Auth::user()->isRevenda())
         <li class="nav-item">
-          <a class="nav-link" href="{{Auth::user()->isRevenda()->getUrl()}}">Minha revenda</a>
+          <a href="{{Auth::user()->isRevenda()->getUrl()}}" class="nav-link btn btn-light btn-lg">Minha revenda</a>
         </li>
+        <!--<li class="nav-item">
+          <a class="nav-link" href="{{Auth::user()->isRevenda()->getUrl()}}">Minha revenda</a>
+        </li>-->
         @endif
         <li class="nav-item">
           <a href="/anuncie" class="nav-link btn btn-warning btn-lg">Anunciar veículo</a>
