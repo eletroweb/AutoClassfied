@@ -79,7 +79,7 @@
         </li>
         <li class="list-group-item d-flex justify-content-between align-items-center">
           Visualizações do contato
-          <span class="badge badge-primary badge-pill">{{$anuncio->visualizacoes()}}</span>
+          <span class="badge badge-primary badge-pill">{{$anuncio->visualizacoesDados()}}</span>
         </li>
       </ul>
         @if(!$anuncio->patrocinado)
