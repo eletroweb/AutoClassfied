@@ -141,7 +141,13 @@
         <div class="card-body">
           <!--<a class="btn btn-primary btn-lg btn-block" data-toggle="collapse" href="#contato" role="button" aria-expanded="false" aria-controls="contato" class="card-link">Entrar em contato</a>-->
           <div class="mt-3" id="contato">
-            <h4 class="card-title" style="font-size: 30px"><span class="badge badge-success">R$ {{$anuncio->getValor()}}</span></h4>
+            <h4 class="card-title" style="font-size: 30px"><span class="badge badge-success">R$ {{$anuncio->getValor()}}</span>
+              @if($anuncio->users->whatsapp())
+                <a href="https://api.whatsapp.com/send?phone={{$anuncio->users->whatsapp()}}">
+                  <i class="fab fa-whatsapp-square" style="color: lightgreen;"></i>
+                </a>
+              @endif
+            </h4>
             <div class="card card-body">
               <form action="{{route('contato_anuncio')}}" method="post">
                 {{csrf_field()}}

@@ -151,6 +151,7 @@ $(document).ready(function(){
   });
   $('#documento').mask('000.000.000-00', {reverse: true});
   $('.telefone').mask('(00) 0000-0000');
+  $('.celular').mask('(00) 00000-0000');
   $("#anunciar").submit(function(){
      var value = $('#valor').cleanVal();
      $('#valor').val(value);
@@ -228,7 +229,7 @@ $(document).ready(function(){
       if($('#marca_loaded') !== undefined){
         $('#marca').val($('#marca_loaded').val()).trigger('change');
       }
-      
+
     }
   });
   $('#marca').change(function(){
@@ -250,7 +251,7 @@ $(document).ready(function(){
           });
           if($('#modelo_loaded') !== undefined){
             $('#modelo').val($('#modelo_loaded').val()).trigger('change');
-          } 
+          }
         }
       }
     });
@@ -274,7 +275,7 @@ $(document).ready(function(){
         }
         if($('#versao_loaded') !== undefined){
           $('#versao').val($('#versao_loaded').val()).trigger('change');
-        } 
+        }
       }
     });
   });

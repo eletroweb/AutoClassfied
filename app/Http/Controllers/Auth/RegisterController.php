@@ -56,7 +56,8 @@ class RegisterController extends Controller
             'documento' => 'bail|required|unique:users|'. count($data['documento']) > 14? 'cnpj':'cpf',
             'pessoa_fisica' => 'required',
             'celular' => 'required|celular_com_ddd',
-            'g-recaptcha-response' => 'required|captcha'
+            'g-recaptcha-response' => 'required|captcha',
+            'whatsapp' => 'required|celular_com_ddd'
         ]);
     }
 
@@ -80,6 +81,11 @@ class RegisterController extends Controller
         $dado->valor= $data['celular'];
         $dado->user = $user->id;
         $dado->save();
+        $whatsapp = new UserDado();
+        $whatsapp->nome = 'whatsapp';
+        $whatsapp->valor = $data['whatsapp'];
+        $whatsapp->user = $user->id;
+        $whatsapp->save();
         return $user;
     }
 }

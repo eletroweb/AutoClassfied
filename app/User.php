@@ -63,4 +63,20 @@ class User extends Authenticatable
        $this->notify(new ResetPassword($token));
     }
 
+    public function dados(){
+      return $this->hasMany('App\UserDado', 'user');
+    }
+
+    public function whatsapp(){
+      $whatsapp = UserDado::where([
+        ['nome', '=', 'whatsapp'],
+        ['user', '=', $this->id]
+      ])->first();
+      if(!$whatsapp){
+        return false;
+      }else{
+        return $whatsapp->valor;
+      }
+    }
+
 }

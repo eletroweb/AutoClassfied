@@ -45,11 +45,20 @@
         @endif
       </div>
       <div class="form-group">
-        <label for="telefone">Celular</label>
+        <label for="telefone">Telefone</label>
         <input class="form-control telefone" type="text" name="celular" placeholder="Digite o seu telefone" value="" required>
         @if ($errors->has('celular'))
             <span class="help-block">
                 <strong>{{ $errors->first('celular') }}</strong>
+            </span>
+        @endif
+      </div>
+      <div class="form-group">
+        <label for="telefone">WhatsApp</label>
+        <input class="form-control celular" type="text" name="whatsapp" placeholder="Digite o número do WhatsApp" value="" required>
+        @if ($errors->has('whatsapp'))
+            <span class="help-block">
+                <strong>{{ $errors->first('whatsapp') }}</strong>
             </span>
         @endif
       </div>
