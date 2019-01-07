@@ -122,9 +122,11 @@ class AnuncioController extends Controller
           if(isset($xml->error)){
             $request->flash();
             return redirect('/anuncie')->with('status', "Erro ao processar pagamento [{$xml->error->code}]: {$xml->error->message}" );
+          }elseif(isset($xml['error'])) {
+            $request->flash();
+            return redirect('/anuncie')->with('status', "Erro ao processar pagamento {$xml['error']}");
           }
           $transaction = TransactionController::transactionFromXml($xml);
-
           $anuncio->transaction_id = $transaction->id;
           $anuncio->patrocinado = true;
           //$anuncio->ativo = false;

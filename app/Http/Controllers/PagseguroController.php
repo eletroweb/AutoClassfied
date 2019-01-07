@@ -37,34 +37,38 @@ class PagseguroController extends Controller
     }
 
     public static function payment(Request $request){
-      $tipo_pagamento = $request->input('tipo_pagamento');
-      $isBoleto = $tipo_pagamento == 'boleto';
-      $link = Option::getOptionValor('pagseguro_endereco');
-      $cpf = $isBoleto? Auth::user()->documento : $request->input('cpf');
-      $cpf = trim(str_replace("-", "", str_replace(".", "", $cpf)));
-      $tel_exploded = explode(") ", $isBoleto? Auth::user()->telefone() : $request->input('telefone'));
-      $ddd = str_replace("(", "", $tel_exploded[0]);
-      $telefone = str_replace("-", "", substr($tel_exploded[1], 2, strlen($tel_exploded[1]) ) );
-      $cep = str_replace("-", "", $isBoleto? Auth::user()->end->cep : $request->input('cep'));
-      $curl = curl_init();
-      $data = null;
-      if($tipo_pagamento == 'boleto'){
-        $data = PagseguroController::dataBoleto($request, $cpf, $ddd, $telefone, $cep);
-      }else{
-        $data = PagseguroController::dataCreditCard($request, $cpf, $ddd, $telefone, $cep);
+      try{
+        $tipo_pagamento = $request->input('tipo_pagamento');
+        $isBoleto = $tipo_pagamento == 'boleto';
+        $link = Option::getOptionValor('pagseguro_endereco');
+        $cpf = $isBoleto? Auth::user()->documento : $request->input('cpf');
+        $cpf = trim(str_replace("-", "", str_replace(".", "", $cpf)));
+        $tel_exploded = explode(") ", $isBoleto? Auth::user()->telefone() : $request->input('telefone'));
+        $ddd = str_replace("(", "", $tel_exploded[0]);
+        $telefone = str_replace("-", "", substr($tel_exploded[1], 2, strlen($tel_exploded[1]) ) );
+        $cep = str_replace("-", "", $isBoleto? Auth::user()->end->cep : $request->input('cep'));
+        $curl = curl_init();
+        $data = null;
+        if($tipo_pagamento == 'boleto'){
+          $data = PagseguroController::dataBoleto($request, $cpf, $ddd, $telefone, $cep);
+        }else{
+          $data = PagseguroController::dataCreditCard($request, $cpf, $ddd, $telefone, $cep);
+        }
+        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($curl, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
+        curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type: application/x-www-form-urlencoded; charset=ISO-8859-1'));
+        //curl_setopt($curl, CURLOPT_URL, "https://ws.sandbox.pagseguro.uol.com.br/v2/transactions/");
+        curl_setopt($curl, CURLOPT_URL, "$link/v2/transactions");
+        curl_setopt($curl, CURLOPT_POST, true);
+        curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($data));
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        $resp = curl_exec($curl);
+        $resp = simplexml_load_string($resp);
+        curl_close($curl);
+        return $resp;
+      }catch(Exception $e){
+        $e-
       }
-      curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
-      curl_setopt($curl, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
-      curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type: application/x-www-form-urlencoded; charset=ISO-8859-1'));
-      //curl_setopt($curl, CURLOPT_URL, "https://ws.sandbox.pagseguro.uol.com.br/v2/transactions/");
-      curl_setopt($curl, CURLOPT_URL, "$link/v2/transactions");
-      curl_setopt($curl, CURLOPT_POST, true);
-      curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($data));
-      curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-      $resp = curl_exec($curl);
-      $resp= simplexml_load_string($resp);
-      curl_close($curl);
-      return $resp;
     }
 
     private static function dataCreditCard(Request $request, $cpf, $ddd, $telefone, $cep){

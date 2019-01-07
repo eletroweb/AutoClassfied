@@ -2,6 +2,8 @@ var bin_bandeira = '';
 var hashComprador = '';
 
 function loadSenderHash(){
+  console.log('Gerando a chave do pagseguro...');
+  $('.cssload-thecube').css('display', 'none');
   $.ajax({
     url: '/pagseguro/startSession',
     dataType: 'json',
@@ -16,8 +18,10 @@ function loadSenderHash(){
                 return false;
             }
             hashComprador = response.senderHash; //Hash estará disponível nesta variável.
+            //$('.cssload-thecube').css('display', 'block');
             $('#btnPagar').prop('disabled', false);
             $('#btnPagar').html('Processar informações');
+            console.log('Chave do pagseguro');
         }
       });
     }
@@ -49,11 +53,11 @@ $(document).ready(function(){
 	        if($(this).val() === 'boleto'){
 	            //$('.credito').css('display', 'none');
 	            //$('#alert_message').html('Iremos gerar e disponibilizar um boleto para que você possa realizar o pagamento. O seu anúncio será aprovado após a confirmação do pagamento por parte do banco. A aprovação do pagamento do boleto costuma demorar no máximo 72 horas.');
-	        	//$('#checkoutModal').modal();  
+	        	//$('#checkoutModal').modal();
 	        } else {
 	        	$('.credito').css('display', 'block');
-	          	$('#alert_message').html('O pagamento só será efetivado após a realização do anúncio. Nós não armazenamos os seus dados do cartão de crédito.');  
-	          	$('#checkoutModal').modal(); 
+	          	$('#alert_message').html('O pagamento só será efetivado após a realização do anúncio. Nós não armazenamos os seus dados do cartão de crédito.');
+	          	$('#checkoutModal').modal();
 	        }
 	        $('#method_payment').val($(this).val());
 	      });
@@ -127,4 +131,3 @@ $(document).ready(function(){
 		}
 	});
 });
-

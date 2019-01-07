@@ -1,3 +1,9 @@
+<div class="cssload-thecube" style="display: none">
+	<div class="cssload-cube cssload-c1"></div>
+	<div class="cssload-cube cssload-c2"></div>
+	<div class="cssload-cube cssload-c4"></div>
+	<div class="cssload-cube cssload-c3"></div>
+</div>
 <!-- Cadastrar endereço se necessário -->
 @if(!Auth::user()->endereco)
 <div class="modal fade" id="enderecoCadastro" tabindex="-1" role="dialog" aria-labelledby="enderecoCadastro" aria-hidden="true">
@@ -86,7 +92,7 @@
             @else
               <input required type="text" value="{{ old('valor')? old('valor'): '' }}" class="form-control" name="valor" id="valor" aria-describedby="valorHelp" placeholder="Digite o preço">
             @endif
-            
+
             <small id="valorHelp" class="form-text text-muted">Este preço será exibido no anúncio</small>
           </div>
         </div>
@@ -256,7 +262,7 @@
         <div class="p-2 bd-highlight">
           <div class="form-group">
             <div class="custom-control custom-checkbox">
-              <input {{ isset($anuncio)? 
+              <input {{ isset($anuncio)?
                         $anuncio->adicionais->filter(function($item)use($op) { return $item->nome == $op; })->first()? 'checked':'' : '' }}
                 type="checkbox" class="custom-control-input" id="opcional_{{$key}}" name="opcionais[]" value="{{$op}}">
               <label class="custom-control-label" for="opcional_{{$key}}">
@@ -414,6 +420,7 @@ form.children("div").steps({
   onFinishing: function (event, currentIndex)
   {
     form.validate().settings.ignore = ":disabled";
+
     return form.valid();
   },
   onFinished: function (event, currentIndex)
