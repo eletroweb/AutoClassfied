@@ -67,7 +67,7 @@ class PagseguroController extends Controller
         curl_close($curl);
         return $resp;
       }catch(Exception $e){
-        $e-
+        return array('error' => $e->getMessage());
       }
     }
 
