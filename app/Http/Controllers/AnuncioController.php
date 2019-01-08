@@ -119,8 +119,6 @@ class AnuncioController extends Controller
             $video->user_id = $anuncio->user;
             $video->save();
           }
-          var_dump($request->all());
-          exit;
           $xml = PagseguroController::payment($request);
           if(isset($xml->error)){
             $request->flash();

@@ -53,9 +53,7 @@ $(document).ready(function(){
 	      $('#tipo_pagamento_destaque').collapse('show');
 	      $('.tipo_pagamento').change(function(){
 	        if($(this).val() === 'boleto'){
-	            //$('.credito').css('display', 'none');
-	            //$('#alert_message').html('Iremos gerar e disponibilizar um boleto para que você possa realizar o pagamento. O seu anúncio será aprovado após a confirmação do pagamento por parte do banco. A aprovação do pagamento do boleto costuma demorar no máximo 72 horas.');
-	        	//$('#checkoutModal').modal();
+	            loadSenderHash();
 	        } else {
 	        	$('.credito').css('display', 'block');
 	          	$('#alert_message').html('O pagamento só será efetivado após a realização do anúncio. Nós não armazenamos os seus dados do cartão de crédito.');

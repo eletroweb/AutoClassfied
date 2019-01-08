@@ -1,4 +1,9 @@
 <!-- Cadastrar endereço se necessário -->
+<script>
+  $(document).ready(function(){
+    loadSenderHash();
+  })
+</script>
 @if(!Auth::user()->endereco)
 <div class="modal fade" id="enderecoCadastro" tabindex="-1" role="dialog" aria-labelledby="enderecoCadastro" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
@@ -30,6 +35,7 @@
       {{ session('status') }}
     </div>
   @endif
+  @include('flash::message')
 <form id="anunciar" method="post" action="{{ isset($anuncio)? route('update_anuncio', ['id'=> $anuncio->id]):route('anuncieStore')}}"  enctype="multipart/form-data">
   <div class="container">
     <h3>Informações básicas</h3>
@@ -413,16 +419,7 @@ form.children("div").steps({
   },
   onFinishing: function (event, currentIndex)
   {
-    if(!loadedHash && senderHash == ''){
-        alert('Você precisa selecionar uma forma de pagamento');
-        return false;
-    }
-    if(loadedHash && senderHash == ''){
-        alert('Aguarde enquanto processamos o pagamento');
-        return false;
-    }
     form.validate().settings.ignore = ":disabled";
-
     return form.valid();
   },
   onFinished: function (event, currentIndex)
