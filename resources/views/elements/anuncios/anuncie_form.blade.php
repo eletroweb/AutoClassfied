@@ -1,9 +1,3 @@
-<div class="cssload-thecube" style="display: none">
-	<div class="cssload-cube cssload-c1"></div>
-	<div class="cssload-cube cssload-c2"></div>
-	<div class="cssload-cube cssload-c4"></div>
-	<div class="cssload-cube cssload-c3"></div>
-</div>
 <!-- Cadastrar endereço se necessário -->
 @if(!Auth::user()->endereco)
 <div class="modal fade" id="enderecoCadastro" tabindex="-1" role="dialog" aria-labelledby="enderecoCadastro" aria-hidden="true">

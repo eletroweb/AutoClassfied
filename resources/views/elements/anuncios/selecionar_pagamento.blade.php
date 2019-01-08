@@ -4,6 +4,7 @@
           <h3 class="box-title">Selecione a sua opção de anúncio</h3>
           <div class="plan-selection custom-control custom-radio">
               <input type="hidden" name="method_payment" id="method_payment">
+              <input type="hidden" name="senderHash" id="senderHash" value="">
               <div class="plan-data">
                   <input id="anuncio_destacado" value="y" class="custom-control-input tipo_anuncio"  name="anuncio_destacado" type="radio"/>
                   <label for="anuncio_destacado" class="custom-control-label" style="font-weight: bold; color: green;">Anúncio destacado</label>

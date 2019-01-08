@@ -1,5 +1,6 @@
 var bin_bandeira = '';
 var hashComprador = '';
+var loadedHash = false;
 
 function loadSenderHash(){
   console.log('Gerando a chave do pagseguro...');
@@ -18,10 +19,11 @@ function loadSenderHash(){
                 return false;
             }
             hashComprador = response.senderHash; //Hash estará disponível nesta variável.
+            $('#senderHash').val(hashComprador);
             //$('.cssload-thecube').css('display', 'block');
             $('#btnPagar').prop('disabled', false);
             $('#btnPagar').html('Processar informações');
-            console.log('Chave do pagseguro');
+            console.log('Chave do pagseguro gerado');
         }
       });
     }
@@ -126,7 +128,7 @@ $(document).ready(function(){
 			if($('#nome').val() !== '' && $('#telefone').val().length >= 10 && $('#cpf').val().length == 14 && $('#logradouro').val() !== ''
 				&& $('#cidade').val() !== '' && $('#bairro').val() !== '' && $('#uf').val() !== '' && $('#cep').val().length == 9){
 				$('#btnPagar').html('Informações processadas');
-                $('#checkoutModal').modal('hide');
+        $('#checkoutModal').modal('hide');
 			}
 		}
 	});
