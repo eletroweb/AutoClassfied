@@ -413,6 +413,14 @@ form.children("div").steps({
   },
   onFinishing: function (event, currentIndex)
   {
+    if(!loadedHash && senderHash == ''){
+        alert('Você precisa selecionar uma forma de pagamento');
+        return false;
+    }
+    if(loadedHash && senderHash == ''){
+        alert('Aguarde enquanto processamos o pagamento');
+        return false;
+    }
     form.validate().settings.ignore = ":disabled";
 
     return form.valid();
