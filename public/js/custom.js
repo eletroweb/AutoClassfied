@@ -1,4 +1,5 @@
 var drop_anuncio;
+var old_response;
 
 function autoRemove(element){
   if(confirm('Deseja realmente remover?')){
@@ -87,21 +88,17 @@ $(document).ready(function(){
     },
     success: function(data){
       if(data.xhr.responseText !== 'false'){
+
           var inputs = JSON.parse(data.xhr.responseText);
-          inputs.forEach(function(item){
-            var exist = false;
-            $('.imagem_anuncio').each(function(img, k){
-              console.log(k);
-              exist = img == item;
-            });
-            if(!exist){
+          if(!_.isEqual(old_response, inputs)){
+            inputs.forEach(function(item){
               var input = $('<input class="imagem_anuncio" type="hidden">');
               input.attr('name', 'imagens[]');
               input.val(item.replace('\"', '').replace('\\', ''));
               $('#anunciar').append(input);
-            }
-            console.log(exist);
-          });
+            });
+            old_response = inputs;
+          }
       }
     }
   });
