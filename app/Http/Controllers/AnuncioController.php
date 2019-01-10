@@ -136,7 +136,11 @@ class AnuncioController extends Controller
               $this->notify(new PaymentRequest($anuncio));
           }
 
-          return redirect("{$title}")->with('status', 'Anúncio publicado, porém só será exibido após a confirmação do seu pagamento.');
+          return redirect("{$title}")->with(
+                                              'status',
+                                              'Anúncio publicado, porém só será exibido após a confirmação do seu pagamento.'.
+                                              'Caso tenha optado por pagar via boleto, você receberá um e-mail contendo o boleto para pagamento.'
+                                           );
         }
         $request->flash();
         return redirect('/anuncie')->with('status', 'Você precisa inserir no mínimo uma imagem para publicar o seu anúncio');

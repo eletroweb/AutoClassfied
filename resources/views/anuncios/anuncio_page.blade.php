@@ -126,11 +126,11 @@
           <p class="text-justify w-100 box">
             {{$anuncio->descricao}}
           </p>
-          @if($anuncio->video)
+          @if(!empty($anuncio->video))
             <hr>
             <h1>Vídeo do veículo</h1>
             <div class="embed-responsive embed-responsive-16by9">
-              <iframe class="embed-responsive-item" src="{{ $anuncio->video->link }}" allowfullscreen></iframe>
+              <iframe class="embed-responsive-item" src="" allowfullscreen></iframe>
             </div>
           @endif
         </div>

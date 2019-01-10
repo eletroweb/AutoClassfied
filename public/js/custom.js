@@ -87,10 +87,21 @@ $(document).ready(function(){
     },
     success: function(data){
       if(data.xhr.responseText !== 'false'){
-          var input = $('<input type="hidden">');
-          input.attr('name', 'imagens[]');
-          input.val(data.xhr.responseText.replace('\"', '').replace('\\', ''));
-          $('#anunciar').append(input);
+          var inputs = JSON.parse(data.xhr.responseText);
+          inputs.forEach(function(item){
+            var exist = false;
+            $('.imagem_anuncio').each(function(img, k){
+              console.log(k);
+              exist = img == item;
+            });
+            if(!exist){
+              var input = $('<input class="imagem_anuncio" type="hidden">');
+              input.attr('name', 'imagens[]');
+              input.val(item.replace('\"', '').replace('\\', ''));
+              $('#anunciar').append(input);
+            }
+            console.log(exist);
+          });
       }
     }
   });

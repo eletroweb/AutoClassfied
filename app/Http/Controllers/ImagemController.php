@@ -11,11 +11,14 @@ class ImagemController extends Controller
   public function imageUpload(Request $request){
     if($request->hasFile('imagem')){
       $file = $request->file('imagem');
-      //var_dump($file);exit;
-      $img = new Imagem();
-      $img->url= Storage::put('public', $file[0]);
-      $img->save();
-      return response()->json($img->url);
+      $urls = [];
+      foreach($file as $f){
+        $img = new Imagem();
+        $img->url= Storage::put('public', $f);
+        $img->save();
+        $urls[] = $img->url;
+      }
+      return response()->json($urls);
     }
     return response()->json(false);
   }
