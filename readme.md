@@ -1,6 +1,6 @@
 # Instalação e configuração
 * ## Requerimentos
-     Para realizar a instalação do Único Dono é necessário o Php7.1+ e o MySQL 5.6+
+     Para realizar a instalação do AutoClassfied é necessário o Php7.1+ e o MySQL 5.6+
 * ## Instalação
      * Instale as dependências através do composer:`composer install` no diretório onde está localizado o AutoClassfied.
      * Construa toda a estrutura do banco de dados:`php artisan migrate` no diretório onde está localizado o AutoClassfied.
