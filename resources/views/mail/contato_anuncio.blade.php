@@ -318,7 +318,11 @@
                           </tbody>
                         </table>
                         <p>Boa sorte com as negociações!</p>
-                        <p>UNICODONO.</p>
+                        <p>
+                          Você está recebendo este e-mail por conta da parceria entre o Único Dono e a DS Auto Store.
+                           <a href="https://unicodono.com.br">Conheça-nos e fique por dentro dos nossos serviços</a>
+                        </p>
+                        <p>Atenciosamente Único Dono.</p>
                       </td>
                     </tr>
                   </table>
