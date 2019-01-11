@@ -126,12 +126,15 @@
           <p class="text-justify w-100 box">
             {{$anuncio->descricao}}
           </p>
-          @if(!empty($anuncio->video))
+          @if(!$anuncio->video->isEmpty())
             <hr>
             <h1>Vídeo do veículo</h1>
-            <div class="embed-responsive embed-responsive-16by9">
-              <iframe class="embed-responsive-item" src="" allowfullscreen></iframe>
-            </div>
+            @foreach($anuncio->video as $video)
+              <div class="embed-responsive embed-responsive-16by9">
+                <iframe width="560" height="315" src="{{str_replace('watch?v=', 'embed/', $video->link) }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <!--<iframe class="embed-responsive-item" src="" allowfullscreen></iframe>-->
+              </div>
+            @endforeach
           @endif
         </div>
       </div>
