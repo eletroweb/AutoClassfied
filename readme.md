@@ -2,8 +2,8 @@
 * ## Requerimentos
      Para realizar a instalação do Único Dono é necessário o Php7.1+ e o MySQL 5.6+
 * ## Instalação
-     * Instale as dependências através do composer:`composer install` no diretório onde está localizado o único dono.
-     * Construa toda a estrutura do banco de dados:`php artisan migrate` no diretório onde está localizado o único dono.
+     * Instale as dependências através do composer:`composer install` no diretório onde está localizado o AutoClassfied.
+     * Construa toda a estrutura do banco de dados:`php artisan migrate` no diretório onde está localizado o AutoClassfied.
 * ## Configuração
      1.  Adicione o seu e-mail (adm) ao array `$adms` no model User (App\User)
      2.  Crie a sua conta
