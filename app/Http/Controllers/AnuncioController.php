@@ -241,7 +241,8 @@ class AnuncioController extends Controller
             where($filter[0])
             ->join('anuncio_dados', 'anuncio_dados.anuncio', '=', 'anuncios.id')
             ->join('users', 'users.id', '=', 'anuncios.user')
-            //->join('enderecos', 'users.endereco', '=', 'enderecos.id')
+            ->join('enderecos', 'users.endereco', '=', 'enderecos.id')
+            ->join('revendas', 'users.id', '=', 'revendas.user')
             /*->where([
               ['enderecos.cidade', 'like', '%'. $request->input('cidade') .'%'],
               ['enderecos.uf', 'like', '%'. $request->input('uf') .'%'],
@@ -251,7 +252,7 @@ class AnuncioController extends Controller
             ->whereIn('moto', $filter[1]['tipos'])
             ->whereIn('usado', isset($filter[1]['usado'])?$filter[1]['usado']:array(0,1))
             ->whereIn('blindagem', isset($filter[1]['blindagem'])?$filter[1]['blindagem']:array(0,1))
-            ->orderBy('patrocinado', 'desc')
+            //->orderBy('patrocinado', 'desc')
             ->orderBy($request->input('order')?$request->input('order'):'id', 'desc')
             ->select('anuncios.*')
             ->paginate($paginacao);

@@ -125,6 +125,7 @@
           <h1>Descrição do anúncio</h1>
           <p class="text-justify w-100 box">
             {{$anuncio->descricao}}
+            {{$anuncio->users->isRevenda()}}
           </p>
           @if(!$anuncio->video->isEmpty())
             <hr>
