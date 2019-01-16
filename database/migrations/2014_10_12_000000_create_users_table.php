@@ -23,6 +23,8 @@ class CreateUsersTable extends Migration
             $table->string('provider')->nullable();
             $table->string('provider_id')->nullable();
             $table->string('documento')->nullable()->unique();
+            $table->string('confirm_token')->nullable();
+            $table->boolean('ativo')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

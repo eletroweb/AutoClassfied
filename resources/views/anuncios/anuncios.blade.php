@@ -4,6 +4,7 @@
 <div class="container">
   <div class="row bg-primary mb-2">
     <div class="col-sm-12 p-2">
+      @include('flash::message')
       <div class="container">
         <div class="row">
           <div class="col-sm-6">

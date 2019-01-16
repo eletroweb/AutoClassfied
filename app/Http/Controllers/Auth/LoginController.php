@@ -43,16 +43,12 @@ class LoginController extends Controller
      *
      * @return Response
      */
-    /*public function authenticate()
+    public function authenticate()
     {
         if (Auth::attempt(['email' => $email, 'password' => $password])) {
             $user = Auth::user();
-            if($revenda = $user->isRevenda()){
-                $url = $revenda->getUrl();
-                return redirect($url);
-            }
-            return redirect('/anuncios');
+            return redirect('/minha-conta');
         }
-    }*/
+    }
 
 }

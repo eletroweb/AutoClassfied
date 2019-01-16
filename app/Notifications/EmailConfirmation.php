@@ -1,0 +1,62 @@
+<?php
+
+namespace App\Notifications;
+
+use Illuminate\Bus\Queueable;
+use Illuminate\Notifications\Notification;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Notifications\Messages\MailMessage;
+
+class EmailConfirmation extends Notification
+{
+    use Queueable;
+    private $user;
+    /**
+     * Create a new notification instance.
+     *
+     * @return void
+     */
+    public function __construct($user)
+    {
+        $this->user = $user;
+    }
+
+    /**
+     * Get the notification's delivery channels.
+     *
+     * @param  mixed  $notifiable
+     * @return array
+     */
+    public function via($notifiable)
+    {
+        return ['mail'];
+    }
+
+    /**
+     * Get the mail representation of the notification.
+     *
+     * @param  mixed  $notifiable
+     * @return \Illuminate\Notifications\Messages\MailMessage
+     */
+    public function toMail($notifiable)
+    {
+        return (new MailMessage)
+                    ->line("Olá {$this->user->name}, bem-vindo(a) ao Único Dono!")
+                    ->line('Falta pouco para concluir o seu cadastro. Nesta ultima etapa você deve confirmar o seu e-mail através do botão abaixo.')
+                    ->action('Confirmar o meu e-mail', url('/confirmacao-email/'.$user->confirm_token))
+                    ->line('Obrigado pela confiança!');
+    }
+
+    /**
+     * Get the array representation of the notification.
+     *
+     * @param  mixed  $notifiable
+     * @return array
+     */
+    public function toArray($notifiable)
+    {
+        return [
+            //
+        ];
+    }
+}

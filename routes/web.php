@@ -12,6 +12,7 @@
 */
 
 Auth::routes();
+Route::get('/conta-inativa', 'UserController@conta_inativa');
 Route::get('/ajax/veiculos/marcas', 'VeiculoController@getMarcas');
 Route::get('/ajax/veiculos/modelos', 'VeiculoController@getModelos');
 Route::get('/ajax/veiculos/versoes', 'VeiculoController@getVersoes');
@@ -38,7 +39,7 @@ Route::post('/anuncios/count/visualizacao/', 'VisualizacaoDadosController@store'
 Route::post('/newsletter/fipe', 'NewsletterUserController@store');
 Route::post('/pagseguro/notification/transaction/', 'TransactionController@transactionNotification')->name('notification_pagseguro');
 
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth', 'confirm_account'])->group(function () {
   Route::get('/telefone/{nome}/{cidade}/{id}/videos/adicionar', 'VideoController@create');
   Route::post('/videos/store', 'VideoController@store')->name('revenda_add_video');
   Route::post('/anuncios/{id}/desabilitar', 'AnuncioController@desabilitar')->name('desabilitar_anuncio');
@@ -59,9 +60,11 @@ Route::middleware('auth')->group(function () {
   Route::post('/videos/delete', 'VideoController@delete');
   Route::post('/anuncios/{id}/update', 'AnuncioController@update')->name('update_anuncio');
 });
+Route::get('/confirmacao-email/{token}', 'UserController@confirmAccount');
+Route::post('/reenviar-confirmacao', 'UserController@reenviarConfirmacao')->middleware('auth');
 
 Route::get('/importxml', 'VeiculoController@updateVeiculos');
-Route::middleware(['auth','admin'])->group(function(){
+Route::middleware(['auth','admin', 'confirm_account'])->group(function(){
   Route::get('/admin/fale-conosco', 'ContatoController@admin')->name('fale_conosco_admin');
   Route::get('/admin/contatos', 'ContatoAnuncioController@index')->name('contatos_anuncios');
   Route::post('/admin/anuncios/desabilitar', 'AnuncioController@changeStatus')->name('anuncio_change_status');

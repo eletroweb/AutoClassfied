@@ -7,6 +7,11 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use App\UserDado;
+use App\Notification\EmailConfirmation;
+use Auth;
+use Flash;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Http\Request;
 
 class RegisterController extends Controller
 {
@@ -22,7 +27,9 @@ class RegisterController extends Controller
     */
 
     use RegistersUsers;
+    use Notifiable;
 
+    private $user;
     /**
      * Where to redirect users after registration.
      *
@@ -75,6 +82,8 @@ class RegisterController extends Controller
             'password' => bcrypt($data['password']),
             'documento' => $data['documento'],
             'pessoa_fisica' => $data['pessoa_fisica'],
+            'confirm_account' => User::generateToken(),
+            'ativo'=> false
         ]);
         $dado = new UserDado();
         $dado->nome = 'telefone';
@@ -86,6 +95,13 @@ class RegisterController extends Controller
         $whatsapp->valor = $data['whatsapp'];
         $whatsapp->user = $user->id;
         $whatsapp->save();
+        $this->notify(new EmailConfirmation($user));
         return $user;
     }
+
+    public function routeNotificationForMail()
+    {
+        return $this->user->email;
+    }
+
 }

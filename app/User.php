@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'pessoa_fisica', 'documento', 'provider', 'provider_id'
+        'name', 'email', 'password', 'pessoa_fisica', 'documento', 'provider', 'provider_id', 'confirm_account', 'ativo'
     ];
 
     //Péssima prática de programação
@@ -49,6 +49,16 @@ class User extends Authenticatable
 
     public function isAdmin(){
       return in_array($this->email, $this->adms);
+    }
+
+    public function geneateToken($length = 25) {
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charactersLength = strlen($characters);
+        $randomString = '';
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $characters[rand(0, $charactersLength - 1)];
+        }
+        return $randomString;
     }
 
     public function isRevenda(){

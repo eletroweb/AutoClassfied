@@ -62,5 +62,6 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'documento' => \App\Http\Middleware\CheckDocumento::class,
         'is_my_anuncio' => \App\Http\Middleware\isMyAnuncio::class,
+        'confirm_account' => \App\Http\Middleware\ConfirmAccount::class,
     ];
 }

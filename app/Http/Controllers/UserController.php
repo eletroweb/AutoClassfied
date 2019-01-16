@@ -19,9 +19,14 @@ use App\Endereco;
 use App\UserDado;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use App\Notifications\EmailConfirmation;
+use Illuminate\Notifications\Notifiable;
 
 class UserController extends AppBaseController
 {
+
+    use Notifiable;
+
     /** @var  UserRepository */
     private $userRepository;
 
@@ -242,4 +247,38 @@ class UserController extends AppBaseController
         Flash::success('Endereço cadastrado com sucesso!');
         return redirect()->back();
     }
+
+    public function conta_inativa(Request $request){
+      return view('errors.confirm_account');
+    }
+
+    public function reenviarConfirmacao(Request $request){
+        $user = Auth::user();
+        if(!$user->ativo){
+          $this->notify(new EmailConfirmation($user));
+          Flash::success('Enviamos novamente o link com a confirmação do seu cadastro');
+          return redirect('/anuncios');
+        }else{
+          Flash::error('A sua conta já está ativada');
+          return redirect('/anuncios');
+        }
+    }
+
+    public function routeNotificationForMail()
+    {
+        return Auth::user()->email;
+    }
+
+    public function confirmAccount(Request $request, $token){
+      $user = User::where('confirm_token', $token)->firstOrFail();
+      if($user->ativo){
+        Flash::warning('Este usuário já foi ativado!');
+        return redirect('/anuncios');
+      }else{
+        $user->ativo = true;
+        Flash::success('Usuário ativado com sucesso! Agora você pode usufruir de todas as funcionalidades.');
+        return redirect('/anuncios');
+      }
+    }
+
 }
