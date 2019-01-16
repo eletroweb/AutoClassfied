@@ -237,24 +237,42 @@ class AnuncioController extends Controller
       if(!empty($data)){
         $filter = $this->filter_search($data);
         $m_buscados = $request->input('mais_buscados'); //ordem por número de visualizações
+        $data['cidade'] = isset($data['cidade'])? $data['cidade']:'';
+        $data['uf'] = isset($data['uf'])? $data['uf']:'';
         $anuncios = Anuncio::
             where($filter[0])
             ->join('anuncio_dados', 'anuncio_dados.anuncio', '=', 'anuncios.id')
             ->join('users', 'users.id', '=', 'anuncios.user')
+            //->join('revendas as r', 'r.user', '=', 'users.id')
             ->join('enderecos', 'users.endereco', '=', 'enderecos.id')
-            ->join('revendas', 'users.id', '=', 'revendas.user')
+            //->join('enderecos as endereco_revenda', 'r.endereco', '=', 'endereco_revenda.id')
+            //->join('enderecos as endereco_user', 'users.endereco', '=', 'enderecos.id')
+            //->join('revendas', 'users.id', '=', 'revendas.user')
+            //->join('enderecos as endereco_revenda', 'revendas.endereco', '=', 'enderecos.id')
             /*->where([
               ['enderecos.cidade', 'like', '%'. $request->input('cidade') .'%'],
               ['enderecos.uf', 'like', '%'. $request->input('uf') .'%'],
             ])*/
+            ->where([
+              ['enderecos.uf', 'like', '%'.$data['uf'].'%'],
+              ['enderecos.cidade', 'like', '%'.$data['cidade'].'%']
+            ])
             ->whereRaw("anuncio_dados.nome = 'cambio' && anuncio_dados.valor like '%{$request->input('cambio')}%'")
             //->whereRaw("anuncio_dados.nome = 'cor' && anuncio_dados.valor like '%{$request->input('cor')}%'")
             ->whereIn('moto', $filter[1]['tipos'])
             ->whereIn('usado', isset($filter[1]['usado'])?$filter[1]['usado']:array(0,1))
             ->whereIn('blindagem', isset($filter[1]['blindagem'])?$filter[1]['blindagem']:array(0,1))
+            /*->where([
+                ['endereco_revenda.cidade', 'like', '%'.$data['cidade'].'%'],
+                ['endereco_revenda.UF', 'like', '%'.$data['uf'].'%']
+            ])*/
+            /*->where([
+              ['endereco_user.cidade', 'like', '%'.$data['cidade'].'%'],
+              ['endereco_user.UF', 'like', '%'.$data['uf'].'%']
+            ])*/
             //->orderBy('patrocinado', 'desc')
             ->orderBy($request->input('order')?$request->input('order'):'id', 'desc')
-            ->select('anuncios.*')
+            ->select(['anuncios.*'])
             ->paginate($paginacao);
       }else{
         $anuncios = Anuncio::where('ativo', true)

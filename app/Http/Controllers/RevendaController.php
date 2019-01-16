@@ -222,6 +222,9 @@ class RevendaController extends AppBaseController
   public function importSingleRevenda($veiculo){
     $cnpj = $veiculo->cnpj;
     if($revenda = Revenda::where('cnpj', $cnpj)->first()){
+      $user = User::find($revenda->user);
+      $user->endereco = $revenda->endereco;
+      $user->save();
       return $revenda;
     }else{
       $user = User::where('email', $veiculo->email)->first();
@@ -418,7 +421,7 @@ class RevendaController extends AppBaseController
                 $anuncio->unicodono = true;
                 $anuncio->save();
               }else{
-                $this->createAdicional($anuncio, $complemento);  
+                $this->createAdicional($anuncio, $complemento);
               }
             }
           }
@@ -436,7 +439,7 @@ class RevendaController extends AppBaseController
                   $img_anuncio->anuncio = $anuncio->id;
                   $img_anuncio->first = $first;
                   $img_anuncio->save();
-                  $first = false;  
+                  $first = false;
                 }
               }
             }
@@ -563,7 +566,7 @@ class RevendaController extends AppBaseController
       }
     }elseif ($veiculo->complemento) {
       foreach ($veiculo->complemento->item as $complemento) {
-        return $complemento == 'Único dono'; 
+        return $complemento == 'Único dono';
       }
     }
   }
