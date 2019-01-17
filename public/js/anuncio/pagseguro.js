@@ -104,6 +104,7 @@ $(document).ready(function(){
 										//console.log(r);
 								},
 								complete: function(r) {
+                  //console.log(r);
 										//tratamento comum para todas chamadas
 										//$('#btnPagar').html('Processar pagamento');
 								}

@@ -44,12 +44,15 @@ class PagseguroController extends Controller
         $cpf = $isBoleto? Auth::user()->documento : $request->input('cpf');
         $cpf = trim(str_replace("-", "", str_replace(".", "", $cpf)));
         $tel_exploded = explode(") ", $isBoleto? Auth::user()->telefone() : $request->input('telefone'));
+        if($tel_exploded[0] == ''){
+          $tel_exploded = explode(")", $isBoleto? Auth::user()->telefone() : $request->input('telefone'));
+        }
         $ddd = str_replace("(", "", $tel_exploded[0]);
         $telefone = str_replace("-", "", substr($tel_exploded[1], 2, strlen($tel_exploded[1]) ) );
         $cep = str_replace("-", "", $isBoleto? Auth::user()->end->cep : $request->input('cep'));
         $curl = curl_init();
         $data = null;
-        if($tipo_pagamento == 'boleto'){
+        if($isBoleto){
           $data = PagseguroController::dataBoleto($request, $cpf, $ddd, $telefone, $cep);
         }else{
           $data = PagseguroController::dataCreditCard($request, $cpf, $ddd, $telefone, $cep);

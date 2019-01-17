@@ -332,6 +332,25 @@
     <h3>Pagamento</h3>
     <section>
       @include('elements.anuncios.selecionar_pagamento')
+      <div class="modal fade" id="checkoutModal" tabindex="-1" role="dialog" aria-labelledby="checkoutModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="checkoutModalLabel">Informações de pagamento</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              @include('elements.anuncios.checkout')
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+              <button type="button" id="btnPagar" class="btn btn-success">Prosseguir com o pagamento</button>
+            </div>
+          </div>
+        </div>
+      </div>
       @if ($errors->has('g-recaptcha-response'))
       <span class="help-block">
           <strong>{{ $errors->first('g-recaptcha-response') }}</strong>
@@ -345,25 +364,6 @@
   </div>
 </form>
 <script type="text/javascript" src="{{asset('js/anuncio/pagseguro.js')}}"></script>
-<div class="modal fade" id="checkoutModal" tabindex="-1" role="dialog" aria-labelledby="checkoutModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="checkoutModalLabel">Informações de pagamento</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        @include('elements.anuncios.checkout')
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-        <button type="button" id="btnPagar" class="btn btn-success">Prosseguir com o pagamento</button>
-      </div>
-    </div>
-  </div>
-</div>
 <script type="text/javascript">
 var form = $("#anunciar");
 form.validate({

@@ -43,7 +43,7 @@ class EmailConfirmation extends Notification
         return (new MailMessage)
                     ->line("Olá {$this->user->name}, bem-vindo(a) ao Único Dono!")
                     ->line('Falta pouco para concluir o seu cadastro. Nesta ultima etapa você deve confirmar o seu e-mail através do botão abaixo.')
-                    ->action('Confirmar o meu e-mail', url('/confirmacao-email/'.$user->confirm_token))
+                    ->action('Confirmar o meu e-mail', url('/confirmacao-email/'.$this->user->confirm_token))
                     ->line('Obrigado pela confiança!');
     }
 
