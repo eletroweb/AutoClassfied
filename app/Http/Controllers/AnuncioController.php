@@ -262,17 +262,8 @@ class AnuncioController extends Controller
             ->whereIn('moto', $filter[1]['tipos'])
             ->whereIn('usado', isset($filter[1]['usado'])?$filter[1]['usado']:array(0,1))
             ->whereIn('blindagem', isset($filter[1]['blindagem'])?$filter[1]['blindagem']:array(0,1))
-            /*->where([
-                ['endereco_revenda.cidade', 'like', '%'.$data['cidade'].'%'],
-                ['endereco_revenda.UF', 'like', '%'.$data['uf'].'%']
-            ])*/
-            /*->where([
-              ['endereco_user.cidade', 'like', '%'.$data['cidade'].'%'],
-              ['endereco_user.UF', 'like', '%'.$data['uf'].'%']
-            ])*/
-            //->orderBy('patrocinado', 'desc')
             ->orderBy($request->input('order')?$request->input('order'):'id', 'desc')
-            ->select(['anuncios.*'])
+            ->select('anuncios.*')
             ->paginate($paginacao);
       }else{
         $anuncios = Anuncio::where('ativo', true)
@@ -314,7 +305,7 @@ class AnuncioController extends Controller
     public static function filter_search($data){
       $param = array();
       $details = array();
-      $param[] = ['ativo', '=', '1'];
+      $param[] = ['anuncios.ativo', '=', '1'];
       $except = array('mais_buscados', 'order', 'paginate', 'cambio', 'cor', 'cidade', 'estado');
       foreach ($data as $key=>$value) {
         if($value && !in_array($key, $except)/*$key != 'mais_buscados' && $key != 'order' && $key != 'paginate'*/){
